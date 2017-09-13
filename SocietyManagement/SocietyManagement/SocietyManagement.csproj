@@ -427,6 +427,7 @@
     <Content Include="Views\Complaint\Details.cshtml" />
     <Content Include="Views\Complaint\Edit.cshtml" />
     <Content Include="Views\Complaint\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

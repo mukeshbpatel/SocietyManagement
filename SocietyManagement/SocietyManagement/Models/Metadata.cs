@@ -25,7 +25,7 @@ namespace SocietyManagement.Models
         [Display(Name = "Author")]
         public string AuthorID { get; set; }
         [Display(Name = "Date")]
-        [Required]
+        [Required]        
         [DataType(dataType: DataType.Date)]
         public System.DateTime ComplaintDate { get; set; }
         [Display(Name = "Type")]
