@@ -10,6 +10,48 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SocietyManagement.Models
 {
+    //public partial class ComplaintMetadata
+    //{
+
+    //}
+    //[MetadataType(typeof(ComplaintMetadata))]
+    //public partial class Complaint
+    //{
+    //}
+
+    public partial class ComplaintMetadata
+    {
+        [Required]
+        [Display(Name = "Author")]
+        public string AuthorID { get; set; }
+        [Display(Name = "Complaint Date")]
+        [Required]
+        [DataType(dataType: DataType.Date)]
+        public System.DateTime ComplaintDate { get; set; }
+        [Display(Name = "Complaint Type")]
+        [Required]
+        public int ComplaintTypeID { get; set; }
+        [Display(Name = "AssignTo")]
+        [Required]
+        public string AssignToID { get; set; }
+        [Required]
+        public string Title { get; set; }
+        [Display(Name = "Detail")]
+        [Required]
+        public string Details { get; set; }
+        [Required]
+        public int Status { get; set; }
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }
+        [Display(Name = "Modified Date")]
+        public System.DateTime ModifiedDate { get; set; }
+    }
+
+    [MetadataType(typeof(ComplaintMetadata))]
+    public partial class Complaint
+    {
+    }
+
 
     public partial class NoticeBoardMetadata
     {
