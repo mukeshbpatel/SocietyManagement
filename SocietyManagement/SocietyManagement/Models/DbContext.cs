@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Security.Principal;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocietyManagement.Models
 {
@@ -13,6 +14,16 @@ namespace SocietyManagement.Models
     {
         Male,
         Female
+    }
+
+    enum ComplaintStatus
+    {
+        None = 0,
+        Open = 1,
+        [Display(Name = "In Progress")]
+        InProgress = 2,
+        Resolved = 3,
+        Rejected = 4,        
     }
 
     public static class Helper

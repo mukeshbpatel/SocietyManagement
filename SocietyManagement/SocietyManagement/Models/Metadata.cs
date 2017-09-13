@@ -24,17 +24,18 @@ namespace SocietyManagement.Models
         [Required]
         [Display(Name = "Author")]
         public string AuthorID { get; set; }
-        [Display(Name = "Complaint Date")]
+        [Display(Name = "Date")]
         [Required]
         [DataType(dataType: DataType.Date)]
         public System.DateTime ComplaintDate { get; set; }
-        [Display(Name = "Complaint Type")]
+        [Display(Name = "Type")]
         [Required]
         public int ComplaintTypeID { get; set; }
         [Display(Name = "AssignTo")]
         [Required]
         public string AssignToID { get; set; }
         [Required]
+        [Display(Name = "Complaint")]
         public string Title { get; set; }
         [Display(Name = "Detail")]
         [Required]

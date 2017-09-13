@@ -187,6 +187,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BuildingController.cs" />
     <Compile Include="Controllers\BuildingUnitController.cs" />
+    <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\DueController.cs" />
     <Compile Include="Controllers\ForumCommentController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
@@ -421,6 +422,11 @@
     <Content Include="Views\ForumComment\Edit.cshtml" />
     <Content Include="Views\ForumComment\Index.cshtml" />
     <Content Include="Views\Forum\AddComment.cshtml" />
+    <Content Include="Views\Complaint\Create.cshtml" />
+    <Content Include="Views\Complaint\Delete.cshtml" />
+    <Content Include="Views\Complaint\Details.cshtml" />
+    <Content Include="Views\Complaint\Edit.cshtml" />
+    <Content Include="Views\Complaint\Index.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />
