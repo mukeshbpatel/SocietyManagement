@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SocietyManagement.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Members";
+}
+
+<h2>Members</h2>
+<div class="pull-right form-inline">
+    <select class="form-control input-sm" id="filters">
+        <option value="">Wing</option>
+        <option value="(A">A</option>
+        <option value="(B">B</option>
+        <option value="(C">C</option>
+        <option value="(D">D</option>
+        <option value="(E">E</option>
+        <option value="(F">F</option>
+        <option value="(G">G</option>
+        <option value="(H">H</option>
+        <option value="(I">I</option>
+        <option value="(J">J</option>
+        <option value="(K">K</option>
+    </select>
+    <input type="text" id="search" class="form-control input-sm" placeholder="search.." />
+</div>
+<table class="table table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            Flat No
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>        
+        @if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+        {
+        <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td class="ICapital">
+            @Html.DisplayFor(modelItem => item.Name)            
+        </td>        
+        <td>
+            (@Html.DisplayFor(modelItem => item.FlatNo))
+        </td>
+        <td>
+            <a href="mailto:@item.Email"><span class="glyphicon glyphicon-envelope"></span></a>                        
+        </td>
+        @if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+        {
+        <td>            
+            <a href="@Url.Action("UpdateUser", new { id = item.Id })"><span class="glyphicon glyphicon-edit"></span></a>         
+        </td>
+        }
+    </tr>
+    
+}
+    <tr>
+        <th>Total Members</th>
+        <th colspan="2">@Model.Count()</th>
+        @if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+        {
+            <th>         
+            </th>
+        }
+    </tr>
+
+</table>

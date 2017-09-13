@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SocietyManagement.Models.BuildingUnit>
+
+@{
+    ViewBag.Title = "Building Unit";
+}
+
+<h2>Building Unit</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="pull-right">
+        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Building.BuildingName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </th>
+        @if (User.IsInRole("Admin"))
+        {
+        <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.DisplayFor(modelItem => item.Building.BuildingName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitType.KeyValues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Owner.FirstName)
+        </td>     
+        @if (User.IsInRole("Admin"))
+        {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.UnitID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UnitID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.UnitID })
+        </td>
+        }
+    </tr>
+}
+
+</table>

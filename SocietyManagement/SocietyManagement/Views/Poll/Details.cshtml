@@ -1,0 +1,114 @@
+﻿@model SocietyManagement.Models.Poll
+
+@{
+    ViewBag.Title = "Poll";
+}
+
+<h3><span class="glyphicon glyphicon-tasks"></span> Poll</h3>
+
+<div>
+    <h4>Poll</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PollTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PollTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PollType.KeyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PollType.KeyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PollID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

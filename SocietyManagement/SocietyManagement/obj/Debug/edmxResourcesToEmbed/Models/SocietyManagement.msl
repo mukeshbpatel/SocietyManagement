@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SocietyManagementModelStoreContainer" CdmEntityContainer="SocietyManagementEntities">
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="SocietyManagementModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="SocietyManagementModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="SocietyManagementModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="SocietyManagementModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+          <ScalarProperty Name="Profession" ColumnName="Profession" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Audits">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Audit">
+        <MappingFragment StoreEntitySet="Audits">
+          <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="AuditID" ColumnName="AuditID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Buildings">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Building">
+        <MappingFragment StoreEntitySet="Buildings">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="BuildingTypeID" ColumnName="BuildingTypeID" />
+          <ScalarProperty Name="BuildingName" ColumnName="BuildingName" />
+          <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuildingUnits">
+      <EntityTypeMapping TypeName="SocietyManagementModel.BuildingUnit">
+        <MappingFragment StoreEntitySet="BuildingUnits">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="UnitArea" ColumnName="UnitArea" />
+          <ScalarProperty Name="OneTimeMaintenance" ColumnName="OneTimeMaintenance" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="UnitTypeID" ColumnName="UnitTypeID" />
+          <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+          <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Collections">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Collection">
+        <MappingFragment StoreEntitySet="Collections">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ChequeName" ColumnName="ChequeName" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="ChequeEncashmentDate" ColumnName="ChequeEncashmentDate" />
+          <ScalarProperty Name="ChequeCleared" ColumnName="ChequeCleared" />
+          <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+          <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+          <ScalarProperty Name="ChequeBank" ColumnName="ChequeBank" />
+          <ScalarProperty Name="Reference" ColumnName="Reference" />
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+          <ScalarProperty Name="LatePaymentCharges" ColumnName="LatePaymentCharges" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+          <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComplaintComments">
+      <EntityTypeMapping TypeName="SocietyManagementModel.ComplaintComment">
+        <MappingFragment StoreEntitySet="ComplaintComments">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="AssignToID" ColumnName="AssignToID" />
+          <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Complaints">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Complaint">
+        <MappingFragment StoreEntitySet="Complaints">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AssignToID" ColumnName="AssignToID" />
+          <ScalarProperty Name="ComplaintTypeID" ColumnName="ComplaintTypeID" />
+          <ScalarProperty Name="ComplaintDate" ColumnName="ComplaintDate" />
+          <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+          <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dues">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Due">
+        <MappingFragment StoreEntitySet="Dues">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="RecurringID" ColumnName="RecurringID" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+          <ScalarProperty Name="DueTypeID" ColumnName="DueTypeID" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+          <ScalarProperty Name="DueID" ColumnName="DueID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForumComments">
+      <EntityTypeMapping TypeName="SocietyManagementModel.ForumComment">
+        <MappingFragment StoreEntitySet="ForumComments">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+          <ScalarProperty Name="ForumID" ColumnName="ForumID" />
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Forums">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Forum">
+        <MappingFragment StoreEntitySet="Forums">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="ForumTitle" ColumnName="ForumTitle" />
+          <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+          <ScalarProperty Name="ForumID" ColumnName="ForumID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KeyValues">
+      <EntityTypeMapping TypeName="SocietyManagementModel.KeyValue">
+        <MappingFragment StoreEntitySet="KeyValues">
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="KeyOrder" ColumnName="KeyOrder" />
+          <ScalarProperty Name="KeyValues" ColumnName="KeyValues" />
+          <ScalarProperty Name="KeyName" ColumnName="KeyName" />
+          <ScalarProperty Name="KeyID" ColumnName="KeyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NoticeBoards">
+      <EntityTypeMapping TypeName="SocietyManagementModel.NoticeBoard">
+        <MappingFragment StoreEntitySet="NoticeBoard">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Notice" ColumnName="Notice" />
+          <ScalarProperty Name="NoticeHeading" ColumnName="NoticeHeading" />
+          <ScalarProperty Name="NoticeDate" ColumnName="NoticeDate" />
+          <ScalarProperty Name="NoticeID" ColumnName="NoticeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PollOptions">
+      <EntityTypeMapping TypeName="SocietyManagementModel.PollOption">
+        <MappingFragment StoreEntitySet="PollOptions">
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="OptionOrder" ColumnName="OptionOrder" />
+          <ScalarProperty Name="PollOption1" ColumnName="PollOption" />
+          <ScalarProperty Name="PollID" ColumnName="PollID" />
+          <ScalarProperty Name="PollOptionID" ColumnName="PollOptionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Polls">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Poll">
+        <MappingFragment StoreEntitySet="Polls">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="PollTypeID" ColumnName="PollTypeID" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="PollTitle" ColumnName="PollTitle" />
+          <ScalarProperty Name="PollID" ColumnName="PollID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PollVotes">
+      <EntityTypeMapping TypeName="SocietyManagementModel.PollVote">
+        <MappingFragment StoreEntitySet="PollVotes">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="VoteDate" ColumnName="VoteDate" />
+          <ScalarProperty Name="VoteByID" ColumnName="VoteByID" />
+          <ScalarProperty Name="PollOptionID" ColumnName="PollOptionID" />
+          <ScalarProperty Name="VoteID" ColumnName="VoteID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tenants">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Tenant">
+        <MappingFragment StoreEntitySet="Tenants">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DateOfLeaving" ColumnName="DateOfLeaving" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+          <ScalarProperty Name="DateOfJoining" ColumnName="DateOfJoining" />
+          <ScalarProperty Name="TenantName" ColumnName="TenantName" />
+          <ScalarProperty Name="TenantTypeID" ColumnName="TenantTypeID" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="TenantID" ColumnName="TenantID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserDefineFields">
+      <EntityTypeMapping TypeName="SocietyManagementModel.UserDefineField">
+        <MappingFragment StoreEntitySet="UserDefineFields">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="RegularExpression" ColumnName="RegularExpression" />
+          <ScalarProperty Name="IsRegularExpression" ColumnName="IsRegularExpression" />
+          <ScalarProperty Name="MaximumValue" ColumnName="MaximumValue" />
+          <ScalarProperty Name="MinimumValue" ColumnName="MinimumValue" />
+          <ScalarProperty Name="IsRangeValidator" ColumnName="IsRangeValidator" />
+          <ScalarProperty Name="IsRequired" ColumnName="IsRequired" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="FieldType" ColumnName="FieldType" />
+          <ScalarProperty Name="ControlType" ColumnName="ControlType" />
+          <ScalarProperty Name="FieldLable" ColumnName="FieldLable" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDispaly" ColumnName="IsDispaly" />
+          <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+          <ScalarProperty Name="TableName" ColumnName="TableName" />
+          <ScalarProperty Name="UDFID" ColumnName="UDFID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="SocietyManagementModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetUser">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="RecurringDues">
+      <EntityTypeMapping TypeName="SocietyManagementModel.RecurringDue">
+        <MappingFragment StoreEntitySet="RecurringDues">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="LastRunDate" ColumnName="LastRunDate" />
+          <ScalarProperty Name="DueDays" ColumnName="DueDays" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="DueTypeID" ColumnName="DueTypeID" />
+          <ScalarProperty Name="RecurringTypeID" ColumnName="RecurringTypeID" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="RecurringID" ColumnName="RecurringID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

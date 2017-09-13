@@ -1,0 +1,919 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SocietyManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SocietyManagementEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="SocietyManagementModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="SocietyManagementModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="SocietyManagementModel.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="SocietyManagementModel.AspNetUser" />
+    <EntitySet Name="Audits" EntityType="SocietyManagementModel.Audit" />
+    <EntitySet Name="Buildings" EntityType="SocietyManagementModel.Building" />
+    <EntitySet Name="BuildingUnits" EntityType="SocietyManagementModel.BuildingUnit" />
+    <EntitySet Name="Collections" EntityType="SocietyManagementModel.Collection" />
+    <EntitySet Name="ComplaintComments" EntityType="SocietyManagementModel.ComplaintComment" />
+    <EntitySet Name="Complaints" EntityType="SocietyManagementModel.Complaint" />
+    <EntitySet Name="Dues" EntityType="SocietyManagementModel.Due" />
+    <EntitySet Name="ForumComments" EntityType="SocietyManagementModel.ForumComment" />
+    <EntitySet Name="Forums" EntityType="SocietyManagementModel.Forum" />
+    <EntitySet Name="KeyValues" EntityType="SocietyManagementModel.KeyValue" />
+    <EntitySet Name="NoticeBoards" EntityType="SocietyManagementModel.NoticeBoard" />
+    <EntitySet Name="PollOptions" EntityType="SocietyManagementModel.PollOption" />
+    <EntitySet Name="Polls" EntityType="SocietyManagementModel.Poll" />
+    <EntitySet Name="PollVotes" EntityType="SocietyManagementModel.PollVote" />
+    <EntitySet Name="Tenants" EntityType="SocietyManagementModel.Tenant" />
+    <EntitySet Name="UserDefineFields" EntityType="SocietyManagementModel.UserDefineField" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="SocietyManagementModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="SocietyManagementModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUnits_Owner" Association="SocietyManagementModel.FK_BuildingUnits_Owner">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplaintComments_UserProfile" Association="SocietyManagementModel.FK_ComplaintComments_UserProfile">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="ComplaintComment" EntitySet="ComplaintComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaints_AssignTo" Association="SocietyManagementModel.FK_Complaints_AssignTo">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Complaint" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaints_Author" Association="SocietyManagementModel.FK_Complaints_Author">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Complaint" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumComments_Author" Association="SocietyManagementModel.FK_ForumComments_Author">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="ForumComment" EntitySet="ForumComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Forums_Author" Association="SocietyManagementModel.FK_Forums_Author">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Forum" EntitySet="Forums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PollVotes_Voter" Association="SocietyManagementModel.FK_PollVotes_Voter">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="PollVote" EntitySet="PollVotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Buildings_BuildingType" Association="SocietyManagementModel.FK_Buildings_BuildingType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Building" EntitySet="Buildings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUnits_Buildings" Association="SocietyManagementModel.FK_BuildingUnits_Buildings">
+      <End Role="Building" EntitySet="Buildings" />
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUnits_UnitType" Association="SocietyManagementModel.FK_BuildingUnits_UnitType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collections_BuildingUnits" Association="SocietyManagementModel.FK_Collections_BuildingUnits">
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+      <End Role="Collection" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dues_BuildingUnits" Association="SocietyManagementModel.FK_Dues_BuildingUnits">
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+      <End Role="Due" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tenants_BuildingUnits" Association="SocietyManagementModel.FK_Tenants_BuildingUnits">
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+      <End Role="Tenant" EntitySet="Tenants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collections_KeyValues" Association="SocietyManagementModel.FK_Collections_KeyValues">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Collection" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplaintComments_Complaints" Association="SocietyManagementModel.FK_ComplaintComments_Complaints">
+      <End Role="Complaint" EntitySet="Complaints" />
+      <End Role="ComplaintComment" EntitySet="ComplaintComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaints_ComplaintType" Association="SocietyManagementModel.FK_Complaints_ComplaintType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Complaint" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dues_KeyValues" Association="SocietyManagementModel.FK_Dues_KeyValues">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Due" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumComments_Forums" Association="SocietyManagementModel.FK_ForumComments_Forums">
+      <End Role="Forum" EntitySet="Forums" />
+      <End Role="ForumComment" EntitySet="ForumComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polls_PollType" Association="SocietyManagementModel.FK_Polls_PollType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Poll" EntitySet="Polls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tenants_TenantType" Association="SocietyManagementModel.FK_Tenants_TenantType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Tenant" EntitySet="Tenants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PollOptions_Polls" Association="SocietyManagementModel.FK_PollOptions_Polls">
+      <End Role="Poll" EntitySet="Polls" />
+      <End Role="PollOption" EntitySet="PollOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PollVotes_PollOptions" Association="SocietyManagementModel.FK_PollVotes_PollOptions">
+      <End Role="PollOption" EntitySet="PollOptions" />
+      <End Role="PollVote" EntitySet="PollVotes" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="SocietyManagementModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="RecurringDues" EntityType="SocietyManagementModel.RecurringDue" />
+    <AssociationSet Name="FK_RecurringDues_BuildingUnits" Association="SocietyManagementModel.FK_RecurringDues_BuildingUnits">
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+      <End Role="RecurringDue" EntitySet="RecurringDues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dues_RecurringDues" Association="SocietyManagementModel.FK_Dues_RecurringDues">
+      <End Role="RecurringDue" EntitySet="RecurringDues" />
+      <End Role="Due" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecurringDues_DueType" Association="SocietyManagementModel.FK_RecurringDues_DueType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="RecurringDue" EntitySet="RecurringDues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecurringDues_RecurringType" Association="SocietyManagementModel.FK_RecurringDues_RecurringType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="RecurringDue" EntitySet="RecurringDues" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="SocietyManagementModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="SocietyManagementModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="SocietyManagementModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Gender" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="DateTime" Precision="3" />
+    <Property Name="Profession" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Occupation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UnitID" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="SocietyManagementModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="SocietyManagementModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="BuildingUnits" Relationship="SocietyManagementModel.FK_BuildingUnits_Owner" FromRole="AspNetUser" ToRole="BuildingUnit" />
+    <NavigationProperty Name="ComplaintComments" Relationship="SocietyManagementModel.FK_ComplaintComments_UserProfile" FromRole="AspNetUser" ToRole="ComplaintComment" />
+    <NavigationProperty Name="ComplaintsAssign" Relationship="SocietyManagementModel.FK_Complaints_AssignTo" FromRole="AspNetUser" ToRole="Complaint" />
+    <NavigationProperty Name="Complaints" Relationship="SocietyManagementModel.FK_Complaints_Author" FromRole="AspNetUser" ToRole="Complaint" />
+    <NavigationProperty Name="ForumComments" Relationship="SocietyManagementModel.FK_ForumComments_Author" FromRole="AspNetUser" ToRole="ForumComment" />
+    <NavigationProperty Name="Forums" Relationship="SocietyManagementModel.FK_Forums_Author" FromRole="AspNetUser" ToRole="Forum" />
+    <NavigationProperty Name="PollVotes" Relationship="SocietyManagementModel.FK_PollVotes_Voter" FromRole="AspNetUser" ToRole="PollVote" />
+    <NavigationProperty Name="AspNetRoles" Relationship="SocietyManagementModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+  </EntityType>
+  <EntityType Name="Audit">
+    <Key>
+      <PropertyRef Name="AuditID" />
+    </Key>
+    <Property Name="AuditID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TableName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FieldName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Action" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ActionDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Building">
+    <Key>
+      <PropertyRef Name="BuildingID" />
+    </Key>
+    <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="BuildingTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BuildingType" Relationship="SocietyManagementModel.FK_Buildings_BuildingType" FromRole="Building" ToRole="KeyValue" />
+    <NavigationProperty Name="BuildingUnits" Relationship="SocietyManagementModel.FK_BuildingUnits_Buildings" FromRole="Building" ToRole="BuildingUnit" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BuildingUnit">
+    <Key>
+      <PropertyRef Name="UnitID" />
+    </Key>
+    <Property Name="UnitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BuildingID" Type="Int32" Nullable="false" />
+    <Property Name="UnitName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="UnitTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OwnerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OneTimeMaintenance" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="UnitArea" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Owner" Relationship="SocietyManagementModel.FK_BuildingUnits_Owner" FromRole="BuildingUnit" ToRole="AspNetUser" />
+    <NavigationProperty Name="Building" Relationship="SocietyManagementModel.FK_BuildingUnits_Buildings" FromRole="BuildingUnit" ToRole="Building" />
+    <NavigationProperty Name="UnitType" Relationship="SocietyManagementModel.FK_BuildingUnits_UnitType" FromRole="BuildingUnit" ToRole="KeyValue" />
+    <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_BuildingUnits" FromRole="BuildingUnit" ToRole="Collection" />
+    <NavigationProperty Name="Dues" Relationship="SocietyManagementModel.FK_Dues_BuildingUnits" FromRole="BuildingUnit" ToRole="Due" />
+    <NavigationProperty Name="Tenants" Relationship="SocietyManagementModel.FK_Tenants_BuildingUnits" FromRole="BuildingUnit" ToRole="Tenant" />
+    <NavigationProperty Name="RecurringDues" Relationship="SocietyManagementModel.FK_RecurringDues_BuildingUnits" FromRole="BuildingUnit" ToRole="RecurringDue" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Collection">
+    <Key>
+      <PropertyRef Name="CollectionID" />
+    </Key>
+    <Property Name="CollectionID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UnitID" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="LatePaymentCharges" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="ReceiptNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
+    <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeDate" Type="DateTime" Precision="0" />
+    <Property Name="ChequeNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeCleared" Type="Boolean" Nullable="false" />
+    <Property Name="ChequeEncashmentDate" Type="DateTime" Precision="0" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_Collections_BuildingUnits" FromRole="Collection" ToRole="BuildingUnit" />
+    <NavigationProperty Name="PaymentMode" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="Collection" ToRole="KeyValue" />
+    <Property Name="ChequeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ComplaintComment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ComplaintID" Type="Int32" Nullable="false" />
+    <Property Name="AuthorID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AssignToID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="SocietyManagementModel.FK_ComplaintComments_UserProfile" FromRole="ComplaintComment" ToRole="AspNetUser" />
+    <NavigationProperty Name="Complaint" Relationship="SocietyManagementModel.FK_ComplaintComments_Complaints" FromRole="ComplaintComment" ToRole="Complaint" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Complaint">
+    <Key>
+      <PropertyRef Name="ComplaintID" />
+    </Key>
+    <Property Name="ComplaintID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ComplaintDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ComplaintTypeID" Type="Int32" Nullable="false" />
+    <Property Name="AssignToID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AssignTo" Relationship="SocietyManagementModel.FK_Complaints_AssignTo" FromRole="Complaint" ToRole="AspNetUser" />
+    <NavigationProperty Name="Author" Relationship="SocietyManagementModel.FK_Complaints_Author" FromRole="Complaint" ToRole="AspNetUser" />
+    <NavigationProperty Name="ComplaintComments" Relationship="SocietyManagementModel.FK_ComplaintComments_Complaints" FromRole="Complaint" ToRole="ComplaintComment" />
+    <NavigationProperty Name="ComplaintType" Relationship="SocietyManagementModel.FK_Complaints_ComplaintType" FromRole="Complaint" ToRole="KeyValue" />
+  </EntityType>
+  <EntityType Name="Due">
+    <Key>
+      <PropertyRef Name="DueID" />
+    </Key>
+    <Property Name="DueID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BillDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UnitID" Type="Int32" Nullable="false" />
+    <Property Name="DueTypeID" Type="Int32" Nullable="false" />
+    <Property Name="DueAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_Dues_BuildingUnits" FromRole="Due" ToRole="BuildingUnit" />
+    <NavigationProperty Name="DueType" Relationship="SocietyManagementModel.FK_Dues_KeyValues" FromRole="Due" ToRole="KeyValue" />
+    <Property Name="RecurringID" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="RecurringDue" Relationship="SocietyManagementModel.FK_Dues_RecurringDues" FromRole="Due" ToRole="RecurringDue" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumComment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ForumID" Type="Int32" Nullable="false" />
+    <Property Name="AuthorID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Author" Relationship="SocietyManagementModel.FK_ForumComments_Author" FromRole="ForumComment" ToRole="AspNetUser" />
+    <NavigationProperty Name="Forum" Relationship="SocietyManagementModel.FK_ForumComments_Forums" FromRole="ForumComment" ToRole="Forum" />
+  </EntityType>
+  <EntityType Name="Forum">
+    <Key>
+      <PropertyRef Name="ForumID" />
+    </Key>
+    <Property Name="ForumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AuthorID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ForumTitle" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Author" Relationship="SocietyManagementModel.FK_Forums_Author" FromRole="Forum" ToRole="AspNetUser" />
+    <NavigationProperty Name="ForumComments" Relationship="SocietyManagementModel.FK_ForumComments_Forums" FromRole="Forum" ToRole="ForumComment" />
+  </EntityType>
+  <EntityType Name="KeyValue">
+    <Key>
+      <PropertyRef Name="KeyID" />
+    </Key>
+    <Property Name="KeyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KeyName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="KeyValues" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="KeyOrder" Type="Int32" Nullable="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Buildings" Relationship="SocietyManagementModel.FK_Buildings_BuildingType" FromRole="KeyValue" ToRole="Building" />
+    <NavigationProperty Name="BuildingUnits" Relationship="SocietyManagementModel.FK_BuildingUnits_UnitType" FromRole="KeyValue" ToRole="BuildingUnit" />
+    <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="KeyValue" ToRole="Collection" />
+    <NavigationProperty Name="Complaints" Relationship="SocietyManagementModel.FK_Complaints_ComplaintType" FromRole="KeyValue" ToRole="Complaint" />
+    <NavigationProperty Name="Dues" Relationship="SocietyManagementModel.FK_Dues_KeyValues" FromRole="KeyValue" ToRole="Due" />
+    <NavigationProperty Name="Polls" Relationship="SocietyManagementModel.FK_Polls_PollType" FromRole="KeyValue" ToRole="Poll" />
+    <NavigationProperty Name="Tenants" Relationship="SocietyManagementModel.FK_Tenants_TenantType" FromRole="KeyValue" ToRole="Tenant" />
+    <NavigationProperty Name="RecurringDues" Relationship="SocietyManagementModel.FK_RecurringDues_DueType" FromRole="KeyValue" ToRole="RecurringDue" />
+    <NavigationProperty Name="RecurringDues1" Relationship="SocietyManagementModel.FK_RecurringDues_RecurringType" FromRole="KeyValue" ToRole="RecurringDue" />
+  </EntityType>
+  <EntityType Name="NoticeBoard">
+    <Key>
+      <PropertyRef Name="NoticeID" />
+    </Key>
+    <Property Name="NoticeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NoticeDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NoticeHeading" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Notice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="PollOption">
+    <Key>
+      <PropertyRef Name="PollOptionID" />
+    </Key>
+    <Property Name="PollOptionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PollID" Type="Int32" Nullable="false" />
+    <Property Name="PollOption1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OptionOrder" Type="Int32" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Poll" Relationship="SocietyManagementModel.FK_PollOptions_Polls" FromRole="PollOption" ToRole="Poll" />
+    <NavigationProperty Name="PollVotes" Relationship="SocietyManagementModel.FK_PollVotes_PollOptions" FromRole="PollOption" ToRole="PollVote" />
+  </EntityType>
+  <EntityType Name="Poll">
+    <Key>
+      <PropertyRef Name="PollID" />
+    </Key>
+    <Property Name="PollID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PollTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PollTypeID" Type="Int32" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="PollType" Relationship="SocietyManagementModel.FK_Polls_PollType" FromRole="Poll" ToRole="KeyValue" />
+    <NavigationProperty Name="PollOptions" Relationship="SocietyManagementModel.FK_PollOptions_Polls" FromRole="Poll" ToRole="PollOption" />
+  </EntityType>
+  <EntityType Name="PollVote">
+    <Key>
+      <PropertyRef Name="VoteID" />
+    </Key>
+    <Property Name="VoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PollOptionID" Type="Int32" Nullable="false" />
+    <Property Name="VoteByID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="VoteDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Voter" Relationship="SocietyManagementModel.FK_PollVotes_Voter" FromRole="PollVote" ToRole="AspNetUser" />
+    <NavigationProperty Name="PollOption" Relationship="SocietyManagementModel.FK_PollVotes_PollOptions" FromRole="PollVote" ToRole="PollOption" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Tenant">
+    <Key>
+      <PropertyRef Name="TenantID" />
+    </Key>
+    <Property Name="TenantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UnitID" Type="Int32" Nullable="false" />
+    <Property Name="TenantTypeID" Type="Int32" Nullable="false" />
+    <Property Name="TenantName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfJoining" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="PermanentAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfLeaving" Type="DateTime" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_Tenants_BuildingUnits" FromRole="Tenant" ToRole="BuildingUnit" />
+    <NavigationProperty Name="TenantType" Relationship="SocietyManagementModel.FK_Tenants_TenantType" FromRole="Tenant" ToRole="KeyValue" />
+  </EntityType>
+  <EntityType Name="UserDefineField">
+    <Key>
+      <PropertyRef Name="UDFID" />
+    </Key>
+    <Property Name="UDFID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TableName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FieldName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsDispaly" Type="Boolean" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FieldLable" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ControlType" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FieldType" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DefaultValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsRequired" Type="Boolean" Nullable="false" />
+    <Property Name="IsRangeValidator" Type="Boolean" Nullable="false" />
+    <Property Name="MinimumValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="MaximumValue" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsRegularExpression" Type="Boolean" Nullable="false" />
+    <Property Name="RegularExpression" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SocietyManagementModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SocietyManagementModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUnits_Owner">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BuildingUnit">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplaintComments_UserProfile">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.ComplaintComment" Role="ComplaintComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ComplaintComment">
+        <PropertyRef Name="AssignToID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaints_AssignTo">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.Complaint" Role="Complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Complaint">
+        <PropertyRef Name="AssignToID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaints_Author">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Complaint" Role="Complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Complaint">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumComments_Author">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SocietyManagementModel.ForumComment" Role="ForumComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ForumComment">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Forums_Author">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Forum" Role="Forum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Forum">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PollVotes_Voter">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SocietyManagementModel.PollVote" Role="PollVote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PollVote">
+        <PropertyRef Name="VoteByID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Buildings_BuildingType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Building" Role="Building" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Building">
+        <PropertyRef Name="BuildingTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUnits_Buildings">
+    <End Type="SocietyManagementModel.Building" Role="Building" Multiplicity="1" />
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="BuildingUnit">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUnits_UnitType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="BuildingUnit">
+        <PropertyRef Name="UnitTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collections_BuildingUnits">
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Collection">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dues_BuildingUnits">
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Due" Role="Due" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Due">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tenants_BuildingUnits">
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Tenant" Role="Tenant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Tenant">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collections_KeyValues">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Collection">
+        <PropertyRef Name="PaymentModeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplaintComments_Complaints">
+    <End Type="SocietyManagementModel.Complaint" Role="Complaint" Multiplicity="1" />
+    <End Type="SocietyManagementModel.ComplaintComment" Role="ComplaintComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Complaint">
+        <PropertyRef Name="ComplaintID" />
+      </Principal>
+      <Dependent Role="ComplaintComment">
+        <PropertyRef Name="ComplaintID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaints_ComplaintType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Complaint" Role="Complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Complaint">
+        <PropertyRef Name="ComplaintTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dues_KeyValues">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Due" Role="Due" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Due">
+        <PropertyRef Name="DueTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumComments_Forums">
+    <End Type="SocietyManagementModel.Forum" Role="Forum" Multiplicity="1" />
+    <End Type="SocietyManagementModel.ForumComment" Role="ForumComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Forum">
+        <PropertyRef Name="ForumID" />
+      </Principal>
+      <Dependent Role="ForumComment">
+        <PropertyRef Name="ForumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polls_PollType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Poll" Role="Poll" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Poll">
+        <PropertyRef Name="PollTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tenants_TenantType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Tenant" Role="Tenant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Tenant">
+        <PropertyRef Name="TenantTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PollOptions_Polls">
+    <End Type="SocietyManagementModel.Poll" Role="Poll" Multiplicity="1" />
+    <End Type="SocietyManagementModel.PollOption" Role="PollOption" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Poll">
+        <PropertyRef Name="PollID" />
+      </Principal>
+      <Dependent Role="PollOption">
+        <PropertyRef Name="PollID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PollVotes_PollOptions">
+    <End Type="SocietyManagementModel.PollOption" Role="PollOption" Multiplicity="1" />
+    <End Type="SocietyManagementModel.PollVote" Role="PollVote" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PollOption">
+        <PropertyRef Name="PollOptionID" />
+      </Principal>
+      <Dependent Role="PollVote">
+        <PropertyRef Name="PollOptionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="SocietyManagementModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityType Name="RecurringDue">
+    <Key>
+      <PropertyRef Name="RecurringID" />
+    </Key>
+    <Property Name="RecurringID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UnitID" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="RecurringTypeID" Type="Int32" Nullable="false" />
+    <Property Name="DueTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DueDays" Type="Int32" Nullable="false" />
+    <Property Name="LastRunDate" Type="DateTime" Precision="3" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_RecurringDues_BuildingUnits" FromRole="RecurringDue" ToRole="BuildingUnit" />
+    <NavigationProperty Name="Dues" Relationship="SocietyManagementModel.FK_Dues_RecurringDues" FromRole="RecurringDue" ToRole="Due" />
+    <NavigationProperty Name="DueType" Relationship="SocietyManagementModel.FK_RecurringDues_DueType" FromRole="RecurringDue" ToRole="KeyValue" />
+    <NavigationProperty Name="RecurringType" Relationship="SocietyManagementModel.FK_RecurringDues_RecurringType" FromRole="RecurringDue" ToRole="KeyValue" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_RecurringDues_BuildingUnits">
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
+    <End Type="SocietyManagementModel.RecurringDue" Role="RecurringDue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="RecurringDue">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dues_RecurringDues">
+    <End Type="SocietyManagementModel.RecurringDue" Role="RecurringDue" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.Due" Role="Due" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RecurringDue">
+        <PropertyRef Name="RecurringID" />
+      </Principal>
+      <Dependent Role="Due">
+        <PropertyRef Name="RecurringID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecurringDues_DueType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.RecurringDue" Role="RecurringDue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="RecurringDue">
+        <PropertyRef Name="DueTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecurringDues_RecurringType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.RecurringDue" Role="RecurringDue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="RecurringDue">
+        <PropertyRef Name="RecurringTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

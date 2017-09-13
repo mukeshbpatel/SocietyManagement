@@ -1,0 +1,130 @@
+﻿@model SocietyManagement.Models.Due
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Due</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BillDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueType.KeyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueType.KeyName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DueID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

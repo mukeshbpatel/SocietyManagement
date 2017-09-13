@@ -1,0 +1,744 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SocietyManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Audits">
+    <Key>
+      <PropertyRef Name="AuditID" />
+    </Key>
+    <Property Name="AuditID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Action" Type="nvarchar" MaxLength="50" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="ActionDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Buildings">
+    <Key>
+      <PropertyRef Name="BuildingID" />
+    </Key>
+    <Property Name="BuildingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="BuildingTypeID" Type="int" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BuildingUnits">
+    <Key>
+      <PropertyRef Name="UnitID" />
+    </Key>
+    <Property Name="UnitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BuildingID" Type="int" Nullable="false" />
+    <Property Name="UnitName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="UnitTypeID" Type="int" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="OwnerID" Type="int" />
+    <Property Name="OneTimeMaintenance" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UnitArea" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Collections">
+    <Key>
+      <PropertyRef Name="CollectionID" />
+    </Key>
+    <Property Name="CollectionID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CollectionDate" Type="date" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="LatePaymentCharges" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PaymentModeID" Type="int" Nullable="false" />
+    <Property Name="ChequeBank" Type="nvarchar(max)" />
+    <Property Name="ChequeDate" Type="date" />
+    <Property Name="ChequeNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="ChequeCleared" Type="bit" Nullable="false" />
+    <Property Name="ChequeEncashmentDate" Type="date" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ComplaintComments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ComplaintID" Type="int" Nullable="false" />
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+    <Property Name="AssignToID" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Complaints">
+    <Key>
+      <PropertyRef Name="ComplaintID" />
+    </Key>
+    <Property Name="ComplaintID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+    <Property Name="ComplaintDate" Type="datetime" Nullable="false" />
+    <Property Name="ComplaintTypeID" Type="int" Nullable="false" />
+    <Property Name="AssignToID" Type="int" Nullable="false" />
+    <Property Name="ComplaintRelatedTo" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Status" Type="int" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dues">
+    <Key>
+      <PropertyRef Name="DueID" />
+    </Key>
+    <Property Name="DueID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DueDate" Type="date" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="DueTypeID" Type="int" Nullable="false" />
+    <Property Name="DueAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastDateOfPayment" Type="date" Nullable="false" />
+    <Property Name="PenaltyType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PenaltyPerDay" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumComments">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ForumID" Type="int" Nullable="false" />
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Forums">
+    <Key>
+      <PropertyRef Name="ForumID" />
+    </Key>
+    <Property Name="ForumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AuthorID" Type="int" Nullable="false" />
+    <Property Name="ForumTitle" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="KeyValues">
+    <Key>
+      <PropertyRef Name="KeyID" />
+    </Key>
+    <Property Name="KeyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KeyName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="KeyValues" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="KeyOrder" Type="int" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoticeBoard">
+    <Key>
+      <PropertyRef Name="NoticeID" />
+    </Key>
+    <Property Name="NoticeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoticeDate" Type="datetime" Nullable="false" />
+    <Property Name="NoticeHeading" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Notice" Type="nvarchar(max)" />
+    <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+    <Property Name="IsArchive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PollOptions">
+    <Key>
+      <PropertyRef Name="PollOptionID" />
+    </Key>
+    <Property Name="PollOptionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PollID" Type="int" Nullable="false" />
+    <Property Name="PollOption" Type="nvarchar(max)" />
+    <Property Name="OptionOrder" Type="int" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Polls">
+    <Key>
+      <PropertyRef Name="PollID" />
+    </Key>
+    <Property Name="PollID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PollTitle" Type="nvarchar" MaxLength="500" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="PollTypeID" Type="int" Nullable="false" />
+    <Property Name="IsOpenPoll" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PollVotes">
+    <Key>
+      <PropertyRef Name="VoteID" />
+    </Key>
+    <Property Name="VoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PollOptionID" Type="int" Nullable="false" />
+    <Property Name="VoteByID" Type="int" Nullable="false" />
+    <Property Name="VoteDate" Type="datetime" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Tenants">
+    <Key>
+      <PropertyRef Name="TenantID" />
+    </Key>
+    <Property Name="TenantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="TenantTypeID" Type="int" Nullable="false" />
+    <Property Name="TenantName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="DateOfJoining" Type="date" Nullable="false" />
+    <Property Name="PermanentAddress" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="500" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DateOfLeaving" Type="date" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDefineFields">
+    <Key>
+      <PropertyRef Name="UDFID" />
+    </Key>
+    <Property Name="UDFID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TableName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="FieldName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="IsDispaly" Type="bit" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FieldLable" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ControlType" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="FieldType" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="DefaultValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsRequired" Type="bit" Nullable="false" />
+    <Property Name="IsRangeValidator" Type="bit" Nullable="false" />
+    <Property Name="MinimumValue" Type="nvarchar" MaxLength="500" />
+    <Property Name="MaximumValue" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsRegularExpression" Type="bit" Nullable="false" />
+    <Property Name="RegularExpression" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDefineFieldValues">
+    <Key>
+      <PropertyRef Name="UDFVID" />
+    </Key>
+    <Property Name="UDFVID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UDFID" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nvarchar(max)" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserDefineValues">
+    <Key>
+      <PropertyRef Name="UDVID" />
+    </Key>
+    <Property Name="UDVID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UDFID" Type="int" Nullable="false" />
+    <Property Name="ItemText" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ItemValue" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ItemOrder" Type="int" Nullable="false" />
+    <Property Name="UpdatedByID" Type="int" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="56" Nullable="false" />
+    <Property Name="Initial" Type="nvarchar" MaxLength="10" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="DOB" Type="datetime" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Profession" Type="nvarchar" MaxLength="500" />
+    <Property Name="Occupation" Type="nvarchar" MaxLength="500" />
+    <Property Name="UnitID" Type="int" />
+  </EntityType>
+  <Association Name="FK_Buildings_BuildingType">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Buildings">
+        <PropertyRef Name="BuildingTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUnits_Buildings">
+    <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buildings">
+        <PropertyRef Name="BuildingID" />
+      </Principal>
+      <Dependent Role="BuildingUnits">
+        <PropertyRef Name="BuildingID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUnits_Owner">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BuildingUnits">
+        <PropertyRef Name="OwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BuildingUnits_UnitType">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="BuildingUnits">
+        <PropertyRef Name="UnitTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collections_BuildingUnits">
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="1" />
+    <End Role="Collections" Type="Self.Collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnits">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Collections">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collections_KeyValues">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Collections" Type="Self.Collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Collections">
+        <PropertyRef Name="PaymentModeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplaintComments_Complaints">
+    <End Role="Complaints" Type="Self.Complaints" Multiplicity="1" />
+    <End Role="ComplaintComments" Type="Self.ComplaintComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Complaints">
+        <PropertyRef Name="ComplaintID" />
+      </Principal>
+      <Dependent Role="ComplaintComments">
+        <PropertyRef Name="ComplaintID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplaintComments_UserProfile">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="ComplaintComments" Type="Self.ComplaintComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ComplaintComments">
+        <PropertyRef Name="AssignToID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaints_AssignTo">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="Complaints" Type="Self.Complaints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Complaints">
+        <PropertyRef Name="AssignToID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaints_Author">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="Complaints" Type="Self.Complaints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Complaints">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaints_ComplaintType">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Complaints" Type="Self.Complaints" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Complaints">
+        <PropertyRef Name="ComplaintTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dues_BuildingUnits">
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="1" />
+    <End Role="Dues" Type="Self.Dues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnits">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Dues">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dues_KeyValues">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Dues" Type="Self.Dues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Dues">
+        <PropertyRef Name="DueTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumComments_Author">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="ForumComments" Type="Self.ForumComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ForumComments">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumComments_Forums">
+    <End Role="Forums" Type="Self.Forums" Multiplicity="1" />
+    <End Role="ForumComments" Type="Self.ForumComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Forums">
+        <PropertyRef Name="ForumID" />
+      </Principal>
+      <Dependent Role="ForumComments">
+        <PropertyRef Name="ForumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Forums_Author">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="Forums" Type="Self.Forums" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Forums">
+        <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PollOptions_Polls">
+    <End Role="Polls" Type="Self.Polls" Multiplicity="1" />
+    <End Role="PollOptions" Type="Self.PollOptions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Polls">
+        <PropertyRef Name="PollID" />
+      </Principal>
+      <Dependent Role="PollOptions">
+        <PropertyRef Name="PollID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Polls_PollType">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Polls" Type="Self.Polls" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Polls">
+        <PropertyRef Name="PollTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PollVotes_PollOptions">
+    <End Role="PollOptions" Type="Self.PollOptions" Multiplicity="1" />
+    <End Role="PollVotes" Type="Self.PollVotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PollOptions">
+        <PropertyRef Name="PollOptionID" />
+      </Principal>
+      <Dependent Role="PollVotes">
+        <PropertyRef Name="PollOptionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PollVotes_Voter">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="PollVotes" Type="Self.PollVotes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PollVotes">
+        <PropertyRef Name="VoteByID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tenants_BuildingUnits">
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="1" />
+    <End Role="Tenants" Type="Self.Tenants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnits">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Tenants">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tenants_TenantType">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Tenants" Type="Self.Tenants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Tenants">
+        <PropertyRef Name="TenantTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDefineFieldValues_UserDefineFields">
+    <End Role="UserDefineFields" Type="Self.UserDefineFields" Multiplicity="1" />
+    <End Role="UserDefineFieldValues" Type="Self.UserDefineFieldValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDefineFields">
+        <PropertyRef Name="UDFID" />
+      </Principal>
+      <Dependent Role="UserDefineFieldValues">
+        <PropertyRef Name="UDFID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserDefineValues_UserDefineFields">
+    <End Role="UserDefineFields" Type="Self.UserDefineFields" Multiplicity="1" />
+    <End Role="UserDefineValues" Type="Self.UserDefineValues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserDefineFields">
+        <PropertyRef Name="UDFID" />
+      </Principal>
+      <Dependent Role="UserDefineValues">
+        <PropertyRef Name="UDFID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SocietyManagementModelStoreContainer">
+    <EntitySet Name="Audits" EntityType="Self.Audits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BuildingUnits" EntityType="Self.BuildingUnits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Collections" EntityType="Self.Collections" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ComplaintComments" EntityType="Self.ComplaintComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Complaints" EntityType="Self.Complaints" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dues" EntityType="Self.Dues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ForumComments" EntityType="Self.ForumComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Forums" EntityType="Self.Forums" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KeyValues" EntityType="Self.KeyValues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoticeBoard" EntityType="Self.NoticeBoard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PollOptions" EntityType="Self.PollOptions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Polls" EntityType="Self.Polls" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PollVotes" EntityType="Self.PollVotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tenants" EntityType="Self.Tenants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDefineFields" EntityType="Self.UserDefineFields" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDefineFieldValues" EntityType="Self.UserDefineFieldValues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserDefineValues" EntityType="Self.UserDefineValues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Buildings_BuildingType" Association="Self.FK_Buildings_BuildingType">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Buildings" EntitySet="Buildings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUnits_Buildings" Association="Self.FK_BuildingUnits_Buildings">
+      <End Role="Buildings" EntitySet="Buildings" />
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUnits_Owner" Association="Self.FK_BuildingUnits_Owner">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUnits_UnitType" Association="Self.FK_BuildingUnits_UnitType">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collections_BuildingUnits" Association="Self.FK_Collections_BuildingUnits">
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+      <End Role="Collections" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collections_KeyValues" Association="Self.FK_Collections_KeyValues">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Collections" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplaintComments_Complaints" Association="Self.FK_ComplaintComments_Complaints">
+      <End Role="Complaints" EntitySet="Complaints" />
+      <End Role="ComplaintComments" EntitySet="ComplaintComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplaintComments_UserProfile" Association="Self.FK_ComplaintComments_UserProfile">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="ComplaintComments" EntitySet="ComplaintComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaints_AssignTo" Association="Self.FK_Complaints_AssignTo">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="Complaints" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaints_Author" Association="Self.FK_Complaints_Author">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="Complaints" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaints_ComplaintType" Association="Self.FK_Complaints_ComplaintType">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Complaints" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dues_BuildingUnits" Association="Self.FK_Dues_BuildingUnits">
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+      <End Role="Dues" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dues_KeyValues" Association="Self.FK_Dues_KeyValues">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Dues" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumComments_Author" Association="Self.FK_ForumComments_Author">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="ForumComments" EntitySet="ForumComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumComments_Forums" Association="Self.FK_ForumComments_Forums">
+      <End Role="Forums" EntitySet="Forums" />
+      <End Role="ForumComments" EntitySet="ForumComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Forums_Author" Association="Self.FK_Forums_Author">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="Forums" EntitySet="Forums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PollOptions_Polls" Association="Self.FK_PollOptions_Polls">
+      <End Role="Polls" EntitySet="Polls" />
+      <End Role="PollOptions" EntitySet="PollOptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Polls_PollType" Association="Self.FK_Polls_PollType">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Polls" EntitySet="Polls" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PollVotes_PollOptions" Association="Self.FK_PollVotes_PollOptions">
+      <End Role="PollOptions" EntitySet="PollOptions" />
+      <End Role="PollVotes" EntitySet="PollVotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PollVotes_Voter" Association="Self.FK_PollVotes_Voter">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="PollVotes" EntitySet="PollVotes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tenants_BuildingUnits" Association="Self.FK_Tenants_BuildingUnits">
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+      <End Role="Tenants" EntitySet="Tenants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tenants_TenantType" Association="Self.FK_Tenants_TenantType">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Tenants" EntitySet="Tenants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDefineFieldValues_UserDefineFields" Association="Self.FK_UserDefineFieldValues_UserDefineFields">
+      <End Role="UserDefineFields" EntitySet="UserDefineFields" />
+      <End Role="UserDefineFieldValues" EntitySet="UserDefineFieldValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserDefineValues_UserDefineFields" Association="Self.FK_UserDefineValues_UserDefineFields">
+      <End Role="UserDefineFields" EntitySet="UserDefineFields" />
+      <End Role="UserDefineValues" EntitySet="UserDefineValues" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap") 
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>                                
+                <a href="@Url.Action("Index", "Home")" class = "navbar-brand"><span class="icon-office"></span> Yashraj Green Castle</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">                             
+                    @*<li class="dropdown-item"><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>*@
+
+                 @if (Request.IsAuthenticated)
+                 {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-briefcase"></span> My Account
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Due")"><span class="glyphicon glyphicon-usd"></span> Due</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Payment")"><span class="icon-library"></span> Payments</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Poll</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Forum")"><span class="glyphicon glyphicon-bullhorn"></span> Forum</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Complaint")"><span class="glyphicon glyphicon-hand-up"></span> Complaint</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Event")"><span class="glyphicon glyphicon-calendar"></span> Event</a></li>
+                        </ul>
+                    </li>
+                    if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+                    {
+
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon-king"></span> Manager
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Due")"><span class="glyphicon glyphicon-usd"></span> Due</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Collection")"><span class="glyphicon glyphicon-piggy-bank"></span> Collection</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Expense")"><span class="glyphicon glyphicon glyphicon-list-alt"></span> Expense</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Poll</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Forum")"><span class="glyphicon glyphicon-bullhorn"></span> Forum</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Complaint")"><span class="glyphicon glyphicon-hand-up"></span> Complaint</a></li>
+                        </ul>
+                    </li>
+                     }
+
+                     if (User.IsInRole("Admin"))
+                     {
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="glyphicon glyphicon glyphicon-queen"></span> Admin
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "KeyValue")"><span class="icon-library"></span> Keys</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Building")"><span class="icon-office"></span> Building</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "BuildingUnit")"><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</a></li>
+                        </ul>
+                    </li>
+                     }
+
+
+
+                 }
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+   
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,136 @@
+﻿@model SocietyManagement.Models.Due
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Due</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BillDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueType.KeyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueType.KeyName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

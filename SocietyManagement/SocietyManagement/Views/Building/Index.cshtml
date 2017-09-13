@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SocietyManagement.Models.Building>
+
+@{
+    ViewBag.Title = "Building";
+}
+
+<h2>Building</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="pull-right">
+        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+}
+@*<div class="pull-right">
+    <input type="text" id="search" class="form-control input-sm" placeholder="search.." />
+</div>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingTypeID)
+        </th>
+        @if (User.IsInRole("Admin"))
+        {
+        <th>
+            Action
+        </th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingType.KeyValues)
+        </td>
+        @if (User.IsInRole("Admin"))
+        {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.BuildingID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.BuildingID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.BuildingID })
+        </td>
+        }
+    </tr>
+}
+
+</table>

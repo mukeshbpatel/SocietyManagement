@@ -1,0 +1,97 @@
+﻿@model SocietyManagement.Models.BuildingUnit
+
+@{
+    ViewBag.Title = "Building Unit";
+}
+
+<h2>Building Unit</h2>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OneTimeMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OneTimeMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Building.BuildingName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Building.BuildingName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitType.KeyValues)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.UnitID }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

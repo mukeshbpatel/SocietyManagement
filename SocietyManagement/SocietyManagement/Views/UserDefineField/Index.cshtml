@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SocietyManagement.Models.UserDefineField>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TableName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDispaly)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FieldLable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ControlType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FieldType)
+        </th>             
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TableName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FieldName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDispaly)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FieldLable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ControlType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FieldType)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UDFID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UDFID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UDFID })
+        </td>
+    </tr>
+}
+
+</table>

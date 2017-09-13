@@ -1,0 +1,49 @@
+﻿@model SocietyManagement.Models.Forum
+
+@{
+    ViewBag.Title = "Forum";
+}
+<br />
+
+<div>
+    <h3><span class="glyphicon glyphicon-bullhorn"></span>  @Html.DisplayFor(model => model.ForumTitle)</h3>
+    <hr />
+    @Html.Raw(Model.Details)    
+</div>
+<hr />
+<div>
+    <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
+    <div class="pull-right">
+        <a href="@Url.Action("Create", "ForumComment", new { id = Model.ForumID })"><span class="glyphicon glyphicon-plus"></span> Add Comment</a>
+    </div>
+</div>
+
+@foreach (var item in Model.ForumComments.Where(c=>c.IsDeleted==false).OrderBy(o=>o.ModifiedDate))
+{
+    <div>
+        <span>@item.Author.FirstName</span>, <span>@item.CreatedDate</span>
+
+        @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+        {
+            <a href="@Url.Action("Edit","ForumComment" ,new { id = item.CommentID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Delete","ForumComment", new { id = item.CommentID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+        }        
+    </div>
+
+@Html.Raw(item.Comment)
+    <hr />
+}
+
+@if (Model.ForumComments.Count() == 0)
+{
+    <div>Be first to add comment.</div>
+}
+
+        @{
+            var cmodel = new SocietyManagement.Models.ForumComment();
+            cmodel.ForumID = Model.ForumID;
+            Html.RenderPartial("AddComment", cmodel);
+        }
+        <p>            
+            @Html.ActionLink("Back to List", "Index")
+        </p>

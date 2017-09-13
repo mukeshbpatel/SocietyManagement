@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SocietyManagement.Models.Poll>
+
+@{
+    ViewBag.Title = "Poll";
+}
+
+<h3><span class="glyphicon glyphicon-tasks"></span> Poll</h3>
+
+@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+{
+    <div class="pull-right">
+        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PollTitle)
+        </th>
+@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+{
+        <th>
+            @Html.DisplayNameFor(model => model.PollType.KeyValues)
+        </th>
+}
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PollTitle)
+        </td>
+@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+{
+        <td>
+            @Html.DisplayFor(modelItem => item.PollType.KeyValues)
+        </td>
+}
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>        
+        <td>
+            <a href="@Url.Action("Details", new { id = item.PollID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+{
+            <a href="@Url.Action("Edit", new { id = item.PollID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Delete", new { id = item.PollID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+}
+        </td>
+    </tr>
+}
+
+</table>
