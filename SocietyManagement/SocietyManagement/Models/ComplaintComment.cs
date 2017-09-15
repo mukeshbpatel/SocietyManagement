@@ -18,7 +18,6 @@ namespace SocietyManagement.Models
         public int ComplaintID { get; set; }
         public string AuthorID { get; set; }
         public string AssignToID { get; set; }
-        public int Status { get; set; }
         public string Comment { get; set; }
         public string UDK1 { get; set; }
         public string UDK2 { get; set; }
@@ -29,8 +28,11 @@ namespace SocietyManagement.Models
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public int StatusID { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AssignTo { get; set; }
         public virtual Complaint Complaint { get; set; }
+        public virtual KeyValue Status { get; set; }
+        public virtual AspNetUser Author { get; set; }
     }
 }

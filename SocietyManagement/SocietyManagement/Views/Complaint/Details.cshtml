@@ -3,143 +3,37 @@
 @{
     ViewBag.Title = "Complaint";
 }
-
-<h3><span class="glyphicon glyphicon-hand-up"></span> Complaint</h3>
+<br />
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ComplaintDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ComplaintDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Details)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Details)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK4)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK4)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK5)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK5)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignTo.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AssignTo.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ComplaintType.KeyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ComplaintType.KeyName)
-        </dd>
-
-    </dl>
+    <h3><span class="glyphicon glyphicon-hand-up"></span>  @Html.DisplayFor(model => model.Title)</h3>
+    <hr />    
+    @Html.Raw(Model.Details.Replace(Environment.NewLine,"</br>"))
 </div>
+<hr />
+<div>
+    <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
+    <div class="pull-right">
+        <a href="@Url.Action("Create", "ComplaintComment", new { id = Model.ComplaintID })"><span class="glyphicon glyphicon-plus"></span> Add Comment</a>
+    </div>
+</div>
+
+@foreach (var item in Model.ComplaintComments.Where(c => c.IsDeleted == false).OrderBy(o => o.ModifiedDate))
+{
+    <div>
+        <span>@item.Author.FirstName</span>, <span>@item.CreatedDate</span>
+
+        @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+        {
+            <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Delete","ComplaintComment", new { id = item.CommentID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+        }
+    </div>
+    @Html.Raw("</br><b>Status : " + item.Status.KeyValues + "</b></br>")
+    @Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
+    <hr />
+}
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ComplaintID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

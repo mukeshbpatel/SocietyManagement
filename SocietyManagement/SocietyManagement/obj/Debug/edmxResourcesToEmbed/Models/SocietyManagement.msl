@@ -142,6 +142,7 @@
     <EntitySetMapping Name="ComplaintComments">
       <EntityTypeMapping TypeName="SocietyManagementModel.ComplaintComment">
         <MappingFragment StoreEntitySet="ComplaintComments">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
@@ -152,7 +153,6 @@
           <ScalarProperty Name="UDK2" ColumnName="UDK2" />
           <ScalarProperty Name="UDK1" ColumnName="UDK1" />
           <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="AssignToID" ColumnName="AssignToID" />
           <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
           <ScalarProperty Name="ComplaintID" ColumnName="ComplaintID" />
@@ -163,6 +163,7 @@
     <EntitySetMapping Name="Complaints">
       <EntityTypeMapping TypeName="SocietyManagementModel.Complaint">
         <MappingFragment StoreEntitySet="Complaints">
+          <ScalarProperty Name="StatusID" ColumnName="StatusID" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -172,7 +173,6 @@
           <ScalarProperty Name="UDK2" ColumnName="UDK2" />
           <ScalarProperty Name="UDK1" ColumnName="UDK1" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="Details" ColumnName="Details" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="AssignToID" ColumnName="AssignToID" />

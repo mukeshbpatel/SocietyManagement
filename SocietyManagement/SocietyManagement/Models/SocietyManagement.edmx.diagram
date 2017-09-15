@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="57963f295608442b9b43758960e55aa5" Name="Diagram1" ZoomLevel="65">
+      <Diagram DiagramId="57963f295608442b9b43758960e55aa5" Name="Diagram1" ZoomLevel="63">
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetRole" Width="1.5" PointX="0.75" PointY="24.625" />
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetUserClaim" Width="1.5" PointX="4" PointY="35.25" />
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetUserLogin" Width="1.5" PointX="5.5" PointY="32.625" />
@@ -55,6 +55,9 @@
         <AssociationConnector Association="SocietyManagementModel.FK_Dues_RecurringDues" />
         <AssociationConnector Association="SocietyManagementModel.FK_RecurringDues_DueType" />
         <AssociationConnector Association="SocietyManagementModel.FK_RecurringDues_RecurringType" />
+        <AssociationConnector Association="SocietyManagementModel.FK_ComplaintComments_Status" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Complaints_Status" />
+        <AssociationConnector Association="SocietyManagementModel.FK_ComplaintComments_AssignTo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

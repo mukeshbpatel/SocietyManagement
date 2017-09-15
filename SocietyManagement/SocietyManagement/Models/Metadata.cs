@@ -19,9 +19,31 @@ namespace SocietyManagement.Models
     //{
     //}
 
+    public partial class ComplaintCommentMetadata
+    {
+
+        public int ComplaintID { get; set; }
+        [Required]
+        [Display(Name = "Assign To")]
+        public string AssignToID { get; set; }
+        [Required]
+        [Display(Name = "Status")]
+        public int StatusID { get; set; }
+        [Display(Name = "Comment")]
+        [Required]
+        public string Comment { get; set; }
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }
+        [Display(Name = "Modified Date")]
+        public System.DateTime ModifiedDate { get; set; }
+    }
+    [MetadataType(typeof(ComplaintCommentMetadata))]
+    public partial class ComplaintComment
+    {
+    }
+    
     public partial class ComplaintMetadata
     {
-        [Required]
         [Display(Name = "Author")]
         public string AuthorID { get; set; }
         [Display(Name = "Date")]
@@ -32,16 +54,16 @@ namespace SocietyManagement.Models
         [Required]
         public int ComplaintTypeID { get; set; }
         [Display(Name = "AssignTo")]
-        [Required]
         public string AssignToID { get; set; }
+        [Display(Name = "Status")]
+        [Required]
+        public string StatusID { get; set; }
         [Required]
         [Display(Name = "Complaint")]
         public string Title { get; set; }
         [Display(Name = "Detail")]
         [Required]
         public string Details { get; set; }
-        [Required]
-        public int Status { get; set; }
         [Display(Name = "Created Date")]
         public System.DateTime CreatedDate { get; set; }
         [Display(Name = "Modified Date")]

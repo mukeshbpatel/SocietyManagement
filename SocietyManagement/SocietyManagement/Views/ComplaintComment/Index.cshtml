@@ -1,0 +1,111 @@
+﻿@model IEnumerable<SocietyManagement.Models.ComplaintComment>
+
+@{
+    ViewBag.Title = "Complaint Comment";
+}
+
+<h3><span class="glyphicon glyphicon-hand-up"></span> Complaint Comment</h3>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AuthorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UDK1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UDK2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UDK3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UDK4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UDK5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Complaint.AuthorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status.KeyName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UDK1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UDK2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UDK3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UDK4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UDK5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUser.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Complaint.AuthorID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.KeyName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CommentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommentID })
+        </td>
+    </tr>
+}
+
+</table>

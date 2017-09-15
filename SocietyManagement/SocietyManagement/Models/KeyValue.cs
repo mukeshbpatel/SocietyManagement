@@ -26,6 +26,8 @@ namespace SocietyManagement.Models
             this.Tenants = new HashSet<Tenant>();
             this.RecurringDues = new HashSet<RecurringDue>();
             this.RecurringDues1 = new HashSet<RecurringDue>();
+            this.ComplaintComments = new HashSet<ComplaintComment>();
+            this.Complaints1 = new HashSet<Complaint>();
         }
     
         public int KeyID { get; set; }
@@ -55,5 +57,9 @@ namespace SocietyManagement.Models
         public virtual ICollection<RecurringDue> RecurringDues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RecurringDue> RecurringDues1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComplaintComment> ComplaintComments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Complaint> Complaints1 { get; set; }
     }
 }

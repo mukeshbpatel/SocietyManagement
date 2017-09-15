@@ -28,7 +28,7 @@
         </th>
 
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.StatusID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AssignToID)
@@ -51,7 +51,7 @@
             @Html.DisplayFor(modelItem => item.ComplaintType.KeyValues)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Status)
+            @Html.DisplayFor(modelItem => item.Status.KeyValues)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.AssignTo.FirstName)

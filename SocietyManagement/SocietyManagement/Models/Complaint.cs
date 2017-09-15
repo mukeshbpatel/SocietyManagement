@@ -27,7 +27,6 @@ namespace SocietyManagement.Models
         public string AssignToID { get; set; }
         public string Title { get; set; }
         public string Details { get; set; }
-        public int Status { get; set; }
         public bool IsDeleted { get; set; }
         public string UDK1 { get; set; }
         public string UDK2 { get; set; }
@@ -37,11 +36,13 @@ namespace SocietyManagement.Models
         public string UserID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public int StatusID { get; set; }
     
         public virtual AspNetUser AssignTo { get; set; }
         public virtual AspNetUser Author { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ComplaintComment> ComplaintComments { get; set; }
         public virtual KeyValue ComplaintType { get; set; }
+        public virtual KeyValue Status { get; set; }
     }
 }

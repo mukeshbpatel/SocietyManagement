@@ -138,6 +138,18 @@
       <End Role="KeyValue" EntitySet="KeyValues" />
       <End Role="RecurringDue" EntitySet="RecurringDues" />
     </AssociationSet>
+    <AssociationSet Name="FK_ComplaintComments_Status" Association="SocietyManagementModel.FK_ComplaintComments_Status">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="ComplaintComment" EntitySet="ComplaintComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Complaints_Status" Association="SocietyManagementModel.FK_Complaints_Status">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Complaint" EntitySet="Complaints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ComplaintComments_AssignTo" Association="SocietyManagementModel.FK_ComplaintComments_AssignTo">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="ComplaintComment" EntitySet="ComplaintComments" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRole">
     <Key>
@@ -201,6 +213,7 @@
     <NavigationProperty Name="Forums" Relationship="SocietyManagementModel.FK_Forums_Author" FromRole="AspNetUser" ToRole="Forum" />
     <NavigationProperty Name="PollVotes" Relationship="SocietyManagementModel.FK_PollVotes_Voter" FromRole="AspNetUser" ToRole="PollVote" />
     <NavigationProperty Name="AspNetRoles" Relationship="SocietyManagementModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <NavigationProperty Name="ComplaintComments1" Relationship="SocietyManagementModel.FK_ComplaintComments_AssignTo" FromRole="AspNetUser" ToRole="ComplaintComment" />
   </EntityType>
   <EntityType Name="Audit">
     <Key>
@@ -303,7 +316,6 @@
     <Property Name="ComplaintID" Type="Int32" Nullable="false" />
     <Property Name="AuthorID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="AssignToID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="Int32" Nullable="false" />
     <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -313,9 +325,12 @@
     <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="AspNetUser" Relationship="SocietyManagementModel.FK_ComplaintComments_UserProfile" FromRole="ComplaintComment" ToRole="AspNetUser" />
+    <NavigationProperty Name="AssignTo" Relationship="SocietyManagementModel.FK_ComplaintComments_UserProfile" FromRole="ComplaintComment" ToRole="AspNetUser" />
     <NavigationProperty Name="Complaint" Relationship="SocietyManagementModel.FK_ComplaintComments_Complaints" FromRole="ComplaintComment" ToRole="Complaint" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Status" Relationship="SocietyManagementModel.FK_ComplaintComments_Status" FromRole="ComplaintComment" ToRole="KeyValue" />
+    <NavigationProperty Name="Author" Relationship="SocietyManagementModel.FK_ComplaintComments_AssignTo" FromRole="ComplaintComment" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="Complaint">
     <Key>
@@ -328,7 +343,6 @@
     <Property Name="AssignToID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Title" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="Int32" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -342,6 +356,8 @@
     <NavigationProperty Name="Author" Relationship="SocietyManagementModel.FK_Complaints_Author" FromRole="Complaint" ToRole="AspNetUser" />
     <NavigationProperty Name="ComplaintComments" Relationship="SocietyManagementModel.FK_ComplaintComments_Complaints" FromRole="Complaint" ToRole="ComplaintComment" />
     <NavigationProperty Name="ComplaintType" Relationship="SocietyManagementModel.FK_Complaints_ComplaintType" FromRole="Complaint" ToRole="KeyValue" />
+    <Property Name="StatusID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Status" Relationship="SocietyManagementModel.FK_Complaints_Status" FromRole="Complaint" ToRole="KeyValue" />
   </EntityType>
   <EntityType Name="Due">
     <Key>
@@ -425,6 +441,8 @@
     <NavigationProperty Name="Tenants" Relationship="SocietyManagementModel.FK_Tenants_TenantType" FromRole="KeyValue" ToRole="Tenant" />
     <NavigationProperty Name="RecurringDues" Relationship="SocietyManagementModel.FK_RecurringDues_DueType" FromRole="KeyValue" ToRole="RecurringDue" />
     <NavigationProperty Name="RecurringDues1" Relationship="SocietyManagementModel.FK_RecurringDues_RecurringType" FromRole="KeyValue" ToRole="RecurringDue" />
+    <NavigationProperty Name="ComplaintComments" Relationship="SocietyManagementModel.FK_ComplaintComments_Status" FromRole="KeyValue" ToRole="ComplaintComment" />
+    <NavigationProperty Name="Complaints1" Relationship="SocietyManagementModel.FK_Complaints_Status" FromRole="KeyValue" ToRole="Complaint" />
   </EntityType>
   <EntityType Name="NoticeBoard">
     <Key>
@@ -913,6 +931,42 @@
       </Principal>
       <Dependent Role="RecurringDue">
         <PropertyRef Name="RecurringTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplaintComments_Status">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.ComplaintComment" Role="ComplaintComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="ComplaintComment">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Complaints_Status">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Complaint" Role="Complaint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Complaint">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ComplaintComments_AssignTo">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SocietyManagementModel.ComplaintComment" Role="ComplaintComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ComplaintComment">
+        <PropertyRef Name="AuthorID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

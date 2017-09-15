@@ -40,8 +40,8 @@ namespace SocietyManagement.Controllers
         // GET: Complaint/Create
         public ActionResult Create()
         {
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName");
             ViewBag.ComplaintTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintType"), "KeyID", "KeyValues");
+            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName");
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace SocietyManagement.Controllers
         {
             Helper.AssignUserInfo(complaint, User);
             complaint.AuthorID = complaint.UserID;
-            complaint.Status = 1;
+            complaint.StatusID = db.KeyValues.SingleOrDefault(s=>s.KeyName == "ComplaintStatus" && s.KeyValues == "Open").KeyID;
             if (ModelState.IsValid)
             {
                 db.Complaints.Add(complaint);
@@ -88,7 +88,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ComplaintID,AuthorID,ComplaintDate,ComplaintTypeID,AssignToID,Title,Details,Status,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Complaint complaint)
+        public ActionResult Edit([Bind(Include = "ComplaintID,AuthorID,ComplaintDate,ComplaintTypeID,AssignToID,Title,Details,StatusID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Complaint complaint)
         {
             Helper.AssignUserInfo(complaint, User, true);
             if (ModelState.IsValid)

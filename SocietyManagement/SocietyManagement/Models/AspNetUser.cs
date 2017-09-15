@@ -27,6 +27,7 @@ namespace SocietyManagement.Models
             this.Forums = new HashSet<Forum>();
             this.PollVotes = new HashSet<PollVote>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.ComplaintComments1 = new HashSet<ComplaintComment>();
         }
     
         public string Id { get; set; }
@@ -69,5 +70,7 @@ namespace SocietyManagement.Models
         public virtual ICollection<PollVote> PollVotes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ComplaintComment> ComplaintComments1 { get; set; }
     }
 }
