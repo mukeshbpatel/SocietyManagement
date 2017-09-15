@@ -4,7 +4,7 @@
     ViewBag.Title = "Building";
 }
 
-<h2>Building</h2>
+<h3><span class="icon-office"></span> Building</h3>
 
 @if (User.IsInRole("Admin"))
 {
@@ -23,12 +23,11 @@
         <th>
             @Html.DisplayNameFor(model => model.BuildingTypeID)
         </th>
-        @if (User.IsInRole("Admin"))
-        {
         <th>
-            Action
+            Units
         </th>
-        }
+        <th></th>
+        
     </tr>
 
 @foreach (var item in Model) {
@@ -39,14 +38,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.BuildingType.KeyValues)
         </td>
-        @if (User.IsInRole("Admin"))
-        {
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.BuildingID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.BuildingID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.BuildingID })
+            <a href="@Url.Action("Index","BuildingUnit",new { id = item.BuildingID })">@item.BuildingUnits.Where(d => d.IsDeleted == false).Count()</a>
         </td>
-        }
+                    <td>
+                        <a href="@Url.Action("Details", new { id = item.BuildingID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+            @if (User.IsInRole("Admin"))
+                {
+                                    <a href="@Url.Action("Edit", new { id = item.BuildingID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Delete", new { id = item.BuildingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+            }
+                        </td>        
+                
     </tr>
 }
 

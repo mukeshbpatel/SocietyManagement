@@ -10,7 +10,7 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize()]
+    [Authorize]
     public class BuildingController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();

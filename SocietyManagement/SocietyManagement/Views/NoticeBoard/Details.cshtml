@@ -11,7 +11,7 @@
     <h4>@Html.DisplayFor(model => model.NoticeHeading)</h4>
     
     <div class="multiline">
-        @Html.DisplayFor(model => model.Notice)
+        @Html.Raw(Model.Notice)
     </div>        
  
        @*@Html.Raw("<pre>" + Html.Encode(Model.Notice) + "</pre>")*@    

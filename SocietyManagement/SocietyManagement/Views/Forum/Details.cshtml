@@ -8,29 +8,41 @@
 <div>
     <h3><span class="glyphicon glyphicon-bullhorn"></span>  @Html.DisplayFor(model => model.ForumTitle)</h3>
     <hr />
+    <a href="#"><span class="glyphicon glyphicon-user"></span>@Model.Author.FirstName</a> &nbsp;
+    <span class="glyphicon glyphicon-calendar"></span>@Model.CreatedDate
+    @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Edit", new { id = Model.ForumID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a><span></span>
+            <a href="@Url.Action("Delete", new { id = Model.ForumID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+        </div>
+    }
     @Html.Raw(Model.Details)    
 </div>
 <hr />
 <div>
     <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
-    <div class="pull-right">
+    @*<div class="pull-right">
         <a href="@Url.Action("Create", "ForumComment", new { id = Model.ForumID })"><span class="glyphicon glyphicon-plus"></span> Add Comment</a>
     </div>
+    <br />*@
 </div>
 
 @foreach (var item in Model.ForumComments.Where(c=>c.IsDeleted==false).OrderBy(o=>o.ModifiedDate))
 {
     <div>
-        <span>@item.Author.FirstName</span>, <span>@item.CreatedDate</span>
-
+        <a href="#"><span class="glyphicon glyphicon-user"></span>@item.Author.FirstName</a> &nbsp;
+        <span class="glyphicon glyphicon-calendar"></span>@item.CreatedDate
         @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
-            <a href="@Url.Action("Edit","ForumComment" ,new { id = item.CommentID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-            <a href="@Url.Action("Delete","ForumComment", new { id = item.CommentID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-        }        
-    </div>
+            <div class="pull-right">
+                <a href="@Url.Action("Edit", "ForumComment", new { id = item.CommentID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="@Url.Action("Delete", "ForumComment", new { id = item.CommentID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+             </div>
+        }
+            </div>
 
-@Html.Raw(item.Comment)
+@Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
     <hr />
 }
 

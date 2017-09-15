@@ -4,7 +4,7 @@
     ViewBag.Title = "Building";
 }
 
-<h2>Building</h2>
+<h3><span class="icon-office"></span> Building</h3>
 
 <div>    
     <hr />
@@ -32,35 +32,11 @@
         <dd>
             @Html.DisplayFor(model => model.Details)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-
+        
     </dl>
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.BuildingID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 

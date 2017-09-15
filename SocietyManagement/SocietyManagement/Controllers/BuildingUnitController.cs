@@ -10,16 +10,24 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class BuildingUnitController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
         // GET: BuildingUnit
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var buildingUnits = db.BuildingUnits.Where(d => d.IsDeleted == false).Include(b => b.Owner).Include(b => b.Building).Include(b => b.UnitType).OrderBy(o=>o.UnitName);
-            return View(buildingUnits.ToList());
+            if (id == null)
+            {
+                var buildingUnits = db.BuildingUnits.Where(d => d.IsDeleted == false).Include(b => b.Owner).Include(b => b.Building).Include(b => b.UnitType).OrderBy(o => o.UnitName);
+                return View(buildingUnits.ToList());
+            }
+            else
+            {
+                var buildingUnits = db.BuildingUnits.Where(d => d.IsDeleted == false & d.BuildingID == id).Include(b => b.Owner).Include(b => b.Building).Include(b => b.UnitType).OrderBy(o => o.UnitName);
+                return View(buildingUnits.ToList());
+            }
         }
 
         // GET: BuildingUnit/Details/5
@@ -38,6 +46,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
             ViewBag.OwnerID = new SelectList(db.AspNetUsers, "Id", "FirstName");
@@ -51,6 +60,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,UDK1,UDK2,UDK3,UDK4,UDK5")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit,User);
@@ -68,6 +78,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +101,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit, User,false);
@@ -106,6 +118,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,6 +136,7 @@ namespace SocietyManagement.Controllers
         // POST: BuildingUnit/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             BuildingUnit buildingUnit = db.BuildingUnits.Find(id);

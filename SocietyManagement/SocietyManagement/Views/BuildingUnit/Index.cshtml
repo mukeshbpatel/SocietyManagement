@@ -4,7 +4,7 @@
     ViewBag.Title = "Building Unit";
 }
 
-<h2>Building Unit</h2>
+<h3><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</h3>
 
 @if (User.IsInRole("Admin"))
 {
@@ -26,10 +26,7 @@
         <th>
             @Html.DisplayNameFor(model => model.OwnerID)
         </th>
-        @if (User.IsInRole("Admin"))
-        {
         <th></th>
-        }
     </tr>
 
 @foreach (var item in Model) {
@@ -46,14 +43,14 @@
         <td>
             @Html.DisplayFor(modelItem => item.Owner.FirstName)
         </td>     
-        @if (User.IsInRole("Admin"))
-        {
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.UnitID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.UnitID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.UnitID })
-        </td>
-        }
+            <a href="@Url.Action("Details", new { id = item.UnitID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+            @if (User.IsInRole("Admin"))
+                {
+                <a href="@Url.Action("Edit", new { id = item.UnitID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <a href="@Url.Action("Delete", new { id = item.UnitID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+            }
+        </td>  
     </tr>
 }
 
