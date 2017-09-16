@@ -19,6 +19,23 @@ namespace SocietyManagement.Models
     //{
     //}
 
+    public partial class AspNetUserMetadata
+    {     
+        
+    }
+    [MetadataType(typeof(AspNetUserMetadata))]
+    public partial class AspNetUser
+    {
+        [NotMapped]
+        public string Name
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+            }
+        }
+    }
+
     public partial class ComplaintCommentMetadata
     {
 

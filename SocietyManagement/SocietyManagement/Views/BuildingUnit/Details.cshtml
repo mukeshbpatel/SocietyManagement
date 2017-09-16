@@ -46,7 +46,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Owner.FirstName)
+            @Html.DisplayFor(model => model.Owner.Name)
         </dd>
 
         <dt>
@@ -64,34 +64,9 @@
         <dd>
             @Html.DisplayFor(model => model.UnitType.KeyValues)
         </dd>
-
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
     </dl>
 </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.UnitID }) |*@
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
 </p>

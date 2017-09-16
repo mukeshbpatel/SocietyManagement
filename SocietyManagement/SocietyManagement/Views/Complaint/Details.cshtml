@@ -10,18 +10,24 @@
     <hr />    
     @Html.Raw(Model.Details.Replace(Environment.NewLine,"</br>"))
 </div>
+<p>
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>
 <hr />
+
 <div>
     <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
     <div class="pull-right">
-        <a href="@Url.Action("Create", "ComplaintComment", new { id = Model.ComplaintID })"><span class="glyphicon glyphicon-plus"></span> Add Comment</a>
+        <a href="@Url.Action("Create", "ComplaintComment", new { id = Model.ComplaintID })"><span class="glyphicon glyphicon-plus"></span> Add Comment</a>        
     </div>
 </div>
+<br />
+
 
 @foreach (var item in Model.ComplaintComments.Where(c => c.IsDeleted == false).OrderBy(o => o.ModifiedDate))
 {
     <div>
-        <span>@item.Author.FirstName</span>, <span>@item.CreatedDate</span>
+        <span>@item.Author.Name</span>, <span>@item.CreatedDate</span>
 
         @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
@@ -34,6 +40,3 @@
     <hr />
 }
 
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

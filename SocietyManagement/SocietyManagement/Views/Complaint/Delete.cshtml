@@ -58,19 +58,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AssignTo.FirstName)
+            @Html.DisplayNameFor(model => model.AssignTo.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AssignTo.FirstName)
+            @Html.DisplayFor(model => model.AssignTo.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Author.FirstName)
+            @Html.DisplayNameFor(model => model.Author.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Author.FirstName)
+            @Html.DisplayFor(model => model.Author.Name)
         </dd>
 
         <dt>
@@ -85,10 +85,13 @@
 
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+<div class="form-horizontal">
+            <div class="form-group">
+        <div class="form-actions no-color col-md-offset-1 col-md-11">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
         </div>
+                </div>
+    </div>
     }
 </div>

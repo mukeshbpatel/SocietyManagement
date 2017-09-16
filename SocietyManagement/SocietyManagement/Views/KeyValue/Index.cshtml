@@ -4,7 +4,7 @@
     ViewBag.Title = "Key Value";
 }
 
-<h2>Key Value</h2>
+<h3><span class="icon-key"></span> Key Value</h3>
 
 @if (User.IsInRole("Admin"))
 {
@@ -43,8 +43,8 @@
         @if (User.IsInRole("Admin"))
         {
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.KeyID }) |            
-            @Html.ActionLink("Delete", "Delete", new { id = item.KeyID })
+            <a href="@Url.Action("Edit", new { id = item.KeyID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Delete", new { id = item.KeyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
         </td>
         }
     </tr>

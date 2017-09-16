@@ -48,7 +48,7 @@
                                 @Html.Raw(item.Details.Replace("<a href","<a target='_blank' href"))
                        </div>
                             <div class="panel-footer">
-                                <a href="#"><span class="glyphicon glyphicon-user"></span>@item.Author.FirstName</a> &nbsp;
+                                <a href="#"><span class="glyphicon glyphicon-user"></span>@item.Author.Name</a> &nbsp;
                                 <a href="@Url.Action("Details", new { id = item.ForumID })"><span class="glyphicon glyphicon-comment"></span>@item.ForumComments.Where(d => d.IsDeleted == false).Count() Comments</a> &nbsp;                                
                             </div>
                         </div>

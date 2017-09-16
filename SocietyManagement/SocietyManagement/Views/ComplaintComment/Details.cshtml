@@ -96,7 +96,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Author.FirstName)
+            @Html.DisplayFor(model => model.Author.Name)
         </dd>
 
         <dt>
@@ -119,5 +119,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CommentID }) |
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
 </p>

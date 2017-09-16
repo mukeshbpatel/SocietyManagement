@@ -45,7 +45,7 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Author.FirstName)
+            @Html.DisplayFor(modelItem => item.Author.Name)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ComplaintType.KeyValues)
@@ -54,7 +54,7 @@
             @Html.DisplayFor(modelItem => item.Status.KeyValues)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AssignTo.FirstName)
+            @Html.DisplayFor(modelItem => item.AssignTo.Name)
         </td>                
         <td>
             <a href="@Url.Action("Details", new { id = item.ComplaintID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>

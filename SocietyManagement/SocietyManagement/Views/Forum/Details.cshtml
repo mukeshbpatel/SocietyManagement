@@ -8,7 +8,7 @@
 <div>
     <h3><span class="glyphicon glyphicon-bullhorn"></span>  @Html.DisplayFor(model => model.ForumTitle)</h3>
     <hr />
-    <a href="#"><span class="glyphicon glyphicon-user"></span>@Model.Author.FirstName</a> &nbsp;
+    <a href="#"><span class="glyphicon glyphicon-user"></span>@Model.Author.Name</a> &nbsp;
     <span class="glyphicon glyphicon-calendar"></span>@Model.CreatedDate
     @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
     {
@@ -31,7 +31,7 @@
 @foreach (var item in Model.ForumComments.Where(c=>c.IsDeleted==false).OrderBy(o=>o.ModifiedDate))
 {
     <div>
-        <a href="#"><span class="glyphicon glyphicon-user"></span>@item.Author.FirstName</a> &nbsp;
+        <a href="#"><span class="glyphicon glyphicon-user"></span>@item.Author.Name</a> &nbsp;
         <span class="glyphicon glyphicon-calendar"></span>@item.CreatedDate
         @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
@@ -56,6 +56,4 @@
             cmodel.ForumID = Model.ForumID;
             Html.RenderPartial("AddComment", cmodel);
         }
-        <p>            
-            @Html.ActionLink("Back to List", "Index")
-        </p>
+       

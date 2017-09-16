@@ -41,14 +41,14 @@
             @Html.DisplayFor(modelItem => item.UnitType.KeyValues)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Owner.FirstName)
+            @Html.DisplayFor(modelItem => item.Owner.Name)
         </td>     
         <td>
             <a href="@Url.Action("Details", new { id = item.UnitID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
             @if (User.IsInRole("Admin"))
                 {
                 <a href="@Url.Action("Edit", new { id = item.UnitID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <a href="@Url.Action("Delete", new { id = item.UnitID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                <a href="@Url.Action("Delete", new { id = item.UnitID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
             }
         </td>  
     </tr>
