@@ -10,14 +10,24 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
+    [Authorize]
     public class DueController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
         // GET: Due
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult Index()
         {
             var dues = db.Dues.Where(d=>d.IsDeleted == false).Include(d => d.BuildingUnit).Include(d => d.DueType);
+            return View(dues.ToList());
+        }
+
+        public ActionResult MyBill()
+        {
+            string UserID = Helper.GetUserID(User);
+            var MyUnit = db.BuildingUnits.Where(d => d.IsDeleted == false && d.OwnerID == UserID);
+            var dues = db.Dues.Where(d => d.IsDeleted == false).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o=>o.BillDate);
             return View(dues.ToList());
         }
 

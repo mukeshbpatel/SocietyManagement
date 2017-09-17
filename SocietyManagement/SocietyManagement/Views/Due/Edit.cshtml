@@ -1,10 +1,11 @@
 ﻿@model SocietyManagement.Models.Due
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Bills";
 }
 
-<h2>Edit</h2>
+<h3><span class="glyphicon glyphicon-usd"></span> Bills</h3>
+
 
 
 @using (Html.BeginForm())
@@ -17,6 +18,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.DueID)
         @Html.HiddenFor(model => model.CreatedDate)
+
         <div class="form-group">
             @Html.LabelFor(model => model.BillDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -26,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UnitID, "UnitID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.UnitID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.UnitID, "", new { @class = "text-danger" })
@@ -34,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DueTypeID, "DueTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DueTypeID,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("DueTypeID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DueTypeID, "", new { @class = "text-danger" })
@@ -71,57 +73,16 @@
         @Html.HiddenFor(model => model.UDK4)
         @Html.HiddenFor(model => model.UDK5)
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.UDK1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UDK1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UDK1, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UDK2, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UDK2, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UDK2, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UDK3, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UDK3, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UDK3, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UDK4, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UDK4, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UDK4, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UDK5, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UDK5, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UDK5, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
                 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-primary" />
+                <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
             </div>
         </div>
     </div>
 }
 
-<div>
-    <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

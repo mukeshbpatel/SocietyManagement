@@ -1,0 +1,80 @@
+﻿@model SocietyManagement.Models.RecurringDue
+
+@{
+    ViewBag.Title = "Recurring Bill";
+}
+
+<h3><span class="glyphicon glyphicon-retweet"></span> Recurring Bill</h3>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueType.KeyValues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecurringTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecurringType.KeyValues)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastRunDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastRunDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>

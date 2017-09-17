@@ -31,8 +31,8 @@
                             <span class="glyphicon glyphicon-briefcase"></span> My Account
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Due")"><span class="glyphicon glyphicon-usd"></span> Due</a></li>
+                        <ul class="dropdown-menu" role="menu">                            
+                            <li class="dropdown-item"><a href="@Url.Action("MyBill", "Due")"><span class="glyphicon glyphicon-usd"></span> Bill</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Payment")"><span class="icon-library"></span> Payments</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Poll</a></li>
@@ -50,7 +50,8 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Due")"><span class="glyphicon glyphicon-usd"></span> Due</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "RecurringDue")"><span class="glyphicon glyphicon-retweet"></span> Recurring Bills</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Due")"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Collection")"><span class="glyphicon glyphicon-piggy-bank"></span> Collection</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Expense")"><span class="glyphicon glyphicon glyphicon-list-alt"></span> Expense</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>

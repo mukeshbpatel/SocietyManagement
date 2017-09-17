@@ -261,6 +261,7 @@
     <Compile Include="Models\PollVote.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RecurringBill.cs" />
     <Compile Include="Models\RecurringDue.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
@@ -287,6 +288,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Controllers\RecurringDueController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -434,6 +436,12 @@
     <Content Include="Views\ComplaintComment\Details.cshtml" />
     <Content Include="Views\ComplaintComment\Edit.cshtml" />
     <Content Include="Views\ComplaintComment\Index.cshtml" />
+    <Content Include="Views\RecurringDue\Create.cshtml" />
+    <Content Include="Views\RecurringDue\Delete.cshtml" />
+    <Content Include="Views\RecurringDue\Details.cshtml" />
+    <Content Include="Views\RecurringDue\Edit.cshtml" />
+    <Content Include="Views\RecurringDue\Index.cshtml" />
+    <Content Include="Views\Due\MyBill.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SocietyManagement.Models.RecurringDue>
+
+@{
+    ViewBag.Title = "Recurring Bill";
+}
+
+<h3><span class="glyphicon glyphicon-retweet"></span> Recurring Bill</h3>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="pull-right">
+        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecurringTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastRunDate)
+        </th>        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.DueType.KeyValues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecurringType.KeyValues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastRunDate)
+        </td>            
+        <td>
+        @if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+        {
+            <a href="@Url.Action("Details", new { id = item.RecurringID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+            <a href="@Url.Action("Edit", new { id = item.RecurringID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Delete", new { id = item.RecurringID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+        }
+        </td> 
+    </tr>
+}
+
+</table>

@@ -198,7 +198,7 @@ namespace SocietyManagement.Models
 
     public partial class RecurringDueMetadata
     {
-        [Display(Name = "Sstart")]
+        [Display(Name = "Start")]
         [Required]
         [DataType(dataType: DataType.Date)]
         public System.DateTime StartDate { get; set; }
@@ -209,7 +209,7 @@ namespace SocietyManagement.Models
         [Display(Name = "Recurring Type")]
         [Required]
         public int RecurringTypeID { get; set; }
-        [Display(Name = "Due Type")]
+        [Display(Name = "Bill Type")]
         [Required]
         public int DueTypeID { get; set; }
         [Display(Name = "Amount")]
@@ -220,7 +220,7 @@ namespace SocietyManagement.Models
         [Required]
         [Range(0,99999)]
         public int DueDays { get; set; }
-        [Display(Name = "Last Run")]
+        [Display(Name = "Last Bill")]
         [DataType(dataType: DataType.Date)]
         public Nullable<System.DateTime> LastRunDate { get; set; }
 
@@ -233,6 +233,19 @@ namespace SocietyManagement.Models
     [MetadataType(typeof(RecurringDueMetadata))]
     public partial class RecurringDue
     {
+        [NotMapped]
+        public int LastRunMonth
+        {
+            get
+            {
+                if (this.LastRunDate == null)
+                 return 200001;
+                else
+                {
+                    return ((this.LastRunDate.Value.Year * 100) + this.LastRunDate.Value.Month); 
+                }
+            }
+        }
     }
 
     public partial class DueMetadata
@@ -243,14 +256,14 @@ namespace SocietyManagement.Models
         public System.DateTime BillDate { get; set; }
         [Required]
         public int UnitID { get; set; }
-        [Display(Name = "Due Type")]
+        [Display(Name = "Bill Type")]
         [Required]
         public int DueTypeID { get; set; }
         [Display(Name = "Amount")]
         [Required]
         [Range(-99999999,9999999)]
         public decimal DueAmount { get; set; }
-        [Display(Name = "Due")]
+        [Display(Name = "Perticular")]
         [Required]
         [StringLength(1000)]
         public string Details { get; set; }
