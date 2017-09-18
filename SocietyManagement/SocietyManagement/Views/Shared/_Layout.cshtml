@@ -70,8 +70,10 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            @if (User.IsInRole("Admin")) {
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "KeyValue")"><span class="icon-library"></span> Keys</a></li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="dropdown-item"><a href="@Url.Action("CalculateBill", "RecurringDue",new {id = 0})"><span class="glyphicon glyphicon-retweet"></span> Calculate Bills</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("Index", "KeyValue")"><span class="icon-library"></span> Keys</a></li>
                             }
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Building")"><span class="icon-office"></span> Building</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "BuildingUnit")"><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</a></li>

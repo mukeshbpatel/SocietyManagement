@@ -9,19 +9,38 @@ namespace SocietyManagement.Models
 {
     public class RecurringBill 
     {
-        
-
-        public bool CalculateRecurringBill(IPrincipal User)
+        public List<RecurringDue> CalculateRecurringBill(IPrincipal User, DateTime BillDate)
         {
+            List<RecurringDue> bills = new List<RecurringDue>();
+            SocietyManagementEntities db = new SocietyManagementEntities();
+
+            DateTime RunDate = new DateTime(BillDate.Year, BillDate.Month, 1);
+            int RunDay = RunDate.Day;
+            int RunMonth = (RunDate.Year * 100) + RunDate.Month;
+            int RunYear = RunDate.Year;
+            var recurringDues = db.RecurringDues.Where(d => d.IsDeleted == false && d.StartDate <= RunDate && d.EndDate >= RunDate).Include(r => r.BuildingUnit).Include(r => r.DueType).Include(r => r.RecurringType);
+            var recurringDuesMonth = recurringDues.Where(m => m.RecurringType.KeyValues == "Monthly" & ((m.LastRunDate == null || (m.LastRunDate.Value.Year * 100) + m.LastRunDate.Value.Month < RunMonth)));
+            var recurringDuesQuater = recurringDues.Where(m => m.RecurringType.KeyValues == "Quarterly" & ((m.LastRunDate == null || (m.LastRunDate.Value.Year * 100) + m.LastRunDate.Value.Month + 3 <= RunMonth)));
+            var recurringDuesHalfYear = recurringDues.Where(m => m.RecurringType.KeyValues == "Half-Yearly" & ((m.LastRunDate == null || (m.LastRunDate.Value.Year * 100) + m.LastRunDate.Value.Month + 6 <= RunMonth)));
+            var recurringDuesYear = recurringDues.Where(m => m.RecurringType.KeyValues == "Yearly" & ((m.LastRunDate == null || m.LastRunDate.Value.Year < RunYear)));
+            
+            bills.AddRange((IEnumerable<RecurringDue>)recurringDuesMonth.ToList());
+            bills.AddRange((IEnumerable<RecurringDue>)recurringDuesQuater.ToList());
+            bills.AddRange((IEnumerable<RecurringDue>)recurringDuesHalfYear.ToList());
+            bills.AddRange((IEnumerable<RecurringDue>)recurringDuesYear.ToList());
+            
+            db.Dispose();
+            return bills;
+        }
 
 
+        public bool EnterRecurringBill(IPrincipal User, DateTime BillDate)
+        {
             SocietyManagementEntities db = new SocietyManagementEntities();
             SocietyManagementEntities db1 = new SocietyManagementEntities();
-
-            for (int i = 5; i <= 12; i++)
-            {
-
-                DateTime RunDate = new DateTime(2017, i, 1);
+                 
+                   
+                DateTime RunDate = new DateTime(BillDate.Year, BillDate.Month, 1);
                 int RunDay = RunDate.Day;
                 int RunMonth = (RunDate.Year * 100) + RunDate.Month;
                 int RunYear = RunDate.Year;
@@ -133,12 +152,10 @@ namespace SocietyManagement.Models
                     db1.Entry(recurringDue).State = EntityState.Modified;
                     db1.SaveChanges();
 
-                }
-            }
+                }           
             db.Dispose();
             db1.Dispose();
             return true;
-        }
-        
+        }        
     }
 }

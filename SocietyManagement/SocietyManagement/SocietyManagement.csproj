@@ -442,6 +442,7 @@
     <Content Include="Views\RecurringDue\Edit.cshtml" />
     <Content Include="Views\RecurringDue\Index.cshtml" />
     <Content Include="Views\Due\MyBill.cshtml" />
+    <Content Include="Views\RecurringDue\CalculateBill.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

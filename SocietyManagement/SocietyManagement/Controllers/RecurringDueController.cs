@@ -10,10 +10,42 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Views
 {
-    [Authorize(Roles ="Admin,Manager")]
+    [Authorize(Roles = "Admin,Manager")]
     public class RecurringDueController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult CalculateBill(int id,string RecurringDate)
+        {
+            DateTime dt = DateTime.Now;
+            if (!string.IsNullOrEmpty(RecurringDate))
+                dt = DateTime.Parse(RecurringDate);
+            else
+                return RedirectToAction("CalculateBill", new { RecurringDate = dt.ToString("dd-MM-yyyy") });
+
+            RecurringBill recurringBill = new RecurringBill();            
+            return View(recurringBill.CalculateRecurringBill(User, dt));
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CalculateBill(string RecurringDate)
+        {
+            DateTime dt = DateTime.Now;
+            if (!string.IsNullOrEmpty(RecurringDate))
+                dt = DateTime.Parse(RecurringDate);
+            RecurringBill recurringBill = new RecurringBill();
+            if (recurringBill.EnterRecurringBill(User,dt))
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.ExpectationFailed);
+            }
+        }
 
         // GET: RecurringDue
         public ActionResult Index(int? id)
@@ -133,13 +165,10 @@ namespace SocietyManagement.Views
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            RecurringBill bill = new RecurringBill();
-            bill.CalculateRecurringBill(User);
-
-            //RecurringDue recurringDue = db.RecurringDues.Find(id);
-            //Helper.SoftDelete(recurringDue, User);
-            //db.Entry(recurringDue).State = EntityState.Modified;
-            //db.SaveChanges();
+            RecurringDue recurringDue = db.RecurringDues.Find(id);
+            Helper.SoftDelete(recurringDue, User);
+            db.Entry(recurringDue).State = EntityState.Modified;
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
