@@ -15,6 +15,58 @@ namespace SocietyManagement.Controllers
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
+
+        public ActionResult Vote(int id)
+        {
+            Poll poll = db.Polls.Find(id);
+            if (poll == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.IsVoted = false;
+            var UserID = Helper.GetUserID(User);
+            ViewBag.UserID = UserID;
+            if (poll.PollOptions.Count > 0)
+            {                
+                var options = db.PollVotes.Where(d => d.IsDeleted == false && d.PollOption.PollID == id && d.VoteByID == UserID);
+                if (options.Count() > 0)
+                    ViewBag.IsVoted = true;
+            }
+            return View(poll);
+        }
+
+        [HttpPost]
+        public ActionResult Vote(int id, FormCollection collection)
+        {
+            Poll poll = db.Polls.Find(id);
+            if (poll == null)
+            {
+                return HttpNotFound();
+            }
+
+            foreach (var option in poll.PollOptions)
+            {
+                if (!string.IsNullOrEmpty(collection["chk_" + option.PollOptionID]))
+                {
+                    string chk = collection["chk_" + option.PollOptionID];
+                    if (chk.ToLower() == "on")
+                    {
+                        PollVote pollVote = new PollVote();
+                        pollVote.PollOptionID = option.PollOptionID;
+                        Helper.AssignUserInfo(pollVote, User);
+                        pollVote.VoteByID = pollVote.UserID;
+                        pollVote.VoteDate = pollVote.CreatedDate;
+                        db.PollVotes.Add(pollVote);
+                        db.SaveChanges();
+                    }
+                    
+                }
+            }
+            return RedirectToAction("Details", new { id = poll.PollID });            
+        }
+
+
         // GET: Poll
         public ActionResult Index()
         {
@@ -34,6 +86,9 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
+
+            int TotalVote = db.PollVotes.Where(p => p.IsDeleted == false && p.PollOption.PollID == id).Count();
+            ViewBag.TotalVote = TotalVote;
             return View(poll);
         }
 
@@ -125,7 +180,7 @@ namespace SocietyManagement.Controllers
                     if (!string.IsNullOrEmpty(item))
                     {
                         var pollOption = db.PollOptions.Where(p => p.PollID == poll.PollID & p.PollOption1 == item).FirstOrDefault();
-                        if (pollOption != null)
+                        if (pollOption == null)
                         {
                             pollOption = new PollOption();
                             pollOption.PollID = poll.PollID;
@@ -134,7 +189,7 @@ namespace SocietyManagement.Controllers
                             db.PollOptions.Add(pollOption);
                             db.SaveChanges();
                             i = +1;
-                        }          
+                        }
                     }
                 }
 

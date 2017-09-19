@@ -309,9 +309,9 @@
           <Property Name="PollOptionID" Type="int" Nullable="false" />
           <Property Name="VoteByID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="VoteDate" Type="datetime" Nullable="false" />
-          <Property Name="UDK1" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UDK2" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="UDK3" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
@@ -1455,9 +1455,9 @@
           <Property Name="PollOptionID" Type="Int32" Nullable="false" />
           <Property Name="VoteByID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="VoteDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Voter" Relationship="SocietyManagementModel.FK_PollVotes_Voter" FromRole="PollVote" ToRole="AspNetUser" />
           <NavigationProperty Name="PollOption" Relationship="SocietyManagementModel.FK_PollVotes_PollOptions" FromRole="PollVote" ToRole="PollOption" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />

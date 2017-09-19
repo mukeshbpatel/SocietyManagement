@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Details)
+            @Html.Raw(Model.Details)
         </dd>
 
         <dt>
@@ -41,74 +41,39 @@
         <dd>
             @Html.DisplayFor(model => model.EndDate)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK1)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK1)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK2)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK2)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UDK3)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UDK3)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PollType.KeyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PollType.KeyName)
-        </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.PollID }) |
+
+
+@foreach (var options in Model.PollOptions)
+{
+    int TotalVote = int.Parse(ViewBag.TotalVote.ToString());
+    int Vote = options.PollVotes.Where(d => d.IsDeleted == false).Count();
+    decimal Percentage = 0;
+    if (TotalVote > 0)
+    {
+        Percentage = (Vote * 100) / TotalVote;
+    }
+    <Label>@options.PollOption1</Label>
+    <div class="progress">        
+        @if (Percentage <= 25)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-info" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        } else if (Percentage > 25 & Percentage <=50)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-warning" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        }
+        else if (Percentage > 50 & Percentage <= 75)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-primary" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        }
+        else if (Percentage > 70)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-success" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        }
+    </div>
+}
+
+<p>    
     <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
 </p>

@@ -15,6 +15,7 @@ namespace SocietyManagement.Controllers
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
+      
         // GET: PollOption
         public ActionResult Index(int? PollID)
         {

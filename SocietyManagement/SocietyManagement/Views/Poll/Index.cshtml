@@ -50,6 +50,7 @@
             @Html.DisplayFor(modelItem => item.EndDate)
         </td>        
         <td>
+            <a href="@Url.Action("Vote", new { id = item.PollID })" title="Vote"><span class="glyphicon glyphicon-apple"></span></a>
             <a href="@Url.Action("Details", new { id = item.PollID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
 @if (User.IsInRole("Admin") | User.IsInRole("Manager"))
 {

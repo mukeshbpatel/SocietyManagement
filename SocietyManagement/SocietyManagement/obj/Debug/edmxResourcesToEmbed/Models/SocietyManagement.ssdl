@@ -304,9 +304,9 @@
     <Property Name="PollOptionID" Type="int" Nullable="false" />
     <Property Name="VoteByID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="VoteDate" Type="datetime" Nullable="false" />
-    <Property Name="UDK1" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UDK2" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="UDK3" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
