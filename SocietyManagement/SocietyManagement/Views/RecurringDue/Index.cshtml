@@ -69,7 +69,7 @@
             @Html.DisplayFor(modelItem => item.LastRunDate)
         </td>            
         <td>
-        @if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+        @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
         {
             <a href="@Url.Action("Details", new { id = item.RecurringID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
             <a href="@Url.Action("Edit", new { id = item.RecurringID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>

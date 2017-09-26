@@ -36,7 +36,7 @@ namespace SocietyManagement.Controllers
             return View(noticeBoard);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         // GET: NoticeBoard/Create
         public ActionResult Create()
         {
@@ -47,7 +47,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "NoticeID,NoticeDate,NoticeHeading,Notice,ExpiryDate,IsDeleted,UDK1,UDK2,UDK3")] NoticeBoard noticeBoard)
@@ -63,7 +63,7 @@ namespace SocietyManagement.Controllers
             return View(noticeBoard);
         }
 
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         // GET: NoticeBoard/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -83,7 +83,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "NoticeID,NoticeDate,NoticeHeading,Notice,ExpiryDate,IsDeleted,UDK1,UDK2,UDK3,CreatedDate")] NoticeBoard noticeBoard)
@@ -99,7 +99,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: NoticeBoard/Delete/5
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,7 +116,7 @@ namespace SocietyManagement.Controllers
 
         // POST: NoticeBoard/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

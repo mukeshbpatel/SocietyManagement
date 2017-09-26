@@ -150,6 +150,15 @@
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="ComplaintComment" EntitySet="ComplaintComments" />
     </AssociationSet>
+    <EntitySet Name="Expenses" EntityType="SocietyManagementModel.Expense" />
+    <AssociationSet Name="FK_Expenses_PaymentMode" Association="SocietyManagementModel.FK_Expenses_PaymentMode">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Expens" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expenses_Type" Association="SocietyManagementModel.FK_Expenses_Type">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="Expens" EntitySet="Expenses" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRole">
     <Key>
@@ -214,6 +223,13 @@
     <NavigationProperty Name="PollVotes" Relationship="SocietyManagementModel.FK_PollVotes_Voter" FromRole="AspNetUser" ToRole="PollVote" />
     <NavigationProperty Name="AspNetRoles" Relationship="SocietyManagementModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
     <NavigationProperty Name="ComplaintComments1" Relationship="SocietyManagementModel.FK_ComplaintComments_AssignTo" FromRole="AspNetUser" ToRole="ComplaintComment" />
+    <Property Name="BillNotification" Type="Boolean" Nullable="false" />
+    <Property Name="PaymentNotification" Type="Boolean" Nullable="false" />
+    <Property Name="NoticeBoardNotification" Type="Boolean" Nullable="false" />
+    <Property Name="PollNotification" Type="Boolean" Nullable="false" />
+    <Property Name="EventNotification" Type="Boolean" Nullable="false" />
+    <Property Name="ForumNotification" Type="Boolean" Nullable="false" />
+    <Property Name="PaymentReminder" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="Audit">
     <Key>
@@ -443,6 +459,8 @@
     <NavigationProperty Name="RecurringDues1" Relationship="SocietyManagementModel.FK_RecurringDues_RecurringType" FromRole="KeyValue" ToRole="RecurringDue" />
     <NavigationProperty Name="ComplaintComments" Relationship="SocietyManagementModel.FK_ComplaintComments_Status" FromRole="KeyValue" ToRole="ComplaintComment" />
     <NavigationProperty Name="Complaints1" Relationship="SocietyManagementModel.FK_Complaints_Status" FromRole="KeyValue" ToRole="Complaint" />
+    <NavigationProperty Name="Expenses" Relationship="SocietyManagementModel.FK_Expenses_PaymentMode" FromRole="KeyValue" ToRole="Expens" />
+    <NavigationProperty Name="Expenses1" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="KeyValue" ToRole="Expens" />
   </EntityType>
   <EntityType Name="NoticeBoard">
     <Key>
@@ -967,6 +985,60 @@
       </Principal>
       <Dependent Role="ComplaintComment">
         <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Expense">
+    <Key>
+      <PropertyRef Name="ExpenseID" />
+    </Key>
+    <Property Name="ExpenseID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PaidTo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ExpenseTypeID" Type="Int32" Nullable="false" />
+    <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="TDS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
+    <Property Name="ChequeBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeDate" Type="DateTime" Precision="0" />
+    <Property Name="ChequeNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ChequeCleared" Type="Boolean" Nullable="false" />
+    <Property Name="ChequeEncashmentDate" Type="DateTime" Precision="0" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="PaymentMode" Relationship="SocietyManagementModel.FK_Expenses_PaymentMode" FromRole="Expens" ToRole="KeyValue" />
+    <NavigationProperty Name="ExpenseType" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="Expens" ToRole="KeyValue" />
+  </EntityType>
+  <Association Name="FK_Expenses_PaymentMode">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Expense" Role="Expens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Expens">
+        <PropertyRef Name="PaymentModeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expenses_Type">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Expense" Role="Expens" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Expens">
+        <PropertyRef Name="ExpenseTypeID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

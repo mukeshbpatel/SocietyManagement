@@ -1,0 +1,162 @@
+﻿@model SocietyManagement.Models.Collection
+
+@{
+    if (Request.QueryString["Title"] != null)
+    {
+        ViewBag.Title = "Payment";
+    }
+    else
+    {
+        ViewBag.Title = "Collection";
+    }
+}
+
+<h3>
+    @if (Request.QueryString["Title"] != null)
+    {
+    <span class="icon-library"></span>
+    } else {
+    <span class="glyphicon glyphicon-piggy-bank"></span>
+    }  @ViewBag.Title
+</h3>
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CollectionDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollectionDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LatePaymentCharges)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LatePaymentCharges)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiptNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiptNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaymentModeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentMode.KeyValues)
+        </dd>
+
+        @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+        {
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference)
+        </dt>
+        
+        <dd>
+            @Html.DisplayFor(model => model.Reference)
+        </dd>
+        }
+        @if (Model.PaymentMode.KeyValues == "Bank Transfer" || Model.PaymentMode.KeyValues == "Cheque")
+        {
+        <dt>
+            @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+            {
+                <span>Bank</span>
+            }
+            else
+            {
+                @Html.DisplayNameFor(model => model.ChequeBank)
+            }
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequeBank)
+        </dd>
+
+        <dt>
+            @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+            {
+                <span>Transfer Date</span>
+            }
+            else
+            {
+                @Html.DisplayNameFor(model => model.ChequeDate)
+            }
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChequeDate)
+        </dd>
+        }
+        @if (Model.PaymentMode.KeyValues == "Cheque")
+        {
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequeNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeCleared)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequeCleared)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeEncashmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChequeEncashmentDate)
+        </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Details)
+        </dd>
+    </dl>
+</div>
+<p>    
+    @if (Request.QueryString["Title"] != null)
+    {
+        <a href="@Url.Action("MyPayment")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+    } else {
+        <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+    }
+</p>

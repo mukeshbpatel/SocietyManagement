@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SocietyManagement.Models;
+using System.Data.Entity;
 
 namespace SocietyManagement.Controllers
 {
@@ -49,7 +50,7 @@ namespace SocietyManagement.Controllers
                 _userManager = value;
             }
         }
-
+        
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -59,8 +60,8 @@ namespace SocietyManagement.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
                 : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.AddPhoneSuccess ? "Your profile updated sucessfully."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."                
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -211,8 +212,69 @@ namespace SocietyManagement.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
+        [Authorize(Roles="Manager,Admin")]
+        public ActionResult Users()
+        {
+            SocietyManagementEntities db = new SocietyManagementEntities();
+            var AppUsers = db.AspNetUsers.Include(i => i.AspNetRoles).Include(i => i.BuildingUnits);
+            db.Dispose();
+            return View(AppUsers);
+        }
+
+        public ActionResult MyProfile()
+        {
+            SocietyManagementEntities db = new SocietyManagementEntities();
+            var UserID = Helper.GetUserID(User);
+            var UserInfo = db.AspNetUsers.Find(UserID);
+            db.Dispose();
+            if (UserInfo == null)
+            {
+                return HttpNotFound();
+            }
+            UserProfile profile = new UserProfile(UserInfo);
+            return View(profile);
+        }
+
         //
-        // GET: /Manage/ChangePassword
+        // Post: /Manage/MyProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MyProfile([Bind(Include = "FirstName,LastName,Gender,DOB,Profession,Occupation,Email,PhoneNumber,BillNotification,PaymentNotification,NoticeBoardNotification,PollNotification,EventNotification,ForumNotification,PaymentReminder")] UserProfile profile)
+        {
+            if (ModelState.IsValid)
+            {
+                SocietyManagementEntities db = new SocietyManagementEntities();
+                var UserID = Helper.GetUserID(User);
+                var aspNetUsers = db.AspNetUsers.Find(UserID);
+                if (aspNetUsers == null)
+                {
+                    return HttpNotFound();
+                }
+
+                aspNetUsers.FirstName = profile.FirstName;
+                aspNetUsers.LastName = profile.LastName;
+                aspNetUsers.Gender = profile.Gender;
+                aspNetUsers.DOB = profile.DOB;
+                aspNetUsers.Profession = profile.Profession;
+                aspNetUsers.Occupation = profile.Occupation;
+                aspNetUsers.Email = profile.Email;
+                aspNetUsers.PhoneNumber = profile.PhoneNumber;                
+                aspNetUsers.BillNotification = profile.BillNotification;
+                aspNetUsers.PaymentNotification = profile.PaymentNotification;
+                aspNetUsers.NoticeBoardNotification = profile.NoticeBoardNotification;
+                aspNetUsers.PaymentReminder = profile.PaymentReminder;
+                aspNetUsers.PollNotification = profile.PollNotification;
+                aspNetUsers.ForumNotification = profile.ForumNotification;
+                aspNetUsers.EventNotification = profile.EventNotification;
+                aspNetUsers.NoticeBoardNotification = profile.NoticeBoardNotification;
+                db.Entry(aspNetUsers).State = EntityState.Modified;
+                db.SaveChanges();
+                db.Dispose();
+                return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
+            }
+            return View(profile);
+        }
+
         public ActionResult ChangePassword()
         {
             return View();

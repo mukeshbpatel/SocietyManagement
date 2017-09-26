@@ -94,7 +94,7 @@ namespace SocietyManagement.Controllers
 
 
         // GET: Poll/Create
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         public ActionResult Create()
         {            
             ViewBag.PollTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PollType"), "KeyID", "KeyValues");
@@ -105,7 +105,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "PollID,PollTitle,Details,StartDate,EndDate,PollTypeID,UDK1,UDK2,UDK3,Options")] Poll poll)
@@ -136,7 +136,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Poll/Edit/5
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -162,7 +162,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "PollID,PollTitle,Details,StartDate,EndDate,PollTypeID,UDK1,UDK2,UDK3,CreatedDate,Options")] Poll poll)
@@ -200,7 +200,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Poll/Delete/5
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -218,7 +218,7 @@ namespace SocietyManagement.Controllers
         // POST: Poll/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Comity")]
         public ActionResult DeleteConfirmed(int id)
         {
             Poll poll = db.Polls.Find(id);

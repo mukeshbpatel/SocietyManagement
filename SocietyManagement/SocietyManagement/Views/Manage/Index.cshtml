@@ -1,9 +1,11 @@
 ﻿@model SocietyManagement.Models.IndexViewModel
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Setting";
 }
-<h2>@ViewBag.Title.</h2>
+<h3><span class="glyphicon glyphicon-user"></span> @ViewBag.Title.</h3>
+
 <p class="text-success">@ViewBag.StatusMessage</p>
+
 <hr />
 <div>    
     <dl class="dl-horizontal">
@@ -19,7 +21,7 @@
                 @Html.ActionLink("Create", "SetPassword")                
             }
             ]
-        </dd> 
+        </dd>
         <dt>Profile:</dt>
         <dd>            
             [

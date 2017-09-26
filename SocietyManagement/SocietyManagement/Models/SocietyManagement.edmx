@@ -62,6 +62,13 @@
           <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
           <Property Name="AccessFailedCount" Type="int" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="BillNotification" Type="bit" Nullable="false" />
+          <Property Name="PaymentNotification" Type="bit" Nullable="false" />
+          <Property Name="NoticeBoardNotification" Type="bit" Nullable="false" />
+          <Property Name="PollNotification" Type="bit" Nullable="false" />
+          <Property Name="EventNotification" Type="bit" Nullable="false" />
+          <Property Name="ForumNotification" Type="bit" Nullable="false" />
+          <Property Name="PaymentReminder" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Audits">
           <Key>
@@ -208,6 +215,34 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Expenses">
+          <Key>
+            <PropertyRef Name="ExpenseID" />
+          </Key>
+          <Property Name="ExpenseID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExpenseDate" Type="datetime" Nullable="false" />
+          <Property Name="PaidTo" Type="varchar(max)" Nullable="false" />
+          <Property Name="ExpenseTypeID" Type="int" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TDS" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PaymentModeID" Type="int" Nullable="false" />
+          <Property Name="ChequeBank" Type="nvarchar(max)" />
+          <Property Name="ChequeName" Type="nvarchar(max)" />
+          <Property Name="ChequeDate" Type="date" />
+          <Property Name="ChequeNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="ChequeCleared" Type="bit" Nullable="false" />
+          <Property Name="ChequeEncashmentDate" Type="date" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="UDK4" Type="nvarchar(max)" />
+          <Property Name="UDK5" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="ForumComments">
           <Key>
@@ -648,6 +683,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Expenses_PaymentMode">
+          <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValues">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="PaymentModeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenses_Type">
+          <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+          <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValues">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="Expenses">
+              <PropertyRef Name="ExpenseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ForumComments_Author">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="ForumComments" Type="Self.ForumComments" Multiplicity="*" />
@@ -805,6 +864,7 @@
           <EntitySet Name="ComplaintComments" EntityType="Self.ComplaintComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Complaints" EntityType="Self.Complaints" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dues" EntityType="Self.Dues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ForumComments" EntityType="Self.ForumComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Forums" EntityType="Self.Forums" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KeyValues" EntityType="Self.KeyValues" Schema="dbo" store:Type="Tables" />
@@ -898,6 +958,14 @@
           <AssociationSet Name="FK_Dues_RecurringDues" Association="Self.FK_Dues_RecurringDues">
             <End Role="RecurringDues" EntitySet="RecurringDues" />
             <End Role="Dues" EntitySet="Dues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expenses_PaymentMode" Association="Self.FK_Expenses_PaymentMode">
+            <End Role="KeyValues" EntitySet="KeyValues" />
+            <End Role="Expenses" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expenses_Type" Association="Self.FK_Expenses_Type">
+            <End Role="KeyValues" EntitySet="KeyValues" />
+            <End Role="Expenses" EntitySet="Expenses" />
           </AssociationSet>
           <AssociationSet Name="FK_ForumComments_Author" Association="Self.FK_ForumComments_Author">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1102,7 +1170,16 @@
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="ComplaintComment" EntitySet="ComplaintComments" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="Expenses" EntityType="SocietyManagementModel.Expense" />
+          <AssociationSet Name="FK_Expenses_PaymentMode" Association="SocietyManagementModel.FK_Expenses_PaymentMode">
+            <End Role="KeyValue" EntitySet="KeyValues" />
+            <End Role="Expens" EntitySet="Expenses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Expenses_Type" Association="SocietyManagementModel.FK_Expenses_Type">
+            <End Role="KeyValue" EntitySet="KeyValues" />
+            <End Role="Expens" EntitySet="Expenses" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
             <PropertyRef Name="Id" />
@@ -1166,6 +1243,13 @@
           <NavigationProperty Name="PollVotes" Relationship="SocietyManagementModel.FK_PollVotes_Voter" FromRole="AspNetUser" ToRole="PollVote" />
           <NavigationProperty Name="AspNetRoles" Relationship="SocietyManagementModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
           <NavigationProperty Name="ComplaintComments1" Relationship="SocietyManagementModel.FK_ComplaintComments_AssignTo" FromRole="AspNetUser" ToRole="ComplaintComment" />
+          <Property Name="BillNotification" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentNotification" Type="Boolean" Nullable="false" />
+          <Property Name="NoticeBoardNotification" Type="Boolean" Nullable="false" />
+          <Property Name="PollNotification" Type="Boolean" Nullable="false" />
+          <Property Name="EventNotification" Type="Boolean" Nullable="false" />
+          <Property Name="ForumNotification" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentReminder" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Audit">
           <Key>
@@ -1395,7 +1479,9 @@
           <NavigationProperty Name="RecurringDues1" Relationship="SocietyManagementModel.FK_RecurringDues_RecurringType" FromRole="KeyValue" ToRole="RecurringDue" />
           <NavigationProperty Name="ComplaintComments" Relationship="SocietyManagementModel.FK_ComplaintComments_Status" FromRole="KeyValue" ToRole="ComplaintComment" />
           <NavigationProperty Name="Complaints1" Relationship="SocietyManagementModel.FK_Complaints_Status" FromRole="KeyValue" ToRole="Complaint" />
-        </EntityType>
+          <NavigationProperty Name="Expenses" Relationship="SocietyManagementModel.FK_Expenses_PaymentMode" FromRole="KeyValue" ToRole="Expens" />
+          <NavigationProperty Name="Expenses1" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="KeyValue" ToRole="Expens" />
+          </EntityType>
         <EntityType Name="NoticeBoard">
           <Key>
             <PropertyRef Name="NoticeID" />
@@ -1922,7 +2008,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="Expense">
+          <Key>
+            <PropertyRef Name="ExpenseID" />
+          </Key>
+          <Property Name="ExpenseID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PaidTo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ExpenseTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TDS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
+          <Property Name="ChequeBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeDate" Type="DateTime" Precision="0" />
+          <Property Name="ChequeNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeCleared" Type="Boolean" Nullable="false" />
+          <Property Name="ChequeEncashmentDate" Type="DateTime" Precision="0" />
+          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PaymentMode" Relationship="SocietyManagementModel.FK_Expenses_PaymentMode" FromRole="Expens" ToRole="KeyValue" />
+          <NavigationProperty Name="ExpenseType" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="Expens" ToRole="KeyValue" />
+        </EntityType>
+        <Association Name="FK_Expenses_PaymentMode">
+          <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+          <End Type="SocietyManagementModel.Expense" Role="Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValue">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="Expens">
+              <PropertyRef Name="PaymentModeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Expenses_Type">
+          <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+          <End Type="SocietyManagementModel.Expense" Role="Expens" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValue">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="Expens">
+              <PropertyRef Name="ExpenseTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1958,6 +2098,13 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SocietyManagementModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="PaymentReminder" ColumnName="PaymentReminder" />
+                <ScalarProperty Name="ForumNotification" ColumnName="ForumNotification" />
+                <ScalarProperty Name="EventNotification" ColumnName="EventNotification" />
+                <ScalarProperty Name="PollNotification" ColumnName="PollNotification" />
+                <ScalarProperty Name="NoticeBoardNotification" ColumnName="NoticeBoardNotification" />
+                <ScalarProperty Name="PaymentNotification" ColumnName="PaymentNotification" />
+                <ScalarProperty Name="BillNotification" ColumnName="BillNotification" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -2327,6 +2474,35 @@
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="UnitID" ColumnName="UnitID" />
                 <ScalarProperty Name="RecurringID" ColumnName="RecurringID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Expenses">
+            <EntityTypeMapping TypeName="SocietyManagementModel.Expense">
+              <MappingFragment StoreEntitySet="Expenses">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="ChequeEncashmentDate" ColumnName="ChequeEncashmentDate" />
+                <ScalarProperty Name="ChequeCleared" ColumnName="ChequeCleared" />
+                <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="ChequeName" ColumnName="ChequeName" />
+                <ScalarProperty Name="ChequeBank" ColumnName="ChequeBank" />
+                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+                <ScalarProperty Name="TDS" ColumnName="TDS" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="ExpenseTypeID" ColumnName="ExpenseTypeID" />
+                <ScalarProperty Name="PaidTo" ColumnName="PaidTo" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

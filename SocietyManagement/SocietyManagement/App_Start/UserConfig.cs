@@ -23,6 +23,12 @@ namespace SocietyManagement
                 role.Name = "Manager";
                 roleManager.Create(role);
             }
+            if (!roleManager.RoleExists("Comity"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Comity";
+                roleManager.Create(role);
+            }
             if (!roleManager.RoleExists("User"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();

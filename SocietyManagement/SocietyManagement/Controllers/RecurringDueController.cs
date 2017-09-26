@@ -10,7 +10,7 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Views
 {
-    [Authorize(Roles = "Admin,Manager")]
+    [Authorize(Roles = "Manager,Admin")]
     public class RecurringDueController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();

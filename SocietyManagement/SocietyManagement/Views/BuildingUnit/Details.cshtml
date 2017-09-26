@@ -66,6 +66,99 @@
         </dd>
     </dl>
 </div>
+
+Bills
+<table class="table table-sm table-striped table-hover table-responsive">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th class="hidden-xs">
+            Bill Type
+        </th>
+        <th>
+            Perticular
+        </th>        
+        <th>
+            Due Date
+        </th>
+        <th>
+            Amount
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Dues.Where(d=>d.IsDeleted==false).OrderBy(o=>o.BillDate))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillDate)
+            </td>
+            <td class="hidden-xs">
+                @Html.DisplayFor(modelItem => item.DueType.KeyValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td class="right">
+                @Html.DisplayFor(modelItem => item.DueAmount)
+            </td>
+            
+        </tr>
+    }
+
+</table>
+
+Payments
+<table class="table table-sm table-striped table-hover table-responsive">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Payment Mode
+        </th>
+        <th>
+            Receipt
+        </th>
+        <th class="hidden-xs">
+            Details
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Penalty
+        </th>   
+    </tr>
+
+    @foreach (var item in Model.Collections.Where(d => d.IsDeleted == false).OrderBy(o => o.CollectionDate))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptNumber)
+            </td>
+            <td class="hidden-xs">
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LatePaymentCharges)
+            </td>                      
+        </tr>
+    }
+</table>
+
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.UnitID }) |*@
     <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>

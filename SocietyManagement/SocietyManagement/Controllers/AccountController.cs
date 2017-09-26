@@ -79,6 +79,9 @@ namespace SocietyManagement.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    UserConfig uc = new UserConfig();
+                    uc.CreateRoles();
+                    uc = null;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -151,7 +154,7 @@ namespace SocietyManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Gender = model.Gender };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.Mobile, FirstName = model.FirstName, LastName = model.LastName, Gender = model.Gender };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -159,7 +162,7 @@ namespace SocietyManagement.Controllers
                     uc.CreateRoles();
                     uc = null;
 
-                    if (model.UserName == "9860002040")
+                    if (model.Mobile == "9860002040")
                     {
                         var roles = await UserManager.AddToRoleAsync(user.Id, "Admin");
                     }
@@ -405,6 +408,7 @@ namespace SocietyManagement.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session.RemoveAll();
             return RedirectToAction("Index", "Home");
         }
 

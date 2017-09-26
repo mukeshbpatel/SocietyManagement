@@ -10,7 +10,7 @@
     <hr />
     <a href="#"><span class="glyphicon glyphicon-user"></span>@Model.Author.Name</a> &nbsp;
     <span class="glyphicon glyphicon-calendar"></span>@Model.CreatedDate
-    @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+    @if (User.IsInRole("Manager") || User.IsInRole("Admin") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
     {
         <div class="pull-right">
             <a href="@Url.Action("Edit", new { id = Model.ForumID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a><span></span>
@@ -33,7 +33,7 @@
     <div>
         <a href="#"><span class="glyphicon glyphicon-user"></span>@item.Author.Name</a> &nbsp;
         <span class="glyphicon glyphicon-calendar"></span>@item.CreatedDate
-        @if (User.IsInRole("Admin") | User.IsInRole("Manager") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+        @if (User.IsInRole("Manager") || User.IsInRole("Admin") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
             <div class="pull-right">
                 <a href="@Url.Action("Edit", "ForumComment", new { id = item.CommentID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>

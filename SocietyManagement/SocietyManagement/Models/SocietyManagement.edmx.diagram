@@ -58,6 +58,9 @@
         <AssociationConnector Association="SocietyManagementModel.FK_ComplaintComments_Status" />
         <AssociationConnector Association="SocietyManagementModel.FK_Complaints_Status" />
         <AssociationConnector Association="SocietyManagementModel.FK_ComplaintComments_AssignTo" />
+        <EntityTypeShape EntityType="SocietyManagementModel.Expense" Width="1.5" PointX="5.25" PointY="8.75" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Expenses_PaymentMode" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Expenses_Type" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

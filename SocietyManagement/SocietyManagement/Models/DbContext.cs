@@ -32,6 +32,13 @@ namespace SocietyManagement.Models
         {
             return DateTime.Now;
         }
+
+        public static List<AspNetUser> GetUsers(DbSet<AspNetUser> Users)
+        {
+            List<AspNetUser> FilterUsers = Users.Where(u => u.PhoneNumber!="9860002040" && u.Email!="mukeshbpatel@gmail.com").OrderBy(o=>o.FirstName).ToList();
+            return FilterUsers;
+        }
+
         public static List<KeyValue> FilterKeyValues(DbSet<KeyValue> KeyValues,string KeyName)
         {            
             return KeyValues.Where(k => k.KeyName == KeyName).OrderBy(o => o.KeyOrder).ToList();

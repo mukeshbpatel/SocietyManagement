@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SocietyManagement.Models.Collection>
+
+@{
+    ViewBag.Title = "Collection";
+}
+
+<h3><span class="glyphicon glyphicon-piggy-bank"></span> Collection</h3>
+
+
+@if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+{
+    <div class="pull-right">
+        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+}
+
+<table class="table table-sm table-striped table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CollectionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentModeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LatePaymentCharges)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptNumber)
+        </th>        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LatePaymentCharges)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptNumber)
+            </td>            
+            <td>
+                <a href="@Url.Action("Details", new { id = item.CollectionID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a href="@Url.Action("Edit", new { id = item.CollectionID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Delete", new { id = item.CollectionID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

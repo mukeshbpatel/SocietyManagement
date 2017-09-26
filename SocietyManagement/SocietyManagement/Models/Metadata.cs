@@ -19,13 +19,146 @@ namespace SocietyManagement.Models
     //{
     //}
 
-    public partial class AspNetUserMetadata
-    {     
+
+    public partial class ExpenseMetadata
+    {
+        [Required]
+        [Display(Name = "Date")]
+        [DataType(DataType.Date)]
+        public System.DateTime ExpenseDate { get; set; }
+
+        [Display(Name = "Paid To")]
+        [Required]
+        public string PaidTo { get; set; }
+
+        [Display(Name = "Expense Type")]
+        public int ExpenseTypeID { get; set; }
+
+        [Required]
+        public string Details { get; set; }
+
+        [Range(0, 9999999)]
+        [Required]
+        public decimal Amount { get; set; }
+
+        [Display(Name = "TDS")]
+        [Range(0,9999999)]
+        public decimal TDS { get; set; }
+
+        [Display(Name = "Payment Mode")]
+        public int PaymentModeID { get; set; }
+
+        [Display(Name = "Cheque Bank")]
+        public string ChequeBank { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Cheque Date")]
+        public Nullable<System.DateTime> ChequeDate { get; set; }
+        [Display(Name = "Cheque Number")]
+        public string ChequeNumber { get; set; }
+        [Display(Name = "Cheque Cleared")]
+        public bool ChequeCleared { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Encashment Date")]
+        public Nullable<System.DateTime> ChequeEncashmentDate { get; set; }
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }
+        [Display(Name = "Modified Date")]
+        public System.DateTime ModifiedDate { get; set; }
+    }
+    [MetadataType(typeof(ExpenseMetadata))]
+    public partial class Expense
+    {
+       
+    }
+
+    public partial class CollectionMetadata
+    {
+        [Required]
+        [Display(Name = "Date")]
+        [DataType(DataType.Date)]
+        public System.DateTime CollectionDate { get; set; }
+        [Required]
+        [Display(Name = "Unit")]
+        public int UnitID { get; set; }
+        [Required]
+        [Range(0, 9999999, ErrorMessage = "Invalid Amount")]
+        public decimal Amount { get; set; }        
+        [Range(0, 9999999, ErrorMessage = "Invalid Penalty Amount")]
+        [Display(Name = "Penalty")]
+        public decimal LatePaymentCharges { get; set; }
+        [Required]
+        [Display(Name = "Receipt Number")]
+        public string ReceiptNumber { get; set; }
+        [Required]
+        [Display(Name = "Payment Mode")]
+        public int PaymentModeID { get; set; }
+        [Display(Name = "Reference Number")]
+        public string Reference { get; set; }
+        [Display(Name = "Cheque Bank")]
+        public string ChequeBank { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Cheque Date")]
+        public Nullable<System.DateTime> ChequeDate { get; set; }
+        [Display(Name = "Cheque Number")]
+        public string ChequeNumber { get; set; }
+        [Display(Name = "Name on Cheque")]
+        public string ChequeName { get; set; }
+        [Display(Name = "Cheque Cleared")]
+        public bool ChequeCleared { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Encashment Date")]
+        public Nullable<System.DateTime> ChequeEncashmentDate { get; set; }
+        public string Details { get; set; }
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }
+        [Display(Name = "Modified Date")]
+        public System.DateTime ModifiedDate { get; set; }
+    }
+    [MetadataType(typeof(CollectionMetadata))]
+    public partial class Collection
+    {
         
     }
+
+    public partial class AspNetUserMetadata
+    {
+        [Required]
+        [Display(Name = "User Name")]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public string UserName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string Gender { get; set; }
+
+        [Display(Name = "Mobile")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid mobile number")]
+        public string PhoneNumber { get; set; }
+
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? DOB { get; set; }
+    }
+
     [MetadataType(typeof(AspNetUserMetadata))]
     public partial class AspNetUser
     {
+        [NotMapped]        
+        public string Role { get; set; }
+        [Display(Name = "Reset Password")]
+        public bool ResetPassword { get; set; }
         [NotMapped]
         public string Name
         {

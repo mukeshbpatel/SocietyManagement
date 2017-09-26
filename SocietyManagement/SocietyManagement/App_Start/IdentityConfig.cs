@@ -105,8 +105,8 @@ namespace SocietyManagement
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
-                AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = true
+                AllowOnlyAlphanumericUserNames = true,
+                RequireUniqueEmail = false                
             };
 
             // Configure validation logic for passwords
@@ -121,8 +121,8 @@ namespace SocietyManagement
 
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
-            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 50;
+            manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(60);
+            manager.MaxFailedAccessAttemptsBeforeLockout = 500;
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.

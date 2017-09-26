@@ -50,7 +50,7 @@ namespace SocietyManagement.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Mobile")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
@@ -64,6 +64,11 @@ namespace SocietyManagement.Models
 
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+            this.Role = "User";
+        }
+
         [Required]
         [StringLength(50)]
         [Display(Name = "First Name")]
@@ -75,15 +80,19 @@ namespace SocietyManagement.Models
         [Required]
         [StringLength(10)]
         public string Gender { get; set; }
-        
-        [Required]
-        [Display(Name = "Mobile")]
-        public string UserName { get; set; }
 
-        [Required]
+        [Display(Name = "Mobile")]
+        [StringLength(10, MinimumLength = 10,ErrorMessage = "Invalid mobile number")]
+        public string Mobile { get; set; }
+
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "User Name")]
+        [StringLength(20,MinimumLength = 6, ErrorMessage = "The {0} must be at least {2} characters long.")]
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -95,6 +104,8 @@ namespace SocietyManagement.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        
+        public string Role { get; set; }
     }
 
     public class ResetPasswordViewModel

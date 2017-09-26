@@ -49,7 +49,7 @@ namespace SocietyManagement.Controllers
         [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
-            ViewBag.OwnerID = new SelectList(db.AspNetUsers, "Id", "FirstName");
+            ViewBag.OwnerID = new SelectList(Helper.GetUsers(db.AspNetUsers), "Id", "Name");
             ViewBag.BuildingID = new SelectList(db.Buildings.Where(d => d.IsDeleted == false).OrderBy(o=>o.BuildingName) , "BuildingID", "BuildingName");
             ViewBag.UnitTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "BuildingUnitType"), "KeyID", "KeyValues");
             return View();
@@ -71,14 +71,14 @@ namespace SocietyManagement.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OwnerID = new SelectList(db.AspNetUsers, "Id", "FirstName", buildingUnit.OwnerID);
+            ViewBag.OwnerID = new SelectList(Helper.GetUsers(db.AspNetUsers), "Id", "Name", buildingUnit.OwnerID);
             ViewBag.BuildingID = new SelectList(db.Buildings.Where(d => d.IsDeleted == false).OrderBy(o=>o.BuildingName), "BuildingID", "BuildingName", buildingUnit.BuildingID);
             ViewBag.UnitTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "BuildingUnitType"), "KeyID", "KeyValues", buildingUnit.UnitTypeID);
             return View(buildingUnit);
         }
 
         // GET: BuildingUnit/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Manager,Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,7 +90,7 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.OwnerID = new SelectList(db.AspNetUsers, "Id", "FirstName", buildingUnit.OwnerID);
+            ViewBag.OwnerID = new SelectList(Helper.GetUsers(db.AspNetUsers), "Id", "Name", buildingUnit.OwnerID);
             ViewBag.BuildingID = new SelectList(db.Buildings.Where(d => d.IsDeleted == false).OrderBy(o => o.BuildingName), "BuildingID", "BuildingName", buildingUnit.BuildingID);
             ViewBag.UnitTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "BuildingUnitType"), "KeyID", "KeyValues", buildingUnit.UnitTypeID);
             return View(buildingUnit);
@@ -101,7 +101,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Manager,Admin")]
         public ActionResult Edit([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit, User,false);
@@ -111,7 +111,7 @@ namespace SocietyManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.OwnerID = new SelectList(db.AspNetUsers, "Id", "FirstName", buildingUnit.OwnerID);
+            ViewBag.OwnerID = new SelectList(Helper.GetUsers(db.AspNetUsers), "Id", "Name", buildingUnit.OwnerID);
             ViewBag.BuildingID = new SelectList(db.Buildings.Where(d => d.IsDeleted == false).OrderBy(o => o.BuildingName), "BuildingID", "BuildingName", buildingUnit.BuildingID);
             ViewBag.UnitTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "BuildingUnitType"), "KeyID", "KeyValues", buildingUnit.UnitTypeID);
             return View(buildingUnit);

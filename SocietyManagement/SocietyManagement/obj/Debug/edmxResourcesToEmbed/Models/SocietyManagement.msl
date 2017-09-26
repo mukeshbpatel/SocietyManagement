@@ -31,6 +31,13 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="SocietyManagementModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="PaymentReminder" ColumnName="PaymentReminder" />
+          <ScalarProperty Name="ForumNotification" ColumnName="ForumNotification" />
+          <ScalarProperty Name="EventNotification" ColumnName="EventNotification" />
+          <ScalarProperty Name="PollNotification" ColumnName="PollNotification" />
+          <ScalarProperty Name="NoticeBoardNotification" ColumnName="NoticeBoardNotification" />
+          <ScalarProperty Name="PaymentNotification" ColumnName="PaymentNotification" />
+          <ScalarProperty Name="BillNotification" ColumnName="BillNotification" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
           <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
           <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
@@ -400,6 +407,35 @@
           <ScalarProperty Name="StartDate" ColumnName="StartDate" />
           <ScalarProperty Name="UnitID" ColumnName="UnitID" />
           <ScalarProperty Name="RecurringID" ColumnName="RecurringID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Expenses">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Expense">
+        <MappingFragment StoreEntitySet="Expenses">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="ChequeEncashmentDate" ColumnName="ChequeEncashmentDate" />
+          <ScalarProperty Name="ChequeCleared" ColumnName="ChequeCleared" />
+          <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+          <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+          <ScalarProperty Name="ChequeName" ColumnName="ChequeName" />
+          <ScalarProperty Name="ChequeBank" ColumnName="ChequeBank" />
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="TDS" ColumnName="TDS" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="ExpenseTypeID" ColumnName="ExpenseTypeID" />
+          <ScalarProperty Name="PaidTo" ColumnName="PaidTo" />
+          <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+          <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -32,18 +32,18 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">                            
-                            <li class="dropdown-item"><a href="@Url.Action("MyBill", "Due")"><span class="glyphicon glyphicon-usd"></span> Bill</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Payment")"><span class="icon-library"></span> Payments</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("MyBill", "Due")"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("MyPayment", "Collection")"><span class="icon-library"></span> Payments</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Poll</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Forum")"><span class="glyphicon glyphicon-bullhorn"></span> Forum</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Complaint")"><span class="glyphicon glyphicon-hand-up"></span> Complaint</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Event")"><span class="glyphicon glyphicon-calendar"></span> Event</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Event")"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>
                         </ul>
                     </li>
-                    if (User.IsInRole("Admin") | User.IsInRole("Manager"))
-                    {
 
+                    if (User.IsInRole("Admin") | User.IsInRole("Comity") | User.IsInRole("Manager"))
+                    {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="glyphicon glyphicon-king"></span> Manager
@@ -52,17 +52,17 @@
                         <ul class="dropdown-menu" role="menu">
                             <li class="dropdown-item"><a href="@Url.Action("Index", "RecurringDue")"><span class="glyphicon glyphicon-retweet"></span> Recurring Bills</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Due")"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Collection")"><span class="glyphicon glyphicon-piggy-bank"></span> Collection</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Expense")"><span class="glyphicon glyphicon glyphicon-list-alt"></span> Expense</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Collection")"><span class="glyphicon glyphicon-piggy-bank"></span> Collections</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Expense")"><span class="glyphicon glyphicon glyphicon-list-alt"></span> Expenses</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Poll</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Forum")"><span class="glyphicon glyphicon-bullhorn"></span> Forum</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Complaint")"><span class="glyphicon glyphicon-hand-up"></span> Complaint</a></li>
                         </ul>
-                    </li>
+                    </li>                    
                      }
 
-                     if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+                     if (User.IsInRole("Manager") || User.IsInRole("Admin"))
                      {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -75,8 +75,9 @@
                                 <li class="dropdown-item"><a href="@Url.Action("CalculateBill", "RecurringDue",new {id = 0})"><span class="glyphicon glyphicon-retweet"></span> Calculate Bills</a></li>
                                 <li class="dropdown-item"><a href="@Url.Action("Index", "KeyValue")"><span class="icon-library"></span> Keys</a></li>
                             }
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Building")"><span class="icon-office"></span> Building</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "BuildingUnit")"><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Building")"><span class="icon-office"></span> Buildings</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "BuildingUnit")"><span class="glyphicon glyphicon glyphicon-home"></span> Building Units</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "User")"><span class="glyphicon glyphicon-user"></span> Manage Users</a></li>                            
                         </ul>
                     </li>
                      }
@@ -94,7 +95,8 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="col-sm-4">&copy; @DateTime.Now.Year - My ASP.NET Application</div>
+            @*<div class="col-sm-8"><span class="glyphicon glyphicon-user"></span>User &nbsp; &nbsp; <span class="glyphicon glyphicon-road"></span>Role</div>*@ 
         </footer>
     </div>
 

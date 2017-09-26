@@ -5,11 +5,16 @@
     {
     @Html.AntiForgeryToken()
 
+        if (Session["UserName"] == null)
+        {
+            Session["UserName"] = User.Identity.Name;            
+        }
+
     <ul class="nav navbar-nav navbar-right">        
         @*<li><a href="@Url.Action("Profile", "Manage")"><span class="glyphicon glyphicon-picture"></span> Profile</a></li>*@
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <span class="glyphicon glyphicon-user"></span> Settings
+                <span class="glyphicon glyphicon-user"></span> @Session["UserName"]
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">

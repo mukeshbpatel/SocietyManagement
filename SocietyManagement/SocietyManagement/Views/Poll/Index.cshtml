@@ -6,7 +6,7 @@
 
 <h3><span class="glyphicon glyphicon-tasks"></span> Poll</h3>
 
-@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+@if (User.IsInRole("Manager") || User.IsInRole("Admin") | User.IsInRole("Comity"))
 {
     <div class="pull-right">
         <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
@@ -17,7 +17,7 @@
         <th>
             @Html.DisplayNameFor(model => model.PollTitle)
         </th>
-@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+@if (User.IsInRole("Manager") || User.IsInRole("Admin"))
 {
         <th>
             @Html.DisplayNameFor(model => model.PollType.KeyValues)
@@ -37,7 +37,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.PollTitle)
         </td>
-@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+@if (User.IsInRole("Manager") || User.IsInRole("Admin"))
 {
         <td>
             @Html.DisplayFor(modelItem => item.PollType.KeyValues)
@@ -52,7 +52,7 @@
         <td>
             <a href="@Url.Action("Vote", new { id = item.PollID })" title="Vote"><span class="glyphicon glyphicon-apple"></span></a>
             <a href="@Url.Action("Details", new { id = item.PollID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-@if (User.IsInRole("Admin") | User.IsInRole("Manager"))
+@if (User.IsInRole("Manager") || User.IsInRole("Admin") | User.IsInRole("Comity"))
 {
             <a href="@Url.Action("Edit", new { id = item.PollID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
             <a href="@Url.Action("Delete", new { id = item.PollID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>

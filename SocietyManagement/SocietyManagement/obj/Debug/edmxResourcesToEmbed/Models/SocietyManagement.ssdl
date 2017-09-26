@@ -57,6 +57,13 @@
     <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
     <Property Name="AccessFailedCount" Type="int" Nullable="false" />
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="BillNotification" Type="bit" Nullable="false" />
+    <Property Name="PaymentNotification" Type="bit" Nullable="false" />
+    <Property Name="NoticeBoardNotification" Type="bit" Nullable="false" />
+    <Property Name="PollNotification" Type="bit" Nullable="false" />
+    <Property Name="EventNotification" Type="bit" Nullable="false" />
+    <Property Name="ForumNotification" Type="bit" Nullable="false" />
+    <Property Name="PaymentReminder" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Audits">
     <Key>
@@ -203,6 +210,34 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Expenses">
+    <Key>
+      <PropertyRef Name="ExpenseID" />
+    </Key>
+    <Property Name="ExpenseID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseDate" Type="datetime" Nullable="false" />
+    <Property Name="PaidTo" Type="varchar(max)" Nullable="false" />
+    <Property Name="ExpenseTypeID" Type="int" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="TDS" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PaymentModeID" Type="int" Nullable="false" />
+    <Property Name="ChequeBank" Type="nvarchar(max)" />
+    <Property Name="ChequeName" Type="nvarchar(max)" />
+    <Property Name="ChequeDate" Type="date" />
+    <Property Name="ChequeNumber" Type="nvarchar" MaxLength="100" />
+    <Property Name="ChequeCleared" Type="bit" Nullable="false" />
+    <Property Name="ChequeEncashmentDate" Type="date" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ForumComments">
     <Key>
@@ -643,6 +678,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Expenses_PaymentMode">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="PaymentModeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expenses_Type">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="ExpenseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ForumComments_Author">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="ForumComments" Type="Self.ForumComments" Multiplicity="*" />
@@ -800,6 +859,7 @@
     <EntitySet Name="ComplaintComments" EntityType="Self.ComplaintComments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Complaints" EntityType="Self.Complaints" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dues" EntityType="Self.Dues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ForumComments" EntityType="Self.ForumComments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Forums" EntityType="Self.Forums" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeyValues" EntityType="Self.KeyValues" Schema="dbo" store:Type="Tables" />
@@ -893,6 +953,14 @@
     <AssociationSet Name="FK_Dues_RecurringDues" Association="Self.FK_Dues_RecurringDues">
       <End Role="RecurringDues" EntitySet="RecurringDues" />
       <End Role="Dues" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expenses_PaymentMode" Association="Self.FK_Expenses_PaymentMode">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Expenses" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expenses_Type" Association="Self.FK_Expenses_Type">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="Expenses" EntitySet="Expenses" />
     </AssociationSet>
     <AssociationSet Name="FK_ForumComments_Author" Association="Self.FK_ForumComments_Author">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
