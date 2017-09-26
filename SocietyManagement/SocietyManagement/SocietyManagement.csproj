@@ -198,6 +198,7 @@
     <Compile Include="Controllers\KeyValueController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NoticeBoardController.cs" />
+    <Compile Include="Controllers\PenaltyController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\PollOptionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -256,6 +257,9 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\NoticeBoard.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Penalty.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Poll.cs">
@@ -462,6 +466,11 @@
     <Content Include="Views\Expense\Details.cshtml" />
     <Content Include="Views\Expense\Edit.cshtml" />
     <Content Include="Views\Expense\Index.cshtml" />
+    <Content Include="Views\Penalty\Create.cshtml" />
+    <Content Include="Views\Penalty\Delete.cshtml" />
+    <Content Include="Views\Penalty\Details.cshtml" />
+    <Content Include="Views\Penalty\Edit.cshtml" />
+    <Content Include="Views\Penalty\Index.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

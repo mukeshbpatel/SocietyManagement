@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SocietyManagement.Models.Penalty>
+
+@{
+    ViewBag.Title = "Penalty";
+}
+
+<h3>Penalty</h3>
+
+@if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+{
+<div class="pull-right">
+    <a href="@Url.Action("Create",new {id=ViewBag.DueID})"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+</div>
+}
+
+<table class="table table-sm table-striped table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PenaltyDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PenaltyDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.DueID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+                @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                {
+                    <a href="@Url.Action("Edit", new { id = item.DueID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="@Url.Action("Delete", new { id = item.DueID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

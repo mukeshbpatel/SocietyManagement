@@ -30,6 +30,9 @@
             @Html.DisplayNameFor(model => model.DueAmount)
         </th>
         <th>
+            Penalty
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.DueDate)
         </th>
         
@@ -54,13 +57,16 @@
             @Html.DisplayFor(modelItem => item.DueAmount)
         </td>
         <td>
+            <a href="@Url.Action("Index","Penalty", new { id = item.DueID })" title="Penalty">@item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount)</a>
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.DueDate)
         </td>        
         <td>
             <a href="@Url.Action("Details", new { id = item.DueID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
             @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
             {
-                <a href="@Url.Action("Edit", new { id = item.DueID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                <a href="@Url.Action("Edit", new { id = item.DueID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>                
                 <a href="@Url.Action("Delete", new { id = item.DueID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
             }
         </td>

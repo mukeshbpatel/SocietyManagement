@@ -130,8 +130,11 @@ Payments
             Amount
         </th>
         <th>
-            Penalty
+            Discount
         </th>   
+        <th>
+            Payment
+        </th>
     </tr>
 
     @foreach (var item in Model.Collections.Where(d => d.IsDeleted == false).OrderBy(o => o.CollectionDate))
@@ -153,7 +156,10 @@ Payments
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LatePaymentCharges)
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectionAmount)
             </td>                      
         </tr>
     }

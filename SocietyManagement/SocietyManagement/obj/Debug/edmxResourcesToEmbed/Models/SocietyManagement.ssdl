@@ -126,7 +126,7 @@
     <Property Name="CollectionDate" Type="date" Nullable="false" />
     <Property Name="UnitID" Type="int" Nullable="false" />
     <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="LatePaymentCharges" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Discount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
     <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="PaymentModeID" Type="int" Nullable="false" />
     <Property Name="Reference" Type="nvarchar(max)" />
@@ -297,6 +297,26 @@
     <Property Name="UDK1" Type="nvarchar(max)" />
     <Property Name="UDK2" Type="nvarchar(max)" />
     <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Penalty">
+    <Key>
+      <PropertyRef Name="PenaltyID" />
+    </Key>
+    <Property Name="PenaltyID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PenaltyDate" Type="date" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="DueID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
@@ -738,6 +758,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Penalty_BuildingUnits">
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="1" />
+    <End Role="Penalty" Type="Self.Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnits">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Penalty">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Penalty_Dues">
+    <End Role="Dues" Type="Self.Dues" Multiplicity="0..1" />
+    <End Role="Penalty" Type="Self.Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dues">
+        <PropertyRef Name="DueID" />
+      </Principal>
+      <Dependent Role="Penalty">
+        <PropertyRef Name="DueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_PollOptions_Polls">
     <End Role="Polls" Type="Self.Polls" Multiplicity="1" />
     <End Role="PollOptions" Type="Self.PollOptions" Multiplicity="*" />
@@ -864,6 +908,7 @@
     <EntitySet Name="Forums" EntityType="Self.Forums" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeyValues" EntityType="Self.KeyValues" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NoticeBoard" EntityType="Self.NoticeBoard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Penalty" EntityType="Self.Penalty" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PollOptions" EntityType="Self.PollOptions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Polls" EntityType="Self.Polls" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PollVotes" EntityType="Self.PollVotes" Schema="dbo" store:Type="Tables" />
@@ -973,6 +1018,14 @@
     <AssociationSet Name="FK_Forums_Author" Association="Self.FK_Forums_Author">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Forums" EntitySet="Forums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Penalty_BuildingUnits" Association="Self.FK_Penalty_BuildingUnits">
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+      <End Role="Penalty" EntitySet="Penalty" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Penalty_Dues" Association="Self.FK_Penalty_Dues">
+      <End Role="Dues" EntitySet="Dues" />
+      <End Role="Penalty" EntitySet="Penalty" />
     </AssociationSet>
     <AssociationSet Name="FK_PollOptions_Polls" Association="Self.FK_PollOptions_Polls">
       <End Role="Polls" EntitySet="Polls" />

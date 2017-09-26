@@ -119,6 +119,7 @@
     <EntitySetMapping Name="Collections">
       <EntityTypeMapping TypeName="SocietyManagementModel.Collection">
         <MappingFragment StoreEntitySet="Collections">
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ChequeName" ColumnName="ChequeName" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -138,7 +139,6 @@
           <ScalarProperty Name="Reference" ColumnName="Reference" />
           <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
           <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
-          <ScalarProperty Name="LatePaymentCharges" ColumnName="LatePaymentCharges" />
           <ScalarProperty Name="Amount" ColumnName="Amount" />
           <ScalarProperty Name="UnitID" ColumnName="UnitID" />
           <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
@@ -436,6 +436,27 @@
           <ScalarProperty Name="PaidTo" ColumnName="PaidTo" />
           <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
           <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Penalties">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Penalty">
+        <MappingFragment StoreEntitySet="Penalty">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="DueID" ColumnName="DueID" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="PenaltyDate" ColumnName="PenaltyDate" />
+          <ScalarProperty Name="PenaltyID" ColumnName="PenaltyID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

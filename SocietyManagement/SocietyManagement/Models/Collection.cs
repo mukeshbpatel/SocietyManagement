@@ -18,7 +18,6 @@ namespace SocietyManagement.Models
         public System.DateTime CollectionDate { get; set; }
         public int UnitID { get; set; }
         public decimal Amount { get; set; }
-        public decimal LatePaymentCharges { get; set; }
         public string ReceiptNumber { get; set; }
         public int PaymentModeID { get; set; }
         public string Reference { get; set; }
@@ -38,6 +37,7 @@ namespace SocietyManagement.Models
         public System.DateTime ModifiedDate { get; set; }
         public string ChequeName { get; set; }
         public bool IsDeleted { get; set; }
+        public decimal Discount { get; set; }
     
         public virtual BuildingUnit BuildingUnit { get; set; }
         public virtual KeyValue PaymentMode { get; set; }

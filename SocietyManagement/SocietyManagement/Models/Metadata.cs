@@ -20,6 +20,22 @@ namespace SocietyManagement.Models
     //}
 
 
+    public partial class PenaltyMetadata
+    {
+        [Required]
+        [Display(Name = "Date")]
+        [DataType(DataType.Date)]
+        public System.DateTime PenaltyDate { get; set; }
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }
+        [Display(Name = "Modified Date")]
+        public System.DateTime ModifiedDate { get; set; }
+    }
+    [MetadataType(typeof(PenaltyMetadata))]
+    public partial class Penalty
+    {
+    }
+
     public partial class ExpenseMetadata
     {
         [Required]
@@ -83,9 +99,9 @@ namespace SocietyManagement.Models
         [Required]
         [Range(0, 9999999, ErrorMessage = "Invalid Amount")]
         public decimal Amount { get; set; }        
-        [Range(0, 9999999, ErrorMessage = "Invalid Penalty Amount")]
-        [Display(Name = "Penalty")]
-        public decimal LatePaymentCharges { get; set; }
+        [Range(0, 9999999, ErrorMessage = "Invalid Discount Amount")]
+        [Display(Name = "Discount")]
+        public decimal Discount { get; set; }
         [Required]
         [Display(Name = "Receipt Number")]
         public string ReceiptNumber { get; set; }
@@ -117,7 +133,15 @@ namespace SocietyManagement.Models
     [MetadataType(typeof(CollectionMetadata))]
     public partial class Collection
     {
-        
+       [NotMapped]
+        [Display(Name = "Amount")]
+        public string CollectionAmount
+        {
+            get
+            {
+                return this.Amount + " " + this.Discount;
+            }
+        }
     }
 
     public partial class AspNetUserMetadata

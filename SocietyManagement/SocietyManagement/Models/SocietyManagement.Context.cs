@@ -47,5 +47,6 @@ namespace SocietyManagement.Models
         public virtual DbSet<UserDefineField> UserDefineFields { get; set; }
         public virtual DbSet<RecurringDue> RecurringDues { get; set; }
         public virtual DbSet<Expense> Expenses { get; set; }
+        public virtual DbSet<Penalty> Penalties { get; set; }
     }
 }

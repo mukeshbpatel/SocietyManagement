@@ -23,6 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.DueAmount)
         </th>
+        <th>Penalty</th>        
         <th>
             @Html.DisplayNameFor(model => model.DueDate)
         </th>
@@ -46,8 +47,17 @@
             @Html.DisplayFor(modelItem => item.DueAmount)
         </td>
         <td>
+                        @{ 
+                            decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
+                            if (penalty > 0 )
+                            {
+                                <span>@penalty</span>
+                            }
+                         }
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.DueDate)
-        </td>        
+        </td>
     </tr>
 }
 

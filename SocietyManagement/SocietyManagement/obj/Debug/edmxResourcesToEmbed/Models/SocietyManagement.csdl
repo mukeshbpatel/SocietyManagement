@@ -159,6 +159,15 @@
       <End Role="KeyValue" EntitySet="KeyValues" />
       <End Role="Expens" EntitySet="Expenses" />
     </AssociationSet>
+    <EntitySet Name="Penalties" EntityType="SocietyManagementModel.Penalty" />
+    <AssociationSet Name="FK_Penalty_BuildingUnits" Association="SocietyManagementModel.FK_Penalty_BuildingUnits">
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+      <End Role="Penalty" EntitySet="Penalties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Penalty_Dues" Association="SocietyManagementModel.FK_Penalty_Dues">
+      <End Role="Due" EntitySet="Dues" />
+      <End Role="Penalty" EntitySet="Penalties" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRole">
     <Key>
@@ -292,6 +301,7 @@
     <NavigationProperty Name="Tenants" Relationship="SocietyManagementModel.FK_Tenants_BuildingUnits" FromRole="BuildingUnit" ToRole="Tenant" />
     <NavigationProperty Name="RecurringDues" Relationship="SocietyManagementModel.FK_RecurringDues_BuildingUnits" FromRole="BuildingUnit" ToRole="RecurringDue" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Penalties" Relationship="SocietyManagementModel.FK_Penalty_BuildingUnits" FromRole="BuildingUnit" ToRole="Penalty" />
   </EntityType>
   <EntityType Name="Collection">
     <Key>
@@ -301,7 +311,6 @@
     <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="UnitID" Type="Int32" Nullable="false" />
     <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-    <Property Name="LatePaymentCharges" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="ReceiptNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
     <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -323,6 +332,7 @@
     <NavigationProperty Name="PaymentMode" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="Collection" ToRole="KeyValue" />
     <Property Name="ChequeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
   </EntityType>
   <EntityType Name="ComplaintComment">
     <Key>
@@ -399,6 +409,7 @@
     <Property Name="RecurringID" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="RecurringDue" Relationship="SocietyManagementModel.FK_Dues_RecurringDues" FromRole="Due" ToRole="RecurringDue" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Penalties" Relationship="SocietyManagementModel.FK_Penalty_Dues" FromRole="Due" ToRole="Penalty" />
   </EntityType>
   <EntityType Name="ForumComment">
     <Key>
@@ -1039,6 +1050,52 @@
       </Principal>
       <Dependent Role="Expens">
         <PropertyRef Name="ExpenseTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Penalty">
+    <Key>
+      <PropertyRef Name="PenaltyID" />
+    </Key>
+    <Property Name="PenaltyID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PenaltyDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="UnitID" Type="Int32" Nullable="false" />
+    <Property Name="DueID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_Penalty_BuildingUnits" FromRole="Penalty" ToRole="BuildingUnit" />
+    <NavigationProperty Name="Due" Relationship="SocietyManagementModel.FK_Penalty_Dues" FromRole="Penalty" ToRole="Due" />
+  </EntityType>
+  <Association Name="FK_Penalty_BuildingUnits">
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Penalty" Role="Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="Penalty">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Penalty_Dues">
+    <End Type="SocietyManagementModel.Due" Role="Due" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.Penalty" Role="Penalty" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Due">
+        <PropertyRef Name="DueID" />
+      </Principal>
+      <Dependent Role="Penalty">
+        <PropertyRef Name="DueID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

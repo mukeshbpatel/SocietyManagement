@@ -26,10 +26,7 @@
             @Html.DisplayNameFor(model => model.PaymentModeID)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LatePaymentCharges)
+            @Html.DisplayNameFor(model => model.CollectionAmount)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ReceiptNumber)
@@ -50,10 +47,7 @@
                 @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LatePaymentCharges)
+                @Html.DisplayFor(modelItem => item.CollectionAmount)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ReceiptNumber)

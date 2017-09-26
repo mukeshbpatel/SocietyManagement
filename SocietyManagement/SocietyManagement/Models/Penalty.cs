@@ -12,36 +12,25 @@ namespace SocietyManagement.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Due
+    public partial class Penalty
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Due()
-        {
-            this.Penalties = new HashSet<Penalty>();
-        }
-    
-        public decimal DueID { get; set; }
-        public System.DateTime BillDate { get; set; }
+        public decimal PenaltyID { get; set; }
+        public System.DateTime PenaltyDate { get; set; }
         public int UnitID { get; set; }
-        public int DueTypeID { get; set; }
-        public decimal DueAmount { get; set; }
+        public Nullable<decimal> DueID { get; set; }
+        public decimal Amount { get; set; }
         public string Details { get; set; }
-        public System.DateTime DueDate { get; set; }
         public string UDK1 { get; set; }
         public string UDK2 { get; set; }
         public string UDK3 { get; set; }
         public string UDK4 { get; set; }
         public string UDK5 { get; set; }
+        public bool IsDeleted { get; set; }
         public string UserID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
-        public Nullable<decimal> RecurringID { get; set; }
-        public bool IsDeleted { get; set; }
     
         public virtual BuildingUnit BuildingUnit { get; set; }
-        public virtual KeyValue DueType { get; set; }
-        public virtual RecurringDue RecurringDue { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Penalty> Penalties { get; set; }
+        public virtual Due Due { get; set; }
     }
 }

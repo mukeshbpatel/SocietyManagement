@@ -60,7 +60,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "Manager,Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,LatePaymentCharges,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
+        public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
         {
             Helper.AssignUserInfo(collection, User);
             if (ModelState.IsValid)
@@ -99,7 +99,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "Manager,Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,LatePaymentCharges,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
+        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
         {
             Helper.AssignUserInfo(collection, User, false);
             if (ModelState.IsValid)
