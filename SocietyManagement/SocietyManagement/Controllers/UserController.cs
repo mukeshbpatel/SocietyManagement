@@ -66,7 +66,7 @@ namespace SocietyManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, Gender = model.Gender };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,PhoneNumber = model.Mobile, FirstName = model.FirstName, LastName = model.LastName, Gender = model.Gender };
                 var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {                    

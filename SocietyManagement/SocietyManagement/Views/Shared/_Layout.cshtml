@@ -21,29 +21,38 @@
                 <a href="@Url.Action("Index", "Home")" class = "navbar-brand"><span class="icon-office"></span> Yashraj Green Castle</a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">                             
-                    @*<li class="dropdown-item"><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>*@
+                <ul class="nav navbar-nav">
+    @*<li class="dropdown-item"><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>*@
 
-                 @if (Request.IsAuthenticated)
-                 {
+    @if (Request.IsAuthenticated)
+    {
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span class="glyphicon glyphicon-briefcase"></span> My Account
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li class="dropdown-item"><a href="@Url.Action("MyBill", "Due")"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("MyPayment", "Collection")"><span class="icon-library"></span> Payments</a></li>
+
+            </ul>
+        </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="glyphicon glyphicon-briefcase"></span> My Account
+                            <span class="glyphicon glyphicon-compressed"></span> Communication
                             <span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" role="menu">                            
-                            <li class="dropdown-item"><a href="@Url.Action("MyBill", "Due")"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("MyPayment", "Collection")"><span class="icon-library"></span> Payments</a></li>
+                        <ul class="dropdown-menu" role="menu">
                             <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Poll</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Opinion Poll</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Forum")"><span class="glyphicon glyphicon-bullhorn"></span> Forum</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Complaint")"><span class="glyphicon glyphicon-hand-up"></span> Complaint</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Event")"><span class="glyphicon glyphicon-calendar"></span> Events</a></li>
                         </ul>
                     </li>
 
-                    if (User.IsInRole("Admin") | User.IsInRole("Comity") | User.IsInRole("Manager"))
-                    {
+        if (User.IsInRole("Admin") | User.IsInRole("Comity") | User.IsInRole("Manager"))
+        {
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <span class="glyphicon glyphicon-king"></span> Manager
@@ -53,11 +62,7 @@
                             <li class="dropdown-item"><a href="@Url.Action("Index", "RecurringDue")"><span class="glyphicon glyphicon-retweet"></span> Recurring Bills</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Due")"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Collection")"><span class="glyphicon glyphicon-piggy-bank"></span> Collections</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Expense")"><span class="glyphicon glyphicon glyphicon-list-alt"></span> Expenses</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Poll")"><span class="glyphicon glyphicon-tasks"></span> Poll</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Forum")"><span class="glyphicon glyphicon-bullhorn"></span> Forum</a></li>
-                            <li class="dropdown-item"><a href="@Url.Action("Index", "Complaint")"><span class="glyphicon glyphicon-hand-up"></span> Complaint</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "Expense")"><span class="glyphicon glyphicon glyphicon-list-alt"></span> Expenses</a></li>                            
                         </ul>
                     </li>                    
                      }
