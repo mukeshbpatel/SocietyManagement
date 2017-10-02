@@ -18,6 +18,7 @@ namespace SocietyManagement.Models
         public Forum()
         {
             this.ForumComments = new HashSet<ForumComment>();
+            this.ForumMedias = new HashSet<ForumMedia>();
         }
     
         public int ForumID { get; set; }
@@ -35,5 +36,7 @@ namespace SocietyManagement.Models
         public virtual AspNetUser Author { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ForumComment> ForumComments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ForumMedia> ForumMedias { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using System.Security.Principal;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace SocietyManagement.Models
 {
@@ -74,6 +75,13 @@ namespace SocietyManagement.Models
             AssignValue(obj, "UserID", User.Identity.GetUserId());
         }
 
+        public static string FormatAmount(object Amount)
+        {
+            if (Amount == null)
+                return string.Empty;
+            else
+                return string.Format(CultureInfo.CreateSpecificCulture("hi-IN"), "{0:#,#}", Amount);
+        }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

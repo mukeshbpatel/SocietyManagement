@@ -119,6 +119,7 @@
     <EntitySetMapping Name="Collections">
       <EntityTypeMapping TypeName="SocietyManagementModel.Collection">
         <MappingFragment StoreEntitySet="Collections">
+          <ScalarProperty Name="YearID" ColumnName="YearID" />
           <ScalarProperty Name="Discount" ColumnName="Discount" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="ChequeName" ColumnName="ChequeName" />
@@ -193,6 +194,7 @@
     <EntitySetMapping Name="Dues">
       <EntityTypeMapping TypeName="SocietyManagementModel.Due">
         <MappingFragment StoreEntitySet="Dues">
+          <ScalarProperty Name="YearID" ColumnName="YearID" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="RecurringID" ColumnName="RecurringID" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -413,6 +415,7 @@
     <EntitySetMapping Name="Expenses">
       <EntityTypeMapping TypeName="SocietyManagementModel.Expense">
         <MappingFragment StoreEntitySet="Expenses">
+          <ScalarProperty Name="YearID" ColumnName="YearID" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -457,6 +460,178 @@
           <ScalarProperty Name="UnitID" ColumnName="UnitID" />
           <ScalarProperty Name="PenaltyDate" ColumnName="PenaltyDate" />
           <ScalarProperty Name="PenaltyID" ColumnName="PenaltyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BuildingUnitMedias">
+      <EntityTypeMapping TypeName="SocietyManagementModel.BuildingUnitMedia">
+        <MappingFragment StoreEntitySet="BuildingUnitMedia">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="MediaData" ColumnName="MediaData" />
+          <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+          <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CollectionMedias">
+      <EntityTypeMapping TypeName="SocietyManagementModel.CollectionMedia">
+        <MappingFragment StoreEntitySet="CollectionMedia">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="MediaData" ColumnName="MediaData" />
+          <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+          <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpenseMedias">
+      <EntityTypeMapping TypeName="SocietyManagementModel.ExpenseMedia">
+        <MappingFragment StoreEntitySet="ExpenseMedia">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="MediaData" ColumnName="MediaData" />
+          <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="ExpenseID" ColumnName="ExpenseID" />
+          <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FinancialYears">
+      <EntityTypeMapping TypeName="SocietyManagementModel.FinancialYear">
+        <MappingFragment StoreEntitySet="FinancialYear">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsClosed" ColumnName="IsClosed" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="YearName" ColumnName="YearName" />
+          <ScalarProperty Name="YearID" ColumnName="YearID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ForumMedias">
+      <EntityTypeMapping TypeName="SocietyManagementModel.ForumMedia">
+        <MappingFragment StoreEntitySet="ForumMedia">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="MediaData" ColumnName="MediaData" />
+          <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="ForumID" ColumnName="ForumID" />
+          <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NoticeBoardMedias">
+      <EntityTypeMapping TypeName="SocietyManagementModel.NoticeBoardMedia">
+        <MappingFragment StoreEntitySet="NoticeBoardMedia">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="MediaData" ColumnName="MediaData" />
+          <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+          <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+          <ScalarProperty Name="NoticeID" ColumnName="NoticeID" />
+          <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemSettings">
+      <EntityTypeMapping TypeName="SocietyManagementModel.SystemSetting">
+        <MappingFragment StoreEntitySet="SystemSettings">
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+          <ScalarProperty Name="SettingName" ColumnName="SettingName" />
+          <ScalarProperty Name="SettingID" ColumnName="SettingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailTemplates">
+      <EntityTypeMapping TypeName="SocietyManagementModel.EmailTemplate">
+        <MappingFragment StoreEntitySet="EmailTemplates">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+          <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="ReplyToName" ColumnName="ReplyToName" />
+          <ScalarProperty Name="ReplyToEmail" ColumnName="ReplyToEmail" />
+          <ScalarProperty Name="FromName" ColumnName="FromName" />
+          <ScalarProperty Name="FromEmail" ColumnName="FromEmail" />
+          <ScalarProperty Name="TemplateBody" ColumnName="TemplateBody" />
+          <ScalarProperty Name="TemplateSubject" ColumnName="TemplateSubject" />
+          <ScalarProperty Name="TemplateTypeID" ColumnName="TemplateTypeID" />
+          <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="SocietyManagementModel.Notification">
+        <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+          <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+          <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
+          <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+          <ScalarProperty Name="Body" ColumnName="Body" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="TemplateID" ColumnName="TemplateID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

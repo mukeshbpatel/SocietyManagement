@@ -191,6 +191,7 @@
     <Compile Include="Controllers\ComplaintCommentController.cs" />
     <Compile Include="Controllers\ComplaintController.cs" />
     <Compile Include="Controllers\DueController.cs" />
+    <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\ForumCommentController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
@@ -228,7 +229,13 @@
     <Compile Include="Models\BuildingUnit.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BuildingUnitMedia.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Collection.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CollectionMedia.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Complaint.cs">
@@ -241,13 +248,26 @@
     <Compile Include="Models\Due.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailNotification.cs" />
+    <Compile Include="Models\EmailTemplate.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Expense.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExpenseMedia.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FinancialYear.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Forum.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ForumComment.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ForumMedia.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -257,6 +277,12 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\NoticeBoard.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NoticeBoardMedia.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Notification.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Penalty.cs">
@@ -290,6 +316,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SocietyManagement.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SystemSetting.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Tenant.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
@@ -308,6 +337,8 @@
     <Content Include="Content\icomoon.css" />
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\jquery-te.png" />
+    <Content Include="Template\MaintanceBill.html" />
+    <Content Include="Template\PaymentReceipt.html" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\icomoon.svg" />
@@ -471,6 +502,11 @@
     <Content Include="Views\Penalty\Details.cshtml" />
     <Content Include="Views\Penalty\Edit.cshtml" />
     <Content Include="Views\Penalty\Index.cshtml" />
+    <Content Include="Views\EmailTemplate\Create.cshtml" />
+    <Content Include="Views\EmailTemplate\Delete.cshtml" />
+    <Content Include="Views\EmailTemplate\Details.cshtml" />
+    <Content Include="Views\EmailTemplate\Edit.cshtml" />
+    <Content Include="Views\EmailTemplate\Index.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

@@ -19,6 +19,39 @@ namespace SocietyManagement.Models
     //{
     //}
 
+    public partial class EmailTemplateMetadata
+    {
+        [Display(Name = "Template Type")]
+        public int TemplateTypeID { get; set; }
+        [Required]
+        [Display(Name = "Subject")]
+        public string TemplateSubject { get; set; }
+        [Required]
+        [DataType(DataType.Html)]
+        [Display(Name = "Body")]
+        public string TemplateBody { get; set; }
+        [EmailAddress]
+        [Display(Name = "From Email ID")]
+        public string FromEmail { get; set; }
+        [Required]
+        [Display(Name = "From Email Name")]
+        public string FromName { get; set; }
+        [EmailAddress]
+        [Required]
+        [Display(Name = "Reply To Email")]
+        public string ReplyToEmail { get; set; }
+        [Required]
+        [Display(Name = "Reply To Name")]
+        public string ReplyToName { get; set; }        
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }
+        [Display(Name = "Modified Date")]
+        public System.DateTime ModifiedDate { get; set; }
+    }
+    [MetadataType(typeof(EmailTemplateMetadata))]
+    public partial class EmailTemplate
+    {
+    }
 
     public partial class PenaltyMetadata
     {
@@ -135,11 +168,11 @@ namespace SocietyManagement.Models
     {
        [NotMapped]
         [Display(Name = "Amount")]
-        public string CollectionAmount
+        public decimal CollectionAmount
         {
             get
             {
-                return this.Amount + " " + this.Discount;
+                return this.Amount - this.Discount;
             }
         }
     }
@@ -499,6 +532,9 @@ namespace SocietyManagement.Models
     [MetadataType(typeof(BuildingUnitMetadata))]
     public partial class BuildingUnit
     {
+        [NotMapped]
+        [Display(Name = "Files")]
+        public HttpPostedFileBase[] Files { get; set; }
     }
 
     public partial class KeyValueMetadata

@@ -67,9 +67,13 @@ namespace SocietyManagement.Controllers
             {
                 db.Dues.Add(due);
                 db.SaveChanges();
+
+                EmailNotification emailNotification = new EmailNotification(db);
+                emailNotification.SendBillNotification(due);
+                emailNotification = null;
+
                 return RedirectToAction("Index");
             }
-
             ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName", due.UnitID);
             ViewBag.DueTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "DueType"), "KeyID", "KeyValues", due.DueTypeID);
             return View(due);

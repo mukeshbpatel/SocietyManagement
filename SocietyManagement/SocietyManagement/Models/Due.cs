@@ -37,11 +37,13 @@ namespace SocietyManagement.Models
         public System.DateTime ModifiedDate { get; set; }
         public Nullable<decimal> RecurringID { get; set; }
         public bool IsDeleted { get; set; }
+        public Nullable<int> YearID { get; set; }
     
         public virtual BuildingUnit BuildingUnit { get; set; }
         public virtual KeyValue DueType { get; set; }
         public virtual RecurringDue RecurringDue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Penalty> Penalties { get; set; }
+        public virtual FinancialYear FinancialYear { get; set; }
     }
 }

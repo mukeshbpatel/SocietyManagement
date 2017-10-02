@@ -96,6 +96,24 @@
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="BuildingUnitMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UnitID" Type="int" Nullable="false" />
+    <Property Name="MediaType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MediaTitle" Type="nvarchar(max)" />
+    <Property Name="MediaData" Type="varbinary(max)" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="BuildingUnits">
     <Key>
       <PropertyRef Name="UnitID" />
@@ -117,6 +135,24 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CollectionMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CollectionID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="MediaType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MediaTitle" Type="nvarchar(max)" />
+    <Property Name="MediaData" Type="varbinary(max)" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Collections">
     <Key>
@@ -146,6 +182,7 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="YearID" Type="int" />
   </EntityType>
   <EntityType Name="ComplaintComments">
     <Key>
@@ -210,6 +247,46 @@
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="YearID" Type="int" />
+  </EntityType>
+  <EntityType Name="EmailTemplates">
+    <Key>
+      <PropertyRef Name="TemplateID" />
+    </Key>
+    <Property Name="TemplateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TemplateTypeID" Type="int" Nullable="false" />
+    <Property Name="TemplateSubject" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TemplateBody" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FromEmail" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="FromName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="ReplyToEmail" Type="nvarchar" MaxLength="200" />
+    <Property Name="ReplyToName" Type="nvarchar" MaxLength="200" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ExpenseMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseID" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="MediaType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MediaTitle" Type="nvarchar(max)" />
+    <Property Name="MediaData" Type="varbinary(max)" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Expenses">
     <Key>
@@ -238,6 +315,27 @@
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="YearID" Type="int" />
+  </EntityType>
+  <EntityType Name="FinancialYear">
+    <Key>
+      <PropertyRef Name="YearID" />
+    </Key>
+    <Property Name="YearID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="YearName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsClosed" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="ForumComments">
     <Key>
@@ -247,6 +345,24 @@
     <Property Name="ForumID" Type="int" Nullable="false" />
     <Property Name="AuthorID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Comment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ForumMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ForumID" Type="int" Nullable="false" />
+    <Property Name="MediaType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MediaTitle" Type="nvarchar(max)" />
+    <Property Name="MediaData" Type="varbinary(max)" />
+    <Property Name="Details" Type="nvarchar(max)" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="UDK1" Type="nvarchar(max)" />
     <Property Name="UDK2" Type="nvarchar(max)" />
@@ -298,6 +414,42 @@
     <Property Name="UDK2" Type="nvarchar(max)" />
     <Property Name="UDK3" Type="nvarchar(max)" />
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NoticeBoardMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NoticeID" Type="int" Nullable="false" />
+    <Property Name="MediaType" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MediaTitle" Type="nvarchar(max)" />
+    <Property Name="MediaData" Type="varbinary(max)" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="TemplateID" Type="int" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IsRead" Type="bit" Nullable="false" />
+    <Property Name="IsArchive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
   </EntityType>
@@ -390,6 +542,20 @@
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="SystemSettings">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SettingName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SettingValue" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
+    <Property Name="UDK2" Type="nvarchar(max)" />
+    <Property Name="UDK3" Type="nvarchar(max)" />
+    <Property Name="UDK4" Type="nvarchar(max)" />
+    <Property Name="UDK5" Type="nvarchar(max)" />
+    <Property Name="Details" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="Tenants">
     <Key>
       <PropertyRef Name="TenantID" />
@@ -450,6 +616,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_BuildingUnitMedia_BuildingUnit">
+    <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="1" />
+    <End Role="BuildingUnitMedia" Type="Self.BuildingUnitMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnits">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="BuildingUnitMedia">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_BuildingUnits_Buildings">
     <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
     <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="*" />
@@ -486,6 +664,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CollectionMedia_Collection">
+    <End Role="Collections" Type="Self.Collections" Multiplicity="1" />
+    <End Role="CollectionMedia" Type="Self.CollectionMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collections">
+        <PropertyRef Name="CollectionID" />
+      </Principal>
+      <Dependent Role="CollectionMedia">
+        <PropertyRef Name="CollectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Collections_BuildingUnits">
     <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="1" />
     <End Role="Collections" Type="Self.Collections" Multiplicity="*" />
@@ -495,6 +685,18 @@
       </Principal>
       <Dependent Role="Collections">
         <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collections_FinancialYear">
+    <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+    <End Role="Collections" Type="Self.Collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinancialYear">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="Collections">
+        <PropertyRef Name="YearID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -674,6 +876,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Dues_FinancialYear">
+    <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+    <End Role="Dues" Type="Self.Dues" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinancialYear">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="Dues">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Dues_KeyValues">
     <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
     <End Role="Dues" Type="Self.Dues" Multiplicity="*" />
@@ -695,6 +909,42 @@
       </Principal>
       <Dependent Role="Dues">
         <PropertyRef Name="RecurringID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailTemplates_TemplateType">
+    <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+    <End Role="EmailTemplates" Type="Self.EmailTemplates" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValues">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="EmailTemplates">
+        <PropertyRef Name="TemplateTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseMedia_Expenses">
+    <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
+    <End Role="ExpenseMedia" Type="Self.ExpenseMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expenses">
+        <PropertyRef Name="ExpenseID" />
+      </Principal>
+      <Dependent Role="ExpenseMedia">
+        <PropertyRef Name="ExpenseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expenses_FinancialYear">
+    <End Role="FinancialYear" Type="Self.FinancialYear" Multiplicity="0..1" />
+    <End Role="Expenses" Type="Self.Expenses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinancialYear">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="Expenses">
+        <PropertyRef Name="YearID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -746,6 +996,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ForumMedia_Forums">
+    <End Role="Forums" Type="Self.Forums" Multiplicity="1" />
+    <End Role="ForumMedia" Type="Self.ForumMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Forums">
+        <PropertyRef Name="ForumID" />
+      </Principal>
+      <Dependent Role="ForumMedia">
+        <PropertyRef Name="ForumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Forums_Author">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="Forums" Type="Self.Forums" Multiplicity="*" />
@@ -755,6 +1017,42 @@
       </Principal>
       <Dependent Role="Forums">
         <PropertyRef Name="AuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NoticeBoardMedia_NoticeBoard">
+    <End Role="NoticeBoard" Type="Self.NoticeBoard" Multiplicity="1" />
+    <End Role="NoticeBoardMedia" Type="Self.NoticeBoardMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NoticeBoard">
+        <PropertyRef Name="NoticeID" />
+      </Principal>
+      <Dependent Role="NoticeBoardMedia">
+        <PropertyRef Name="NoticeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_EmailTemplate">
+    <End Role="EmailTemplates" Type="Self.EmailTemplates" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmailTemplates">
+        <PropertyRef Name="TemplateID" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="TemplateID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_User">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UserID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -898,26 +1196,39 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Audits" EntityType="Self.Audits" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BuildingUnitMedia" EntityType="Self.BuildingUnitMedia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BuildingUnits" EntityType="Self.BuildingUnits" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CollectionMedia" EntityType="Self.CollectionMedia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Collections" EntityType="Self.Collections" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ComplaintComments" EntityType="Self.ComplaintComments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Complaints" EntityType="Self.Complaints" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Dues" EntityType="Self.Dues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpenseMedia" EntityType="Self.ExpenseMedia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ForumComments" EntityType="Self.ForumComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ForumMedia" EntityType="Self.ForumMedia" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Forums" EntityType="Self.Forums" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KeyValues" EntityType="Self.KeyValues" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NoticeBoard" EntityType="Self.NoticeBoard" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NoticeBoardMedia" EntityType="Self.NoticeBoardMedia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Penalty" EntityType="Self.Penalty" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PollOptions" EntityType="Self.PollOptions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Polls" EntityType="Self.Polls" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PollVotes" EntityType="Self.PollVotes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RecurringDues" EntityType="Self.RecurringDues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemSettings" EntityType="Self.SystemSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tenants" EntityType="Self.Tenants" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserDefineFields" EntityType="Self.UserDefineFields" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Buildings_BuildingType" Association="Self.FK_Buildings_BuildingType">
       <End Role="KeyValues" EntitySet="KeyValues" />
       <End Role="Buildings" EntitySet="Buildings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BuildingUnitMedia_BuildingUnit" Association="Self.FK_BuildingUnitMedia_BuildingUnit">
+      <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+      <End Role="BuildingUnitMedia" EntitySet="BuildingUnitMedia" />
     </AssociationSet>
     <AssociationSet Name="FK_BuildingUnits_Buildings" Association="Self.FK_BuildingUnits_Buildings">
       <End Role="Buildings" EntitySet="Buildings" />
@@ -931,8 +1242,16 @@
       <End Role="KeyValues" EntitySet="KeyValues" />
       <End Role="BuildingUnits" EntitySet="BuildingUnits" />
     </AssociationSet>
+    <AssociationSet Name="FK_CollectionMedia_Collection" Association="Self.FK_CollectionMedia_Collection">
+      <End Role="Collections" EntitySet="Collections" />
+      <End Role="CollectionMedia" EntitySet="CollectionMedia" />
+    </AssociationSet>
     <AssociationSet Name="FK_Collections_BuildingUnits" Association="Self.FK_Collections_BuildingUnits">
       <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+      <End Role="Collections" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collections_FinancialYear" Association="Self.FK_Collections_FinancialYear">
+      <End Role="FinancialYear" EntitySet="FinancialYear" />
       <End Role="Collections" EntitySet="Collections" />
     </AssociationSet>
     <AssociationSet Name="FK_Collections_KeyValues" Association="Self.FK_Collections_KeyValues">
@@ -991,6 +1310,10 @@
       <End Role="BuildingUnits" EntitySet="BuildingUnits" />
       <End Role="Dues" EntitySet="Dues" />
     </AssociationSet>
+    <AssociationSet Name="FK_Dues_FinancialYear" Association="Self.FK_Dues_FinancialYear">
+      <End Role="FinancialYear" EntitySet="FinancialYear" />
+      <End Role="Dues" EntitySet="Dues" />
+    </AssociationSet>
     <AssociationSet Name="FK_Dues_KeyValues" Association="Self.FK_Dues_KeyValues">
       <End Role="KeyValues" EntitySet="KeyValues" />
       <End Role="Dues" EntitySet="Dues" />
@@ -998,6 +1321,18 @@
     <AssociationSet Name="FK_Dues_RecurringDues" Association="Self.FK_Dues_RecurringDues">
       <End Role="RecurringDues" EntitySet="RecurringDues" />
       <End Role="Dues" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailTemplates_TemplateType" Association="Self.FK_EmailTemplates_TemplateType">
+      <End Role="KeyValues" EntitySet="KeyValues" />
+      <End Role="EmailTemplates" EntitySet="EmailTemplates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseMedia_Expenses" Association="Self.FK_ExpenseMedia_Expenses">
+      <End Role="Expenses" EntitySet="Expenses" />
+      <End Role="ExpenseMedia" EntitySet="ExpenseMedia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expenses_FinancialYear" Association="Self.FK_Expenses_FinancialYear">
+      <End Role="FinancialYear" EntitySet="FinancialYear" />
+      <End Role="Expenses" EntitySet="Expenses" />
     </AssociationSet>
     <AssociationSet Name="FK_Expenses_PaymentMode" Association="Self.FK_Expenses_PaymentMode">
       <End Role="KeyValues" EntitySet="KeyValues" />
@@ -1015,9 +1350,25 @@
       <End Role="Forums" EntitySet="Forums" />
       <End Role="ForumComments" EntitySet="ForumComments" />
     </AssociationSet>
+    <AssociationSet Name="FK_ForumMedia_Forums" Association="Self.FK_ForumMedia_Forums">
+      <End Role="Forums" EntitySet="Forums" />
+      <End Role="ForumMedia" EntitySet="ForumMedia" />
+    </AssociationSet>
     <AssociationSet Name="FK_Forums_Author" Association="Self.FK_Forums_Author">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Forums" EntitySet="Forums" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NoticeBoardMedia_NoticeBoard" Association="Self.FK_NoticeBoardMedia_NoticeBoard">
+      <End Role="NoticeBoard" EntitySet="NoticeBoard" />
+      <End Role="NoticeBoardMedia" EntitySet="NoticeBoardMedia" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_EmailTemplate" Association="Self.FK_Notifications_EmailTemplate">
+      <End Role="EmailTemplates" EntitySet="EmailTemplates" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_User" Association="Self.FK_Notifications_User">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Notifications" EntitySet="Notifications" />
     </AssociationSet>
     <AssociationSet Name="FK_Penalty_BuildingUnits" Association="Self.FK_Penalty_BuildingUnits">
       <End Role="BuildingUnits" EntitySet="BuildingUnits" />

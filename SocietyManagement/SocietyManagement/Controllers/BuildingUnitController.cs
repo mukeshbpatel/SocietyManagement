@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SocietyManagement.Models;
+using System.IO;
 
 namespace SocietyManagement.Controllers
 {
@@ -61,13 +62,36 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public ActionResult Create([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,UDK1,UDK2,UDK3,UDK4,UDK5")] BuildingUnit buildingUnit)
+        public ActionResult Create([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit,User);
             if (ModelState.IsValid)
             {
                 db.BuildingUnits.Add(buildingUnit);
                 db.SaveChanges();
+
+                foreach (HttpPostedFileBase file in buildingUnit.Files)
+                {
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        var media = new BuildingUnitMedia();
+                        media.UnitID = buildingUnit.UnitID;
+                        media.MediaType = file.ContentType;
+                        media.MediaTitle = Path.GetFileName(file.FileName);                       
+                        byte[] bytes = null;
+                        using (BinaryReader br = new BinaryReader(file.InputStream))
+                        {
+                            bytes = br.ReadBytes(file.ContentLength);
+                        }
+                        media.MediaData = bytes;
+                        Helper.AssignUserInfo(media, User);
+                        db.BuildingUnitMedias.Add(media);
+                        db.SaveChanges();                        
+                    }
+
+                }
+
                 return RedirectToAction("Index");
             }
 
@@ -75,6 +99,21 @@ namespace SocietyManagement.Controllers
             ViewBag.BuildingID = new SelectList(db.Buildings.Where(d => d.IsDeleted == false).OrderBy(o=>o.BuildingName), "BuildingID", "BuildingName", buildingUnit.BuildingID);
             ViewBag.UnitTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "BuildingUnitType"), "KeyID", "KeyValues", buildingUnit.UnitTypeID);
             return View(buildingUnit);
+        }
+        
+        public FileResult DownloadFile(int? id)
+        {
+            if (id != null)
+            {
+                var media = db.BuildingUnitMedias.Find(id);
+                if (media == null)
+                {
+                    return null;
+                }
+                return File(media.MediaData, media.MediaType, media.MediaTitle);
+            }
+            else
+                return null;
         }
 
         // GET: BuildingUnit/Edit/5
@@ -102,13 +141,36 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager,Admin")]
-        public ActionResult Edit([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] BuildingUnit buildingUnit)
+        public ActionResult Edit([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit, User,false);
             if (ModelState.IsValid)
             {
                 db.Entry(buildingUnit).State = EntityState.Modified;
                 db.SaveChanges();
+
+                foreach (HttpPostedFileBase file in buildingUnit.Files)
+                {
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        var media = new BuildingUnitMedia();
+                        media.UnitID = buildingUnit.UnitID;
+                        media.MediaType = file.ContentType;
+                        media.MediaTitle = Path.GetFileName(file.FileName);
+                        byte[] bytes = null;
+                        using (BinaryReader br = new BinaryReader(file.InputStream))
+                        {
+                            bytes = br.ReadBytes(file.ContentLength);
+                        }
+                        media.MediaData = bytes;
+                        Helper.AssignUserInfo(media, User);
+                        db.BuildingUnitMedias.Add(media);
+                        db.SaveChanges();
+                    }
+
+                }
+
                 return RedirectToAction("Index");
             }
             ViewBag.OwnerID = new SelectList(Helper.GetUsers(db.AspNetUsers), "Id", "Name", buildingUnit.OwnerID);

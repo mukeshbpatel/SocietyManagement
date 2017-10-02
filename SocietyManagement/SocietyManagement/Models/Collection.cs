@@ -14,6 +14,12 @@ namespace SocietyManagement.Models
     
     public partial class Collection
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Collection()
+        {
+            this.CollectionMedias = new HashSet<CollectionMedia>();
+        }
+    
         public decimal CollectionID { get; set; }
         public System.DateTime CollectionDate { get; set; }
         public int UnitID { get; set; }
@@ -38,8 +44,12 @@ namespace SocietyManagement.Models
         public string ChequeName { get; set; }
         public bool IsDeleted { get; set; }
         public decimal Discount { get; set; }
+        public Nullable<int> YearID { get; set; }
     
         public virtual BuildingUnit BuildingUnit { get; set; }
         public virtual KeyValue PaymentMode { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CollectionMedia> CollectionMedias { get; set; }
+        public virtual FinancialYear FinancialYear { get; set; }
     }
 }

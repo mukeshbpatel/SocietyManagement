@@ -168,6 +168,59 @@
       <End Role="Due" EntitySet="Dues" />
       <End Role="Penalty" EntitySet="Penalties" />
     </AssociationSet>
+    <EntitySet Name="BuildingUnitMedias" EntityType="SocietyManagementModel.BuildingUnitMedia" />
+    <EntitySet Name="CollectionMedias" EntityType="SocietyManagementModel.CollectionMedia" />
+    <EntitySet Name="ExpenseMedias" EntityType="SocietyManagementModel.ExpenseMedia" />
+    <EntitySet Name="FinancialYears" EntityType="SocietyManagementModel.FinancialYear" />
+    <EntitySet Name="ForumMedias" EntityType="SocietyManagementModel.ForumMedia" />
+    <EntitySet Name="NoticeBoardMedias" EntityType="SocietyManagementModel.NoticeBoardMedia" />
+    <EntitySet Name="SystemSettings" EntityType="SocietyManagementModel.SystemSetting" />
+    <AssociationSet Name="FK_BuildingUnitMedia_BuildingUnit" Association="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit">
+      <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+      <End Role="BuildingUnitMedia" EntitySet="BuildingUnitMedias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CollectionMedia_Collection" Association="SocietyManagementModel.FK_CollectionMedia_Collection">
+      <End Role="Collection" EntitySet="Collections" />
+      <End Role="CollectionMedia" EntitySet="CollectionMedias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Collections_FinancialYear" Association="SocietyManagementModel.FK_Collections_FinancialYear">
+      <End Role="FinancialYear" EntitySet="FinancialYears" />
+      <End Role="Collection" EntitySet="Collections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Dues_FinancialYear" Association="SocietyManagementModel.FK_Dues_FinancialYear">
+      <End Role="FinancialYear" EntitySet="FinancialYears" />
+      <End Role="Due" EntitySet="Dues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseMedia_Expenses" Association="SocietyManagementModel.FK_ExpenseMedia_Expenses">
+      <End Role="Expense" EntitySet="Expenses" />
+      <End Role="ExpenseMedia" EntitySet="ExpenseMedias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Expenses_FinancialYear" Association="SocietyManagementModel.FK_Expenses_FinancialYear">
+      <End Role="FinancialYear" EntitySet="FinancialYears" />
+      <End Role="Expense" EntitySet="Expenses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ForumMedia_Forums" Association="SocietyManagementModel.FK_ForumMedia_Forums">
+      <End Role="Forum" EntitySet="Forums" />
+      <End Role="ForumMedia" EntitySet="ForumMedias" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NoticeBoardMedia_NoticeBoard" Association="SocietyManagementModel.FK_NoticeBoardMedia_NoticeBoard">
+      <End Role="NoticeBoard" EntitySet="NoticeBoards" />
+      <End Role="NoticeBoardMedia" EntitySet="NoticeBoardMedias" />
+    </AssociationSet>
+    <EntitySet Name="EmailTemplates" EntityType="SocietyManagementModel.EmailTemplate" />
+    <AssociationSet Name="FK_EmailTemplates_TemplateType" Association="SocietyManagementModel.FK_EmailTemplates_TemplateType">
+      <End Role="KeyValue" EntitySet="KeyValues" />
+      <End Role="EmailTemplate" EntitySet="EmailTemplates" />
+    </AssociationSet>
+    <EntitySet Name="Notifications" EntityType="SocietyManagementModel.Notification" />
+    <AssociationSet Name="FK_Notifications_User" Association="SocietyManagementModel.FK_Notifications_User">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_EmailTemplate" Association="SocietyManagementModel.FK_Notifications_EmailTemplate">
+      <End Role="EmailTemplate" EntitySet="EmailTemplates" />
+      <End Role="Notification" EntitySet="Notifications" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRole">
     <Key>
@@ -239,6 +292,7 @@
     <Property Name="EventNotification" Type="Boolean" Nullable="false" />
     <Property Name="ForumNotification" Type="Boolean" Nullable="false" />
     <Property Name="PaymentReminder" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Notifications" Relationship="SocietyManagementModel.FK_Notifications_User" FromRole="AspNetUser" ToRole="Notification" />
   </EntityType>
   <EntityType Name="Audit">
     <Key>
@@ -302,6 +356,7 @@
     <NavigationProperty Name="RecurringDues" Relationship="SocietyManagementModel.FK_RecurringDues_BuildingUnits" FromRole="BuildingUnit" ToRole="RecurringDue" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Penalties" Relationship="SocietyManagementModel.FK_Penalty_BuildingUnits" FromRole="BuildingUnit" ToRole="Penalty" />
+    <NavigationProperty Name="BuildingUnitMedias" Relationship="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit" FromRole="BuildingUnit" ToRole="BuildingUnitMedia" />
   </EntityType>
   <EntityType Name="Collection">
     <Key>
@@ -333,6 +388,9 @@
     <Property Name="ChequeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="YearID" Type="Int32" />
+    <NavigationProperty Name="CollectionMedias" Relationship="SocietyManagementModel.FK_CollectionMedia_Collection" FromRole="Collection" ToRole="CollectionMedia" />
+    <NavigationProperty Name="FinancialYear" Relationship="SocietyManagementModel.FK_Collections_FinancialYear" FromRole="Collection" ToRole="FinancialYear" />
   </EntityType>
   <EntityType Name="ComplaintComment">
     <Key>
@@ -410,6 +468,8 @@
     <NavigationProperty Name="RecurringDue" Relationship="SocietyManagementModel.FK_Dues_RecurringDues" FromRole="Due" ToRole="RecurringDue" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Penalties" Relationship="SocietyManagementModel.FK_Penalty_Dues" FromRole="Due" ToRole="Penalty" />
+    <Property Name="YearID" Type="Int32" />
+    <NavigationProperty Name="FinancialYear" Relationship="SocietyManagementModel.FK_Dues_FinancialYear" FromRole="Due" ToRole="FinancialYear" />
   </EntityType>
   <EntityType Name="ForumComment">
     <Key>
@@ -446,6 +506,7 @@
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Author" Relationship="SocietyManagementModel.FK_Forums_Author" FromRole="Forum" ToRole="AspNetUser" />
     <NavigationProperty Name="ForumComments" Relationship="SocietyManagementModel.FK_ForumComments_Forums" FromRole="Forum" ToRole="ForumComment" />
+    <NavigationProperty Name="ForumMedias" Relationship="SocietyManagementModel.FK_ForumMedia_Forums" FromRole="Forum" ToRole="ForumMedia" />
   </EntityType>
   <EntityType Name="KeyValue">
     <Key>
@@ -472,6 +533,7 @@
     <NavigationProperty Name="Complaints1" Relationship="SocietyManagementModel.FK_Complaints_Status" FromRole="KeyValue" ToRole="Complaint" />
     <NavigationProperty Name="Expenses" Relationship="SocietyManagementModel.FK_Expenses_PaymentMode" FromRole="KeyValue" ToRole="Expens" />
     <NavigationProperty Name="Expenses1" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="KeyValue" ToRole="Expens" />
+    <NavigationProperty Name="EmailTemplates" Relationship="SocietyManagementModel.FK_EmailTemplates_TemplateType" FromRole="KeyValue" ToRole="EmailTemplate" />
   </EntityType>
   <EntityType Name="NoticeBoard">
     <Key>
@@ -489,6 +551,7 @@
     <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="NoticeBoardMedias" Relationship="SocietyManagementModel.FK_NoticeBoardMedia_NoticeBoard" FromRole="NoticeBoard" ToRole="NoticeBoardMedia" />
   </EntityType>
   <EntityType Name="PollOption">
     <Key>
@@ -1028,6 +1091,9 @@
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="PaymentMode" Relationship="SocietyManagementModel.FK_Expenses_PaymentMode" FromRole="Expens" ToRole="KeyValue" />
     <NavigationProperty Name="ExpenseType" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="Expens" ToRole="KeyValue" />
+    <Property Name="YearID" Type="Int32" />
+    <NavigationProperty Name="ExpenseMedias" Relationship="SocietyManagementModel.FK_ExpenseMedia_Expenses" FromRole="Expense" ToRole="ExpenseMedia" />
+    <NavigationProperty Name="FinancialYear" Relationship="SocietyManagementModel.FK_Expenses_FinancialYear" FromRole="Expense" ToRole="FinancialYear" />
   </EntityType>
   <Association Name="FK_Expenses_PaymentMode">
     <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
@@ -1096,6 +1162,313 @@
       </Principal>
       <Dependent Role="Penalty">
         <PropertyRef Name="DueID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BuildingUnitMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UnitID" Type="Int32" Nullable="false" />
+    <Property Name="MediaType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MediaTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MediaData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit" FromRole="BuildingUnitMedia" ToRole="BuildingUnit" />
+  </EntityType>
+  <EntityType Name="CollectionMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CollectionID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="MediaType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MediaTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MediaData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Collection" Relationship="SocietyManagementModel.FK_CollectionMedia_Collection" FromRole="CollectionMedia" ToRole="Collection" />
+  </EntityType>
+  <EntityType Name="ExpenseMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpenseID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="MediaType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MediaTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MediaData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Expens" Relationship="SocietyManagementModel.FK_ExpenseMedia_Expenses" FromRole="ExpenseMedia" ToRole="Expense" />
+  </EntityType>
+  <EntityType Name="FinancialYear">
+    <Key>
+      <PropertyRef Name="YearID" />
+    </Key>
+    <Property Name="YearID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="YearName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsClosed" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_FinancialYear" FromRole="FinancialYear" ToRole="Collection" />
+    <NavigationProperty Name="Dues" Relationship="SocietyManagementModel.FK_Dues_FinancialYear" FromRole="FinancialYear" ToRole="Due" />
+    <NavigationProperty Name="Expenses" Relationship="SocietyManagementModel.FK_Expenses_FinancialYear" FromRole="FinancialYear" ToRole="Expense" />
+  </EntityType>
+  <EntityType Name="ForumMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ForumID" Type="Int32" Nullable="false" />
+    <Property Name="MediaType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MediaTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MediaData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Forum" Relationship="SocietyManagementModel.FK_ForumMedia_Forums" FromRole="ForumMedia" ToRole="Forum" />
+  </EntityType>
+  <EntityType Name="NoticeBoardMedia">
+    <Key>
+      <PropertyRef Name="MediaID" />
+    </Key>
+    <Property Name="MediaID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NoticeID" Type="Int32" Nullable="false" />
+    <Property Name="MediaType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MediaTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MediaData" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="NoticeBoard" Relationship="SocietyManagementModel.FK_NoticeBoardMedia_NoticeBoard" FromRole="NoticeBoardMedia" ToRole="NoticeBoard" />
+  </EntityType>
+  <EntityType Name="SystemSetting">
+    <Key>
+      <PropertyRef Name="SettingID" />
+    </Key>
+    <Property Name="SettingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SettingName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SettingValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_BuildingUnitMedia_BuildingUnit">
+    <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
+    <End Type="SocietyManagementModel.BuildingUnitMedia" Role="BuildingUnitMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BuildingUnit">
+        <PropertyRef Name="UnitID" />
+      </Principal>
+      <Dependent Role="BuildingUnitMedia">
+        <PropertyRef Name="UnitID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CollectionMedia_Collection">
+    <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="1" />
+    <End Type="SocietyManagementModel.CollectionMedia" Role="CollectionMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Collection">
+        <PropertyRef Name="CollectionID" />
+      </Principal>
+      <Dependent Role="CollectionMedia">
+        <PropertyRef Name="CollectionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Collections_FinancialYear">
+    <End Type="SocietyManagementModel.FinancialYear" Role="FinancialYear" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinancialYear">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="Collection">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Dues_FinancialYear">
+    <End Type="SocietyManagementModel.FinancialYear" Role="FinancialYear" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.Due" Role="Due" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinancialYear">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="Due">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseMedia_Expenses">
+    <End Type="SocietyManagementModel.Expense" Role="Expense" Multiplicity="1" />
+    <End Type="SocietyManagementModel.ExpenseMedia" Role="ExpenseMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Expense">
+        <PropertyRef Name="ExpenseID" />
+      </Principal>
+      <Dependent Role="ExpenseMedia">
+        <PropertyRef Name="ExpenseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Expenses_FinancialYear">
+    <End Type="SocietyManagementModel.FinancialYear" Role="FinancialYear" Multiplicity="0..1" />
+    <End Type="SocietyManagementModel.Expense" Role="Expense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FinancialYear">
+        <PropertyRef Name="YearID" />
+      </Principal>
+      <Dependent Role="Expense">
+        <PropertyRef Name="YearID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ForumMedia_Forums">
+    <End Type="SocietyManagementModel.Forum" Role="Forum" Multiplicity="1" />
+    <End Type="SocietyManagementModel.ForumMedia" Role="ForumMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Forum">
+        <PropertyRef Name="ForumID" />
+      </Principal>
+      <Dependent Role="ForumMedia">
+        <PropertyRef Name="ForumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NoticeBoardMedia_NoticeBoard">
+    <End Type="SocietyManagementModel.NoticeBoard" Role="NoticeBoard" Multiplicity="1" />
+    <End Type="SocietyManagementModel.NoticeBoardMedia" Role="NoticeBoardMedia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NoticeBoard">
+        <PropertyRef Name="NoticeID" />
+      </Principal>
+      <Dependent Role="NoticeBoardMedia">
+        <PropertyRef Name="NoticeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EmailTemplate">
+    <Key>
+      <PropertyRef Name="TemplateID" />
+    </Key>
+    <Property Name="TemplateID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TemplateTypeID" Type="Int32" Nullable="false" />
+    <Property Name="TemplateSubject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="TemplateBody" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FromEmail" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FromName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ReplyToEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ReplyToName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="TemplateType" Relationship="SocietyManagementModel.FK_EmailTemplates_TemplateType" FromRole="EmailTemplate" ToRole="KeyValue" />
+    <NavigationProperty Name="Notifications" Relationship="SocietyManagementModel.FK_Notifications_EmailTemplate" FromRole="EmailTemplate" ToRole="Notification" />
+  </EntityType>
+  <Association Name="FK_EmailTemplates_TemplateType">
+    <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+    <End Type="SocietyManagementModel.EmailTemplate" Role="EmailTemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KeyValue">
+        <PropertyRef Name="KeyID" />
+      </Principal>
+      <Dependent Role="EmailTemplate">
+        <PropertyRef Name="TemplateTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TemplateID" Type="Int32" Nullable="false" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsRead" Type="Boolean" Nullable="false" />
+    <Property Name="IsArchive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="UDK1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="SocietyManagementModel.FK_Notifications_User" FromRole="Notification" ToRole="AspNetUser" />
+    <NavigationProperty Name="EmailTemplate" Relationship="SocietyManagementModel.FK_Notifications_EmailTemplate" FromRole="Notification" ToRole="EmailTemplate" />
+  </EntityType>
+  <Association Name="FK_Notifications_User">
+    <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_EmailTemplate">
+    <End Type="SocietyManagementModel.EmailTemplate" Role="EmailTemplate" Multiplicity="1" />
+    <End Type="SocietyManagementModel.Notification" Role="Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmailTemplate">
+        <PropertyRef Name="TemplateID" />
+      </Principal>
+      <Dependent Role="Notification">
+        <PropertyRef Name="TemplateID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -67,6 +67,11 @@ namespace SocietyManagement.Controllers
             {
                 db.Collections.Add(collection);
                 db.SaveChanges();
+
+                EmailNotification notification = new EmailNotification(db);
+                notification.SendPaymentNotification(collection);
+                notification = null;
+
                 return RedirectToAction("Index");
             }
 

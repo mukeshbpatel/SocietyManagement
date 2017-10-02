@@ -14,6 +14,12 @@ namespace SocietyManagement.Models
     
     public partial class NoticeBoard
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public NoticeBoard()
+        {
+            this.NoticeBoardMedias = new HashSet<NoticeBoardMedia>();
+        }
+    
         public int NoticeID { get; set; }
         public System.DateTime NoticeDate { get; set; }
         public string NoticeHeading { get; set; }
@@ -26,5 +32,8 @@ namespace SocietyManagement.Models
         public string UserID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<NoticeBoardMedia> NoticeBoardMedias { get; set; }
     }
 }

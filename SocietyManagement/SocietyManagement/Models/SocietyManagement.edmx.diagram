@@ -64,6 +64,26 @@
         <EntityTypeShape EntityType="SocietyManagementModel.Penalty" Width="1.5" PointX="15.75" PointY="17.875" />
         <AssociationConnector Association="SocietyManagementModel.FK_Penalty_BuildingUnits" />
         <AssociationConnector Association="SocietyManagementModel.FK_Penalty_Dues" />
+        <EntityTypeShape EntityType="SocietyManagementModel.BuildingUnitMedia" Width="1.5" PointX="7.875" PointY="41" />
+        <EntityTypeShape EntityType="SocietyManagementModel.CollectionMedia" Width="1.5" PointX="18.125" PointY="25.125" />
+        <EntityTypeShape EntityType="SocietyManagementModel.ExpenseMedia" Width="1.5" PointX="7.875" PointY="36.125" />
+        <EntityTypeShape EntityType="SocietyManagementModel.FinancialYear" Width="1.5" PointX="7.75" PointY="3.125" />
+        <EntityTypeShape EntityType="SocietyManagementModel.ForumMedia" Width="1.5" PointX="7.875" PointY="46.125" />
+        <EntityTypeShape EntityType="SocietyManagementModel.NoticeBoardMedia" Width="1.5" PointX="5.375" PointY="39" />
+        <EntityTypeShape EntityType="SocietyManagementModel.SystemSetting" Width="1.5" PointX="0.75" PointY="5.75" />
+        <AssociationConnector Association="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit" />
+        <AssociationConnector Association="SocietyManagementModel.FK_CollectionMedia_Collection" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Collections_FinancialYear" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Dues_FinancialYear" />
+        <AssociationConnector Association="SocietyManagementModel.FK_ExpenseMedia_Expenses" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Expenses_FinancialYear" />
+        <AssociationConnector Association="SocietyManagementModel.FK_ForumMedia_Forums" />
+        <AssociationConnector Association="SocietyManagementModel.FK_NoticeBoardMedia_NoticeBoard" />
+        <EntityTypeShape EntityType="SocietyManagementModel.EmailTemplate" Width="1.5" PointX="5.25" PointY="43.625" />
+        <AssociationConnector Association="SocietyManagementModel.FK_EmailTemplates_TemplateType" />
+        <EntityTypeShape EntityType="SocietyManagementModel.Notification" Width="1.5" PointX="8.5" PointY="31.125" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Notifications_User" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Notifications_EmailTemplate" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

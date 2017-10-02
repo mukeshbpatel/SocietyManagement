@@ -48,5 +48,14 @@ namespace SocietyManagement.Models
         public virtual DbSet<RecurringDue> RecurringDues { get; set; }
         public virtual DbSet<Expense> Expenses { get; set; }
         public virtual DbSet<Penalty> Penalties { get; set; }
+        public virtual DbSet<BuildingUnitMedia> BuildingUnitMedias { get; set; }
+        public virtual DbSet<CollectionMedia> CollectionMedias { get; set; }
+        public virtual DbSet<ExpenseMedia> ExpenseMedias { get; set; }
+        public virtual DbSet<FinancialYear> FinancialYears { get; set; }
+        public virtual DbSet<ForumMedia> ForumMedias { get; set; }
+        public virtual DbSet<NoticeBoardMedia> NoticeBoardMedias { get; set; }
+        public virtual DbSet<SystemSetting> SystemSettings { get; set; }
+        public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
     }
 }

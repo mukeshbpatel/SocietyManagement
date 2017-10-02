@@ -14,6 +14,12 @@ namespace SocietyManagement.Models
     
     public partial class Expense
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Expense()
+        {
+            this.ExpenseMedias = new HashSet<ExpenseMedia>();
+        }
+    
         public decimal ExpenseID { get; set; }
         public System.DateTime ExpenseDate { get; set; }
         public string PaidTo { get; set; }
@@ -37,8 +43,12 @@ namespace SocietyManagement.Models
         public string UserID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public Nullable<int> YearID { get; set; }
     
         public virtual KeyValue PaymentMode { get; set; }
         public virtual KeyValue ExpenseType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ExpenseMedia> ExpenseMedias { get; set; }
+        public virtual FinancialYear FinancialYear { get; set; }
     }
 }
