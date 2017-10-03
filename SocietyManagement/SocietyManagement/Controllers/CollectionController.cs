@@ -68,7 +68,7 @@ namespace SocietyManagement.Controllers
                 db.Collections.Add(collection);
                 db.SaveChanges();
 
-                EmailNotification notification = new EmailNotification(db);
+                EmailNotification notification = new EmailNotification();
                 notification.SendPaymentNotification(collection);
                 notification = null;
 

@@ -140,7 +140,14 @@ namespace SocietyManagement.Controllers
                 if (NetUser.ResetPassword)
                 {
                     string token = UserManager.GeneratePasswordResetToken(aspNetUser.Id);
-                    UserManager.ResetPassword(aspNetUser.Id,token, "abcd1234");
+                    var result = UserManager.ResetPassword(aspNetUser.Id,token, "abcd1234");
+                    if (result.Succeeded)
+                    {
+                        var user = UserManager.FindByName(aspNetUser.UserName);
+                        EmailNotification emailNotification = new EmailNotification();
+                        emailNotification.SendPasswordChangedEmail(user, "abcd1234");
+                        emailNotification = null;
+                    }
                 }
                 return RedirectToAction("Index");
             }

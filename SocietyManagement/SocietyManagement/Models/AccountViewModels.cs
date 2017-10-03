@@ -111,7 +111,7 @@ namespace SocietyManagement.Models
     public class ResetPasswordViewModel
     {
         [Required]
-        [Display(Name = "Mobile")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
@@ -130,7 +130,9 @@ namespace SocietyManagement.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

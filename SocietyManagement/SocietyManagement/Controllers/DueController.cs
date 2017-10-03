@@ -68,7 +68,7 @@ namespace SocietyManagement.Controllers
                 db.Dues.Add(due);
                 db.SaveChanges();
 
-                EmailNotification emailNotification = new EmailNotification(db);
+                EmailNotification emailNotification = new EmailNotification();
                 emailNotification.SendBillNotification(due);
                 emailNotification = null;
 

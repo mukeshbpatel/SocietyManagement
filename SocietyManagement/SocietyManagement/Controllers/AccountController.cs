@@ -214,23 +214,39 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                ApplicationUser user = null;
+                if (!String.IsNullOrEmpty(model.UserName))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    user = UserManager.FindByName(model.UserName);
+                }
+                else if (!String.IsNullOrEmpty(model.Email))
+                {
+                    user = UserManager.FindByEmail(model.Email);
+                } 
+                else
+                {
+                    ModelState.AddModelError("", "User Name or Email address is required to retrive password.");
+                }
+
+                if (user == null)
+                {                    
+                    ModelState.AddModelError("", "User Name or Email address entered is incorrect.");
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = UserManager.GeneratePasswordResetToken(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                EmailNotification emailNotification = new EmailNotification();
+                emailNotification.SendForgotPasswordEmail(user, callbackUrl);
+                emailNotification = null;
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -258,21 +274,25 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
+        public ActionResult ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var user =  await UserManager.FindByNameAsync(model.UserName);
+            var user =  UserManager.FindByName(model.UserName);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var result = UserManager.ResetPassword(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
+                EmailNotification emailNotification = new EmailNotification();
+                emailNotification.SendPasswordChangedEmail(user, model.Password);
+                emailNotification = null;
+
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             AddErrors(result);

@@ -74,7 +74,7 @@ namespace SocietyManagement.Models
                 db1.Entry(recurringDue).State = EntityState.Modified;
                 db1.SaveChanges();
 
-                EmailNotification emailNotification = new EmailNotification(db1);
+                EmailNotification emailNotification = new EmailNotification();
                 emailNotification.SendBillNotification(bill);
                 emailNotification = null;
 
@@ -104,7 +104,7 @@ namespace SocietyManagement.Models
                 db1.Entry(recurringDue).State = EntityState.Modified;
                 db1.SaveChanges();
 
-                EmailNotification emailNotification = new EmailNotification(db1);
+                EmailNotification emailNotification = new EmailNotification();
                 emailNotification.SendBillNotification(bill);
                 emailNotification = null;
             }
@@ -133,7 +133,7 @@ namespace SocietyManagement.Models
                 db1.Entry(recurringDue).State = EntityState.Modified;
                 db1.SaveChanges();
 
-                EmailNotification emailNotification = new EmailNotification(db1);
+                EmailNotification emailNotification = new EmailNotification();
                 emailNotification.SendBillNotification(bill);
                 emailNotification = null;
             }
@@ -162,7 +162,7 @@ namespace SocietyManagement.Models
                 db1.Entry(recurringDue).State = EntityState.Modified;
                 db1.SaveChanges();
 
-                EmailNotification emailNotification = new EmailNotification(db1);
+                EmailNotification emailNotification = new EmailNotification();
                 emailNotification.SendBillNotification(bill);
                 emailNotification = null;
             }
