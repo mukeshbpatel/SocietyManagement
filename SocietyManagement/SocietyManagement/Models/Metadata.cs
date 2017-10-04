@@ -19,6 +19,34 @@ namespace SocietyManagement.Models
     //{
     //}
 
+    public partial class FinancialYearMetadata
+    {
+        [Required]
+        [Display(Name = "Financial Year")]
+        public string YearName { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Start Date")]
+        public System.DateTime StartDate { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "End Date")]
+        public System.DateTime EndDate { get; set; }
+        [Display(Name = "Active")]
+        public bool IsActive { get; set; }
+        [Display(Name = "Closed")]
+        public bool IsClosed { get; set; }
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }
+        [Display(Name = "Modified Date")]
+        public System.DateTime ModifiedDate { get; set; }
+
+    }
+    [MetadataType(typeof(FinancialYearMetadata))]
+    public partial class FinancialYear
+    {
+    }
+
     public partial class EmailTemplateMetadata
     {
         [Display(Name = "Template Type")]

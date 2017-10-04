@@ -77,20 +77,18 @@
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             @if (User.IsInRole("Admin"))
-                            {
+                            {                                
                                 <li class="dropdown-item"><a href="@Url.Action("CalculateBill", "RecurringDue",new {id = 0})"><span class="glyphicon glyphicon-retweet"></span> Calculate Bills</a></li>
-                                <li class="dropdown-item"><a href="@Url.Action("Index", "KeyValue")"><span class="icon-library"></span> Keys</a></li>
+                                <li class="dropdown-item"><a href="@Url.Action("Index", "KeyValue")"><span class="icon-library"></span> Key Value</a></li>
                             }
+                            <li class="dropdown-item"><a href="@Url.Action("Index", "FinancialYear")"><span class="glyphicon glyphicon-calendar"></span> Financial Year</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "Building")"><span class="icon-office"></span> Buildings</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "BuildingUnit")"><span class="glyphicon glyphicon glyphicon-home"></span> Building Units</a></li>
                             <li class="dropdown-item"><a href="@Url.Action("Index", "User")"><span class="glyphicon glyphicon-user"></span> Manage Users</a></li>  
                             <li class="dropdown-item"><a href="@Url.Action("Index", "EmailTemplate")"><span class="glyphicon glyphicon-envelope"></span> Email Template</a></li>
                         </ul>
                     </li>
-                     }
-
-
-
+                     }        
                  }
                 </ul>
                 @Html.Partial("_LoginPartial")

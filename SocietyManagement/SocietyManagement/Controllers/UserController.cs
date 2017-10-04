@@ -70,7 +70,13 @@ namespace SocietyManagement.Controllers
                 var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {                    
-                   var roles = UserManager.AddToRole(user.Id, model.Role);                    
+                   var roles = UserManager.AddToRole(user.Id, model.Role);
+                    if (roles.Succeeded && ! string.IsNullOrWhiteSpace(model.Email))
+                    {
+                        EmailNotification emailNotification = new EmailNotification();
+                        emailNotification.SendWelcomeEmail(user, model.Password);
+                        emailNotification = null;
+                    }
                    return RedirectToAction("Index");
                 }
                 AddErrors(result);

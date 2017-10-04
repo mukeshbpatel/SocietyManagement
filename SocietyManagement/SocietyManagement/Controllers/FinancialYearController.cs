@@ -10,125 +10,118 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize]
-    public class NoticeBoardController : Controller
+    [Authorize(Roles ="Manager, Admin")]
+    public class FinancialYearController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
-        // GET: NoticeBoard
+        // GET: FinancialYear
         public ActionResult Index()
         {
-            return View(db.NoticeBoards.Where(n=>n.ExpiryDate>=DateTime.Now & n.IsDeleted == false).OrderByDescending(o=>o.NoticeDate).ToList());
+            return View(db.FinancialYears.Where(d=>d.IsDeleted==false).OrderByDescending(o=>o.StartDate).ToList());
         }
 
-        // GET: NoticeBoard/Details/5
+        // GET: FinancialYear/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NoticeBoard noticeBoard = db.NoticeBoards.Find(id);
-            if (noticeBoard == null)
+            FinancialYear financialYear = db.FinancialYears.Find(id);
+            if (financialYear == null)
             {
                 return HttpNotFound();
             }
-            return View(noticeBoard);
+            return View(financialYear);
         }
 
-        [Authorize(Roles = "Admin, Manager, Comity")]
-        // GET: NoticeBoard/Create
+        // GET: FinancialYear/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: NoticeBoard/Create
+        // POST: FinancialYear/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "NoticeID,NoticeDate,NoticeHeading,Notice,ExpiryDate,IsDeleted,UDK1,UDK2,UDK3")] NoticeBoard noticeBoard)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create([Bind(Include = "YearID,YearName,StartDate,EndDate,IsActive,IsClosed,UDK1,UDK2,UDK3,UDK4,UDK5")] FinancialYear financialYear)
         {
-            Helper.AssignUserInfo(noticeBoard, User);
+            Helper.AssignUserInfo(financialYear, User);
             if (ModelState.IsValid)
             {
-                db.NoticeBoards.Add(noticeBoard);
+                db.FinancialYears.Add(financialYear);
                 db.SaveChanges();
-
-                EmailNotification emailNotification = new EmailNotification();
-                emailNotification.SendNoticeBoardEmail(noticeBoard);
-                emailNotification = null;
-
                 return RedirectToAction("Index");
             }
 
-            return View(noticeBoard);
+            return View(financialYear);
         }
 
-        [Authorize(Roles = "Admin, Manager, Comity")]
-        // GET: NoticeBoard/Edit/5
+        // GET: FinancialYear/Edit/5
+        [Authorize(Roles ="Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NoticeBoard noticeBoard = db.NoticeBoards.Find(id);
-            if (noticeBoard == null)
+            FinancialYear financialYear = db.FinancialYears.Find(id);
+            if (financialYear == null)
             {
                 return HttpNotFound();
             }
-            return View(noticeBoard);
+            return View(financialYear);
         }
 
-        // POST: NoticeBoard/Edit/5
+        // POST: FinancialYear/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "NoticeID,NoticeDate,NoticeHeading,Notice,ExpiryDate,IsDeleted,UDK1,UDK2,UDK3,CreatedDate")] NoticeBoard noticeBoard)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit([Bind(Include = "YearID,YearName,StartDate,EndDate,IsActive,IsClosed,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] FinancialYear financialYear)
         {
-            Helper.AssignUserInfo(noticeBoard, User, false);
+            Helper.AssignUserInfo(financialYear, User, false);
             if (ModelState.IsValid)
             {
-                db.Entry(noticeBoard).State = EntityState.Modified;
+                db.Entry(financialYear).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(noticeBoard);
+            return View(financialYear);
         }
 
-        // GET: NoticeBoard/Delete/5
-        [Authorize(Roles = "Admin, Manager, Comity")]
+        // GET: FinancialYear/Delete/5
+        [Authorize(Roles ="Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            NoticeBoard noticeBoard = db.NoticeBoards.Find(id);
-            if (noticeBoard == null)
+            FinancialYear financialYear = db.FinancialYears.Find(id);
+            if (financialYear == null)
             {
                 return HttpNotFound();
             }
-            return View(noticeBoard);
+            return View(financialYear);
         }
 
-        // POST: NoticeBoard/Delete/5
+        // POST: FinancialYear/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin, Manager, Comity")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
-            NoticeBoard noticeBoard = db.NoticeBoards.Find(id);
-            Helper.SoftDelete(noticeBoard, User);            
-            db.Entry(noticeBoard).State = EntityState.Modified;
-            db.SaveChanges();            
+            FinancialYear financialYear = db.FinancialYears.Find(id);
+            Helper.SoftDelete(financialYear, User);
+            db.SaveChanges();
+            db.Entry(financialYear).State = EntityState.Modified;
             return RedirectToAction("Index");
         }
 

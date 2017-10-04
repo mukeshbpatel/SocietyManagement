@@ -193,6 +193,7 @@
     <Compile Include="Controllers\DueController.cs" />
     <Compile Include="Controllers\EmailTemplateController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\FinancialYearController.cs" />
     <Compile Include="Controllers\ForumCommentController.cs" />
     <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -508,6 +509,12 @@
     <Content Include="Views\EmailTemplate\Details.cshtml" />
     <Content Include="Views\EmailTemplate\Edit.cshtml" />
     <Content Include="Views\EmailTemplate\Index.cshtml" />
+    <Content Include="Views\FinancialYear\Create.cshtml" />
+    <Content Include="Views\FinancialYear\Delete.cshtml" />
+    <Content Include="Views\FinancialYear\Details.cshtml" />
+    <Content Include="Views\FinancialYear\Edit.cshtml" />
+    <Content Include="Views\FinancialYear\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />
