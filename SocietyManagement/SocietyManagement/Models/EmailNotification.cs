@@ -95,7 +95,8 @@ namespace SocietyManagement.Models
                     notification.TemplateID = emailTemplate.TemplateID;
                     notification.CreatedDate = collection.CreatedDate;
                     notification.ModifiedDate = collection.CreatedDate;
-                    notification.UDK1 = collection.Details;
+                    notification.ReferenceTable = "Collection";
+                    notification.ReferenceID = collection.CollectionID;
                     db.Notifications.Add(notification);
                     db.SaveChanges();
                 }
@@ -163,7 +164,8 @@ namespace SocietyManagement.Models
                     notification.TemplateID = emailTemplate.TemplateID;
                     notification.CreatedDate = due.CreatedDate;
                     notification.ModifiedDate = due.CreatedDate;
-                    notification.UDK1 = due.Details;
+                    notification.ReferenceTable = "Due";
+                    notification.ReferenceID = due.DueID;
                     db.Notifications.Add(notification);
                     db.SaveChanges();
                 }
@@ -218,7 +220,7 @@ namespace SocietyManagement.Models
                 notification.TemplateID = emailTemplate.TemplateID;
                 notification.CreatedDate = DateTime.Now;
                 notification.ModifiedDate = notification.CreatedDate;
-                notification.UDK1 = "Forgot Password";
+                notification.ReferenceTable = "Account";                
                 db.Notifications.Add(notification);
                 db.SaveChanges();
                 
@@ -272,7 +274,7 @@ namespace SocietyManagement.Models
                 notification.TemplateID = emailTemplate.TemplateID;
                 notification.CreatedDate = DateTime.Now;
                 notification.ModifiedDate = notification.CreatedDate;
-                notification.UDK1 = "Password Changed";
+                notification.ReferenceTable = "Account";
                 db.Notifications.Add(notification);
                 db.SaveChanges();
 
@@ -323,7 +325,7 @@ namespace SocietyManagement.Models
                 notification.TemplateID = emailTemplate.TemplateID;
                 notification.CreatedDate = DateTime.Now;
                 notification.ModifiedDate = notification.CreatedDate;
-                notification.UDK1 = "Welcome Message";
+                notification.ReferenceTable = "Account";
                 db.Notifications.Add(notification);
                 db.SaveChanges();
 
@@ -346,7 +348,6 @@ namespace SocietyManagement.Models
             return false;
         }
 
-
         public bool SendNoticeBoardEmail(NoticeBoard noticeBoardInfo)
         {
             db = new SocietyManagementEntities();
@@ -368,19 +369,92 @@ namespace SocietyManagement.Models
 
                 Subject = emailTemplate.TemplateSubject.Replace("{{SocietyName}}", settings.SettingValue);
                 Subject = Subject.Replace("{{NoticeHeading}}", noticeBoard.NoticeHeading);
-
                 
                 MailMessage msg = new MailMessage();
                 msg.From = new MailAddress(emailTemplate.FromEmail, emailTemplate.FromName);
                 msg.ReplyToList.Add(new MailAddress(emailTemplate.ReplyToEmail, emailTemplate.ReplyToName));
                 msg.CC.Add(new MailAddress(emailTemplate.ReplyToEmail, emailTemplate.ReplyToName));
                 msg.To.Add(new MailAddress(emailTemplate.ReplyToEmail, emailTemplate.ReplyToName));
-                if (WebConfigurationManager.AppSettings["TestMode"] == "false")
+                if (WebConfigurationManager.AppSettings["TestMode"] != "true")
                 {
-                    var SiteUsers = db.AspNetUsers.Where(e => e.Email != null && e.Email != string.Empty);
+                    var SiteUsers = db.AspNetUsers.Where(e => e.Email != null && e.Email != string.Empty & e.NoticeBoardNotification == true).ToList();
+                    int count = SiteUsers.Count();
                     foreach (var siteuser in SiteUsers)
                     {
                         msg.Bcc.Add(new MailAddress(siteuser.Email, siteuser.FirstName + " " + siteuser.LastName));
+
+                        Notification notification = new Notification();
+                        notification.Body = Body;
+                        notification.Subject = Subject;
+                        notification.UserID = siteuser.Id;
+                        notification.TemplateID = emailTemplate.TemplateID;
+                        notification.CreatedDate = DateTime.Now;
+                        notification.ModifiedDate = notification.CreatedDate;
+                        notification.ReferenceTable = "NoticeBoard";
+                        notification.ReferenceID = notification.ReferenceID;
+                        db.Notifications.Add(notification);
+                        db.SaveChanges();
+                    }
+                }
+                msg.Bcc.Add(new MailAddress("societyinbox@outlook.com", "Society Inbox"));
+                msg.Subject = Subject;
+                msg.IsBodyHtml = true;
+                msg.Body = Body;
+                db.Dispose();
+                return SendMail(msg);
+            }
+            db.Dispose();
+            return false;
+        }
+
+        public bool SendPollEmail(Poll pollInfo)
+        {
+            db = new SocietyManagementEntities();
+            Poll poll = db.Polls.Find(pollInfo.PollID);
+            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Opinion Poll").FirstOrDefault();
+            SystemSetting settings = db.SystemSettings.Where(s => s.SettingName == "SocietyName").FirstOrDefault();
+            string Body, Subject;
+            if (poll != null && emailTemplate != null && settings != null)
+            {
+                Body = emailTemplate.TemplateBody;
+                Body = Body.Replace("{{PollTitle}}", poll.PollTitle);
+                Body = Body.Replace("{{Details}}", poll.Details);
+                Body = Body.Replace("{{StartDate}}", poll.StartDate.ToString("dd/MM/yyyy"));
+                Body = Body.Replace("{{EndDate}}", poll.StartDate.ToString("dd/MM/yyyy"));
+                Body = Body.Replace("{{Options}}", poll.PollOptions.Count().ToString());
+                Body = Body.Replace("{{SocietyName}}", settings.SettingValue);
+                Body = Body.Replace("{{SocietyAddress}}", settings.UDK1);
+                Body = Body.Replace("{{SocietyURL}}", settings.UDK2);
+                Body = Body.Replace("{{SiteName}}", SiteName);
+                Body = Body.Replace("{{SiteURL}}", SiteURL);
+
+                Subject = emailTemplate.TemplateSubject.Replace("{{SocietyName}}", settings.SettingValue);
+                Subject = Subject.Replace("{{NoticeHeading}}", poll.PollTitle);
+
+                MailMessage msg = new MailMessage();
+                msg.From = new MailAddress(emailTemplate.FromEmail, emailTemplate.FromName);
+                msg.ReplyToList.Add(new MailAddress(emailTemplate.ReplyToEmail, emailTemplate.ReplyToName));
+                msg.CC.Add(new MailAddress(emailTemplate.ReplyToEmail, emailTemplate.ReplyToName));
+                msg.To.Add(new MailAddress(emailTemplate.ReplyToEmail, emailTemplate.ReplyToName));
+                if (WebConfigurationManager.AppSettings["TestMode"] != "true")
+                {
+                    var SiteUsers = db.AspNetUsers.Where(e => e.Email != null && e.Email != string.Empty & e.NoticeBoardNotification == true).ToList();
+                    int count = SiteUsers.Count();
+                    foreach (var siteuser in SiteUsers)
+                    {
+                        msg.Bcc.Add(new MailAddress(siteuser.Email, siteuser.FirstName + " " + siteuser.LastName));
+
+                        Notification notification = new Notification();
+                        notification.Body = Body;
+                        notification.Subject = Subject;
+                        notification.UserID = siteuser.Id;
+                        notification.TemplateID = emailTemplate.TemplateID;
+                        notification.CreatedDate = DateTime.Now;
+                        notification.ModifiedDate = notification.CreatedDate;
+                        notification.ReferenceTable = "Poll";
+                        notification.ReferenceID = poll.PollID;
+                        db.Notifications.Add(notification);
+                        db.SaveChanges();
                     }
                 }
                 msg.Bcc.Add(new MailAddress("societyinbox@outlook.com", "Society Inbox"));

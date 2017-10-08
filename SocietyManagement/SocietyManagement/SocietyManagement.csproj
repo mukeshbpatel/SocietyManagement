@@ -200,6 +200,7 @@
     <Compile Include="Controllers\KeyValueController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NoticeBoardController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PenaltyController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\PollOptionController.cs" />
@@ -515,6 +516,12 @@
     <Content Include="Views\FinancialYear\Edit.cshtml" />
     <Content Include="Views\FinancialYear\Index.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Notification\Create.cshtml" />
+    <Content Include="Views\Notification\Delete.cshtml" />
+    <Content Include="Views\Notification\Details.cshtml" />
+    <Content Include="Views\Notification\Edit.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
+    <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

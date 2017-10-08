@@ -113,6 +113,7 @@
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="BuildingUnits">
     <Key>
@@ -153,6 +154,7 @@
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Collections">
     <Key>
@@ -287,6 +289,7 @@
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Expenses">
     <Key>
@@ -370,6 +373,7 @@
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Forums">
     <Key>
@@ -434,6 +438,7 @@
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Notifications">
     <Key>
@@ -442,12 +447,14 @@
     <Property Name="NotificationID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="TemplateID" Type="int" Nullable="false" />
-    <Property Name="Subject" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Subject" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Body" Type="nvarchar(max)" Nullable="false" />
     <Property Name="IsRead" Type="bit" Nullable="false" />
     <Property Name="IsArchive" Type="bit" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
-    <Property Name="UDK1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReferenceTable" Type="nvarchar" MaxLength="100" />
+    <Property Name="ReferenceID" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="UDK1" Type="nvarchar(max)" />
     <Property Name="UDK2" Type="nvarchar(max)" />
     <Property Name="UDK3" Type="nvarchar(max)" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />

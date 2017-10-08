@@ -1,0 +1,44 @@
+﻿@model SocietyManagement.Models.Notification
+
+@{
+    ViewBag.Title = "Notification";
+}
+
+<h3><span class="glyphicon glyphicon-envelope"></span> Notification</h3>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TemplateID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailTemplate.TemplateType.KeyValues)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+        <dt>
+            Message
+        </dt>
+        <dd>
+            @Html.Raw(Model.Body)
+        </dd>        
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Archive","Notification",new {id = Model.NotificationID })" class="btn btn-primary" role="button">Archive</a>
+    <a href="@Url.Action("Delete","Notification",new {id = Model.NotificationID })" class="btn btn-danger" role="button">Delete</a>
+    <a href="@Url.Action("Index","Notification",new {id = Model.NotificationID })" class="btn btn-success" role="button">Cancel</a>
+</p>

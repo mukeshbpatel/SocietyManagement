@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
+
+
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
@@ -10,8 +12,15 @@
             Session["UserName"] = User.Identity.Name;            
         }
 
+
     <ul class="nav navbar-nav navbar-right">        
         @*<li><a href="@Url.Action("Profile", "Manage")"><span class="glyphicon glyphicon-picture"></span> Profile</a></li>*@
+        <li class="hidden-xs">
+            <a class="navbar-link" href="@Url.Action("Index","Notification")"><span class="glyphicon glyphicon-envelope"></span><span class="badge badge-notify"></span></a>            
+        </li>
+        <li class="hidden-xs">
+            <a class="navbar-link" href="@Url.Action("Index","Alert")"><span class="glyphicon glyphicon-bell"></span><span class="badge badge-notify"></span></a>
+        </li>
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <span class="glyphicon glyphicon-user"></span> @Session["UserName"]
@@ -22,12 +31,34 @@
                 <li class="dropdown-item"><a href="@Url.Action("ChangePassword", "Manage")"><span class="icon-key"></span> Change Password</a></li>                
             </ul>
         </li>    
-        <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span> Log off</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span> Log off</a></li>        
     </ul>
-        }
     }
-    else
-    {
+    <script>
+    $(function() {
+                $.ajax({
+        type: "POST",
+                    url: "/Notification/NotificationCount",
+                    data: '{name: "test" }',
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(response) {
+                        $(".badge-notify").text(response);
+                //alert("You have: " + response + " notifications");
+            },
+                    failure: function(response) {
+                alert(response.responseText);
+            },
+                    error: function(response) {
+                alert(response.responseText);
+            }
+        });
+    });
+    </script>
+
+}
+else
+{
     <ul class="nav navbar-nav navbar-right">
         @*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@

@@ -27,6 +27,7 @@ namespace SocietyManagement.Models
         public string UserID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public string FileName { get; set; }
     
         public virtual NoticeBoard NoticeBoard { get; set; }
     }

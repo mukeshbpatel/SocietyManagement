@@ -466,6 +466,7 @@
     <EntitySetMapping Name="BuildingUnitMedias">
       <EntityTypeMapping TypeName="SocietyManagementModel.BuildingUnitMedia">
         <MappingFragment StoreEntitySet="BuildingUnitMedia">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -485,6 +486,7 @@
     <EntitySetMapping Name="CollectionMedias">
       <EntityTypeMapping TypeName="SocietyManagementModel.CollectionMedia">
         <MappingFragment StoreEntitySet="CollectionMedia">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -504,6 +506,7 @@
     <EntitySetMapping Name="ExpenseMedias">
       <EntityTypeMapping TypeName="SocietyManagementModel.ExpenseMedia">
         <MappingFragment StoreEntitySet="ExpenseMedia">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -544,6 +547,7 @@
     <EntitySetMapping Name="ForumMedias">
       <EntityTypeMapping TypeName="SocietyManagementModel.ForumMedia">
         <MappingFragment StoreEntitySet="ForumMedia">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -563,6 +567,7 @@
     <EntitySetMapping Name="NoticeBoardMedias">
       <EntityTypeMapping TypeName="SocietyManagementModel.NoticeBoardMedia">
         <MappingFragment StoreEntitySet="NoticeBoardMedia">
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -624,6 +629,8 @@
           <ScalarProperty Name="UDK3" ColumnName="UDK3" />
           <ScalarProperty Name="UDK2" ColumnName="UDK2" />
           <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+          <ScalarProperty Name="ReferenceID" ColumnName="ReferenceID" />
+          <ScalarProperty Name="ReferenceTable" ColumnName="ReferenceTable" />
           <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="IsArchive" ColumnName="IsArchive" />
           <ScalarProperty Name="IsRead" ColumnName="IsRead" />

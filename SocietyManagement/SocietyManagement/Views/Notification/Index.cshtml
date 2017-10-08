@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SocietyManagement.Models.Notification>
+
+@{
+    ViewBag.Title = "Notification";
+}
+
+<h3><span class="glyphicon glyphicon-envelope"></span> Notifications</h3>
+
+<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TemplateID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailTemplate.TemplateType.KeyValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.NotificationID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+                <a href="@Url.Action("Archive", new { id = item.NotificationID })" title="Archive"><span class="glyphicon glyphicon-compressed"></span></a>                
+                <a href="@Url.Action("Delete", new { id = item.NotificationID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>                
+            </td>
+        </tr>
+    }
+
+</table>

@@ -82,6 +82,33 @@ namespace SocietyManagement.Models
             else
                 return string.Format(CultureInfo.CreateSpecificCulture("hi-IN"), "{0:#,#}", Amount);
         }
+
+        public static string GetFileType(string MediaType,string MediaTitle)
+        {
+            string FileType = MediaType.ToLower();
+            MediaType = MediaType.ToLower();
+            if (FileType.StartsWith("image")|| MediaType.EndsWith("png") || MediaType.EndsWith("jpg") || MediaType.EndsWith("jpeg") || MediaType.EndsWith("gif") || MediaType.EndsWith("bmp"))
+            {
+                FileType = "Image";
+            }
+            else if (FileType.EndsWith("document") || MediaType.EndsWith("doc") || MediaType.EndsWith("docx"))
+            {
+                FileType = "Document";
+            }
+            else if (FileType.EndsWith("sheet") || MediaType.EndsWith("xls") || MediaType.EndsWith("xlsx"))
+            {
+                FileType = "Excel";
+            }
+            else if (FileType.EndsWith("pdf") || MediaType.EndsWith("pdf"))
+            {
+                FileType = "PDF";
+            }
+            else
+            {
+                FileType = "File";
+            }
+            return FileType;
+        } 
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

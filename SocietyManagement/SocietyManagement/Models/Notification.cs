@@ -22,6 +22,8 @@ namespace SocietyManagement.Models
         public bool IsRead { get; set; }
         public bool IsArchive { get; set; }
         public bool IsDeleted { get; set; }
+        public string ReferenceTable { get; set; }
+        public Nullable<decimal> ReferenceID { get; set; }
         public string UDK1 { get; set; }
         public string UDK2 { get; set; }
         public string UDK3 { get; set; }

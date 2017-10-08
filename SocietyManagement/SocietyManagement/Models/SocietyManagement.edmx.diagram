@@ -81,7 +81,7 @@
         <AssociationConnector Association="SocietyManagementModel.FK_NoticeBoardMedia_NoticeBoard" />
         <EntityTypeShape EntityType="SocietyManagementModel.EmailTemplate" Width="1.5" PointX="5.25" PointY="43.625" />
         <AssociationConnector Association="SocietyManagementModel.FK_EmailTemplates_TemplateType" />
-        <EntityTypeShape EntityType="SocietyManagementModel.Notification" Width="1.5" PointX="8.5" PointY="31.125" />
+        <EntityTypeShape EntityType="SocietyManagementModel.Notification" Width="1.5" PointX="8.5" PointY="31" />
         <AssociationConnector Association="SocietyManagementModel.FK_Notifications_User" />
         <AssociationConnector Association="SocietyManagementModel.FK_Notifications_EmailTemplate" />
       </Diagram>

@@ -104,7 +104,7 @@
         <tr>
             <th>File Name</th>
             <th>File Type</th>
-            <th class="hidden-xs">Date</th>
+            <th class="hidden-xs">Details</th>
             <th></th>
         </tr>
         @foreach (var media in Model.BuildingUnitMedias.Where(d => d.IsDeleted == false))
@@ -114,10 +114,10 @@
                     @Html.DisplayFor(itemModel => media.MediaTitle)
                 </td>
                 <td>
-                    @Html.DisplayFor(itemModel => media.MediaType)
+                    @SocietyManagement.Models.Helper.GetFileType(media.MediaType, media.MediaTitle)
                 </td>
                 <td class="hidden-xs">
-                    @Html.DisplayFor(itemModel => media.CreatedDate)
+                    @Html.DisplayFor(itemModel => media.Details)
                 </td>
                 <td>
                     <a href="@Url.Action("DownloadFile", new { id = media.MediaID })" title="Download"><span class="glyphicon glyphicon-download"></span></a>

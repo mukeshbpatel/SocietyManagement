@@ -63,7 +63,7 @@
             @Html.DisplayFor(modelItem => item.DueDate)
         </td>
         <td class="center">
-            <a href="@Url.Action("Details", new { id = item.DueTypeID, Title = "Payment" })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+            <a href="@Url.Action("Details", new { id = item.DueID, Title = "Payment" })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
         </td>        
     </tr>
 }

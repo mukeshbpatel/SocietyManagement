@@ -1183,6 +1183,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit" FromRole="BuildingUnitMedia" ToRole="BuildingUnit" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CollectionMedia">
     <Key>
@@ -1202,6 +1203,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Collection" Relationship="SocietyManagementModel.FK_CollectionMedia_Collection" FromRole="CollectionMedia" ToRole="Collection" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ExpenseMedia">
     <Key>
@@ -1221,6 +1223,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Expens" Relationship="SocietyManagementModel.FK_ExpenseMedia_Expenses" FromRole="ExpenseMedia" ToRole="Expense" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="FinancialYear">
     <Key>
@@ -1263,6 +1266,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Forum" Relationship="SocietyManagementModel.FK_ForumMedia_Forums" FromRole="ForumMedia" ToRole="Forum" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="NoticeBoardMedia">
     <Key>
@@ -1282,6 +1286,7 @@
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="NoticeBoard" Relationship="SocietyManagementModel.FK_NoticeBoardMedia_NoticeBoard" FromRole="NoticeBoardMedia" ToRole="NoticeBoard" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="SystemSetting">
     <Key>
@@ -1435,12 +1440,14 @@
     <Property Name="NotificationID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="TemplateID" Type="Int32" Nullable="false" />
-    <Property Name="Subject" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Body" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IsRead" Type="Boolean" Nullable="false" />
     <Property Name="IsArchive" Type="Boolean" Nullable="false" />
     <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-    <Property Name="UDK1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceTable" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ReferenceID" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />

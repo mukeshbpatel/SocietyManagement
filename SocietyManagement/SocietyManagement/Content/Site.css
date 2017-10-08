@@ -38,6 +38,14 @@ textarea {
    margin-left:10px;
 }
 
+.badge-notify{
+   background-color:red;
+   position:relative;
+   top: -10px;
+   left: -9px;
+   font-size:xx-small;
+  }
+
 .glyphicon
 {
     margin-right:4px;
@@ -46,11 +54,10 @@ textarea {
 .btn 
 {
    min-width: 70px;
+   margin-right:5px;
+    margin-left:5px;
 }
 
-.btn-primary {
-    margin-right:10px;
-}
 
 .jqte_tool a {
     height:30px;
