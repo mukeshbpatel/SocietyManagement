@@ -1,0 +1,66 @@
+﻿@model SocietyManagement.Models.PollOption
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PollOption</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PollOption1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PollOption1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OptionOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptionOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Poll.PollTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Poll.PollTitle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PollOptionID }) |
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>

@@ -1,0 +1,50 @@
+﻿@model SocietyManagement.Models.ForumComment
+
+@{
+    ViewBag.Title = "Comment";
+}
+
+<h3><span class="glyphicon glyphicon-comment"></span> Comment</h3>
+
+<h4>Are you sure you want to delete this?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Forum.ForumTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Forum.ForumTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.Name)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="form-actions no-color col-md-offset-1 col-md-11">
+                    <input type="submit" value="Delete" class="btn btn-primary" />
+                    <a href="@Url.Action("Details","Forum",new {id= Model.ForumID })" class="btn btn-success" role="button">Cancel</a>
+                </div>
+            </div>
+            </div>
+    }
+
+            </div>

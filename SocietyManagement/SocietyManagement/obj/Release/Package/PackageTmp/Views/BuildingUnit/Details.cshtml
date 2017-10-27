@@ -1,0 +1,209 @@
+﻿@model SocietyManagement.Models.BuildingUnit
+
+@{
+    ViewBag.Title = "Building Unit";
+}
+
+<h3><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</h3>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OneTimeMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OneTimeMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitArea)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Building.BuildingName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Building.BuildingName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitType.KeyValues)
+        </dd>
+    </dl>
+</div>
+
+@if (Model.BuildingUnitMedias.Count > 0)
+{
+    <hr />
+    <h4><span class="glyphicon glyphicon glyphicon-file"></span> Files</h4>
+    <table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+        <tr>
+            <th>File Name</th>
+            <th>File Type</th>
+            <th class="hidden-xs">Date</th>
+            <th></th>
+        </tr>
+        @foreach (var media in Model.BuildingUnitMedias.Where(d => d.IsDeleted == false))
+        {
+            <tr id="row_@media.MediaID">
+                <td>
+                    @Html.DisplayFor(itemModel => media.MediaTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(itemModel => media.MediaType)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(itemModel => media.CreatedDate)
+                </td>
+                <td>
+                    <a href="@Url.Action("DownloadFile", new { id = media.MediaID })" title="Download"><span class="glyphicon glyphicon-download"></span></a>
+                    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Edit","BuildingUnitMedia", new { id = media.MediaID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Delete","BuildingUnitMedia", new { id = media.MediaID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                    }
+                </td>
+
+            </tr>
+        }
+    </table>
+}
+
+
+<h4><span class="glyphicon glyphicon-usd"></span> Bills</h4>
+<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th class="hidden-xs">
+            Bill Type
+        </th>
+        <th>
+            Perticular
+        </th>        
+        <th>
+            Due Date
+        </th>
+        <th>
+            Amount
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Dues.Where(d=>d.IsDeleted==false).OrderBy(o=>o.BillDate))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BillDate)
+            </td>
+            <td class="hidden-xs">
+                @Html.DisplayFor(modelItem => item.DueType.KeyValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>
+            <td class="right">
+                @Html.DisplayFor(modelItem => item.DueAmount)
+            </td>
+            
+        </tr>
+    }
+
+</table>
+
+<h4><span class="icon-library"></span> Payments</h4>
+<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Payment Mode
+        </th>
+        <th>
+            Receipt
+        </th>
+        <th class="hidden-xs">
+            Details
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Discount
+        </th>   
+        <th>
+            Payment
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Collections.Where(d => d.IsDeleted == false).OrderBy(o => o.CollectionDate))
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReceiptNumber)
+            </td>
+            <td class="hidden-xs">
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CollectionAmount)
+            </td>                      
+        </tr>
+    }
+</table>
+
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.UnitID }) |*@
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>

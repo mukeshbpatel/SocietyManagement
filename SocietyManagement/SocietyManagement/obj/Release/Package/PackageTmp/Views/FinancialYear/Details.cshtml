@@ -1,0 +1,72 @@
+﻿@model SocietyManagement.Models.FinancialYear
+
+@{
+    ViewBag.Title = "Financial Year";
+}
+
+<h3><span class="glyphicon glyphicon-calendar"></span> Financial Year</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.YearName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsClosed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsClosed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>

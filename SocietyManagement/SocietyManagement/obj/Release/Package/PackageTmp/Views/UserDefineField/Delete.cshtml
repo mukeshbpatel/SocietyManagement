@@ -1,0 +1,160 @@
+﻿@model SocietyManagement.Models.UserDefineField
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h4>Are you sure you want to delete this?</h4>
+<div>
+    <h4>UserDefineField</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TableName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TableName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDispaly)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDispaly)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldLable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldLable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ControlType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ControlType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FieldType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FieldType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DefaultValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DefaultValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRequired)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRequired)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRangeValidator)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRangeValidator)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinimumValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinimumValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaximumValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaximumValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsRegularExpression)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsRegularExpression)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegularExpression)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegularExpression)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color col-md-offset-1 col-md-11">
+            <input type="submit" value="Delete" class="btn btn-primary" /> |
+            <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
+        </div>
+    }
+</div>

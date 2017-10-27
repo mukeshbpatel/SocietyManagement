@@ -19,6 +19,49 @@ namespace SocietyManagement.Models
     //{
     //}
 
+    public partial class SP_BuildingUnit_BalanceSheet_ResultMetadata
+    {
+        public decimal ID { get; set; }
+        public string RecType { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Date")]
+        public System.DateTime BDate { get; set; }
+        public int UnitID { get; set; }
+        [Display(Name = "Type")]
+        public string BType { get; set; }
+        public string Details { get; set; }
+        public decimal Credit { get; set; }
+        public decimal Debit { get; set; }
+    }
+    [MetadataType(typeof(SP_BuildingUnit_BalanceSheet_ResultMetadata))]
+    public partial class SP_BuildingUnit_BalanceSheet_Result
+    {
+    }
+
+    public partial class NotificationMetadata
+    {
+        [Display(Name = "Notification")]
+        public int TemplateID { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public bool IsRead { get; set; }
+        public bool IsArchive { get; set; }
+        public bool IsDeleted { get; set; }
+        public string ReferenceTable { get; set; }
+        public Nullable<decimal> ReferenceID { get; set; }
+        public string UDK1 { get; set; }
+        public string UDK2 { get; set; }
+        public string UDK3 { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Date")]
+        public System.DateTime CreatedDate { get; set; }
+        public System.DateTime ModifiedDate { get; set; }
+    }
+    [MetadataType(typeof(NotificationMetadata))]
+    public partial class Notification
+    {
+    }
+
     public partial class FinancialYearMetadata
     {
         [Required]

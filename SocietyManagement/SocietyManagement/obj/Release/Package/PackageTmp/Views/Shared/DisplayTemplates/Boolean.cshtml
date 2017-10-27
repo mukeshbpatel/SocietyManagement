@@ -1,0 +1,11 @@
+﻿@model Boolean?
+@{
+    if (Model == null || Model == false)
+    {
+      @Html.Encode("No")
+    }
+    else
+    {  
+      @Html.Encode("Yes")
+    }
+}

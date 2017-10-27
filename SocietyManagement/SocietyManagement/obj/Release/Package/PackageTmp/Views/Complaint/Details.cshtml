@@ -1,0 +1,42 @@
+﻿@model SocietyManagement.Models.Complaint
+
+@{
+    ViewBag.Title = "Complaint";
+}
+<br />
+
+<div>
+    <h3><span class="glyphicon glyphicon-hand-up"></span>  @Html.DisplayFor(model => model.Title)</h3>
+    <hr />    
+    @Html.Raw(Model.Details.Replace(Environment.NewLine,"</br>"))
+</div>
+<p>
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>
+<hr />
+
+<div>
+    <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
+    <div class="pull-right">
+        <a href="@Url.Action("Create", "ComplaintComment", new { id = Model.ComplaintID })"><span class="glyphicon glyphicon-plus"></span> Add Comment</a>        
+    </div>
+</div>
+<br />
+
+
+@foreach (var item in Model.ComplaintComments.Where(c => c.IsDeleted == false).OrderBy(o => o.ModifiedDate))
+{
+    <div>
+        <span>@item.Author.Name</span>, <span>@item.CreatedDate</span>
+
+        @if (User.IsInRole("Manager") || User.IsInRole("Admin") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+        {
+            <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Delete","ComplaintComment", new { id = item.CommentID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+        }
+    </div>
+    @Html.Raw("</br><b>Status : " + item.Status.KeyValues + "</b></br>")
+    @Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
+    <hr />
+}
+

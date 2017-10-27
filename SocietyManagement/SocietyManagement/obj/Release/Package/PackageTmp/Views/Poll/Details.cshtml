@@ -1,0 +1,79 @@
+﻿@model SocietyManagement.Models.Poll
+
+@{
+    ViewBag.Title = "Poll";
+}
+
+<h3><span class="glyphicon glyphicon-tasks"></span> Poll</h3>
+
+<div>
+    <h4>Poll</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PollTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PollTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+    </dl>
+</div>
+
+
+@foreach (var options in Model.PollOptions)
+{
+    int TotalVote = int.Parse(ViewBag.TotalVote.ToString());
+    int Vote = options.PollVotes.Where(d => d.IsDeleted == false).Count();
+    decimal Percentage = 0;
+    if (TotalVote > 0)
+    {
+        Percentage = (Vote * 100) / TotalVote;
+    }
+    <Label>@options.PollOption1</Label>
+    <div class="progress">        
+        @if (Percentage <= 25)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-info" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        } else if (Percentage > 25 & Percentage <=50)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-warning" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        }
+        else if (Percentage > 50 & Percentage <= 75)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-primary" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        }
+        else if (Percentage > 70)
+        {
+            <div class="progress-bar progress-bar-striped progress-bar-animated progress-bar-success" role="progressbar" aria-valuenow="@Percentage" aria-valuemin="0" aria-valuemax="100" style="width:@Percentage%">@Vote / @TotalVote</div>
+        }
+    </div>
+}
+
+<p>    
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>

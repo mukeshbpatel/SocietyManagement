@@ -1,0 +1,22 @@
+﻿@model SocietyManagement.Models.NoticeBoard
+
+@{
+    ViewBag.Title = "Notice";
+}
+
+<h3><span class="glyphicon glyphicon-blackboard"></span> Notice Board</h3>
+
+<div>
+    <hr />
+    <h4>@Html.DisplayFor(model => model.NoticeHeading)</h4>
+    
+    <div class="multiline">
+        @Html.Raw(Model.Notice)
+    </div>        
+ 
+       @*@Html.Raw("<pre>" + Html.Encode(Model.Notice) + "</pre>")*@    
+</div>
+
+<p>
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>

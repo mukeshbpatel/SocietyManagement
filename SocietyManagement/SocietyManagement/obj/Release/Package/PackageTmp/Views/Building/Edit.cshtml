@@ -1,0 +1,65 @@
+﻿@model SocietyManagement.Models.Building
+
+@{
+    ViewBag.Title = "Building";
+}
+
+<h3><span class="icon-office"></span> Building</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BuildingID)
+        @Html.HiddenFor(model => model.CreatedDate)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BuildingName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.BuildingName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.BuildingName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BuildingTypeID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("BuildingTypeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.BuildingTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.UDK1)
+        @Html.HiddenFor(model => model.UDK2)
+        @Html.HiddenFor(model => model.UDK3)
+        @Html.HiddenFor(model => model.UDK4)
+        @Html.HiddenFor(model => model.UDK5)
+
+        
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+
+    
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

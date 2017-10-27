@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SocietyManagement.Models.Due>
+
+@{
+    ViewBag.Title = "Bills";
+}
+
+<h3><span class="glyphicon glyphicon-usd"></span> Bills</h3>
+
+<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BillDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueTypeID)
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.Details)
+        </th>        
+        <th>
+            @Html.DisplayNameFor(model => model.DueAmount)
+        </th>
+        <th>Penalty</th>                
+        <th>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </th>
+        <th></th>
+    </tr>
+    @{
+        decimal TotalPenalty = 0; }
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BillDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueType.KeyValues)
+        </td>
+        <td class="hidden-xs">
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>        
+        <td class="right">
+            @Html.DisplayFor(modelItem => item.DueAmount)
+        </td>
+        <td class="right">
+                        @{ 
+                            decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
+                            if (penalty > 0 )
+                            {
+                                TotalPenalty += penalty;
+                                <span>@penalty</span>
+                            }
+                         }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td class="center">
+            <a href="@Url.Action("Details", new { id = item.DueID, Title = "Payment" })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+        </td>        
+    </tr>
+}
+    @if (Model.Count() > 0)
+    {
+        <tr>
+            <th colspan="3">Total</th>
+            <th class="hidden-xs"></th>
+            <th class="right">@Model.Sum(s => s.DueAmount)</th>
+            <th class="right">@TotalPenalty</th>
+            <th></th>
+            <th></th>
+        </tr>
+    }  
+
+</table>

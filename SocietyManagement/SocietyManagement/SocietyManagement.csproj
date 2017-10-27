@@ -319,6 +319,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SocietyManagement.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_BuildingUnit_BalanceSheet_Result.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SystemSetting.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
@@ -378,6 +381,7 @@
     <Content Include="fonts\icomoon.eot" />
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
@@ -522,6 +526,7 @@
     <Content Include="Views\Notification\Details.cshtml" />
     <Content Include="Views\Notification\Edit.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\Due\BalanceSheet.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />

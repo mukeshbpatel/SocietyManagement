@@ -566,6 +566,11 @@
           <Property Name="UDK3" Type="nvarchar(max)" />
           <Property Name="UDK4" Type="nvarchar(max)" />
           <Property Name="UDK5" Type="nvarchar(max)" />
+          <Property Name="UDK6" Type="nvarchar(max)" />
+          <Property Name="UDK7" Type="nvarchar(max)" />
+          <Property Name="UDK8" Type="nvarchar(max)" />
+          <Property Name="UDK9" Type="nvarchar(max)" />
+          <Property Name="UDK10" Type="nvarchar(max)" />
           <Property Name="Details" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Tenants">
@@ -1200,6 +1205,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SP_BuildingUnit_BalanceSheet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UnitID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="SocietyManagementModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -1652,6 +1660,9 @@
             <End Role="EmailTemplate" EntitySet="EmailTemplates" />
             <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
+          <FunctionImport Name="SP_BuildingUnit_BalanceSheet" ReturnType="Collection(SocietyManagementModel.SP_BuildingUnit_BalanceSheet_Result)">
+            <Parameter Name="UnitID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -2732,6 +2743,11 @@
           <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK6" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK7" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK8" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK9" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK10" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_BuildingUnitMedia_BuildingUnit">
           <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
@@ -2910,6 +2926,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_BuildingUnit_BalanceSheet_Result">
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="RecType" Nullable="false" MaxLength="10" />
+          <Property Type="DateTime" Name="BDate" Nullable="false" />
+          <Property Type="Int32" Name="UnitID" Nullable="false" />
+          <Property Type="String" Name="BType" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="Details" Nullable="true" />
+          <Property Type="Decimal" Name="Credit" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Debit" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3502,6 +3528,11 @@
           <EntitySetMapping Name="SystemSettings">
             <EntityTypeMapping TypeName="SocietyManagementModel.SystemSetting">
               <MappingFragment StoreEntitySet="SystemSettings">
+                <ScalarProperty Name="UDK10" ColumnName="UDK10" />
+                <ScalarProperty Name="UDK9" ColumnName="UDK9" />
+                <ScalarProperty Name="UDK8" ColumnName="UDK8" />
+                <ScalarProperty Name="UDK7" ColumnName="UDK7" />
+                <ScalarProperty Name="UDK6" ColumnName="UDK6" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="UDK5" ColumnName="UDK5" />
                 <ScalarProperty Name="UDK4" ColumnName="UDK4" />
@@ -3557,6 +3588,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_BuildingUnit_BalanceSheet" FunctionName="SocietyManagementModel.Store.SP_BuildingUnit_BalanceSheet">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SocietyManagementModel.SP_BuildingUnit_BalanceSheet_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RecType" ColumnName="RecType" />
+                <ScalarProperty Name="BDate" ColumnName="BDate" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="BType" ColumnName="BType" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Credit" ColumnName="Credit" />
+                <ScalarProperty Name="Debit" ColumnName="Debit" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

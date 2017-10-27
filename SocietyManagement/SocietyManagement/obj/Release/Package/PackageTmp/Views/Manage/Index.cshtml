@@ -1,0 +1,32 @@
+﻿@model SocietyManagement.Models.IndexViewModel
+@{
+    ViewBag.Title = "Setting";
+}
+<h3><span class="glyphicon glyphicon-user"></span> @ViewBag.Title.</h3>
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+
+<hr />
+<div>    
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            [
+            @if (Model.HasPassword)
+            {
+                @Html.ActionLink("Change your password", "ChangePassword")
+            }
+            else
+            {                
+                @Html.ActionLink("Create", "SetPassword")                
+            }
+            ]
+        </dd>
+        <dt>Profile:</dt>
+        <dd>            
+            [
+                @Html.ActionLink("Update Profile", "MyProfile")
+            ]
+        </dd>     
+    </dl>
+</div>

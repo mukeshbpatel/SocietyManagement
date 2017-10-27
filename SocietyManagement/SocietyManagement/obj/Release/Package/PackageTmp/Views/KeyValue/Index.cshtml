@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SocietyManagement.Models.KeyValue>
+
+@{
+    ViewBag.Title = "Key Value";
+}
+
+<h3><span class="icon-key"></span> Key Value</h3>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="pull-right">
+        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+}
+<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.KeyName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KeyValues)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KeyOrder)
+        </th>
+        @if (User.IsInRole("Admin"))
+        {
+        <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.KeyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KeyValues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KeyOrder)
+        </td>
+        @if (User.IsInRole("Admin"))
+        {
+        <td>
+            <a href="@Url.Action("Edit", new { id = item.KeyID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Delete", new { id = item.KeyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+        </td>
+        }
+    </tr>
+}
+
+</table>

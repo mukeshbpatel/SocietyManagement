@@ -1,0 +1,88 @@
+﻿@model SocietyManagement.Models.EmailTemplate
+
+@{
+    ViewBag.Title = "Email Template";
+}
+
+<h3><span class="glyphicon glyphicon-envelope"></span> Email Template</h3>
+
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TemplateTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TemplateType.KeyValues)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TemplateSubject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TemplateSubject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TemplateBody)
+        </dt>
+
+        <dd>
+            @Html.Raw(Model.TemplateBody)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FromName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReplyToEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReplyToEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReplyToName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReplyToName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>
+
+

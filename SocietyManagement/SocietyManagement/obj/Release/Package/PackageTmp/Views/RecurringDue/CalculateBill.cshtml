@@ -1,0 +1,82 @@
+﻿@model IEnumerable<SocietyManagement.Models.RecurringDue>
+
+@{
+    ViewBag.Title = "Calculate Recurring Bill";
+}
+
+<h3><span class="glyphicon glyphicon-retweet"></span> Calculate Recurring Bill</h3>
+
+<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecurringTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DueDays)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastRunDate)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.DueType.KeyValues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecurringType.KeyValues)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDays)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastRunDate)
+        </td>            
+    </tr>
+}
+
+
+</table>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="form-actions no-color col-md-offset-1 col-md-11">
+                <input type="submit" value="Enter Bill" class="btn btn-primary" />
+                <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+
+

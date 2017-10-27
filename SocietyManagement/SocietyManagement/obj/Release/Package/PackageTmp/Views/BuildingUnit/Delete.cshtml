@@ -1,0 +1,81 @@
+﻿@model SocietyManagement.Models.BuildingUnit
+
+@{
+    ViewBag.Title = "Building Unit";
+}
+
+<h3><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</h3>
+
+<h4>Are you sure you want to delete this?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OneTimeMaintenance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OneTimeMaintenance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitArea)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitArea)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Building.BuildingName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Building.BuildingName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitType.KeyValues)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="form-actions no-color col-md-offset-1 col-md-11">
+                    <input type="submit" value="Delete" class="btn btn-primary" />
+                    <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
+                </div>
+                </div>
+            </div>
+                }
+            </div>

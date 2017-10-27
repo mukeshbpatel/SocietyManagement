@@ -1,0 +1,153 @@
+﻿@model SocietyManagement.Models.UserProfile
+@{
+    ViewBag.Title = "Update Profile";
+}
+
+<h3><span class="icon-profile"></span> @ViewBag.Title</h3>
+
+@using (Html.BeginForm("MyProfile", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstName, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control ICapital" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.LastName, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control ICapital" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Gender, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-default" id="Male">
+                            <input type="radio" name="gender" value="Male" /> Male
+                    </label>
+                    <label class="btn btn-default" id="Female">
+                        <input type="radio" name="gender" value="Female"/> Female
+                    </label>
+                    <label class="btn btn-default" id="Other">
+                            <input type="radio" name="gender" value="Other" /> Other
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.DOB, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.DOB, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Occupation, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Occupation, new { htmlAttributes = new { @class = "form-control ICapital" } })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Profession, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Profession, new { htmlAttributes = new { @class = "form-control ICapital" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.PhoneNumber, new { htmlAttributes = new { @class = "form-control ", @maxlength = "10", @type = "number" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control"} })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.BillNotification)
+                    @Html.LabelFor(m => m.BillNotification)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.PaymentReminder)
+                    @Html.LabelFor(m => m.PaymentReminder)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.PaymentNotification)
+                    @Html.LabelFor(m => m.PaymentNotification)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.NoticeBoardNotification)
+                    @Html.LabelFor(m => m.NoticeBoardNotification)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.EventNotification)
+                    @Html.LabelFor(m => m.EventNotification)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.PollNotification)
+                    @Html.LabelFor(m => m.PollNotification)
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBoxFor(m => m.ForumNotification)
+                    @Html.LabelFor(m => m.ForumNotification)
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary" value="Update" />
+            </div>
+        </div>
+        </div>
+}
+
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
+<script>
+    $(document).ready(function(){
+        $("#@Model.Gender").addClass("active");
+    });
+</script>

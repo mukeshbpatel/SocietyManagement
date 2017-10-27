@@ -30,6 +30,21 @@ namespace SocietyManagement.Controllers
             return View(dues.ToList());
         }
 
+        public ActionResult BalanceSheet()
+        {
+            string UserID = Helper.GetUserID(User);
+            var appUser = db.AspNetUsers.Find(UserID);
+            if (appUser != null)
+            {
+                if (appUser.BuildingUnits.Count>0)
+                {
+                    var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + appUser.BuildingUnits.FirstOrDefault().UnitID);
+                    return View(data);
+                }
+            }
+            return View();
+       }
+
         // GET: Due/Details/5
         public ActionResult Details(Int64? id)
         {

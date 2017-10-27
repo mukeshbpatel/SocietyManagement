@@ -1,0 +1,54 @@
+﻿@model SocietyManagement.Models.MyProfileInfo
+@{
+    ViewBag.Title = "Update User Profile";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("UpdateUser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+   
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @maxlength = "10", @type = "number", @disabled = "disabled" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control ICapital" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.FlatNo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FlatNo, new { @class = "form-control Capital", @placeholder = "X-000" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Reset Password to", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBox("ResetPass", false)            
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="Update" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

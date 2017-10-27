@@ -1,0 +1,59 @@
+﻿@model IEnumerable<SocietyManagement.Models.EmailTemplate>
+
+@{
+    ViewBag.Title = "Email Template";
+}
+
+<h3><span class="glyphicon glyphicon-envelope"></span> Email Template</h3>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="pull-right">
+        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+}
+
+<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+    <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TemplateTypeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TemplateSubject)
+            </th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.FromEmail)
+            </th>            
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.ReplyToEmail)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateType.KeyValues)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateSubject)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.FromEmail)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.ReplyToEmail)
+                </td>                
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.TemplateID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+                    <a href="@Url.Action("Edit", new { id = item.TemplateID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    @if (User.IsInRole("Admin"))
+                    {                        
+                        <a href="@Url.Action("Delete", new { id = item.TemplateID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                    }                
+                </td>
+            </tr>
+        }
+
+    </table>

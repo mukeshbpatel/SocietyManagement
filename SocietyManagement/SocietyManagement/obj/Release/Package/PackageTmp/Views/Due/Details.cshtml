@@ -1,0 +1,136 @@
+﻿@model SocietyManagement.Models.Due
+
+@{
+    ViewBag.Title = "Bills";
+}
+
+<h3><span class="glyphicon glyphicon-usd"></span> Bills</h3>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BillDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.DueTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueType.KeyValues)
+        </dd>                
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DueAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueAmount)
+        </dd>
+        <dt>Penalty</dt>
+        <dd><a href="@Url.Action("Index","Penalty", new { id = Model.DueID })" title="Penalty">@Model.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount)</a></dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DueDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DueDate)
+        </dd>
+
+        
+
+    </dl>
+</div>
+
+<hr />
+    <h4><span class="glyphicon glyphicon-usd"></span> Penalty</h4>
+    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+    {
+    <div class="pull-right">
+        <a href="@Url.Action("Create","Penalty",new {id = Model.DueID })"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    </div>
+    }
+    <table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                Amount
+            </th>
+            <th></th>
+        </tr>
+
+@if (Model.Penalties.Where(d => d.IsDeleted == false).Count() == 0)
+{
+    <tr>
+        <td colspan="5">No Penalty found</td>
+    </tr>
+}
+else
+{
+        foreach (var item in Model.Penalties.Where(d => d.IsDeleted == false))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+                </td>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.PenaltyDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "Penalty", new { id = item.PenaltyID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+                    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                    {
+                        <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Delete", "Penalty", new { id = item.PenaltyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                    }
+                </td>
+            </tr>
+        }
+    <tr>
+        <th colspan="3">Total Penalty</th>
+        <th>@Model.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount)</th>
+        <th></th>
+    </tr>
+}
+    </table>
+
+
+
+<p>    
+    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+</p>

@@ -23,5 +23,10 @@ namespace SocietyManagement.Models
         public string UDK4 { get; set; }
         public string UDK5 { get; set; }
         public string Details { get; set; }
+        public string UDK6 { get; set; }
+        public string UDK7 { get; set; }
+        public string UDK8 { get; set; }
+        public string UDK9 { get; set; }
+        public string UDK10 { get; set; }
     }
 }

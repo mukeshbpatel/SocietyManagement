@@ -12,6 +12,8 @@ namespace SocietyManagement.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class SocietyManagementEntities : DbContext
     {
@@ -57,5 +59,14 @@ namespace SocietyManagement.Models
         public virtual DbSet<SystemSetting> SystemSettings { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+    
+        public virtual ObjectResult<SP_BuildingUnit_BalanceSheet_Result> SP_BuildingUnit_BalanceSheet(Nullable<int> unitID)
+        {
+            var unitIDParameter = unitID.HasValue ?
+                new ObjectParameter("UnitID", unitID) :
+                new ObjectParameter("UnitID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BuildingUnit_BalanceSheet_Result>("SP_BuildingUnit_BalanceSheet", unitIDParameter);
+        }
     }
 }
