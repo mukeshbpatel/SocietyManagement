@@ -205,6 +205,7 @@
     <Compile Include="Controllers\PenaltyController.cs" />
     <Compile Include="Controllers\PollController.cs" />
     <Compile Include="Controllers\PollOptionController.cs" />
+    <Compile Include="Controllers\SystemSettingController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserDefineFieldController.cs" />
     <Compile Include="Global.asax.cs">
@@ -546,6 +547,11 @@
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\SystemSetting\Create.cshtml" />
+    <Content Include="Views\SystemSetting\Delete.cshtml" />
+    <Content Include="Views\SystemSetting\Details.cshtml" />
+    <Content Include="Views\SystemSetting\Edit.cshtml" />
+    <Content Include="Views\SystemSetting\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

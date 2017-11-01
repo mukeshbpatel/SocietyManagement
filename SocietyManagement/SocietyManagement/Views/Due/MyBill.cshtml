@@ -6,7 +6,7 @@
 
 <h3><span class="glyphicon glyphicon-usd"></span> Bills</h3>
 
-<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BillDate)
@@ -76,6 +76,12 @@
             <th class="right">@TotalPenalty</th>
             <th></th>
             <th></th>
+        </tr>
+    }    
+    else
+    {
+        <tr>
+            <td colspan="8">No Data available</td>
         </tr>
     }  
 

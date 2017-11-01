@@ -1,0 +1,53 @@
+﻿@model SocietyManagement.Models.SystemSetting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3><span class="glyphicon glyphicon-cog"></span> System Setting</h3>
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SettingName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SettingName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SettingValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SettingValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UDK1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UDK1)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
+</p>

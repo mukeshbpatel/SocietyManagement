@@ -41,20 +41,21 @@ namespace SocietyManagement.Models
                     {
 
                     }
-                }
 
-                SmtpClient client = new SmtpClient();
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.EnableSsl = SiteSetting.SMTPEnableSsl;
-                client.Host = SiteSetting.SMTPHost;
-                client.Port = SiteSetting.SMTPPort;
-                // setup Smtp authentication
-                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(SiteSetting.SMTPUserID, SiteSetting.SMTPPassword);
-                client.UseDefaultCredentials = false;
-                client.Credentials = credentials;
-                client.Send(mailMessage);
-                client.Dispose();
-                result = true;
+
+                    SmtpClient client = new SmtpClient();
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.EnableSsl = SiteSetting.SMTPEnableSsl;
+                    client.Host = SiteSetting.SMTPHost;
+                    client.Port = SiteSetting.SMTPPort;
+                    // setup Smtp authentication
+                    System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(SiteSetting.SMTPUserID, SiteSetting.SMTPPassword);
+                    client.UseDefaultCredentials = false;
+                    client.Credentials = credentials;
+                    client.Send(mailMessage);
+                    client.Dispose();
+                    result = true;
+                }
             }
             catch (Exception ex)
             {
@@ -131,6 +132,10 @@ namespace SocietyManagement.Models
                 {
                     Body = Body.Replace("{{Name}}", due.BuildingUnit.Owner.Name);
                 }
+                else
+                {
+                    Body = Body.Replace("{{Name}}", string.Empty);
+                }
                 Body = Body.Replace("{{UnitName}}", due.BuildingUnit.UnitName);
                 Body = Body.Replace("{{BillNumber}}", due.DueID.ToString());
                 Body = Body.Replace("{{BillAmount}}", Helper.FormatAmount(due.DueAmount));                
@@ -148,6 +153,7 @@ namespace SocietyManagement.Models
                 Subject = Subject.Replace("{{BillMonth}}", due.BillDate.ToString("MMM-yyyy"));
                 Subject = Subject.Replace("{{BillYear}}", due.BillDate.ToString("yyyy"));
                 Subject = Subject.Replace("{{BillDetail}}", due.Details);
+                Subject = Subject.Replace("{{UnitName}}", due.BuildingUnit.UnitName);
                 Subject = UpdateBodySubject(Subject);
 
                 if (due.BuildingUnit.OwnerID != null)

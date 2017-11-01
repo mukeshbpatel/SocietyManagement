@@ -52,7 +52,7 @@ namespace SocietyManagement
             SMTPPort = 587;
             SMTPEnableSsl = true;
 
-            IsTestMode = true;
+            IsTestMode = false;
             return true;
         }
     }

@@ -36,10 +36,12 @@ namespace SocietyManagement.Views
             DateTime dt = DateTime.Now;
             if (!string.IsNullOrEmpty(RecurringDate))
                 dt = DateTime.Parse(RecurringDate);
+            dt = new DateTime(dt.Year, dt.Month, 1);
+
             RecurringBill recurringBill = new RecurringBill();
             if (recurringBill.EnterRecurringBill(User,dt))
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Due",new { BillDate = dt.ToString("dd-MM-yyyy") });
             }
             else
             {

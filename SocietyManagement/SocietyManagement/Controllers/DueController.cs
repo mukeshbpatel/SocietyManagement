@@ -17,10 +17,19 @@ namespace SocietyManagement.Controllers
 
         // GET: Due
         [Authorize(Roles = "Admin,Manager,Comity")]
-        public ActionResult Index()
+        public ActionResult Index(string BillDate)
         {
-            var dues = db.Dues.Where(d=>d.IsDeleted == false).Include(d => d.BuildingUnit).Include(d => d.DueType);
-            return View(dues.ToList());
+            if (!string.IsNullOrEmpty(BillDate))
+            {
+                DateTime dt = DateTime.Parse(BillDate);
+                var dues = db.Dues.Where(d => d.IsDeleted == false & d.BillDate == dt.Date).Include(d => d.BuildingUnit).Include(d => d.DueType);
+                return View(dues.ToList());
+            }
+            else
+            {
+                var dues = db.Dues.Where(d => d.IsDeleted == false).Include(d => d.BuildingUnit).Include(d => d.DueType);
+                return View(dues.ToList());
+            }
         }
 
         public ActionResult MyBill()
@@ -30,20 +39,31 @@ namespace SocietyManagement.Controllers
             return View(dues.ToList());
         }
 
-        public ActionResult BalanceSheet()
+        public ActionResult BalanceSheet(int? id)
         {
             string UserID = Helper.GetUserID(User);
             var appUser = db.AspNetUsers.Find(UserID);
             if (appUser != null)
             {
-                if (appUser.BuildingUnits.Count>0)
+                var Units = appUser.BuildingUnits.Where(b => b.IsDeleted == false).OrderBy(o=>o.UnitName);
+                if (Units.Count() > 0)
                 {
-                    var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + appUser.BuildingUnits.FirstOrDefault().UnitID);
-                    return View(data);
+                    if (id == null)
+                    {
+                        ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", Units.FirstOrDefault().UnitID);
+                        var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + appUser.BuildingUnits.FirstOrDefault().UnitID);
+                        return View(data);
+                    }
+                    else
+                    {
+                        ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
+                        var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id);
+                        return View(data);
+                    }
                 }
             }
             return View();
-       }
+        }
 
         // GET: Due/Details/5
         public ActionResult Details(Int64? id)

@@ -4,9 +4,28 @@
     ViewBag.Title = "Balance Sheet";
 }
 
-<h3><span class="glyphicon glyphicon-usd"></span> Balance Sheet</h3>
 
-<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
+
+<h3><span class="glyphicon glyphicon-usd"></span> Balance Sheet</h3>
+@if (ViewBag.UnitID != null)
+{
+<ul class="nav nav-pills pull-right">
+    @foreach (var item in (SelectList)ViewBag.UnitID)
+    {
+        if (item.Selected)
+        {
+            <li class="active"><a href="#">@item.Text</a></li>
+        }
+        else
+        {
+            <li><a href="@Url.Action("BalanceSheet", new { id = item.Value })">@item.Text</a></li>
+        }
+    }
+</ul>
+
+@*@Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control" })*@
+
+<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BDate)
@@ -29,7 +48,8 @@
     @{
         decimal Balance = 0; }
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.BDate)
@@ -42,7 +62,7 @@
         </td>        
         <td class="right">
            @if (item.Credit > 0)
-           { 
+           {
                @Html.DisplayFor(modelItem => item.Credit)
            }
         </td>
@@ -60,10 +80,11 @@
                 if (Balance > 0)
                 {
                     <span class="text-danger" title="@Balance Credit">@Balance Cr</span>
-                } else if (Balance < 0)
+                }
+                else if (Balance < 0)
                 {
-                    <span class="text-success" title="@(Balance*-1) Debit">@(Balance*-1) Dr</span>
-                } 
+                    <span class="text-success" title="@(Balance * -1) Debit">@(Balance * -1) Dr</span>
+                }
                 else
                 {
                     <span>@Balance</span>
@@ -71,8 +92,26 @@
             }
         </td>
         <td class="center">
-            <a href="@Url.Action("Details", item.RecType,new { id = item.ID, Title = item.BType })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+            <a href="@Url.Action("Details", item.RecType, new { id = item.ID, Title = item.BType })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
         </td>        
     </tr>
-}
+                }
+
+    @if (Model.Count() > 0)
+    {
+        
+    }
+    else
+    {
+        <tr>
+        <td colspan = "7" class="bg-warning"> No Data available</td>
+         </tr>
+    }
+
 </table>
+
+}
+else
+{
+    <div class="bg-info" style="padding:10px"><span class="glyphicon glyphicon-info-sign"></span>No Building Unit assigned to your user id.<br />Please contact your Manager for details.</div>
+}

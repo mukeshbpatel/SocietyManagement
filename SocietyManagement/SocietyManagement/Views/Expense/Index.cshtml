@@ -12,7 +12,7 @@
         <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
     </div>
 }
-<table class="table">
+<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ExpenseDate)
@@ -35,42 +35,43 @@
         <th>
             @Html.DisplayNameFor(model => model.PaymentModeID)
         </th>
- 
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpenseDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpenseType.KeyValues)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaidTo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Details)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TDS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
-        </td>        
-        <td>
-            <a href="@Url.Action("Details", new { id = item.ExpenseID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-            @if (User.IsInRole("Admin"))
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpenseType.KeyValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaidTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Details)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TDS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.ExpenseID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+                @if (User.IsInRole("Admin"))
                 {
-                <a href="@Url.Action("Edit", new { id = item.ExpenseID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="@Url.Action("Edit", new { id = item.ExpenseID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                     <a href="@Url.Action("Delete", new { id = item.ExpenseID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-            }
-        </td>
-    </tr>
-}
+                }
+            </td>
+        </tr>
+    }
 
 </table>
