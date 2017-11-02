@@ -57,7 +57,7 @@ namespace SocietyManagement.Models
                 }
             };
 
-            db.Database.ExecuteSqlCommand("SP_Add_Rrecurring_Bills @BillDate,@UserID", para);
+            db.Database.ExecuteSqlCommand("SP_Add_Recurring_Bills @BillDate,@UserID", para);
 
 
             //SocietyManagementEntities db1 = new SocietyManagementEntities();

@@ -629,6 +629,7 @@
     <EntitySetMapping Name="Notifications">
       <EntityTypeMapping TypeName="SocietyManagementModel.Notification">
         <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="IsEmailSend" ColumnName="IsEmailSend" />
           <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
           <ScalarProperty Name="UDK3" ColumnName="UDK3" />

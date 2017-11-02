@@ -32,34 +32,49 @@ namespace SocietyManagement.Controllers
             }
         }
 
-        public ActionResult MyBill()
-        {
-            string UserID = Helper.GetUserID(User);            
-            var dues = db.Dues.Where(d => d.IsDeleted == false).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o=>o.BillDate);
-            return View(dues.ToList());
-        }
-
-        public ActionResult BalanceSheet(int? id)
+        public ActionResult MyBill(int id)
         {
             string UserID = Helper.GetUserID(User);
             var appUser = db.AspNetUsers.Find(UserID);
             if (appUser != null)
             {
-                var Units = appUser.BuildingUnits.Where(b => b.IsDeleted == false).OrderBy(o=>o.UnitName);
+                var Units = appUser.BuildingUnits.Where(b => b.IsDeleted == false).OrderBy(o => o.UnitName);                
+                if (id == 0)
+                {
+                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName");
+                    var dues = db.Dues.Where(d => d.IsDeleted == false).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
+                    return View(dues.ToList());
+                }
+                else
+                {
+                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
+                    var dues = db.Dues.Where(d => d.IsDeleted == false & d.UnitID == id).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
+                    return View(dues.ToList());
+                }
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult BalanceSheet(int id)
+        {
+            string UserID = Helper.GetUserID(User);
+            var appUser = db.AspNetUsers.Find(UserID);
+            if (appUser != null)
+            {
+                var Units = appUser.BuildingUnits.Where(b => b.IsDeleted == false).OrderBy(o => o.UnitName);
                 if (Units.Count() > 0)
                 {
-                    if (id == null)
+                    if (id == 0)
                     {
-                        ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", Units.FirstOrDefault().UnitID);
-                        var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + appUser.BuildingUnits.FirstOrDefault().UnitID);
-                        return View(data);
+                        id = Units.FirstOrDefault().UnitID;
                     }
-                    else
-                    {
-                        ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
-                        var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id);
-                        return View(data);
-                    }
+
+                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
+                    var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id);
+                    return View(data);
                 }
             }
             return View();

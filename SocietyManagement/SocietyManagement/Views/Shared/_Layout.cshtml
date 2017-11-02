@@ -32,9 +32,9 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-                <li class="dropdown-item"><a href="@Url.Action("MyBill", "Due")"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
-                <li class="dropdown-item"><a href="@Url.Action("MyPayment", "Collection")"><span class="icon-library"></span> Payments</a></li>
-                <li class="dropdown-item"><a href="@Url.Action("BalanceSheet", "Due")"><span class="glyphicon glyphicon-sunglasses"></span> Balance Sheet</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("MyBill", "Due", new { id = 0 })"><span class="glyphicon glyphicon-usd"></span> Bills</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("MyPayment", "Collection", new { id = 0 })"><span class="icon-library"></span> Payments</a></li>
+                <li class="dropdown-item"><a href="@Url.Action("BalanceSheet", "Due", new { id = 0 })"><span class="glyphicon glyphicon-sunglasses"></span> Balance Sheet</a></li>
             </ul>
         </li>
                     <li class="dropdown">

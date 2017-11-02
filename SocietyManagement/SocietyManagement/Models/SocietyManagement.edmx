@@ -464,6 +464,7 @@
           <Property Name="UDK3" Type="nvarchar(max)" />
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsEmailSend" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Penalty">
           <Key>
@@ -1661,7 +1662,7 @@
             <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
           <FunctionImport Name="SP_BuildingUnit_BalanceSheet" ReturnType="Collection(SocietyManagementModel.SP_BuildingUnit_BalanceSheet_Result)">
-            <Parameter Name="UnitID" Mode="In" Type="Int32" />
+          <Parameter Name="UnitID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -2901,6 +2902,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="SocietyManagementModel.FK_Notifications_User" FromRole="Notification" ToRole="AspNetUser" />
           <NavigationProperty Name="EmailTemplate" Relationship="SocietyManagementModel.FK_Notifications_EmailTemplate" FromRole="Notification" ToRole="EmailTemplate" />
+          <Property Name="IsEmailSend" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Notifications_User">
           <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
@@ -3570,6 +3572,7 @@
           <EntitySetMapping Name="Notifications">
             <EntityTypeMapping TypeName="SocietyManagementModel.Notification">
               <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="IsEmailSend" ColumnName="IsEmailSend" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="UDK3" ColumnName="UDK3" />

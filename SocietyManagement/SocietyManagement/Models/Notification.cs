@@ -29,6 +29,7 @@ namespace SocietyManagement.Models
         public string UDK3 { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
+        public bool IsEmailSend { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual EmailTemplate EmailTemplate { get; set; }

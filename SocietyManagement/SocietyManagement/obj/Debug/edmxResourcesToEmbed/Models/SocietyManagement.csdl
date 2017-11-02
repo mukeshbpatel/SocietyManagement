@@ -1462,6 +1462,7 @@
     <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="AspNetUser" Relationship="SocietyManagementModel.FK_Notifications_User" FromRole="Notification" ToRole="AspNetUser" />
     <NavigationProperty Name="EmailTemplate" Relationship="SocietyManagementModel.FK_Notifications_EmailTemplate" FromRole="Notification" ToRole="EmailTemplate" />
+    <Property Name="IsEmailSend" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK_Notifications_User">
     <End Type="SocietyManagementModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />

@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetUserClaim" Width="1.5" PointX="4" PointY="35.25" />
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetUserLogin" Width="1.5" PointX="5.5" PointY="32.625" />
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetUser" Width="1.5" PointX="3" PointY="22.125" />
-        <EntityTypeShape EntityType="SocietyManagementModel.Audit" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SocietyManagementModel.Audit" Width="1.5" PointX="0.75" PointY="0.5" />
         <EntityTypeShape EntityType="SocietyManagementModel.Building" Width="1.5" PointX="3" PointY="29.625" />
         <EntityTypeShape EntityType="SocietyManagementModel.BuildingUnit" Width="1.5" PointX="5.25" PointY="20.875" />
         <EntityTypeShape EntityType="SocietyManagementModel.Collection" Width="1.5" PointX="15.5" PointY="23.625" />

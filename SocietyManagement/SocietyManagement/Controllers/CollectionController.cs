@@ -23,11 +23,30 @@ namespace SocietyManagement.Controllers
             return View(collections.ToList());
         }
 
-        public ActionResult MyPayment()
+        public ActionResult MyPayment(int id = 0)
         {
-            string UserID = Helper.GetUserID(User);                        
-            var collections = db.Collections.Where(d => d.IsDeleted == false).Include(c => c.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(c => c.PaymentMode).OrderBy(o => o.CollectionDate);
-            return View(collections.ToList());
+            string UserID = Helper.GetUserID(User);
+            var appUser = db.AspNetUsers.Find(UserID);
+            if (appUser != null)
+            {
+                var Units = appUser.BuildingUnits.Where(b => b.IsDeleted == false).OrderBy(o => o.UnitName);
+                if (id == 0)
+                {
+                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName");
+                    var collections = db.Collections.Where(d => d.IsDeleted == false).Include(c => c.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(c => c.PaymentMode).OrderBy(o => o.CollectionDate);
+                    return View(collections.ToList());
+                }
+                else
+                {
+                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName",id);
+                    var collections = db.Collections.Where(d => d.IsDeleted == false & d.UnitID == id).Include(c => c.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(c => c.PaymentMode).OrderBy(o => o.CollectionDate);
+                    return View(collections.ToList());
+                }
+            }
+            else
+            {
+                return View();
+            }
         }
 
         // GET: Collection/Details/5
@@ -47,11 +66,23 @@ namespace SocietyManagement.Controllers
 
         // GET: Collection/Create
         [Authorize(Roles ="Manager,Admin")]
-        public ActionResult Create()
+        public ActionResult Create(Int64? id)
         {
-            ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d=>d.IsDeleted==false).OrderBy(o=>o.UnitName), "UnitID", "UnitName");
+            Collection collection = new Collection();
+            collection.CollectionDate = DateTime.Today.Date;
+            collection.Discount = 0;
+            if (id != null)
+            {
+                var due = db.Dues.Find(id);
+                if (due != null)
+                {
+                    collection.Amount = due.DueAmount;
+                    collection.UnitID = due.UnitID;
+                }
+            }
+            ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d=>d.IsDeleted==false).OrderBy(o=>o.UnitName), "UnitID", "UnitName", collection.UnitID);
             ViewBag.PaymentModeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PaymentMode"), "KeyID", "KeyValues");
-            return View();
+            return View(collection);
         }
 
         // POST: Collection/Create

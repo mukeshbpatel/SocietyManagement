@@ -459,6 +459,7 @@
     <Property Name="UDK3" Type="nvarchar(max)" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsEmailSend" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Penalty">
     <Key>

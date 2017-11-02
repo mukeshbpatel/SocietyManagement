@@ -106,102 +106,10 @@
 
 
 <h4><span class="glyphicon glyphicon-usd"></span> Bills</h4>
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            Date
-        </th>
-        <th class="hidden-xs">
-            Bill Type
-        </th>
-        <th>
-            Perticular
-        </th>        
-        <th>
-            Due Date
-        </th>
-        <th>
-            Amount
-        </th>
-    </tr>
-
-    @foreach (var item in Model.Dues.Where(d=>d.IsDeleted==false).OrderBy(o=>o.BillDate))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillDate)
-            </td>
-            <td class="hidden-xs">
-                @Html.DisplayFor(modelItem => item.DueType.KeyValues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Details)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td class="right">
-                @Html.DisplayFor(modelItem => item.DueAmount)
-            </td>
-            
-        </tr>
-    }
-
-</table>
+@Html.Partial("_Bill", Model.Dues)
 
 <h4><span class="icon-library"></span> Payments</h4>
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            Date
-        </th>
-        <th>
-            Payment Mode
-        </th>
-        <th>
-            Receipt
-        </th>
-        <th class="hidden-xs">
-            Details
-        </th>
-        <th>
-            Amount
-        </th>
-        <th>
-            Discount
-        </th>   
-        <th>
-            Payment
-        </th>
-    </tr>
-
-    @foreach (var item in Model.Collections.Where(d => d.IsDeleted == false).OrderBy(o => o.CollectionDate))
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CollectionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiptNumber)
-            </td>
-            <td class="hidden-xs">
-                @Html.DisplayFor(modelItem => item.Details)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Discount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CollectionAmount)
-            </td>                      
-        </tr>
-    }
-</table>
+@Html.Partial("_Payment", Model.Collections)
 
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.UnitID }) |*@

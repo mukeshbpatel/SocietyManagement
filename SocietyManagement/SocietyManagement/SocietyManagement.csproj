@@ -528,6 +528,7 @@
     <Content Include="Views\Notification\Edit.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Due\BalanceSheet.cshtml" />
+    <Content Include="Views\Shared\_Bill.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
@@ -552,6 +553,7 @@
     <Content Include="Views\SystemSetting\Details.cshtml" />
     <Content Include="Views\SystemSetting\Edit.cshtml" />
     <Content Include="Views\SystemSetting\Index.cshtml" />
+    <Content Include="Views\Shared\_Payment.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
