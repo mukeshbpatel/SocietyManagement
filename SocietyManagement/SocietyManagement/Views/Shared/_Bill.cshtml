@@ -5,13 +5,16 @@
         <th>
             @Html.DisplayNameFor(model => model.BillDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
-        </th>
+        @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.DueTypeID)
         </th>
-        <th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.Details)
         </th>
         <th>
@@ -34,13 +37,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BillDate)
             </td>
+@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+{
             <td>
                 @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
             </td>
+}
             <td>
                 @Html.DisplayFor(modelItem => item.DueType.KeyValues)
             </td>
-            <td>
+            <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.Details)
             </td>
             <td class="right">
@@ -63,7 +69,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DueDate)
             </td>
-            <td>
+            <td class="center">
                 <a href="@Url.Action("Details","Due", new { id = item.DueID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
                 @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
                 {
@@ -78,7 +84,14 @@
     @if (Model.Count() > 0)
     {
         <tr>
+@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+{
             <th colspan="3">Total</th>
+}
+else
+{
+    <th colspan="2">Total</th>
+}
             <th class="hidden-xs"></th>
             <th class="right">@Model.Sum(s => s.DueAmount)</th>
             @if (TotalPenalty > 0)

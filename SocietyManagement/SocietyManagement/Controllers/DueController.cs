@@ -38,16 +38,25 @@ namespace SocietyManagement.Controllers
             var appUser = db.AspNetUsers.Find(UserID);
             if (appUser != null)
             {
-                var Units = appUser.BuildingUnits.Where(b => b.IsDeleted == false).OrderBy(o => o.UnitName);                
+                var Units = appUser.BuildingUnits.Where(b => b.IsDeleted == false).OrderBy(o => o.UnitName).ToList();
+                if (Units.Count > 1)
+                {
+                    Units.Add(new BuildingUnit { UnitID = 0, UnitName = "All" });
+                }
+                else if (Units.Count == 1)
+                {
+                    id = Units.FirstOrDefault().UnitID;
+                }
+
+                ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
+
                 if (id == 0)
                 {
-                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName");
                     var dues = db.Dues.Where(d => d.IsDeleted == false).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
                     return View(dues.ToList());
                 }
                 else
                 {
-                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
                     var dues = db.Dues.Where(d => d.IsDeleted == false & d.UnitID == id).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
                     return View(dues.ToList());
                 }

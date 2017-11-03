@@ -8,27 +8,17 @@
 
 @if (ViewBag.UnitID != null)
 {
-    bool isAll = true;
     <ul class="nav nav-pills pull-right">
         @foreach (var item in (SelectList)ViewBag.UnitID)
         {
             if (item.Selected)
             {
-                isAll = false;
                 <li class="active"><a href="#">@item.Text</a></li>
             }
             else
             {
                 <li><a href="@Url.Action("MyPayment", new { id = item.Value })">@item.Text</a></li>
             }
-        }
-        @if (isAll)
-        {
-            <li class="active"><a href="@Url.Action("MyPayment", new { id = 0 })">All</a></li>
-        }
-        else
-        {
-            <li><a href="@Url.Action("MyPayment", new { id = 0 })">All</a></li>
         }
     </ul>
 

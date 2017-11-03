@@ -1,40 +1,47 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Collection>
 
 <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CollectionDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentModeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReceiptNumber)
-        </th>
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.Discount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CollectionAmount)
-        </th>        
-        <th></th>
-    </tr>
-
+    
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CollectionDate)
+            </th>
+@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+{
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+            </th>
+}
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentModeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiptNumber)
+            </th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CollectionAmount)
+            </th>
+            <th></th>
+        </tr>
+   
     @foreach (var item in Model)
     {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.CollectionDate)
             </td>
+@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+{
             <td>
                 @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
             </td>
+}
             <td>
                 @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
             </td>
@@ -50,7 +57,7 @@
             <td align="right">
                 @Html.DisplayFor(modelItem => item.CollectionAmount)
             </td>            
-            <td>
+            <td class="center">
                 <a href="@Url.Action("Details", "Collection", new { id = item.CollectionID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
                 @if (User.IsInRole("Admin"))
                 {
@@ -63,7 +70,14 @@
     @if (Model.Count() > 0)
     {
         <tr>
-            <th colspan="4">Total</th>
+            @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+            {
+                <th colspan="4">Total</th>
+            }
+            else
+            {
+                <th colspan="3">Total</th>
+            }
             <th class="hidden-xs right">@Model.Sum(s => s.Amount)</th>
             <th class="hidden-xs right">@Model.Sum(s => s.Discount)</th>
             <th class="right">@Model.Sum(s => s.CollectionAmount)</th>

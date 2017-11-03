@@ -105,7 +105,7 @@ namespace SocietyManagement.Views
 
             ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName",recurringDue.UnitID);
             ViewBag.DueTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "DueType"), "KeyID", "KeyValues",recurringDue.DueTypeID);
-            ViewBag.RecurringTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "RecurringType"), "KeyID", "KeyValues",recurringDue.RecurringID);
+            ViewBag.RecurringTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "RecurringType"), "KeyID", "KeyValues",recurringDue.RecurringTypeID);
             return View(recurringDue);
         }
 
@@ -123,7 +123,7 @@ namespace SocietyManagement.Views
             }
             ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName", recurringDue.UnitID);
             ViewBag.DueTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "DueType"), "KeyID", "KeyValues", recurringDue.DueTypeID);
-            ViewBag.RecurringTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "RecurringType"), "KeyID", "KeyValues", recurringDue.RecurringID);
+            ViewBag.RecurringTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "RecurringType"), "KeyID", "KeyValues", recurringDue.RecurringTypeID);
             return View(recurringDue);
         }
 
@@ -132,7 +132,7 @@ namespace SocietyManagement.Views
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecurringID,UnitID,StartDate,EndDate,RecurringTypeID,DueTypeID,Amount,DueDays,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] RecurringDue recurringDue)
+        public ActionResult Edit([Bind(Include = "RecurringID,UnitID,StartDate,EndDate,RecurringTypeID,DueTypeID,Amount,DueDays,UDK1,UDK2,UDK3,UDK4,UDK5,LastRunDate,CreatedDate")] RecurringDue recurringDue)
         {
             Helper.AssignUserInfo(recurringDue, User, false);
             if (ModelState.IsValid)
@@ -143,7 +143,7 @@ namespace SocietyManagement.Views
             }
             ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName", recurringDue.UnitID);
             ViewBag.DueTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "DueType"), "KeyID", "KeyValues", recurringDue.DueTypeID);
-            ViewBag.RecurringTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "RecurringType"), "KeyID", "KeyValues", recurringDue.RecurringID);
+            ViewBag.RecurringTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "RecurringType"), "KeyID", "KeyValues", recurringDue.RecurringTypeID);
             return View(recurringDue);
         }
 

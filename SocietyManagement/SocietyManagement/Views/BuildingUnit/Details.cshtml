@@ -105,6 +105,9 @@
 }
 
 
+<h4><span class="glyphicon glyphicon-retweet"></span> Recurring Bills</h4>
+@Html.Partial("_RecurringDue",Model.RecurringDues)
+
 <h4><span class="glyphicon glyphicon-usd"></span> Bills</h4>
 @Html.Partial("_Bill", Model.Dues)
 

@@ -554,6 +554,7 @@
     <Content Include="Views\SystemSetting\Edit.cshtml" />
     <Content Include="Views\SystemSetting\Index.cshtml" />
     <Content Include="Views\Shared\_Payment.cshtml" />
+    <Content Include="Views\Shared\_RecurringDue.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
