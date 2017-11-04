@@ -15,6 +15,22 @@ namespace SocietyManagement.Views
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
+        private SelectList GetMonths(DateTime Current)
+        {
+            FinancialYear fy = db.FinancialYears.Where(f => f.IsActive == true).FirstOrDefault();
+            List<DateTime> dtList = new List<DateTime>();
+            if (fy!=null)
+            {
+                DateTime dt = fy.StartDate;
+                while(dt <= fy.EndDate)
+                {
+                    dtList.Add(dt);
+                    dt = dt.AddMonths(1);
+                }
+            }
+            return new SelectList(dtList, Current);
+        }
+
         [Authorize(Roles = "Admin")]
         public ActionResult CalculateBill(int id,string RecurringDate)
         {
@@ -22,8 +38,9 @@ namespace SocietyManagement.Views
             if (!string.IsNullOrEmpty(RecurringDate))
                 dt = DateTime.Parse(RecurringDate);
             else
-                return RedirectToAction("CalculateBill", new { RecurringDate = dt.ToString("dd-MM-yyyy") });
+                return RedirectToAction("CalculateBill", new { RecurringDate = dt.ToString("01-MM-yyyy") });
 
+            ViewBag.Months = GetMonths(dt);
             RecurringBill recurringBill = new RecurringBill();            
             return View(recurringBill.CalculateRecurringBill(User, dt));
         }

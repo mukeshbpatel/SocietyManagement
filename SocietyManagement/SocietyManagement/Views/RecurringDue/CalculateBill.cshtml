@@ -6,17 +6,31 @@
 
 <h3><span class="glyphicon glyphicon-retweet"></span> Calculate Recurring Bill</h3>
 
+<ul class="nav nav-pills pull-right">
+    @foreach (var item in (SelectList)ViewBag.Months)
+    {
+        DateTime dt = DateTime.Parse(item.Text);
+        if (item.Selected)
+        {
+            <li class="active"><a href="#">@dt.ToString("MMM-yy")</a></li>
+        }
+        else
+        {
+            <li><a href="@Url.Action("CalculateBill", new { id = 0, RecurringDate = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a></li>
+        }
+    }
+</ul>
+
+
+
 <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
+            Bill Date
+        </th>        
         <th>
             @Html.DisplayNameFor(model => model.RecurringTypeID)
         </th>
@@ -40,18 +54,16 @@
             @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
+           @Request.QueryString["RecurringDate"]
+        </td> 
         <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>        
+            @Html.DisplayFor(modelItem => item.RecurringType.KeyValues)
+        </td>             
         <td>
             @Html.DisplayFor(modelItem => item.DueType.KeyValues)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RecurringType.KeyValues)
-        </td>
-        <td>
+        
+        <td class="right">
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
         <td>
@@ -63,6 +75,20 @@
     </tr>
 }
 
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="7">Bill already genrated for selected month. No bill is Pending.</td>
+        </tr>
+    }
+    else
+    {
+        <tr>
+            <th colspan="4">Total</th>
+            <th class="right">@Model.Sum(a => a.Amount)</th>
+            <th colspan="2">Total</th>
+            </tr>
+    }
 
 </table>
 
@@ -72,8 +98,10 @@
     <div class="form-horizontal">
         <div class="form-group">
             <div class="form-actions no-color col-md-offset-1 col-md-11">
+            @if (Model.Count() > 0)
+            {
                 <input type="submit" value="Enter Bill" class="btn btn-primary" />
-                <a href="@Url.Action("Index")" class="btn btn-success" role="button">Cancel</a>
+            }                
             </div>
         </div>
     </div>
