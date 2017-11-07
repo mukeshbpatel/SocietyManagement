@@ -19,7 +19,7 @@ namespace SocietyManagement.Models
             bool result = false;
             try
             {
-                if (SiteSetting.IsTestMode)
+                if (SiteSetting.ItemBoolean("IsTestMode"))
                 {
                     try
                     {
@@ -35,7 +35,7 @@ namespace SocietyManagement.Models
                         {
                             mailMessage.Bcc.RemoveAt(i);
                         }
-                        mailMessage.Bcc.Add(new MailAddress(SiteSetting.SiteBCCAddress, SiteSetting.SiteBCCName));
+                        mailMessage.Bcc.Add(new MailAddress(SiteSetting.Item("SiteBCCAddress"), SiteSetting.Item("SiteBCCName")));
                     }
                     catch
                     {
@@ -45,11 +45,11 @@ namespace SocietyManagement.Models
 
                     SmtpClient client = new SmtpClient();
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.EnableSsl = SiteSetting.SMTPEnableSsl;
-                    client.Host = SiteSetting.SMTPHost;
-                    client.Port = SiteSetting.SMTPPort;
+                    client.EnableSsl = SiteSetting.ItemBoolean("SMTPEnableSsl");
+                    client.Host = SiteSetting.Item("SMTPHost");
+                    client.Port = int.Parse(SiteSetting.Item("SMTPPort"));
                     // setup Smtp authentication
-                    System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(SiteSetting.SMTPUserID, SiteSetting.SMTPPassword);
+                    System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(SiteSetting.Item("SMTPUserID"), SiteSetting.Item("SMTPPassword"));
                     client.UseDefaultCredentials = false;
                     client.Credentials = credentials;
                     client.Send(mailMessage);
@@ -98,8 +98,8 @@ namespace SocietyManagement.Models
                     notification.Subject = Subject;
                     notification.UserID = collection.BuildingUnit.Owner.Id;
                     notification.TemplateID = emailTemplate.TemplateID;
-                    notification.CreatedDate = collection.CreatedDate;
-                    notification.ModifiedDate = collection.CreatedDate;
+                    notification.CreatedDate = collection.CollectionDate;
+                    notification.ModifiedDate = collection.CollectionDate;
                     notification.ReferenceTable = "Collection";
                     notification.ReferenceID = collection.CollectionID;
                     db.Notifications.Add(notification);
@@ -367,21 +367,21 @@ namespace SocietyManagement.Models
 
         private string UpdateBodySubject(string str)
         {
-            str = str.Replace("{{SocietyName}}", SiteSetting.SocietyName);
-            str = str.Replace("{{SocietyAddress}}", SiteSetting.SocietyAddress);
-            str = str.Replace("{{SocietyURL}}", SiteSetting.SocietyURL);
-            str = str.Replace("{{SiteName}}", SiteSetting.SiteName);
-            str = str.Replace("{{SiteURL}}", SiteSetting.SiteURL);
+            str = str.Replace("{{SocietyName}}", SiteSetting.Item("SocietyName"));
+            str = str.Replace("{{SocietyAddress}}", SiteSetting.Item("SocietyAddress"));
+            str = str.Replace("{{SocietyURL}}", SiteSetting.Item("SocietyURL"));
+            str = str.Replace("{{SiteName}}", SiteSetting.Item("SiteName"));
+            str = str.Replace("{{SiteURL}}", SiteSetting.Item("SiteURL"));
             return str;
         }
         
         private MailMessage CreateMessage()
         {
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(SiteSetting.SocietyFromEmailAddress, SiteSetting.SocietyFromEmailName);
-            msg.ReplyToList.Add(new MailAddress(SiteSetting.SocietyReplyToEmailAddress, SiteSetting.SocietyReplyToEmailName));
-            msg.CC.Add(new MailAddress(SiteSetting.SocietyFromEmailAddress, SiteSetting.SocietyFromEmailName));
-            msg.Bcc.Add(new MailAddress(SiteSetting.SiteBCCAddress, SiteSetting.SiteBCCName));
+            msg.From = new MailAddress(SiteSetting.Item("SocietyFromEmailAddress"), SiteSetting.Item("SocietyFromEmailName"));
+            msg.ReplyToList.Add(new MailAddress(SiteSetting.Item("SocietyReplyToEmailAddress"), SiteSetting.Item("SocietyReplyToEmailName")));
+            msg.CC.Add(new MailAddress(SiteSetting.Item("SocietyFromEmailAddress"), SiteSetting.Item("SocietyFromEmailName")));
+            msg.Bcc.Add(new MailAddress(SiteSetting.Item("SiteBCCAddress"), SiteSetting.Item("SiteBCCName")));
             msg.IsBodyHtml = true;
             return msg;
         }

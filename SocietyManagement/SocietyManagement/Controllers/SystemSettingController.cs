@@ -53,6 +53,7 @@ namespace SocietyManagement.Controllers
             {
                 db.SystemSettings.Add(systemSetting);
                 db.SaveChanges();
+                SiteSetting.AddSettings(systemSetting.SettingName, systemSetting.SettingValue);
                 return RedirectToAction("Index");
             }
 
@@ -85,6 +86,7 @@ namespace SocietyManagement.Controllers
             {
                 db.Entry(systemSetting).State = EntityState.Modified;
                 db.SaveChanges();
+                SiteSetting.UpdateSettings(systemSetting.SettingName, systemSetting.SettingValue);
                 return RedirectToAction("Index");
             }
             return View(systemSetting);
@@ -113,6 +115,7 @@ namespace SocietyManagement.Controllers
             SystemSetting systemSetting = db.SystemSettings.Find(id);
             db.SystemSettings.Remove(systemSetting);
             db.SaveChanges();
+            SiteSetting.SetSiteSettings();
             return RedirectToAction("Index");
         }
 

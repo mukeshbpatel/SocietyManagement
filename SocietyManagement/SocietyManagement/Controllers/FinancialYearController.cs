@@ -10,7 +10,7 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize(Roles ="Manager, Admin")]
+    [Authorize(Roles = "Manager, Comity, Admin")]
     public class FinancialYearController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();

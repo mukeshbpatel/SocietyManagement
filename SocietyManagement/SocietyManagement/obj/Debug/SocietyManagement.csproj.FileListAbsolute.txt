@@ -139,6 +139,6 @@ H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\bin\Enti
 H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\bin\Microsoft.AspNet.Identity.Core.xml
 H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\bin\Microsoft.AspNet.Identity.Owin.xml
 H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\bin\Microsoft.AspNet.Identity.EntityFramework.xml
-H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\obj\Debug\SocietyManagement.csprojResolveAssemblyReference.cache
 H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\obj\Debug\SocietyManagement.dll
 H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\obj\Debug\SocietyManagement.pdb
+H:\Project\MukRah\SocietyManagement\SocietyManagement\SocietyManagement\obj\Debug\SocietyManagement.csprojResolveAssemblyReference.cache
