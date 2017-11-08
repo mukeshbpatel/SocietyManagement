@@ -17,6 +17,7 @@ namespace SocietyManagement
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             SiteSetting.SetSiteSettings();
+            SiteSetting.LoadFinancialYearSettings();
         }
     }
 }

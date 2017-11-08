@@ -22,12 +22,12 @@ namespace SocietyManagement.Controllers
             if (!string.IsNullOrEmpty(BillDate))
             {
                 DateTime dt = DateTime.Parse(BillDate);
-                var dues = db.Dues.Where(d => d.IsDeleted == false & d.BillDate == dt.Date).Include(d => d.BuildingUnit).Include(d => d.DueType);
+                var dues = db.Dues.Where(d => d.IsDeleted == false && d.BillDate == dt.Date && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
                 return View(dues.ToList());
             }
             else
             {
-                var dues = db.Dues.Where(d => d.IsDeleted == false).Include(d => d.BuildingUnit).Include(d => d.DueType);
+                var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
                 return View(dues.ToList());
             }
         }
@@ -52,12 +52,12 @@ namespace SocietyManagement.Controllers
 
                 if (id == 0)
                 {
-                    var dues = db.Dues.Where(d => d.IsDeleted == false).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
+                    var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
                     return View(dues.ToList());
                 }
                 else
                 {
-                    var dues = db.Dues.Where(d => d.IsDeleted == false & d.UnitID == id).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
+                    var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID && d.UnitID == id).Include(d => d.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(d => d.DueType).OrderBy(o => o.BillDate);
                     return View(dues.ToList());
                 }
             }
@@ -82,7 +82,7 @@ namespace SocietyManagement.Controllers
                     }
 
                     ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
-                    var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id);
+                    var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id + ",@YearID = " + SiteSetting.FinancialYearID);
                     return View(data);
                 }
             }
@@ -162,7 +162,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Manager,Admin")]
-        public ActionResult Edit([Bind(Include = "DueID,BillDate,UnitID,DueTypeID,DueAmount,Details,DueDate,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Due due)
+        public ActionResult Edit([Bind(Include = "DueID,BillDate,UnitID,DueTypeID,DueAmount,Details,DueDate,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Due due)
         {
             Helper.AssignUserInfo(due, User, false);
             if (ModelState.IsValid)

@@ -19,7 +19,7 @@ namespace SocietyManagement.Controllers
         [Authorize(Roles = "Admin,Manager,Comity")]
         public ActionResult Index()
         {
-            var collections = db.Collections.Where(d=>d.IsDeleted==false).Include(c => c.BuildingUnit).Include(c => c.PaymentMode).OrderByDescending(o=>o.CollectionDate);
+            var collections = db.Collections.Where(d=>d.IsDeleted==false && d.YearID == SiteSetting.FinancialYearID).Include(c => c.BuildingUnit).Include(c => c.PaymentMode).OrderByDescending(o=>o.CollectionDate);
             return View(collections.ToList());
         }
 
@@ -43,12 +43,12 @@ namespace SocietyManagement.Controllers
 
                 if (id == 0)
                 {                    
-                    var collections = db.Collections.Where(d => d.IsDeleted == false).Include(c => c.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(c => c.PaymentMode).OrderBy(o => o.CollectionDate);
+                    var collections = db.Collections.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).Include(c => c.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(c => c.PaymentMode).OrderBy(o => o.CollectionDate);
                     return View(collections.ToList());
                 }
                 else
                 {                    
-                    var collections = db.Collections.Where(d => d.IsDeleted == false & d.UnitID == id).Include(c => c.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(c => c.PaymentMode).OrderBy(o => o.CollectionDate);
+                    var collections = db.Collections.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID && d.UnitID == id).Include(c => c.BuildingUnit).Where(b => b.BuildingUnit.OwnerID == UserID).Include(c => c.PaymentMode).OrderBy(o => o.CollectionDate);
                     return View(collections.ToList());
                 }
             }
@@ -144,7 +144,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "Manager,Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
+        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
         {
             Helper.AssignUserInfo(collection, User, false);
             if (ModelState.IsValid)

@@ -54,10 +54,17 @@ namespace SocietyManagement.Models
                     SqlDbType = SqlDbType.Text,
                     Direction = ParameterDirection.Input,
                     Value = User.Identity.GetUserId()
+                },
+                new SqlParameter
+                {
+                    ParameterName = "@YearID",
+                    SqlDbType = SqlDbType.Int,
+                    Direction = ParameterDirection.Input,
+                    Value = SiteSetting.FinancialYearID
                 }
             };
 
-            db.Database.ExecuteSqlCommand("SP_Add_Recurring_Bills @BillDate,@UserID", para);
+            db.Database.ExecuteSqlCommand("SP_Add_Recurring_Bills @BillDate,@UserID,@YearID", para);
 
 
             //SocietyManagementEntities db1 = new SocietyManagementEntities();

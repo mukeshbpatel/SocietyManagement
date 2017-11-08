@@ -11,7 +11,6 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using SocietyManagement.Models;
-using SendGrid.Helpers.Mail;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;

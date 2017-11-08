@@ -33,17 +33,16 @@
         <th>
             @Html.DisplayNameFor(model => model.BType)
         </th>
-        <th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.Details)
         </th>
-        <th class="hidden-xs">
+        <th>
             @Html.DisplayNameFor(model => model.Credit)
         </th>        
         <th>
             @Html.DisplayNameFor(model => model.Debit)
         </th>
-        <th>Balance</th>                
-        <th></th>
+        <th>Balance</th>        
     </tr>
     @{
         decimal Balance = 0; }
@@ -54,8 +53,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.BDate)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BType)
+        <td>            
+            <a href="@Url.Action("Details", item.RecType, new { id = item.ID, Title = item.BType })" title="Details">@item.BType</a>
         </td>
         <td class="hidden-xs">
             @Html.DisplayFor(modelItem => item.Details)
@@ -90,10 +89,7 @@
                     <span>@Balance</span>
                 }
             }
-        </td>
-        <td class="center">
-            <a href="@Url.Action("Details", item.RecType, new { id = item.ID, Title = item.BType })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-        </td>        
+        </td>              
     </tr>
                 }
 

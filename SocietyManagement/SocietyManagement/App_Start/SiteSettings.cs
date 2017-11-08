@@ -11,27 +11,34 @@ namespace SocietyManagement
     {
         static Dictionary<string, string> Items = new Dictionary<string, string>();
 
-        //public static string SocietyName { get; set; }
-        //public static string SocietyShortName { get; set; }
-        //public static string SocietyAddress { get; set; }
-        //public static string SocietyURL { get; set; }
-        //public static string SocietyFromEmailAddress { get; set; }
-        //public static string SocietyFromEmailName { get; set; }
-        //public static string SocietyReplyToEmailAddress { get; set; }
-        //public static string SocietyReplyToEmailName { get; set; }
-
-        //public static string SiteName { get; set; }
-        //public static string SiteURL { get; set; }
-        //public static string SiteBCCAddress { get; set; }
-        //public static string SiteBCCName { get; set; }
-
-        //public static Boolean IsTestMode { get; set; }
-
-        //public static Boolean SMTPEnableSsl { get; set; }
-        //public static string SMTPHost { get; set; }
-        //public static int SMTPPort { get; set; }
-        //public static string SMTPUserID { get; set; }
-        //public static string SMTPPassword { get; set; }
+        public static int FinancialYearID { get; set; }
+        public static string FinancialYear { get; set; }
+        public static DateTime FinancialYear_StartDate { get; set; }
+        public static DateTime FinancialYear_EndDate { get; set; }
+        
+        public static bool LoadFinancialYearSettings()
+        {
+            bool _result = false;
+            SocietyManagementEntities db = new SocietyManagementEntities();
+            FinancialYear fy = db.FinancialYears.Where(f => f.IsDeleted == false && f.IsActive == true).FirstOrDefault();
+            if (fy != null)
+            {
+                FinancialYearID = fy.YearID;
+                FinancialYear = fy.YearName;
+                FinancialYear_StartDate = fy.StartDate;
+                FinancialYear_EndDate = fy.EndDate;
+                _result = true;
+            }
+            else
+            {
+                FinancialYearID = 0;
+                FinancialYear = string.Empty;
+                FinancialYear_StartDate = DateTime.MinValue;
+                FinancialYear_EndDate = DateTime.MinValue;
+            }
+            db.Dispose();
+            return _result;
+        }
 
         public static bool SetSiteSettings()
         {

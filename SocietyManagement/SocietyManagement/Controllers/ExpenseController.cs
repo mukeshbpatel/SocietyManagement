@@ -91,7 +91,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Manager")]
-        public ActionResult Edit([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Expense expense)
+        public ActionResult Edit([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Expense expense)
         {
             Helper.AssignUserInfo(expense, User, false);
             if (ModelState.IsValid)

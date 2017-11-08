@@ -24,31 +24,32 @@
         <th>
             Units
         </th>
-        <th></th>
-        
+        @if (User.IsInRole("Admin"))
+        {
+            <th>Action</th>
+        }
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BuildingName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BuildingType.KeyValues)
-        </td>
-        <td>
-            <a href="@Url.Action("Index","BuildingUnit",new { id = item.BuildingID })">@item.BuildingUnits.Where(d => d.IsDeleted == false).Count()</a>
-        </td>
-                    <td>
-                        <a href="@Url.Action("Details", new { id = item.BuildingID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <a href="@Url.Action("Details", new { id = item.BuildingID })" title="Details">@item.BuildingName</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingType.KeyValues)
+            </td>
+            <td>
+                <a href="@Url.Action("Index","BuildingUnit",new { id = item.BuildingID })">@item.BuildingUnits.Where(d => d.IsDeleted == false).Count()</a>
+            </td>
             @if (User.IsInRole("Admin"))
                 {
-                        <a href="@Url.Action("Edit", new { id = item.BuildingID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a href="@Url.Action("Delete", new { id = item.BuildingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                <td align="center">
+                    <a href="@Url.Action("Edit", new { id = item.BuildingID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="@Url.Action("Delete", new { id = item.BuildingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
             }
-                        </td>        
-                
-    </tr>
-}
+        </tr>
+    }
 
 </table>

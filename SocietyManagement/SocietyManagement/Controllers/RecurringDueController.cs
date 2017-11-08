@@ -17,7 +17,7 @@ namespace SocietyManagement.Views
 
         private SelectList GetMonths(DateTime Current)
         {
-            FinancialYear fy = db.FinancialYears.Where(f => f.IsActive == true).FirstOrDefault();
+            FinancialYear fy = db.FinancialYears.Where(f =>f.IsDeleted == false && f.IsActive == true).FirstOrDefault();
             List<DateTime> dtList = new List<DateTime>();
             if (fy!=null)
             {

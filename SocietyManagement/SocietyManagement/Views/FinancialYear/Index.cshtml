@@ -28,14 +28,17 @@
         <th>
             @Html.DisplayNameFor(model => model.IsClosed)
         </th>
-        <th></th>
+@if (User.IsInRole("Admin"))
+{
+        <th>Action</th>
+}
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.YearName)
+                <a href="@Url.Action("Details", new { id = item.YearID })" title="Details">@item.YearName</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartDate)
@@ -49,14 +52,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsClosed)
             </td>
-            <td>
-                <a href="@Url.Action("Details", new { id = item.YearID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-                @if (User.IsInRole("Admin"))
-                {
+            @if (User.IsInRole("Admin"))
+            {
+                <td class="center">
                     <a href="@Url.Action("Edit", new { id = item.YearID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                     <a href="@Url.Action("Delete", new { id = item.YearID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                }
-            </td>
+                </td>
+            }
         </tr>
     }
 

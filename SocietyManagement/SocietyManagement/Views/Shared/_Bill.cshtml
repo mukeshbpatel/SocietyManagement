@@ -1,109 +1,131 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Due>
 
+@{ 
+    Boolean ShowDetails = false;
+    if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+    {
+        ShowDetails = true;
+    }
+    if (ViewContext.RouteData.GetRequiredString("action") == "Details")
+    {
+        ShowDetails = true;
+    }
+
+}
 <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.BillDate)
         </th>
-        @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+        @if (ShowDetails)
         {
             <th>
                 @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
             </th>
         }
-        <th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.DueTypeID)
         </th>
-        <th class="hidden-xs">
+        <th>
             @Html.DisplayNameFor(model => model.Details)
         </th>
-        <th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.DueAmount)
         </th>
-        <th>
+        <th class="hidden-xs">
             Penalty
         </th>
-        <th>
+        <th>Amount</th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.DueDate)
         </th>
-
-        <th></th>
+        @if (ShowDetails & (User.IsInRole("Manager") || User.IsInRole("Admin")))
+        {
+            <th></th>
+        }
     </tr>
     @{
         decimal TotalPenalty = 0; }
     @foreach (var item in Model)
     {
+        decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.BillDate)
             </td>
-@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
-{
-            <td>
-                @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
-            </td>
-}
-            <td>
+            @if (ShowDetails)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+                </td>
+            }
+            <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.DueType.KeyValues)
             </td>
-            <td class="hidden-xs">
-                @Html.DisplayFor(modelItem => item.Details)
+            <td>
+                <a href="@Url.Action("Details","Due", new { id = item.DueID })" title="Details">@item.Details</a>
             </td>
-            <td class="right">
+            <td class="hidden-xs right">
                 @Html.DisplayFor(modelItem => item.DueAmount)
             </td>
-            <td class="right">
+            <td class="hidden-xs right">
                 @{
-                    decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
+
                     if (penalty > 0)
                     {
                         TotalPenalty += penalty;
-                        <a href="@Url.Action("Index","Penalty", new { id = item.DueID })" title="Penalty">@penalty</a>
+                        @penalty
                     }
                     else
                     {
-                        <a href="@Url.Action("Create","Penalty", new { id = item.DueID })" title="Add Penalty">0.00</a>
+                        <span>0.00</span>
                     }
-                }                
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td class="center">
-                <a href="@Url.Action("Details","Due", new { id = item.DueID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-                @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
-                {
-                    <a href="@Url.Action("Create","Collection", new { id = item.DueID })" title="Create Payment"><span class="icon-library"></span></a>
-                    <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a href="@Url.Action("Delete","Due", new { id = item.DueID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
                 }
             </td>
+            <td class="right">
+                <span>@(item.DueAmount + penalty)</span>
+            </td>
+            <td class="hidden-xs">
+                @Html.DisplayFor(modelItem => item.DueDate)
+            </td>           
+            @if (ShowDetails & (User.IsInRole("Manager") || User.IsInRole("Admin")))
+                {
+                <td class="center">
+                    <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="@Url.Action("Delete","Due", new { id = item.DueID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
+            }
+
         </tr>
-    }
+                    }
 
     @if (Model.Count() > 0)
     {
         <tr>
-@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
-{
-            <th colspan="3">Total</th>
-}
-else
-{
-    <th colspan="2">Total</th>
-}
-            <th class="hidden-xs"></th>
-            <th class="right">@Model.Sum(s => s.DueAmount)</th>
-            @if (TotalPenalty > 0)
+            @if (ShowDetails)
             {
-                <th class="right">@TotalPenalty</th>
+                <th colspan="3">Total</th>
             }
             else
             {
-                <th class="right">0.00</th>
+                <th colspan="2">Total</th>
             }
-            <th></th>
-            <th></th>
+            <th class="hidden-xs"></th>
+            <th class="hidden-xs right">@Model.Sum(s => s.DueAmount)</th>
+            @if (TotalPenalty > 0)
+            {
+                <th class="hidden-xs right">@TotalPenalty</th>
+            }
+            else
+            {
+                <th class="hidden-xs right">0.00</th>
+            }
+            <th class="right"><span>@(Model.Sum(s => s.DueAmount) + TotalPenalty)</span></th>            
+            <th class="hidden-xs"></th>
+@if (ShowDetails & (User.IsInRole("Manager") || User.IsInRole("Admin")))
+{
+    <th></th>
+}
         </tr>
     }
     else
@@ -114,4 +136,3 @@ else
     }
 
 </table>
-

@@ -62,7 +62,10 @@ namespace SocietyManagement.Models
         {
             DateTime CurrentDate = GetCurrentDate();
             if (IsNew)
+            {
                 AssignValue(obj, "CreatedDate", CurrentDate);
+                AssignValue(obj, "YearID",SiteSetting.FinancialYearID);
+            }
             AssignValue(obj, "ModifiedDate", CurrentDate);
             AssignValue(obj, "UserID", User.Identity.GetUserId());            
         }
