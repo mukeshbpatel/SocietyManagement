@@ -47,10 +47,20 @@ namespace SocietyManagement.Models
 
         private static void AssignValue(object obj,string PropertyName,object value)
         {
-            Type objType = obj.GetType();
-            System.Reflection.PropertyInfo objInfo = objType.GetProperty(PropertyName);
-            object val = objInfo.GetValue(obj);
-            objInfo.SetValue(obj, value, null);
+            try
+            {
+                Type objType = obj.GetType();
+                System.Reflection.PropertyInfo objInfo = objType.GetProperty(PropertyName);
+                if (objInfo != null)
+                {
+                    object val = objInfo.GetValue(obj);
+                    objInfo.SetValue(obj, value, null);
+                }
+            }
+            catch (Exception)
+            {                
+            }
+            
         }
 
         public static string GetUserID(IPrincipal User)

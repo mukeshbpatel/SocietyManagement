@@ -2,24 +2,21 @@
 
 <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
     <tr>
-@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
-{
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
-        </th>
-}
-        <th>
-            @Html.DisplayNameFor(model => model.RecurringTypeID)
-        </th> 
+        @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+        {
+            <th>
+                @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+            </th>
+        }
         <th>
             @Html.DisplayNameFor(model => model.DueTypeID)
-        </th>              
-        <th>
+        </th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.StartDate)
         </th>
-        <th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.EndDate)
-        </th>        
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Amount)
         </th>
@@ -28,35 +25,32 @@
         </th>
         @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
         {
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.LastRunDate)
-        </th>
-        <th></th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.LastRunDate)
+            </th>
+            <th></th>
         }
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
-{
+            @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+            {
+                <td>
+                    <a href="@Url.Action("Details","BuildingUnit",new {id=item.UnitID})">@item.BuildingUnit.UnitName</a>
+                </td>
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+                <a href="@Url.Action("Details","RecurringDue", new { id = item.RecurringID })" title="Details">@item.RecurringType.KeyValues @item.DueType.KeyValues</a>
             </td>
-}
-            <td>
-                @Html.DisplayFor(modelItem => item.RecurringType.KeyValues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueType.KeyValues)
-            </td>
-            <td>
+            <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.StartDate)
             </td>
-            <td>
+            <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.EndDate)
-            </td>           
-           
+            </td>
+
             <td class="right">
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
@@ -65,14 +59,13 @@
             </td>
             @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
             {
-            <td class="hidden-xs">
-                @Html.DisplayFor(modelItem => item.LastRunDate)
-            </td>            
-            <td class="center">               
-                    <a href="@Url.Action("Details","RecurringDue", new { id = item.RecurringID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.LastRunDate)
+                </td>
+                <td class="center" nowrap>
                     <a href="@Url.Action("Edit","RecurringDue", new { id = item.RecurringID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a href="@Url.Action("Delete","RecurringDue", new { id = item.RecurringID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>               
-            </td>
+                    <a href="@Url.Action("Delete","RecurringDue", new { id = item.RecurringID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                </td>
             }
         </tr>
     }

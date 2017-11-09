@@ -207,10 +207,10 @@ namespace SocietyManagement.Models
         [Display(Name = "Discount")]
         public decimal Discount { get; set; }
         [Required]
-        [Display(Name = "Receipt Number")]
+        [Display(Name = "Receipt #")]
         public string ReceiptNumber { get; set; }
         [Required]
-        [Display(Name = "Payment Mode")]
+        [Display(Name = "Mode")]
         public int PaymentModeID { get; set; }
         [Display(Name = "Reference Number")]
         public string Reference { get; set; }

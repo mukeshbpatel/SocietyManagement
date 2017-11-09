@@ -529,6 +529,7 @@
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\Due\BalanceSheet.cshtml" />
     <Content Include="Views\Shared\_Bill.cshtml" />
+    <Content Include="Views\Shared\_BalanceSheet.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />

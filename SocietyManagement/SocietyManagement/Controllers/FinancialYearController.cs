@@ -56,6 +56,7 @@ namespace SocietyManagement.Controllers
             {
                 db.FinancialYears.Add(financialYear);
                 db.SaveChanges();
+                SiteSetting.LoadFinancialYearSettings();
                 return RedirectToAction("Index");
             }
 
@@ -91,6 +92,7 @@ namespace SocietyManagement.Controllers
             {
                 db.Entry(financialYear).State = EntityState.Modified;
                 db.SaveChanges();
+                SiteSetting.LoadFinancialYearSettings();
                 return RedirectToAction("Index");
             }
             return View(financialYear);

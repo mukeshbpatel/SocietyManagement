@@ -11,7 +11,7 @@
     @Html.Raw(Model.Details.Replace(Environment.NewLine,"</br>"))
 </div>
 <p>
-    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
+    <button onclick="goBack()" class="btn btn-success">Back</button>
 </p>
 <hr />
 
