@@ -6,76 +6,25 @@
 
 <h3><span class="icon-library"></span> Payments</h3>
 
-<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CollectionDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentModeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ReceiptNumber)
-        </th>        
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.Amount)
-        </th>
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.Discount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CollectionAmount)
-        </th>        
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CollectionDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiptNumber)
-            </td>
-            <td class="hidden-xs right">
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>            
-            <td class="hidden-xs right">
-                @Html.DisplayFor(modelItem => item.Discount)
-            </td>            
-            <td class="right">
-                @Html.DisplayFor(modelItem => item.CollectionAmount)
-            </td>            
-            <td class="center">
-                <a href="@Url.Action("Details", new { id = item.CollectionID, Title = "Payment" })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-            </td>
-        </tr>
-    }
-
-@if (Model.Count() > 0)
+@if (ViewBag.UnitID != null)
 {
-    <tr>
-        <th colspan="4">Total</th>
-        <th class="hidden-xs right">@Model.Sum(s=>s.Amount)</th>
-        <th class="hidden-xs right">@Model.Sum(s => s.Discount)</th>
-        <th class="right">@Model.Sum(s => s.CollectionAmount)</th>
-        <th></th>
-    </tr>
+    <ul class="nav nav-pills pull-right">
+        @foreach (var item in (SelectList)ViewBag.UnitID)
+        {
+            if (item.Selected)
+            {
+                <li class="active"><a href="#">@item.Text</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("MyPayment", new { id = item.Value })">@item.Text</a></li>
+            }
+        }
+    </ul>
+
+@Html.Partial("_Payment", Model)
 }
 else
 {
-    <tr>
-        <td colspan="8">No Data available</td>
-    </tr>
+    <div class="bg-info" style="padding:10px"><span class="glyphicon glyphicon-info-sign"></span>No Building Unit assigned to your user id.<br />Please contact your Manager for details.</div>
 }
-</table>

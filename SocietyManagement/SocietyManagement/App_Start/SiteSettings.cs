@@ -46,7 +46,7 @@ namespace SocietyManagement
             Items.Clear();
             foreach (var item in db.SystemSettings)
             {
-                Items.Add(item.SettingName, item.SettingValue);
+                Items.Add(item.UDK1 + "." + item.SettingName, item.SettingValue);
             }
             db.Dispose();
             return true;
@@ -79,22 +79,22 @@ namespace SocietyManagement
             }
         }
 
-        public static void UpdateSettings(string SettingName, string SettingValue)
+        public static void UpdateSettings(string SettingType, string SettingName, string SettingValue)
         {
             try
             {
-                Items[SettingName] = SettingValue;
+                Items[SettingType + "." + SettingName] = SettingValue;
             }
             catch (Exception)
             {
             }
             
         }
-        public static void AddSettings(string SettingName, string SettingValue)
+        public static void AddSettings(string SettingType, string SettingName, string SettingValue)
         {
             try
             {
-                Items.Add(SettingName,SettingValue);
+                Items.Add(SettingType + "." + SettingName,SettingValue);
             }
             catch (Exception)
             {

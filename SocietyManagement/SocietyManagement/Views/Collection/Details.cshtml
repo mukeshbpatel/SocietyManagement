@@ -75,7 +75,7 @@
             @Html.DisplayFor(model => model.PaymentMode.KeyValues)
         </dd>
 
-        @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+        @if (Model.PaymentMode.KeyValues == "Bank Transfer" || Model.PaymentMode.KeyValues == "UPI Payment")
         {
         <dt>
             @Html.DisplayNameFor(model => model.Reference)
@@ -85,12 +85,16 @@
             @Html.DisplayFor(model => model.Reference)
         </dd>
         }
-        @if (Model.PaymentMode.KeyValues == "Bank Transfer" || Model.PaymentMode.KeyValues == "Cheque")
+        @if (Model.PaymentMode.KeyValues == "Bank Transfer" || Model.PaymentMode.KeyValues == "Cheque" || Model.PaymentMode.KeyValues == "UPI Payment")
         {
         <dt>
             @if (Model.PaymentMode.KeyValues == "Bank Transfer")
             {
                 <span>Bank</span>
+            }
+            else if (Model.PaymentMode.KeyValues == "UPI Payment")
+            {
+                <span>Mobile/UPI ID</span>
             }
             else
             {
@@ -103,7 +107,7 @@
         </dd>
 
         <dt>
-            @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+            @if (Model.PaymentMode.KeyValues == "Bank Transfer" || Model.PaymentMode.KeyValues == "UPI Payment")
             {
                 <span>Transfer Date</span>
             }

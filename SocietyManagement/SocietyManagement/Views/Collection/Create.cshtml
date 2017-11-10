@@ -144,20 +144,25 @@
         $(".cheque").hide();
         $(".ref").hide();
         $(".cheque_ref").hide();
-        var mode = $("#PaymentModeID").val();
-        if (mode == "1025")
+        var mode = $("#PaymentModeID option:selected").text();        
+        if (mode == "Cheque")
         {
             $(".cheque_ref").show();
             $(".cheque").show();
             $(".ChequeDate").text("Cheque Date");
             $(".ChequeBank").text("Cheque Bank");
-        } else if (mode == "1026")
+        } else if (mode == "Bank Transfer")
         {
             $(".cheque_ref").show();
             $(".ref").show();
             $(".ChequeDate").text("Transfer Date");
             $(".ChequeBank").text("Bank");
-        } 
+        } else if (mode == "UPI Payment") {
+            $(".cheque_ref").show();
+            $(".ref").show();
+            $(".ChequeDate").text("Transfer Date");
+            $(".ChequeBank").text("Mobile/UPI ID");
+        }
 
         //alert(mode);
     }

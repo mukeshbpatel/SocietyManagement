@@ -21,7 +21,7 @@
                 <div class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" style="border-width:0px;">
                     <a class="navbar-link" href="@Url.Action("Index","Notification")"><span class="glyphicon glyphicon-envelope"></span><span class="badge badge-notify"></span></a>
                 </div>
-                <a href="@Url.Action("Index", "Home")" class="navbar-brand"><span class="icon-office"></span> @SiteSetting.Item("SocietyName")</a>
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand"><span class="icon-office"></span> @SiteSetting.Item("Society.Name")</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -107,7 +107,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <div>&copy; @DateTime.Now.Year - <a href="@SiteSetting.Item("SocietyURL")">@SiteSetting.Item("SocietyFullName")</a> powered by <a href="@SiteSetting.Item("SiteURL")">@SiteSetting.Item("SiteName")</a></div>
+            <div>&copy; @DateTime.Now.Year - <a href="@SiteSetting.Item("Society.URL")">@SiteSetting.Item("Society.FullName")</a> powered by <a href="@SiteSetting.Item("Site.URL")">@SiteSetting.Item("Site.Name")</a></div>
             @*<div class="col-sm-8"><span class="glyphicon glyphicon-user"></span>User &nbsp; &nbsp; <span class="glyphicon glyphicon-road"></span>Role</div>*@
         </footer>
     </div>

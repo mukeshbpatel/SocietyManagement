@@ -19,7 +19,7 @@ namespace SocietyManagement.Models
             bool result = false;
             try
             {
-                if (SiteSetting.ItemBoolean("IsTestMode"))
+                if (SiteSetting.ItemBoolean("SMTP.TestMode"))
                 {
                     try
                     {
@@ -35,7 +35,7 @@ namespace SocietyManagement.Models
                         {
                             mailMessage.Bcc.RemoveAt(i);
                         }
-                        mailMessage.Bcc.Add(new MailAddress(SiteSetting.Item("SiteBCCAddress"), SiteSetting.Item("SiteBCCName")));
+                        mailMessage.Bcc.Add(new MailAddress(SiteSetting.Item("Site.BCCAddress"), SiteSetting.Item("Site.BCCName")));
                     }
                     catch
                     {
@@ -45,11 +45,11 @@ namespace SocietyManagement.Models
 
                     SmtpClient client = new SmtpClient();
                     client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.EnableSsl = SiteSetting.ItemBoolean("SMTPEnableSsl");
-                    client.Host = SiteSetting.Item("SMTPHost");
-                    client.Port = int.Parse(SiteSetting.Item("SMTPPort"));
+                    client.EnableSsl = SiteSetting.ItemBoolean("SMTP.EnableSsl");
+                    client.Host = SiteSetting.Item("SMTP.Host");
+                    client.Port = int.Parse(SiteSetting.Item("SMTP.Port"));
                     // setup Smtp authentication
-                    System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(SiteSetting.Item("SMTPUserID"), SiteSetting.Item("SMTPPassword"));
+                    System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(SiteSetting.Item("SMTP.UserID"), SiteSetting.Item("SMTP.Password"));
                     client.UseDefaultCredentials = false;
                     client.Credentials = credentials;
                     client.Send(mailMessage);
@@ -367,21 +367,21 @@ namespace SocietyManagement.Models
 
         private string UpdateBodySubject(string str)
         {
-            str = str.Replace("{{SocietyName}}", SiteSetting.Item("SocietyName"));
-            str = str.Replace("{{SocietyAddress}}", SiteSetting.Item("SocietyAddress"));
-            str = str.Replace("{{SocietyURL}}", SiteSetting.Item("SocietyURL"));
-            str = str.Replace("{{SiteName}}", SiteSetting.Item("SiteName"));
-            str = str.Replace("{{SiteURL}}", SiteSetting.Item("SiteURL"));
+            str = str.Replace("{{SocietyName}}", SiteSetting.Item("Society.Name"));
+            str = str.Replace("{{SocietyAddress}}", SiteSetting.Item("Society.Address"));
+            str = str.Replace("{{SocietyURL}}", SiteSetting.Item("Society.URL"));
+            str = str.Replace("{{SiteName}}", SiteSetting.Item("Site.Name"));
+            str = str.Replace("{{SiteURL}}", SiteSetting.Item("Site.URL"));
             return str;
         }
         
         private MailMessage CreateMessage()
         {
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress(SiteSetting.Item("SocietyFromEmailAddress"), SiteSetting.Item("SocietyFromEmailName"));
-            msg.ReplyToList.Add(new MailAddress(SiteSetting.Item("SocietyReplyToEmailAddress"), SiteSetting.Item("SocietyReplyToEmailName")));
-            msg.CC.Add(new MailAddress(SiteSetting.Item("SocietyFromEmailAddress"), SiteSetting.Item("SocietyFromEmailName")));
-            msg.Bcc.Add(new MailAddress(SiteSetting.Item("SiteBCCAddress"), SiteSetting.Item("SiteBCCName")));
+            msg.From = new MailAddress(SiteSetting.Item("Society.FromEmailAddress"), SiteSetting.Item("Society.FromEmailName"));
+            msg.ReplyToList.Add(new MailAddress(SiteSetting.Item("Society.ReplyToEmailAddress"), SiteSetting.Item("Society.ReplyToEmailName")));
+            msg.CC.Add(new MailAddress(SiteSetting.Item("Society.FromEmailAddress"), SiteSetting.Item("Society.FromEmailName")));
+            msg.Bcc.Add(new MailAddress(SiteSetting.Item("Site.BCCAddress"), SiteSetting.Item("Site.BCCName")));
             msg.IsBodyHtml = true;
             return msg;
         }

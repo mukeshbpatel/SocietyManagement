@@ -343,6 +343,12 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\icomoon.css" />
+    <Content Include="Content\image\BHIM.gif" />
+    <Content Include="Content\image\BHIMScan.png" />
+    <Content Include="Content\image\PhonePe.gif" />
+    <Content Include="Content\image\PhonePeScan.png" />
+    <Content Include="Content\image\Tez.gif" />
+    <Content Include="Content\image\TezScan.png" />
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\jquery-te.png" />
     <Content Include="Template\MaintanceBill.html" />
@@ -557,6 +563,7 @@
     <Content Include="Views\SystemSetting\Index.cshtml" />
     <Content Include="Views\Shared\_Payment.cshtml" />
     <Content Include="Views\Shared\_RecurringDue.cshtml" />
+    <Content Include="Views\Shared\_PayOnline.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
