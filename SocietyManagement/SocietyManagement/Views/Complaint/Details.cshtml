@@ -11,14 +11,14 @@
     @Html.Raw(Model.Details.Replace(Environment.NewLine,"</br>"))
 </div>
 <p>
-    <button onclick="goBack()" class="btn btn-success">Back</button>
+    <button onclick="goBack()" class="btn btn-primary">Back</button>
 </p>
 <hr />
 
 <div>
     <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
     <div class="pull-right">
-        <a href="@Url.Action("Create", "ComplaintComment", new { id = Model.ComplaintID })"><span class="glyphicon glyphicon-plus"></span> Add Comment</a>        
+        <a href="@Url.Action("Create", "ComplaintComment", new { id = Model.ComplaintID })"><span class="fa fa-plus-square"></span> Add Comment</a>        
     </div>
 </div>
 <br />

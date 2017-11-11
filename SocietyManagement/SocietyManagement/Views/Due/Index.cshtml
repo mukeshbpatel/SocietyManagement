@@ -4,13 +4,17 @@
     ViewBag.Title = "Bills";
 }
 
-<h3><span class="glyphicon glyphicon-usd"></span> Bills</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-list-alt"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
+<div class="box-body">
 
-@if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
-{
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
-    </div>
-}
+    @Html.Partial("_Bill", Model)
 
-@Html.Partial("_Bill", Model)
+</div>

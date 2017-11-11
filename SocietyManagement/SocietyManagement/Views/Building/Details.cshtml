@@ -4,10 +4,10 @@
     ViewBag.Title = "Building";
 }
 
-<h3><span class="icon-office"></span> Building</h3>
-
-<div>    
-    <hr />
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-cubes"></i> @ViewBag.Title</h3>
+</div>
+<div class="box-body">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.BuildingName)
@@ -42,14 +42,16 @@
 
 
     </dl>
+
+
+    <h4><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</h4>
+    @Html.Partial("_BuildingUnit", Model.BuildingUnits)
+
+   
+
 </div>
-
-<h4><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</h4>
-@Html.Partial("_BuildingUnit", Model.BuildingUnits)
-
-<p>
-    <button onclick="goBack()" class="btn btn-success">Back</button>
-</p>
-
+<div class="box-footer">    
+        <button onclick="goBack()" class="btn btn-primary">Back</button>
+</div>
 
 

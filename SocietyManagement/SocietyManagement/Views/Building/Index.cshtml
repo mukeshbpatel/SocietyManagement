@@ -3,53 +3,58 @@
 @{
     ViewBag.Title = "Building";
 }
-
-<h3><span class="icon-office"></span> Building</h3>
-
-@if (User.IsInRole("SuperUser"))
-{
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
-    </div>
-}
-
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingTypeID)
-        </th>
-        <th>
-            Units
-        </th>
-        @if (User.IsInRole("SuperUser"))
-        {
-            <th>Action</th>
-        }
-    </tr>
-
-    @foreach (var item in Model)
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-cubes"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("SuperUser"))
     {
-        <tr>
-            <td>
-                <a href="@Url.Action("Details", new { id = item.BuildingID })" title="Details">@item.BuildingName</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuildingType.KeyValues)
-            </td>
-            <td>
-                <a href="@Url.Action("Index","BuildingUnit",new { id = item.BuildingID })">@item.BuildingUnits.Where(d => d.IsDeleted == false).Count()</a>
-            </td>
-            @if (User.IsInRole("SuperUser"))
-                {
-                <td align="center">
-                    <a href="@Url.Action("Edit", new { id = item.BuildingID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a href="@Url.Action("Delete", new { id = item.BuildingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                </td>
-            }
-        </tr>
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
     }
+</div>
+<div class="box-body">
 
-</table>
+    <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
+        <tbody>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.BuildingName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BuildingTypeID)
+                </th>
+                <th>
+                    Units
+                </th>
+                @if (User.IsInRole("SuperUser"))
+            {
+                    <th>Action</th>
+                }
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = item.BuildingID })" title="Details">@item.BuildingName</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BuildingType.KeyValues)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Index","BuildingUnit",new { id = item.BuildingID })">@item.BuildingUnits.Where(d => d.IsDeleted == false).Count()</a>
+                    </td>
+                    @if (User.IsInRole("SuperUser"))
+                {
+                        <td align="center">
+                            <a href="@Url.Action("Edit", new { id = item.BuildingID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="@Url.Action("Delete", new { id = item.BuildingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                        </td>
+                    }
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>

@@ -180,6 +180,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SiteSettings.cs" />
@@ -338,10 +339,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SQL.txt" />
+    <Content Include="Content\AdminLTE.css" />
+    <Content Include="Content\AdminLTE.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\icomoon.css" />
     <Content Include="Content\image\BHIM.gif" />
     <Content Include="Content\image\BHIMScan.png" />
@@ -351,6 +356,8 @@
     <Content Include="Content\image\TezScan.png" />
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\jquery-te.png" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Scripts\adminlte.min.js" />
     <Content Include="Template\MaintanceBill.html" />
     <Content Include="Template\PaymentReceipt.html" />
     <Content Include="favicon.ico" />
@@ -388,6 +395,11 @@
     <Content Include="fonts\icomoon.eot" />
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -538,6 +550,7 @@
     <Content Include="Views\Shared\_BalanceSheet.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />
@@ -565,7 +578,10 @@
     <Content Include="Views\Shared\_RecurringDue.cshtml" />
     <Content Include="Views\Shared\_PayOnline.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\alt\" />
+    <Folder Include="Content\skins\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />

@@ -4,13 +4,17 @@
     ViewBag.Title = "Building Unit";
 }
 
-<h3><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-cube"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("SuperUser"))
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
+<div class="box-body">
 
-@if (User.IsInRole("SuperUser"))
-{
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
-    </div>
-}
+    @Html.Partial("_BuildingUnit", Model)
 
-@Html.Partial("_BuildingUnit",Model)
+</div>

@@ -9,7 +9,7 @@
 @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
 {
 <div class="pull-right">
-    <a href="@Url.Action("Create",new {id=ViewBag.DueID})"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+    <a href="@Url.Action("Create",new {id=ViewBag.DueID})"><span class="fa fa-plus-square"></span> Add New</a>
 </div>
 }
 

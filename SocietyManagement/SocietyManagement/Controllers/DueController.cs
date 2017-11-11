@@ -42,13 +42,13 @@ namespace SocietyManagement.Controllers
                 if (Units.Count > 1)
                 {
                     Units.Add(new BuildingUnit { UnitID = 0, UnitName = "All" });
+                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
                 }
                 else if (Units.Count == 1)
                 {
                     id = Units.FirstOrDefault().UnitID;
-                }
-
-                ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
+                    ViewBag.UnitID = new SelectList(Units, "UnitID", "UnitName", id);
+                }                
 
                 if (id == 0)
                 {

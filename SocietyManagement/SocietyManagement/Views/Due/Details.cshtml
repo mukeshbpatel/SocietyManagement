@@ -68,7 +68,7 @@
     @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
     {
     <div class="pull-right">
-        <a href="@Url.Action("Create","Penalty",new {id = Model.DueID })"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+        <a href="@Url.Action("Create","Penalty",new {id = Model.DueID })"><span class="fa fa-plus-square"></span> Add New</a>
     </div>
     }
     <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
@@ -133,5 +133,5 @@ else
 
 <p>    
     
-    <button onclick="goBack()" class="btn btn-success">Back</button>
+    <button onclick="goBack()" class="btn btn-primary">Back</button>
 </p>

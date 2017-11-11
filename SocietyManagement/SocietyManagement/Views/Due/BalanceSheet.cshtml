@@ -4,13 +4,16 @@
     ViewBag.Title = "Balance Sheet";
 }
 
-
-
-<h3><span class="glyphicon glyphicon-usd"></span> Balance Sheet</h3>
 @if (ViewBag.UnitID != null)
 {
-<ul class="nav nav-pills pull-right">
-    @foreach (var item in (SelectList)ViewBag.UnitID)
+
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-calculator"></i> @ViewBag.Title</h3>
+    </div>
+    <div class="box-body">
+
+        <ul class="nav nav-pills pull-right">
+            @foreach (var item in (SelectList)ViewBag.UnitID)
     {
         if (item.Selected)
         {
@@ -21,14 +24,22 @@
             <li><a href="@Url.Action("BalanceSheet", new { id = item.Value })">@item.Text</a></li>
         }
     }
-</ul>
+        </ul>
 
-@*@Html.DropDownList("UnitID", null, htmlAttributes: new { @class = "form-control" })*@
 
-@Html.Partial("_BalanceSheet", Model);
 
+        @Html.Partial("_BalanceSheet", Model)
+    </div>
 }
 else
 {
-    <div class="bg-info" style="padding:10px"><span class="glyphicon glyphicon-info-sign"></span>No Building Unit assigned to your user id.<br />Please contact your Manager for details.</div>
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-calculator"></i> @ViewBag.Title</h3>
+    </div>
+    <div class="box-body">
+        <div class="alert alert-warning">
+            <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+            No Building Unit assigned to your user id. Please contact your Manager for details.
+        </div>
+    </div>
 }
