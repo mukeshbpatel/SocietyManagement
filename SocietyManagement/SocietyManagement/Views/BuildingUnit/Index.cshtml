@@ -6,7 +6,7 @@
 
 <h3><span class="glyphicon glyphicon glyphicon-home"></span> Building Unit</h3>
 
-@if (User.IsInRole("Admin"))
+@if (User.IsInRole("SuperUser"))
 {
     <div class="pull-right">
         <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>

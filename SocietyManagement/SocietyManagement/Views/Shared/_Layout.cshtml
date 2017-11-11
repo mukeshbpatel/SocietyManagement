@@ -55,7 +55,7 @@
                             </ul>
                         </li>
 
-                        if (User.IsInRole("Manager") || User.IsInRole("Comity") || User.IsInRole("Admin"))
+                        if (User.IsInRole("Admin") || User.IsInRole("Manger") || User.IsInRole("SuperUser"))
                         {
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -63,7 +63,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    @if (User.IsInRole("Manager") || User.IsInRole("Comity") || User.IsInRole("Admin"))
+                                    @if (User.IsInRole("Admin") || User.IsInRole("Manger") || User.IsInRole("SuperUser"))
                                     {
                                         <li class="dropdown-item"><a href="@Url.Action("Index", "RecurringDue")"><span class="glyphicon glyphicon-retweet"></span> Recurring Bills</a></li>
                                     }
@@ -74,7 +74,7 @@
                             </li>
                         }
 
-                        if (User.IsInRole("Manager") || User.IsInRole("Comity") || User.IsInRole("Admin"))
+                        if (User.IsInRole("Admin") || User.IsInRole("Manger") || User.IsInRole("SuperUser"))
                         {
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -82,7 +82,7 @@
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
-                                    @if (User.IsInRole("Admin"))
+                                    @if (User.IsInRole("SuperUser"))
                                     {
                                         <li class="dropdown-item"><a href="@Url.Action("CalculateBill", "RecurringDue",new {id = 0})"><span class="glyphicon glyphicon-retweet"></span> Calculate Bills</a></li>
                                         <li class="dropdown-item"><a href="@Url.Action("Index", "KeyValue")"><span class="icon-library"></span> Key Value</a></li>

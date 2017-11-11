@@ -37,7 +37,7 @@ namespace SocietyManagement.Controllers
             return View(building);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Building/Create
         public ActionResult Create()
         {
@@ -48,7 +48,7 @@ namespace SocietyManagement.Controllers
         // POST: Building/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BuildingID,BuildingName,BuildingTypeID,Details,UDK1,UDK2,UDK3,UDK4,UDK5")] Building building)
@@ -65,7 +65,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Building/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -85,7 +85,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "BuildingID,BuildingName,BuildingTypeID,Details,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Building building)
         {
@@ -100,7 +100,7 @@ namespace SocietyManagement.Controllers
             return View(building);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         // GET: Building/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -118,7 +118,7 @@ namespace SocietyManagement.Controllers
 
         // POST: Building/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

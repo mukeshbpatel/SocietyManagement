@@ -6,7 +6,7 @@
 
 <h3><span class="icon-office"></span> Building</h3>
 
-@if (User.IsInRole("Admin"))
+@if (User.IsInRole("SuperUser"))
 {
     <div class="pull-right">
         <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
@@ -24,7 +24,7 @@
         <th>
             Units
         </th>
-        @if (User.IsInRole("Admin"))
+        @if (User.IsInRole("SuperUser"))
         {
             <th>Action</th>
         }
@@ -42,7 +42,7 @@
             <td>
                 <a href="@Url.Action("Index","BuildingUnit",new { id = item.BuildingID })">@item.BuildingUnits.Where(d => d.IsDeleted == false).Count()</a>
             </td>
-            @if (User.IsInRole("Admin"))
+            @if (User.IsInRole("SuperUser"))
                 {
                 <td align="center">
                     <a href="@Url.Action("Edit", new { id = item.BuildingID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>

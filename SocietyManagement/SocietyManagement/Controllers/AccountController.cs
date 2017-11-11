@@ -78,10 +78,7 @@ namespace SocietyManagement.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:
-                    UserConfig uc = new UserConfig();
-                    uc.CreateRoles();
-                    uc = null;
+                case SignInStatus.Success:                    
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -157,19 +154,8 @@ namespace SocietyManagement.Controllers
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, PhoneNumber = model.Mobile, FirstName = model.FirstName, LastName = model.LastName, Gender = model.Gender };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
-                {
-                    UserConfig uc = new UserConfig();
-                    uc.CreateRoles();
-                    uc = null;
-
-                    if (model.Mobile == "9860002040")
-                    {
-                        var roles = await UserManager.AddToRoleAsync(user.Id, "Admin");
-                    }
-                    else
-                    {
-                        var roles = await UserManager.AddToRoleAsync(user.Id, "User");
-                    }
+                {                    
+                    var roles = await UserManager.AddToRoleAsync(user.Id, "User");                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

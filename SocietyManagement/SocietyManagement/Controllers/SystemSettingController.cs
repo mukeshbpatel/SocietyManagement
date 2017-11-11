@@ -10,7 +10,7 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="SuperUser")]
     public class SystemSettingController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();

@@ -16,7 +16,7 @@ namespace SocietyManagement.Controllers
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
         // GET: Collection
-        [Authorize(Roles = "Admin,Manager,Comity")]
+        [Authorize(Roles = "SuperUser,Admin,Manager")]
         public ActionResult Index()
         {
             var collections = db.Collections.Where(d=>d.IsDeleted==false && d.YearID == SiteSetting.FinancialYearID).Include(c => c.BuildingUnit).Include(c => c.PaymentMode).OrderByDescending(o=>o.CollectionDate);
@@ -74,7 +74,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Collection/Create
-        [Authorize(Roles ="Manager,Admin")]
+        [Authorize(Roles ="SuperUser,Admin")]
         public ActionResult Create(Int64? id)
         {
             Collection collection = new Collection();
@@ -98,7 +98,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
         {
@@ -121,7 +121,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Collection/Edit/5
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Edit(Int64? id)
         {
             if (id == null)
@@ -142,7 +142,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
         {
@@ -159,7 +159,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Collection/Delete/5
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Delete(Int64? id)
         {
             if (id == null)
@@ -176,7 +176,7 @@ namespace SocietyManagement.Controllers
 
         // POST: Collection/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Int64? id)
         {

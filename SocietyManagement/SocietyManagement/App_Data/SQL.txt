@@ -969,7 +969,7 @@ CREATE TABLE [dbo].[UserDefineFields](
 GO
 INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'05558045-b5b4-4b23-9f23-dbe10eb423e8', N'User')
 GO
-INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'1f6e4c6a-48f7-45e3-9b44-790864b1de21', N'Comity')
+INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'1f6e4c6a-48f7-45e3-9b44-790864b1de21', N'"Manger"')
 GO
 INSERT [dbo].[AspNetRoles] ([Id], [Name]) VALUES (N'aa6c91a0-dde1-4fad-ac9a-102a165cba32', N'Manager')
 GO

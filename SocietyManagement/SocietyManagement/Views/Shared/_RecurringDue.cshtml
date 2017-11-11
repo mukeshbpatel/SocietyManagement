@@ -23,7 +23,7 @@
         <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.DueDays)
         </th>
-        @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
         {
             <th class="hidden-xs">
                 @Html.DisplayNameFor(model => model.LastRunDate)
@@ -57,7 +57,7 @@
             <td class="hidden-xs right">
                 @Html.DisplayFor(modelItem => item.DueDays)
             </td>
-            @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
             {
                 <td class="hidden-xs">
                     @Html.DisplayFor(modelItem => item.LastRunDate)

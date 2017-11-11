@@ -6,7 +6,7 @@
 
 <h3>Penalty</h3>
 
-@if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+@if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
 {
 <div class="pull-right">
     <a href="@Url.Action("Create",new {id=ViewBag.DueID})"><span class="glyphicon glyphicon-plus"></span> Add New</a>
@@ -47,7 +47,7 @@
             </td>
             <td>
                 <a href="@Url.Action("Details", new { id = item.DueID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-                @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                 {
                     <a href="@Url.Action("Edit", new { id = item.DueID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                     <a href="@Url.Action("Delete", new { id = item.DueID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>

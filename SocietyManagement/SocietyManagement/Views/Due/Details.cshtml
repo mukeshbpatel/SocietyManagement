@@ -65,7 +65,7 @@
 
 <hr />
     <h4><span class="glyphicon glyphicon-usd"></span> Penalty</h4>
-    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
     {
     <div class="pull-right">
         <a href="@Url.Action("Create","Penalty",new {id = Model.DueID })"><span class="glyphicon glyphicon-plus"></span> Add New</a>
@@ -113,7 +113,7 @@ else
                 </td>
                 <td>
                     <a href="@Url.Action("Details", "Penalty", new { id = item.PenaltyID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-                    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                     {
                         <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                         <a href="@Url.Action("Delete", "Penalty", new { id = item.PenaltyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>

@@ -6,7 +6,7 @@
 
 <h3><span class="icon-key"></span> Key Value</h3>
 
-@if (User.IsInRole("Admin"))
+@if (User.IsInRole("SuperUser"))
 {
     <div class="pull-right">
         <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
@@ -23,7 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.KeyOrder)
         </th>
-        @if (User.IsInRole("Admin"))
+        @if (User.IsInRole("SuperUser"))
         {
         <th></th>
         }
@@ -40,7 +40,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.KeyOrder)
         </td>
-        @if (User.IsInRole("Admin"))
+        @if (User.IsInRole("SuperUser"))
         {
         <td>
             <a href="@Url.Action("Edit", new { id = item.KeyID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>

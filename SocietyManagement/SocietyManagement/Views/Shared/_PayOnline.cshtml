@@ -1,174 +1,174 @@
 ﻿@if (SiteSetting.ItemBoolean("OnlinePayment.AllowOnlinePayment"))
 {
-<ul class="nav pull-left">
-    <li><a href="#" data-toggle="modal" data-target="#payOnline">Pay Online</a></li>
-</ul>
+    <ul class="nav pull-left">
+        <li><a href="#" data-toggle="modal" data-target="#payOnline">Pay Online</a></li>
+    </ul>
 
-<div id="payOnline" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
+    <div id="payOnline" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
 
 
-            <div class="modal-header">
-                <button type="button" class="btn btn-success close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Online Payment Options</h4>
-            </div>
-            <div class="modal-body">
-                <div class="panel-group" id="accordion">
-                   
-                    @if (!String.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.OnlineTransferBankName")))
-                    {
-                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                    Online Bank Transfer
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                                <table class="table">
-                                    <tr><th colspan="3">Bank Account Details</th></tr>
-                                    <tr><td>Bank Name</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBankName")</td></tr>
-                                    <tr><td>Branch Name</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBranchName")</td></tr>
-                                    <tr><td>IFSC Code</td><td>:</td><td><a target="_blank" href="http://banksifsccode.com/@SiteSetting.Item("OnlinePayment.OnlineTransferIFSCCode")/">@SiteSetting.Item("OnlinePayment.OnlineTransferIFSCCode")</a></td></tr>
-                                    <tr><td>Account #</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBankAccountNumber")</td></tr>
-                                    <tr><td>Account Type</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBankAccountType")</td></tr>
-                                    <tr><td>Beneficiary</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBeneficiary")</td></tr>
-                                    <tr><td colspan="3">Submit refrence # and screen print after transfer.</td></tr>
-                                </table>
+                <div class="modal-header">
+                    <button type="button" class="btn btn-success close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Online Payment Options</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-group" id="accordion">
+
+                        @if (!String.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.OnlineTransferBankName")))
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                            Online Bank Transfer
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <tr><th colspan="3">Bank Account Details</th></tr>
+                                            <tr><td>Bank Name</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBankName")</td></tr>
+                                            <tr><td>Branch Name</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBranchName")</td></tr>
+                                            <tr><td>IFSC Code</td><td>:</td><td><a target="_blank" href="http://banksifsccode.com/@SiteSetting.Item("OnlinePayment.OnlineTransferIFSCCode")/">@SiteSetting.Item("OnlinePayment.OnlineTransferIFSCCode")</a></td></tr>
+                                            <tr><td>Account #</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBankAccountNumber")</td></tr>
+                                            <tr><td>Account Type</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBankAccountType")</td></tr>
+                                            <tr><td>Beneficiary</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.OnlineTransferBeneficiary")</td></tr>
+                                            <tr><td colspan="3">Submit refrence # and screen print after transfer.</td></tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    }
+                        }
 
-                    @if(!String.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBeneficiary")))
-                    {
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                    UPI Payment
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse2" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <table class="table">
-                                    <tr><th colspan="3">UPI Payment Details</th></tr>
-                                    @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIAddress")))
-                                    {
-                                        <tr><td>UPI Address</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.UPIAddress")</td></tr>
-                                    }
-                                    <tr><td>Beneficiary</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.UPIBeneficiary")</td></tr>
+                        @if (!String.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBeneficiary")))
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                                            UPI Payment
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <tr><th colspan="3">UPI Payment Details</th></tr>
+                                            @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIAddress")))
+                                            {
+                                                <tr><td>UPI Address</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.UPIAddress")</td></tr>
+                                            }
+                                            <tr><td>Beneficiary</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.UPIBeneficiary")</td></tr>
 
-                                    @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBhimAppURL")) || !string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPITezAppURL")) || !string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPaytmAppURL")) || !string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPhonePeAppURL")))
-                                    {
-                                        <tr>
-                                            <td colspan="3">
-                                                <b>Go Cashless</b> - Download following android application and Pay using UPI address
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3">
-                                                <div class="row">
-                                                    @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBhimAppURL")))
-                                                    {
-                                                    <div class="col-md-3 col-xs-6">
-                                                        <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPIBhimAppURL")">
-                                                            <img class="img-responsive" src="~/Content/image/BHIM.gif" />
-@if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBhimURL")))
-{
-                                                            <div class="caption">
-                                                                <p>@SiteSetting.Item("OnlinePayment.UPIBhimURL")</p>
-                                                            </div>
-}
-                                                        </a>
-                                                    </div>
-                                                    }
-                                                    @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPITezAppURL")))
-                                                    {
-                                                        <div class="col-md-3  col-xs-6">
-                                                            <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPITezAppURL")">
-                                                                <img class="img-responsive" src="~/Content/image/Tez.gif" />
-@if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPITezURL")))
-{
-                                                                <div class="caption">
-                                                                    <p>@SiteSetting.Item("OnlinePayment.UPITezURL")</p>
+                                            @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBhimAppURL")) || !string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPITezAppURL")) || !string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPaytmAppURL")) || !string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPhonePeAppURL")))
+                                            {
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <b>Go Cashless</b> - Download following android application and Pay using UPI address
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <div class="row">
+                                                            @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBhimAppURL")))
+                                                            {
+                                                                <div class="col-md-3 col-xs-6">
+                                                                    <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPIBhimAppURL")">
+                                                                        <img class="img-responsive" src="~/Content/image/BHIM.gif" />
+                                                                        @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIBhimURL")))
+                                                                        {
+                                                                            <div class="caption">
+                                                                                <p>@SiteSetting.Item("OnlinePayment.UPIBhimURL")</p>
+                                                                            </div>
+                                                                        }
+                                                                    </a>
                                                                 </div>
-}
-                                                            </a>
-                                                        </div>
-                                                    }
-                                                    @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPaytmAppURL")))
-                                                    {
-                                                        <div class="col-md-3 col-xs-6">
-                                                            <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPIPaytmAppURL")">
-                                                                <img class="img-responsive" src="~/Content/image/Paytm.gif" />
-@if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPaytmURL")))
-{
-                                                                <div class="caption">
-                                                                    <p>@SiteSetting.Item("OnlinePayment.UPIPaytmURL")</p>
+                                                            }
+                                                            @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPITezAppURL")))
+                                                            {
+                                                                <div class="col-md-3  col-xs-6">
+                                                                    <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPITezAppURL")">
+                                                                        <img class="img-responsive" src="~/Content/image/Tez.gif" />
+                                                                        @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPITezURL")))
+                                                                        {
+                                                                            <div class="caption">
+                                                                                <p>@SiteSetting.Item("OnlinePayment.UPITezURL")</p>
+                                                                            </div>
+                                                                        }
+                                                                    </a>
                                                                 </div>
-}
-                                                            </a>
-                                                        </div>
-                                                    }
-                                                    @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPhonePeAppURL")))
-                                                    {
-                                                        <div class="col-md-3  col-xs-6">
-                                                            <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPIPhonePeAppURL")">
-                                                                <img class="img-responsive" src="~/Content/image/PhonePe.gif" />
-@if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPhonePeURL")))
-{
-                                                                <div class="caption">
-                                                                    <p>@SiteSetting.Item("OnlinePayment.UPIPhonePeURL")</p>
+                                                            }
+                                                            @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPaytmAppURL")))
+                                                            {
+                                                                <div class="col-md-3 col-xs-6">
+                                                                    <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPIPaytmAppURL")">
+                                                                        <img class="img-responsive" src="~/Content/image/Paytm.gif" />
+                                                                        @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPaytmURL")))
+                                                                        {
+                                                                            <div class="caption">
+                                                                                <p>@SiteSetting.Item("OnlinePayment.UPIPaytmURL")</p>
+                                                                            </div>
+                                                                        }
+                                                                    </a>
                                                                 </div>
-}
-                                                            </a>
+                                                            }
+                                                            @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPhonePeAppURL")))
+                                                            {
+                                                                <div class="col-md-3  col-xs-6">
+                                                                    <a target="_blank" href="@SiteSetting.Item("OnlinePayment.UPIPhonePeAppURL")">
+                                                                        <img class="img-responsive" src="~/Content/image/PhonePe.gif" />
+                                                                        @if (!string.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.UPIPhonePeURL")))
+                                                                        {
+                                                                            <div class="caption">
+                                                                                <p>@SiteSetting.Item("OnlinePayment.UPIPhonePeURL")</p>
+                                                                            </div>
+                                                                        }
+                                                                    </a>
+                                                                </div>
+                                                            }
                                                         </div>
-                                                    }                                                    
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    }                                    
-                                    <tr><td colspan="3">Submit refrence # and screen print after payment.</td></tr>
-                                </table>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            <tr><td colspan="3">Submit refrence # and screen print after payment.</td></tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    }
-                            
-                    @if (!String.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.ChequePaymentPayTo")))
-                    {
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                                    Cheque Payment
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapse3" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <table class="table">
-                                    <tr><th colspan="3">Cheque Payment Details</th></tr>
-                                    <tr><td>Pay To</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.ChequePaymentPayTo")</td></tr>
-                                    <tr><td>Cheque Type</td><td>:</td><td>Account Pay</td></tr>
-                                    <tr><td colspan="3">Keep photo copy of your cheque.</td></tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    }
+                        }
 
+                        @if (!String.IsNullOrEmpty(SiteSetting.Item("OnlinePayment.ChequePaymentPayTo")))
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                                            Cheque Payment
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <table class="table">
+                                            <tr><th colspan="3">Cheque Payment Details</th></tr>
+                                            <tr><td>Pay To</td><td>:</td><td>@SiteSetting.Item("OnlinePayment.ChequePaymentPayTo")</td></tr>
+                                            <tr><td>Cheque Type</td><td>:</td><td>Account Pay</td></tr>
+                                            <tr><td colspan="3">Keep photo copy of your cheque.</td></tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
                 </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
 
 }

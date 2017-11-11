@@ -14,7 +14,7 @@
         <th>
             @Html.DisplayNameFor(model => model.OwnerID)
         </th>
-        @if (User.IsInRole("Admin"))
+        @if (User.IsInRole("SuperUser"))
         {
             <th>Action</th>
         }
@@ -35,7 +35,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Owner.Name)
             </td>
-            @if (User.IsInRole("Admin"))
+            @if (User.IsInRole("SuperUser"))
             {
                 <td align="center">
                     <a href="@Url.Action("Edit","BuildingUnit", new { id = item.UnitID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>

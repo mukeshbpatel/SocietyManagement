@@ -29,7 +29,7 @@
     <div>
         <span>@item.Author.Name</span>, <span>@item.CreatedDate</span>
 
-        @if (User.IsInRole("Manager") || User.IsInRole("Admin") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
             <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
             <a href="@Url.Action("Delete","ComplaintComment", new { id = item.CommentID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>

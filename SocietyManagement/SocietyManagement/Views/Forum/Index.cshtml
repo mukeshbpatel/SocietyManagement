@@ -38,7 +38,7 @@
                 </div>
                         <div id="collapse_@item.ForumID" class="panel-collapse collapse">                
                             <div class="panel-body">                                
-                            @if (User.IsInRole("Manager") || User.IsInRole("Admin") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+                            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
                             {
                                 <div class="pull-right">
                                 <a href="@Url.Action("Edit", new { id = item.ForumID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a><span></span>

@@ -16,7 +16,7 @@ namespace SocietyManagement.Controllers
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
         // GET: Expense
-        [Authorize(Roles = "Admin,Manager,Comity")]
+        [Authorize(Roles = "SuperUser,Admin,Manager")]
         public ActionResult Index()
         {
             var expenses = db.Expenses.Where(d=>d.IsDeleted==false).Include(e => e.PaymentMode).Include(e => e.ExpenseType).OrderBy(o=>o.ExpenseDate);

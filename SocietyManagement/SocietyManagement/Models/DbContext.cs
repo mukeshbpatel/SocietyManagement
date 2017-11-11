@@ -36,7 +36,7 @@ namespace SocietyManagement.Models
 
         public static List<AspNetUser> GetUsers(DbSet<AspNetUser> Users)
         {
-            List<AspNetUser> FilterUsers = Users.Where(u => u.PhoneNumber!="9860002040" && u.Email!="mukeshbpatel@gmail.com").OrderBy(o=>o.FirstName).ToList();
+            List<AspNetUser> FilterUsers = Users.Where(u => u.UserName != "SuperUser").OrderBy(o=>o.FirstName).ToList();            
             return FilterUsers;
         }
 

@@ -47,7 +47,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Create
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="SuperUser")]
         public ActionResult Create()
         {
             ViewBag.OwnerID = new SelectList(Helper.GetUsers(db.AspNetUsers), "Id", "Name");
@@ -61,7 +61,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult Create([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit,User);
@@ -117,7 +117,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Edit/5
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -140,7 +140,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Edit([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit, User,false);
@@ -180,7 +180,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -198,7 +198,7 @@ namespace SocietyManagement.Controllers
         // POST: BuildingUnit/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult DeleteConfirmed(int id)
         {
             BuildingUnit buildingUnit = db.BuildingUnits.Find(id);

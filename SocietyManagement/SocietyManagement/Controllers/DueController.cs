@@ -16,7 +16,7 @@ namespace SocietyManagement.Controllers
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
         // GET: Due
-        [Authorize(Roles = "Admin,Manager,Comity")]
+        [Authorize(Roles = "SuperUser,Admin,Manager")]
         public ActionResult Index(string BillDate)
         {
             if (!string.IsNullOrEmpty(BillDate))
@@ -105,7 +105,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Due/Create
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Create()
         {
             ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName");            
@@ -118,7 +118,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Create([Bind(Include = "DueID,BillDate,UnitID,DueTypeID,DueAmount,Details,DueDate,UDK1,UDK2,UDK3,UDK4,UDK5")] Due due)
         {
             Helper.AssignUserInfo(due, User);
@@ -139,7 +139,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Due/Edit/5
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Edit(Int64? id)
         {
             if (id == null)
@@ -161,7 +161,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Edit([Bind(Include = "DueID,BillDate,UnitID,DueTypeID,DueAmount,Details,DueDate,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Due due)
         {
             Helper.AssignUserInfo(due, User, false);
@@ -177,7 +177,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Due/Delete/5
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         public ActionResult Delete(Int64? id)
         {
             if (id == null)
@@ -194,7 +194,7 @@ namespace SocietyManagement.Controllers
 
         // POST: Due/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "Manager,Admin")]
+        [Authorize(Roles = "SuperUser,Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Int64 id)
         {

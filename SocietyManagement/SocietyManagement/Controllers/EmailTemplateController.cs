@@ -10,7 +10,7 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize(Roles = "Manager,Admin")]
+    [Authorize(Roles = "SuperUser,Admin")]
     public class EmailTemplateController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
@@ -50,7 +50,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="SuperUser")]
         public ActionResult Create([Bind(Include = "TemplateID,TemplateTypeID,TemplateSubject,TemplateBody,FromEmail,FromName,ReplyToEmail,ReplyToName,UDK1,UDK2,UDK3,UDK4,UDK5")] EmailTemplate emailTemplate)
         {
             Helper.AssignUserInfo(emailTemplate, User);
@@ -99,7 +99,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: EmailTemplate/Delete/5
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="SuperUser")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,7 +117,7 @@ namespace SocietyManagement.Controllers
         // POST: EmailTemplate/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult DeleteConfirmed(int id)
         {
             EmailTemplate emailTemplate = db.EmailTemplates.Find(id);

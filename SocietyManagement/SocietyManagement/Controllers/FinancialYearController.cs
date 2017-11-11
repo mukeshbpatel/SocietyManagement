@@ -10,7 +10,7 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize(Roles = "Manager, Comity, Admin")]
+    [Authorize(Roles = "SuperUser,Admin,Manager")]
     public class FinancialYearController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
@@ -37,7 +37,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: FinancialYear/Create
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="SuperUser")]
         public ActionResult Create()
         {
             return View();
@@ -48,7 +48,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult Create([Bind(Include = "YearID,YearName,StartDate,EndDate,IsActive,IsClosed,UDK1,UDK2,UDK3,UDK4,UDK5")] FinancialYear financialYear)
         {
             Helper.AssignUserInfo(financialYear, User);
@@ -64,7 +64,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: FinancialYear/Edit/5
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="SuperUser")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,7 +84,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult Edit([Bind(Include = "YearID,YearName,StartDate,EndDate,IsActive,IsClosed,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] FinancialYear financialYear)
         {
             Helper.AssignUserInfo(financialYear, User, false);
@@ -99,7 +99,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: FinancialYear/Delete/5
-        [Authorize(Roles ="Admin")]
+        [Authorize(Roles ="SuperUser")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,7 +117,7 @@ namespace SocietyManagement.Controllers
         // POST: FinancialYear/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperUser")]
         public ActionResult DeleteConfirmed(int id)
         {
             FinancialYear financialYear = db.FinancialYears.Find(id);

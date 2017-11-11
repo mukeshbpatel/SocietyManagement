@@ -92,7 +92,7 @@
                 </td>
                 <td>
                     <a href="@Url.Action("DownloadFile", new { id = media.MediaID })" title="Download"><span class="glyphicon glyphicon-download"></span></a>
-                    @if (User.IsInRole("Manager") || User.IsInRole("Admin"))
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                     {
                         <a href="@Url.Action("Edit","BuildingUnitMedia", new { id = media.MediaID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
                         <a href="@Url.Action("Delete","BuildingUnitMedia", new { id = media.MediaID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>

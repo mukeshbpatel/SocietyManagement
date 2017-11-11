@@ -41,7 +41,7 @@
         <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.DueDate)
         </th>
-        @if (ShowDetails & (User.IsInRole("Manager") || User.IsInRole("Admin")))
+        @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
         {
             <th></th>
         }
@@ -90,7 +90,7 @@
             <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.DueDate)
             </td>
-            @if (ShowDetails & (User.IsInRole("Manager") || User.IsInRole("Admin")))
+            @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
                 {
                 <td class="center" nowrap>
                     <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
@@ -122,7 +122,7 @@
             }
             <th class="right"><span>@(Model.Sum(s => s.DueAmount) + TotalPenalty)</span></th>
             <th class="hidden-xs"></th>
-            @if (ShowDetails & (User.IsInRole("Manager") || User.IsInRole("Admin")))
+            @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
             {
                 <th></th>
             }

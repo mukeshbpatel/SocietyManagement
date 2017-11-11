@@ -16,6 +16,7 @@ namespace SocietyManagement
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            UserConfig.CreateRoles();
             SiteSetting.SetSiteSettings();
             SiteSetting.LoadFinancialYearSettings();
         }
