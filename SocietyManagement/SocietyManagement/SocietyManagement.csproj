@@ -357,6 +357,7 @@
     <Content Include="Content\jquery-te-1.4.0.css" />
     <Content Include="Content\jquery-te.png" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="images\user-160x160.png" />
     <Content Include="Scripts\adminlte.min.js" />
     <Content Include="Template\MaintanceBill.html" />
     <Content Include="Template\PaymentReceipt.html" />

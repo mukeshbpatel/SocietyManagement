@@ -6,77 +6,26 @@
 
 <h3><span class="glyphicon glyphicon-usd"></span> Bills</h3>
 
-<table class="table table-sm table-striped table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BillDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DueTypeID)
-        </th>
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.Details)
-        </th>        
-        <th>
-            @Html.DisplayNameFor(model => model.DueAmount)
-        </th>
-        <th>Penalty</th>                
-        <th>
-            @Html.DisplayNameFor(model => model.DueDate)
-        </th>
-        <th></th>
-    </tr>
-    @{
-        decimal TotalPenalty = 0; }
+@if (ViewBag.UnitID != null)
+{    
+    <ul class="nav nav-pills pull-right">
+   @foreach (var item in (SelectList)ViewBag.UnitID)
+      {
+            if (item.Selected)
+            {                
+                <li class="active"><a href="#">@item.Text</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("MyBill", new { id = item.Value })">@item.Text</a></li>
+            }
+        }        
+    </ul>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.BillDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueType.KeyValues)
-        </td>
-        <td class="hidden-xs">
-            @Html.DisplayFor(modelItem => item.Details)
-        </td>        
-        <td class="right">
-            @Html.DisplayFor(modelItem => item.DueAmount)
-        </td>
-        <td class="right">
-                        @{ 
-                            decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
-                            if (penalty > 0 )
-                            {
-                                TotalPenalty += penalty;
-                                <span>@penalty</span>
-                            }
-                         }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DueDate)
-        </td>
-        <td class="center">
-            <a href="@Url.Action("Details", new { id = item.DueID, Title = "Payment" })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-        </td>        
-    </tr>
+    @Html.Partial("_Bill",Model)
+
 }
-    @if (Model.Count() > 0)
-    {
-        <tr>
-            <th colspan="3">Total</th>
-            <th class="hidden-xs"></th>
-            <th class="right">@Model.Sum(s => s.DueAmount)</th>
-            <th class="right">@TotalPenalty</th>
-            <th></th>
-            <th></th>
-        </tr>
-    }  
-
-</table>
+else
+{
+    <div class="bg-info" style="padding:10px"><span class="glyphicon glyphicon-info-sign"></span>No Building Unit assigned to your user id.<br />Please contact your Manager for details.</div>
+}
