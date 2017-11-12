@@ -270,6 +270,7 @@ namespace SocietyManagement.Controllers
                 db.Entry(aspNetUsers).State = EntityState.Modified;
                 db.SaveChanges();
                 db.Dispose();
+                HttpContext.Session["UserInfo"] = null;
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             return View(profile);

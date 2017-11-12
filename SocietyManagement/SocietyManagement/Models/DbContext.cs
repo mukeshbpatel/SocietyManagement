@@ -40,6 +40,40 @@ namespace SocietyManagement.Models
             return FilterUsers;
         }
 
+        public static AspNetUser CurrentUser()
+        {
+            AspNetUser aspNetUser;
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                aspNetUser = new AspNetUser();
+                aspNetUser.FirstName = string.Empty;
+                aspNetUser.LastName = string.Empty;
+                aspNetUser.Role = string.Empty;
+                aspNetUser.Gender = "Male";
+                HttpContext.Current.Session["UserInfo"] = null;
+            }
+            else if (HttpContext.Current.Session["UserInfo"] != null)
+            {
+                aspNetUser = (AspNetUser)HttpContext.Current.Session["UserInfo"];                
+            }
+            else
+            {
+                using (SocietyManagementEntities db = new SocietyManagementEntities())
+                {
+                    aspNetUser = db.AspNetUsers.Find(HttpContext.Current.User.Identity.GetUserId());
+                    if (aspNetUser != null)
+                        aspNetUser.Role = aspNetUser.AspNetRoles.FirstOrDefault().Name;
+                    HttpContext.Current.Session["UserInfo"] = aspNetUser;
+                }                
+            }
+            return aspNetUser;
+        }
+
+        public static string GetUserID(IPrincipal User)
+        {
+            return User.Identity.GetUserId();
+        }        
+
         public static List<KeyValue> FilterKeyValues(DbSet<KeyValue> KeyValues,string KeyName)
         {            
             return KeyValues.Where(k => k.KeyName == KeyName).OrderBy(o => o.KeyOrder).ToList();
@@ -62,12 +96,7 @@ namespace SocietyManagement.Models
             }
             
         }
-
-        public static string GetUserID(IPrincipal User)
-        {
-            return User.Identity.GetUserId();
-        }
-
+        
         public static void AssignUserInfo(object obj, IPrincipal User, bool IsNew = true)
         {
             DateTime CurrentDate = GetCurrentDate();

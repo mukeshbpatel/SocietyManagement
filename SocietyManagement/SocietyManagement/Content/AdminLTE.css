@@ -139,11 +139,9 @@ body {
 /* Content */
 .content {
   min-height: 250px;
-  padding: 15px;
+  padding: 10px;
   margin-right: auto;
-  margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  margin-left: auto;  
 }
 /* H1 - H6 font */
 h1,
@@ -506,7 +504,7 @@ a:focus {
   margin: 0;
   padding: 0;
 }
-.sidebar-menu > li > a {
+.sidebar-menu > li > a, .sidebar-menu > li > form > a {
   padding: 12px 5px 12px 15px;
   display: block;
 }
@@ -1447,16 +1445,40 @@ a:focus {
  * Component: Small Box
  * --------------------
  */
+
+.col-lg-3
+{
+    padding-right:10px;
+    padding-left:10px;
+} 
+.col-xs-6
+{
+    padding-right:10px;
+    padding-left:10px;
+}
 .small-box {
-  border-radius: 2px;
+  border-radius: 3px;
   position: relative;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 .small-box > .inner {
-  padding: 10px;
+  padding: 15px;
 }
+
+.small-box > .small-box-header {
+  position: relative;
+  text-align: center;
+  padding: 6px 0;
+  color: #f4f4f4;  
+  display: block;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  font-weight: bold;
+}
+
 .small-box > .small-box-footer {
   position: relative;
   text-align: center;
@@ -1473,14 +1495,16 @@ a:focus {
   background: rgba(0, 0, 0, 0.15);
 }
 .small-box h3 {
-  font-size: 38px;
+  font-size: 25px;
   font-weight: bold;
   margin: 0 0 10px 0;
   white-space: nowrap;
   padding: 0;
 }
+
 .small-box p {
   font-size: 15px;
+  font-weight: bold;
 }
 .small-box p > small {
   display: block;
@@ -1497,10 +1521,10 @@ a:focus {
   -o-transition: all 0.3s linear;
   transition: all 0.3s linear;
   position: absolute;
-  top: -10px;
-  right: 10px;
+  top: 25px;
+  right: 15px;
   z-index: 0;
-  font-size: 90px;
+  font-size: 75px;
   color: rgba(0, 0, 0, 0.15);
 }
 .small-box:hover {
@@ -1508,7 +1532,7 @@ a:focus {
   color: #f9f9f9;
 }
 .small-box:hover .icon {
-  font-size: 95px;
+  font-size: 85px;
 }
 @media (max-width: 767px) {
   .small-box {
@@ -1518,7 +1542,7 @@ a:focus {
     display: none;
   }
   .small-box p {
-    font-size: 12px;
+    font-size: 13px;
   }
 }
 /*
@@ -1776,7 +1800,7 @@ a:focus {
   border-top-right-radius: 0;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-  padding: 10px;
+  padding: 15px;
 }
 .no-header .box-body {
   border-top-right-radius: 3px;
