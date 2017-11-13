@@ -8,13 +8,13 @@
         <th>
             @Html.DisplayNameFor(model => model.UnitName)
         </th>
-        <th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.UnitTypeID)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.OwnerID)
         </th>
-        @if (User.IsInRole("SuperUser"))
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
         {
             <th>Action</th>
         }
@@ -29,17 +29,20 @@
             <td>
                 <a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })" title="Details">@item.UnitName</a>
             </td>
-            <td>
+            <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.UnitType.KeyValues)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Owner.Name)
             </td>
-            @if (User.IsInRole("SuperUser"))
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
             {
-                <td align="center">
-                    <a href="@Url.Action("Edit","BuildingUnit", new { id = item.UnitID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a href="@Url.Action("Delete","BuildingUnit", new { id = item.UnitID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                <td class="list-action">
+                    <a href="@Url.Action("Edit","BuildingUnit", new { id = item.UnitID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
+                    @if (User.IsInRole("SuperUser"))
+                    {
+                        <a href="@Url.Action("Delete", "BuildingUnit", new { id = item.UnitID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                    }
                 </td>
             }
         </tr>

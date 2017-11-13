@@ -41,7 +41,7 @@
                             @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
                             {
                                 <div class="pull-right">
-                                <a href="@Url.Action("Edit", new { id = item.ForumID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a><span></span>
+                                <a href="@Url.Action("Edit", new { id = item.ForumID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a><span></span>
                                 <a href="@Url.Action("Delete", new { id = item.ForumID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
                                 </div>
                              }

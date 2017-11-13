@@ -138,8 +138,8 @@ body {
 }
 /* Content */
 .content {
-  min-height: 250px;
-  padding: 10px;
+  min-height: 200px;
+  padding: 7px;
   margin-right: auto;
   margin-left: auto;  
 }
@@ -504,10 +504,17 @@ a:focus {
   margin: 0;
   padding: 0;
 }
-.sidebar-menu > li > a, .sidebar-menu > li > form > a {
+.sidebar-menu > li > a {
   padding: 12px 5px 12px 15px;
   display: block;
 }
+
+.sidebar-menu > li > form > a
+{
+    padding: 12px 5px 12px 15px;
+  display: block;
+}
+
 .sidebar-menu > li > a > .fa,
 .sidebar-menu > li > a > .glyphicon,
 .sidebar-menu > li > a > .ion {
@@ -1800,7 +1807,10 @@ a:focus {
   border-top-right-radius: 0;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-  padding: 15px;
+  padding-top: 7px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-bottom: 15px;
 }
 .no-header .box-body {
   border-top-right-radius: 3px;
@@ -1839,6 +1849,19 @@ a:focus {
   padding: 10px;
   background-color: #ffffff;
 }
+
+.box-footer a {
+  margin-right:10px;
+  width:80px;
+}
+.box-footer a i {
+  margin-right:3px;  
+}
+
+.box-footer a span {
+  margin-right:3px;  
+}
+
 .chart-legend {
   margin: 10px 0;
 }
@@ -5026,4 +5049,26 @@ textarea {
 
 label {
     font-weight:600;
+}
+
+
+.overflow-hidden
+{
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.list-action
+{
+    text-wrap:avoid;
+    text-align: center;
+    width:70px;
+}
+
+.list-action a 
+{
+    margin-left:3px;
+    margin-right:3px;
 }

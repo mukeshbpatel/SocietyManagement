@@ -43,7 +43,7 @@
         @if (User.IsInRole("SuperUser"))
         {
         <td>
-            <a href="@Url.Action("Edit", new { id = item.KeyID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Edit", new { id = item.KeyID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
             <a href="@Url.Action("Delete", new { id = item.KeyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
         </td>
         }

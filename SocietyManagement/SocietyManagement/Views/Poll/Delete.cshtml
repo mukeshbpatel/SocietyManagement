@@ -1,14 +1,15 @@
 ﻿@model SocietyManagement.Models.Poll
 
 @{
-    ViewBag.Title = "Poll";
+    ViewBag.Title = "Opinion Poll";
 }
 
-<h3><span class="glyphicon glyphicon-tasks"></span> Poll</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-tasks"></i> @ViewBag.Title</h3>
+</div>
 
-<h4>Are you sure you want to delete this?</h4>
-<div>
-    <hr />
+<div class="box-body">
+    <h4>Are you sure you want to delete this?</h4>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.PollTitle)
@@ -107,17 +108,18 @@
         </dd>
 
     </dl>
-
+</div>
+<div class="box-footer">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="form-actions no-color col-md-offset-1 col-md-11">
-                    <input type="submit" value="Delete" class="btn btn-primary" /> |
+                    <input type="submit" value="Delete" class="btn btn-primary" />
                     <a href="@Url.Action("Index")" class="btn btn-default" role="button">Cancel</a>
                 </div>
-                </div>
             </div>
-                }
-            </div>
+        </div>
+    }
+</div>

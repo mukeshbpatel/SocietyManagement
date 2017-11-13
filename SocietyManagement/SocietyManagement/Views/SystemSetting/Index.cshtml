@@ -48,7 +48,7 @@
                 @if (User.IsInRole("SuperUser"))
                 {
                     <a href="@Url.Action("Details", new { id = item.SettingID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>                
-                    <a href="@Url.Action("Edit", new { id = item.SettingID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="@Url.Action("Edit", new { id = item.SettingID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
                     <a href="@Url.Action("Delete", new { id = item.SettingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
                 }
             </td>

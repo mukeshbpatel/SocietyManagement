@@ -6,6 +6,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.CollectionDate)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiptNumber)
+            </th>
 @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
 {
             <th>
@@ -15,9 +18,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PaymentModeID)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReceiptNumber)
-            </th>
+            
             <th class="hidden-xs">
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
@@ -36,18 +37,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CollectionDate)
             </td>
+            <td>
+                <a href="@Url.Action("Details", "Collection", new { id = item.CollectionID })" title="Details">@item.ReceiptNumber</a>
+</td>
 @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
 {
             <td>
-                @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+                <a href="@Url.Action("Details","BuildingUnit",new {id=item.UnitID})">@item.BuildingUnit.UnitName</a>
             </td>
 }
             <td>
                 @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReceiptNumber)
-            </td>
+           
             <td class="hidden-xs right">
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
@@ -56,15 +58,16 @@
             </td>
             <td align="right">
                 @Html.DisplayFor(modelItem => item.CollectionAmount)
-            </td>            
-            <td class="center">
-                <a href="@Url.Action("Details", "Collection", new { id = item.CollectionID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a href="@Url.Action("Edit","Collection", new { id = item.CollectionID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                    <a href="@Url.Action("Delete","Collection", new { id = item.CollectionID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                }
             </td>
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+            <td class="center" nowrap>                
+                
+                    <a href="@Url.Action("Edit","Collection", new { id = item.CollectionID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="@Url.Action("Delete","Collection", new { id = item.CollectionID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                
+            </td>
+            }
         </tr>
     }
     @if (Model.Count() > 0)

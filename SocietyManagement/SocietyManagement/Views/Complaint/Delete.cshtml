@@ -4,94 +4,112 @@
     ViewBag.Title = "Complaint";
 }
 
-<h3><span class="glyphicon glyphicon-hand-up"></span> Complaint</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-hand-o-up"></i> @ViewBag.Title</h3>
+</div>
+<div class="box-body">
+    <h4>Are you sure you want to delete this?</h4>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ComplaintDate)
+            </dt>
 
-<h4>Are you sure you want to delete this?</h4>
-<div>    
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ComplaintDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ComplaintDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ComplaintDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Details)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Details)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Details)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Details)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StatusID)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StatusID)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Status.KeyValues)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Status.KeyValues)
-        </dd>
-<dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedDate)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedDate)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.AssignTo.Name)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AssignTo.Name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.AssignTo.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.AssignTo.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Author.Name)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Author.Name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Author.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Author.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ComplaintTypeID)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ComplaintTypeID)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ComplaintType.KeyValues)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ComplaintType.KeyValues)
-        </dd>
+        </dl>
 
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-<div class="form-horizontal">
-            <div class="form-group">
-        <div class="form-actions no-color col-md-offset-1 col-md-11">
-            <input type="submit" value="Delete" class="btn btn-primary" /> |
-            <a href="@Url.Action("Index")" class="btn btn-default" role="button">Cancel</a>
-        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="form-actions no-color col-md-offset-1 col-md-11">
+                        <input type="submit" value="Delete" class="btn btn-primary" /> |
+                        <a href="@Url.Action("Index")" class="btn btn-default" role="button">Cancel</a>
+                    </div>
                 </div>
+            </div>
+        }
     </div>
+</div>
+<div class="box-footer">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <div class="form-actions no-color col-md-offset-1 col-md-11">
+                    <input type="submit" value="Delete" class="btn btn-primary" />
+                    <a href="@Url.Action("Index")" class="btn btn-default" role="button">Cancel</a>
+                </div>
+            </div>
+        </div>
     }
 </div>

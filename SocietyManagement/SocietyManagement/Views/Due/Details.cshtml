@@ -115,7 +115,7 @@ else
                     <a href="@Url.Action("Details", "Penalty", new { id = item.PenaltyID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
                     @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                     {
-                        <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
                         <a href="@Url.Action("Delete", "Penalty", new { id = item.PenaltyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
                     }
                 </td>
@@ -133,5 +133,5 @@ else
 
 <p>    
     
-    <button onclick="goBack()" class="btn btn-primary">Back</button>
+    <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><span class="fa fa-backward"></span> Back</a>
 </p>

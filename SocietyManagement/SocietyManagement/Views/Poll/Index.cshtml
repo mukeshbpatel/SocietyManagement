@@ -1,64 +1,67 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Poll>
 
 @{
-    ViewBag.Title = "Poll";
+    ViewBag.Title = "Opinion Poll";
 }
 
-<h3><span class="glyphicon glyphicon-tasks"></span> Poll</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-tasks"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | User.IsInRole("Manger"))
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
 
-@if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | User.IsInRole("Manger"))
+<div class="box-body">
+    <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PollTitle)
+            </th>
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") || User.IsInRole("Manager"))
 {
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
-    </div>
-}
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PollTitle)
-        </th>
-@if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
-{
-        <th>
+        <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.PollType.KeyValues)
         </th>
 }
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>        
-        <th></th>
-    </tr>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.EndDate)
+            </th>
+            <th>Vote</th>
+        </tr>
 
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.PollTitle)
+            <a href="@Url.Action("Details", new { id = item.PollID })" title="Details">@item.PollTitle</a>
         </td>
-@if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") || User.IsInRole("Manager"))
 {
-        <td>
+        <td class="hidden-xs">
             @Html.DisplayFor(modelItem => item.PollType.KeyValues)
         </td>
 }
-        <td>
+        <td class="hidden-xs">
             @Html.DisplayFor(modelItem => item.StartDate)
         </td>
-        <td>
+        <td class="hidden-xs">
             @Html.DisplayFor(modelItem => item.EndDate)
-        </td>        
-        <td>
-            <a href="@Url.Action("Vote", new { id = item.PollID })" title="Vote"><span class="glyphicon glyphicon-apple"></span></a>
-            <a href="@Url.Action("Details", new { id = item.PollID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-@if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | User.IsInRole("Manger"))
+        </td>
+        <td class="list-action">
+            <a href="@Url.Action("Vote", new { id = item.PollID })" title="Vote"><span class="fa fa-hand-o-up"></span></a>            
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | User.IsInRole("Manger"))
 {
-            <a href="@Url.Action("Edit", new { id = item.PollID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+            <a href="@Url.Action("Edit", new { id = item.PollID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
             <a href="@Url.Action("Delete", new { id = item.PollID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
 }
         </td>
     </tr>
 }
 
-</table>
+    </table>
+</div>

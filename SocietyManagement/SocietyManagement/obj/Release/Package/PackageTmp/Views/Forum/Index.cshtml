@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Forum";
-    bool first = true;
+    
 }
 
 <h3><span class="glyphicon glyphicon-bullhorn"></span> Forum</h3>
@@ -11,7 +11,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Add New</a>
+        <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
     </div>
 }
 
@@ -38,10 +38,10 @@
                 </div>
                         <div id="collapse_@item.ForumID" class="panel-collapse collapse">                
                             <div class="panel-body">                                
-                            @if (User.IsInRole("Manager") || User.IsInRole("Admin") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+                            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
                             {
                                 <div class="pull-right">
-                                <a href="@Url.Action("Edit", new { id = item.ForumID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a><span></span>
+                                <a href="@Url.Action("Edit", new { id = item.ForumID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a><span></span>
                                 <a href="@Url.Action("Delete", new { id = item.ForumID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
                                 </div>
                              }

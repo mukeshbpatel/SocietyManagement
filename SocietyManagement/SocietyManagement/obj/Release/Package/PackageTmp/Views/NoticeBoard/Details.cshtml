@@ -4,19 +4,20 @@
     ViewBag.Title = "Notice";
 }
 
-<h3><span class="glyphicon glyphicon-blackboard"></span> Notice Board</h3>
-
-<div>
-    <hr />
-    <h4>@Html.DisplayFor(model => model.NoticeHeading)</h4>
-    
-    <div class="multiline">
-        @Html.Raw(Model.Notice)
-    </div>        
- 
-       @*@Html.Raw("<pre>" + Html.Encode(Model.Notice) + "</pre>")*@    
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="glyphicon glyphicon-blackboard"></i> @ViewBag.Title</h3>
 </div>
 
-<p>
-    <a href="@Url.Action("Index")" class="col-md-offset-1 btn btn-success" role="button">Back</a>
-</p>
+<div class="box-body">
+
+    <h4>@Html.DisplayFor(model => model.NoticeHeading)</h4>
+    <small><i class="fa fa-calendar"></i> @Html.DisplayFor(model => model.NoticeDate)</small>
+    <br /><br />
+    <div class="multiline">
+        @Html.Raw(Model.Notice)
+    </div>
+</div>
+
+<div class="box-footer">
+    <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><span class="fa fa-backward"></span> Back</a>
+</div>

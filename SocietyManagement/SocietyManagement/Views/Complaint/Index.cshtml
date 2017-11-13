@@ -4,67 +4,60 @@
     ViewBag.Title = "Complaint";
 }
 
-<h3><span class="glyphicon glyphicon-hand-up"></span> Complaint</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-hand-o-up"></i> @ViewBag.Title</h3>
 
-@if (User.Identity.IsAuthenticated)
-{
     <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
+        <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
     </div>
-}
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ComplaintDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuthorID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ComplaintTypeID)
-        </th>
+</div>
 
-        <th>
-            @Html.DisplayNameFor(model => model.StatusID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AssignToID)
-        </th>
-        <th></th>
-    </tr>
+<div class="box-body">
+    <table class="table table-sm table-hover  table-condensed table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ComplaintDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.AuthorID)
+            </th>
+            <th  class="hidden-xs">
+                @Html.DisplayNameFor(model => model.ComplaintTypeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusID)
+            </th>
+            <th  class="hidden-xs">
+                @Html.DisplayNameFor(model => model.AssignToID)
+            </th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ComplaintDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Author.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ComplaintType.KeyValues)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status.KeyValues)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AssignTo.Name)
-        </td>                
-        <td>
-            <a href="@Url.Action("Details", new { id = item.ComplaintID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
-            {
-                <a href="@Url.Action("Edit", new { id = item.ComplaintID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                <a href="@Url.Action("Delete", new { id = item.ComplaintID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-            }
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComplaintDate)
+                </td>
+                <td class="overflow-hidden">
+                    <a href="@Url.Action("Details", new { id = item.ComplaintID })" title="Details">@item.Title</a>
+                </td>
+                <td  class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.Author.Name)
+                </td>
+                <td  class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.ComplaintType.KeyValues)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.KeyValues)
+                </td>
+                <td  class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.AssignTo.Name)
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

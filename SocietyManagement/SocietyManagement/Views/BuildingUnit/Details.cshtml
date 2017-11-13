@@ -93,7 +93,7 @@
                 <a href="@Url.Action("DownloadFile", new { id = media.MediaID })" title="Download"><span class="glyphicon glyphicon-download"></span></a>
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                     {
-                    <a href="@Url.Action("Edit","BuildingUnitMedia", new { id = media.MediaID })" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
+                    <a href="@Url.Action("Edit","BuildingUnitMedia", new { id = media.MediaID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
                     <a href="@Url.Action("Delete","BuildingUnitMedia", new { id = media.MediaID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
                     }
             </td>
@@ -116,5 +116,5 @@
 
 </div>
 <div class="box-footer">
-    <button onclick="goBack()" class="btn btn-primary">Back</button>
+    <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><span class="fa fa-backward"></span> Back</a>
 </div>
