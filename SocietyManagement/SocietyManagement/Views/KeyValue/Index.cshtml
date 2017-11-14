@@ -4,32 +4,34 @@
     ViewBag.Title = "Key Value";
 }
 
-<h3><span class="icon-key"></span> Key Value</h3>
-
-@if (User.IsInRole("SuperUser"))
-{
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
-    </div>
-}
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.KeyName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KeyValues)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.KeyOrder)
-        </th>
-        @if (User.IsInRole("SuperUser"))
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-key"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("SuperUser"))
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
+<div class="box-body">
+    <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyValues)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KeyOrder)
+            </th>
+            @if (User.IsInRole("SuperUser"))
         {
-        <th></th>
+        <th>Action</th>
         }
-    </tr>
+        </tr>
 
-@foreach (var item in Model) {
+        @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.KeyName)
@@ -42,7 +44,7 @@
         </td>
         @if (User.IsInRole("SuperUser"))
         {
-        <td>
+        <td class="list-action">
             <a href="@Url.Action("Edit", new { id = item.KeyID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
             <a href="@Url.Action("Delete", new { id = item.KeyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
         </td>
@@ -50,4 +52,5 @@
     </tr>
 }
 
-</table>
+    </table>
+</div>

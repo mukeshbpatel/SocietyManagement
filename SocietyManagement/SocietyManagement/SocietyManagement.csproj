@@ -180,6 +180,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -578,9 +579,14 @@
     <Content Include="Views\Shared\_BalanceSheet.cshtml" />
     <Content Include="Views\Home\_TopBox.cshtml" />
     <Content Include="Views\Home\_TopBoxUser.cshtml" />
+    <Content Include="Views\Account\View.cshtml" />
+    <Content Include="Views\MyAccount\BalanceSheet.cshtml" />
+    <Content Include="Views\MyAccount\MyBill.cshtml" />
+    <Content Include="Views\MyAccount\MyPayment.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

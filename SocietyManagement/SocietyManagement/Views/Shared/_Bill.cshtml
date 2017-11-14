@@ -43,7 +43,7 @@
         </th>
         @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
         {
-            <th></th>
+            <th>Action</th>
         }
     </tr>
     @{
@@ -92,7 +92,7 @@
             </td>
             @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
                 {
-                <td class="center" nowrap>
+                <td class="list-action">
                     <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
                     <a href="@Url.Action("Delete","Due", new { id = item.DueID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
                 </td>

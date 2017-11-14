@@ -4,55 +4,57 @@
     ViewBag.Title = "System Settings";
 }
 
-<h3><span class="glyphicon glyphicon-cog"></span> System Settings</h3>
-
-@if (User.IsInRole("SuperUser"))
-{
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
-    </div>
-}
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.UDK1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SettingName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SettingValue)
-        </th>              
-        <th>
-            @Html.DisplayNameFor(model => model.Details)
-        </th>       
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-cog"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("SuperUser"))
     {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
+<div class="box-body">
+    <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UDK1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SettingName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SettingValue)
-            </td>                       
-            <td>
-                @Html.DisplayFor(modelItem => item.Details)
-            </td>            
-            <td>
+            <th>
+                @Html.DisplayNameFor(model => model.UDK1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SettingValue)
+            </th>
+           
+            @if (User.IsInRole("SuperUser"))
+            {
+                <th>Action</th>
+            }
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UDK1)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.SettingID })" title="Details">@item.SettingName</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SettingValue)
+                </td>
+               
                 @if (User.IsInRole("SuperUser"))
                 {
-                    <a href="@Url.Action("Details", new { id = item.SettingID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>                
-                    <a href="@Url.Action("Edit", new { id = item.SettingID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
-                    <a href="@Url.Action("Delete", new { id = item.SettingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                }
-            </td>
-        </tr>
-    }
+                    <td class="list-action">
+                        <a href="@Url.Action("Edit", new { id = item.SettingID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="@Url.Action("Delete", new { id = item.SettingID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
 
-</table>
+                    </td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>

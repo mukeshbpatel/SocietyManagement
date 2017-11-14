@@ -1,0 +1,44 @@
+﻿@model IEnumerable<SocietyManagement.Models.Due>
+@{
+    ViewBag.Title = "Bills";
+}
+
+@if (ViewBag.UnitID != null)
+{
+
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-list-alt"></i> @ViewBag.Title</h3>
+        <div class="pull-right">
+            @Html.Partial("_PayOnline")
+        </div>       
+    </div>
+    <div class="box-body">
+        <ul class="nav nav-pills pull-right">
+            @foreach (var item in (SelectList)ViewBag.UnitID)
+            {
+                if (item.Selected)
+                {
+                    <li class="active"><a href="#">@item.Text</a></li>
+                }
+                else
+                {
+                    <li><a href="@Url.Action("MyBill", new { id = item.Value })">@item.Text</a></li>
+                }
+            }
+        </ul>
+
+        @Html.Partial("_Bill", Model)
+    </div>
+}
+else
+{
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-list-alt"></i> @ViewBag.Title</h3>
+    </div>
+        <div class="box-body">
+            <div class="alert alert-info">                
+                <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+                No Building Unit assigned to your user id. Please contact your Manager for details.
+            </div>
+        </div>
+}

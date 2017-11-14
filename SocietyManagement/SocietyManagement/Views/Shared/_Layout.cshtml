@@ -57,6 +57,9 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        <li>
+                        <a href="@Url.Action("Index","Home")"><i class="glyphicon glyphicon-home"></i></a>
+                        </li>    
                         <!-- Messages: style can be found in dropdown.less-->
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -269,7 +272,7 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="@Html.IsSelected(actions: "Index", controllers: "Home")"><a href="@Url.Action("Index", "Home")" class="active"><i class="glyphicon glyphicon-home text-blue"></i> <span>Home</span></a></li>
 
-                    <li class="treeview @Html.IsSelected(actions: "MyBill,MyPayment,BalanceSheet", controllers: "Due,Collection")">
+                    <li class="treeview @Html.IsSelected(actions: "MyBill,MyPayment,BalanceSheet", controllers: "MyAccount")">
                         <a href="#">
                             <i class="glyphicon glyphicon-briefcase text-green"></i> <span>My Account</span>
                             <span class="pull-right-container">
@@ -277,9 +280,9 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="@Html.IsSelected(actions: "MyBill", controllers: "Due")"><a href="@Url.Action("MyBill", "Due", new { id = 0 })"><i class="fa fa-list-alt"></i> Bills</a></li>
-                            <li class="@Html.IsSelected(actions: "MyPayment", controllers: "Collection")"><a href="@Url.Action("MyPayment", "Collection", new { id = 0 })"><i class="fa fa-bank"></i> Payments</a></li>
-                            <li class="@Html.IsSelected(actions: "BalanceSheet", controllers: "Due")"><a href="@Url.Action("BalanceSheet", "Due", new { id = 0 })"><i class="fa fa-calculator"></i> Balance Sheet</a></li>
+                            <li class="@Html.IsSelected(actions: "MyBill", controllers: "MyAccount")"><a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })"><i class="fa fa-list-alt"></i> Bills</a></li>
+                            <li class="@Html.IsSelected(actions: "MyPayment", controllers: "MyAccount")"><a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })"><i class="fa fa-bank"></i> Payments</a></li>
+                            <li class="@Html.IsSelected(actions: "BalanceSheet", controllers: "MyAccount")"><a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })"><i class="fa fa-calculator"></i> Balance Sheet</a></li>
                         </ul>
                     </li>
                     <li class="treeview @Html.IsSelected(controllers: "Notification,NoticeBoard,Poll,Forum,ForumComment,Complaint,ComplaintComment,Event")">
@@ -311,6 +314,8 @@
                             <li class="@Html.IsSelected(controllers: "User")"><a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> Members</a></li>
                         </ul>
                     </li>
+                    @if(User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperUser"))
+                    { 
                     <li class="treeview @Html.IsSelected(controllers: "RecurringDue,Due,Collection,Expense")">
                         <a href="#">
                             <i class="fa fa-bank text-success"></i> <span>Account</span>
@@ -322,9 +327,12 @@
                             <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("Index", "RecurringDue")"><i class="fa fa-retweet"></i> Recurring Bill</a></li>
                             <li class="@Html.IsSelected(controllers: "Due")"><a href="@Url.Action("Index", "Due")"><i class="fa fa-list-alt"></i> Maintanance Bills</a></li>
                             <li class="@Html.IsSelected(controllers: "Collection")"><a href="@Url.Action("Index", "Collection")"><i class="fa fa-bank"></i> Collections</a></li>
-                            <li class="@Html.IsSelected(controllers: "Expense")"><a href="@Url.Action("Index", "Expense")"><i class="fa fa-envelope"></i> Expenses</a></li>
+                            <li class="@Html.IsSelected(controllers: "Expense")"><a href="@Url.Action("Index", "Expense")"><i class="fa fa-money"></i> Expenses</a></li>
                         </ul>
                     </li>
+                    }
+                    @if (User.IsInRole("SuperUser"))
+                    {
                     <li class="treeview @Html.IsSelected(controllers: "RecurringDue,KeyValue,SystemSetting,EmailTemplate")">
                         <a href="#">
                             <i class="fa fa-superpowers text-orange"></i> <span>Admin</span>
@@ -339,7 +347,7 @@
                             <li class="@Html.IsSelected(controllers: "EmailTemplate")"><a href="@Url.Action("Index", "EmailTemplate")"><i class="fa fa-envelope"></i> Email Template</a></li>
                         </ul>
                     </li>
-
+                    }
                     <li class="treeview @Html.IsSelected(controllers: "Manage")">
                         <a href="#">
                             <i class="fa fa-cog text-purple"></i> <span>Settings</span>

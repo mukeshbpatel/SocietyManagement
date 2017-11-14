@@ -4,17 +4,19 @@
     ViewBag.Title = "Email Template";
 }
 
-<h3><span class="glyphicon glyphicon-envelope"></span> Email Template</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-envelope"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("SuperUser"))
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
 
-@if (User.IsInRole("SuperUser"))
-{
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
-    </div>
-}
-
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
+<div class="box-body">
+    <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
+        <tr>
             <th>
                 @Html.DisplayNameFor(model => model.TemplateTypeID)
             </th>
@@ -23,18 +25,18 @@
             </th>
             <th class="hidden-xs">
                 @Html.DisplayNameFor(model => model.FromEmail)
-            </th>            
+            </th>
             <th class="hidden-xs">
                 @Html.DisplayNameFor(model => model.ReplyToEmail)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TemplateType.KeyValues)
+                    <a href="@Url.Action("Details", new { id = item.TemplateID })" title="Details">@Html.DisplayFor(modelItem => item.TemplateType.KeyValues)</a>
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TemplateSubject)
@@ -44,16 +46,16 @@
                 </td>
                 <td class="hidden-xs">
                     @Html.DisplayFor(modelItem => item.ReplyToEmail)
-                </td>                
+                </td>
                 <td>
-                    <a href="@Url.Action("Details", new { id = item.TemplateID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
                     <a href="@Url.Action("Edit", new { id = item.TemplateID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
                     @if (User.IsInRole("SuperUser"))
-                    {                        
+                    {
                         <a href="@Url.Action("Delete", new { id = item.TemplateID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                    }                
+                    }
                 </td>
             </tr>
         }
 
     </table>
+</div>

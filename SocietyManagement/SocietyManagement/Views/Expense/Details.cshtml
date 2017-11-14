@@ -3,10 +3,11 @@
     ViewBag.Title = "Expense";
 }
 
-<h3><span class="glyphicon glyphicon-list-alt"></span> Expense</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-money"></i> @ViewBag.Title</h3>
+</div>
 
-<div>
-   <hr />
+<div class="box-body">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ExpenseDate)
@@ -65,67 +66,67 @@
 
         @if (Model.PaymentMode.KeyValues == "Bank Transfer" || Model.PaymentMode.KeyValues == "Cheque")
         {
-            <dt>
-                @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+        <dt>
+            @if (Model.PaymentMode.KeyValues == "Bank Transfer")
                 {
-                    <span>Bank</span>
+                <span>Bank</span>
                 }
                 else
                 {
-                    @Html.DisplayNameFor(model => model.ChequeBank)
+                @Html.DisplayNameFor(model => model.ChequeBank)
                 }
-            </dt>
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ChequeBank)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ChequeBank)
+        </dd>
 
-            <dt>
-                @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+        <dt>
+            @if (Model.PaymentMode.KeyValues == "Bank Transfer")
                 {
-                    <span>Transfer Date</span>
+                <span>Transfer Date</span>
                 }
                 else
                 {
-                    @Html.DisplayNameFor(model => model.ChequeDate)
+                @Html.DisplayNameFor(model => model.ChequeDate)
                 }
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.ChequeDate)
-            </dd>
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChequeDate)
+        </dd>
         }
         @if (Model.PaymentMode.KeyValues == "Cheque")
         {
-            <dt>
-                @Html.DisplayNameFor(model => model.ChequeNumber)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeNumber)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ChequeNumber)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.ChequeName)
-            </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ChequeNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeName)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ChequeName)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ChequeName)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ChequeCleared)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeCleared)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ChequeCleared)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ChequeCleared)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.ChequeEncashmentDate)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.ChequeEncashmentDate)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.ChequeEncashmentDate)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.ChequeEncashmentDate)
+        </dd>
         }
         <dt>
             @Html.DisplayNameFor(model => model.CreatedDate)
@@ -146,6 +147,7 @@
 
     </dl>
 </div>
-<p>    
-    <a href="@Url.Action("Index")" class="btn btn-default" role="button">Cancel</a>
-</p>
+<div class="box-footer">
+    <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><span class="fa fa-backward"></span> Back</a>
+</div>
+

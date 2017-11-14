@@ -1,36 +1,39 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Collection>
 
 <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CollectionDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReceiptNumber)
-            </th>
-@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
-{
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CollectionDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiptNumber)
+        </th>
+        @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+        {
             <th>
                 @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
             </th>
-}
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentModeID)
-            </th>
-            
-            <th class="hidden-xs">
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th class="hidden-xs">
-                @Html.DisplayNameFor(model => model.Discount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CollectionAmount)
-            </th>
-            <th></th>
-        </tr>
-   
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentModeID)
+        </th>
+
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.Discount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CollectionAmount)
+        </th>
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+            <th>Action</th>
+        }
+    </tr>
+
     @foreach (var item in Model)
     {
         <tr>
@@ -39,17 +42,17 @@
             </td>
             <td>
                 <a href="@Url.Action("Details", "Collection", new { id = item.CollectionID })" title="Details">@item.ReceiptNumber</a>
-</td>
-@if (ViewContext.RouteData.GetRequiredString("action") == "Index")
-{
-            <td>
-                <a href="@Url.Action("Details","BuildingUnit",new {id=item.UnitID})">@item.BuildingUnit.UnitName</a>
             </td>
-}
+            @if (ViewContext.RouteData.GetRequiredString("action") == "Index")
+            {
+                <td>
+                    <a href="@Url.Action("Details","BuildingUnit",new {id=item.UnitID})">@item.BuildingUnit.UnitName</a>
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
             </td>
-           
+
             <td class="hidden-xs right">
                 @Html.DisplayFor(modelItem => item.Amount)
             </td>
@@ -61,12 +64,11 @@
             </td>
             @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
             {
-            <td class="center" nowrap>                
-                
+                <td class="list-action">
                     <a href="@Url.Action("Edit","Collection", new { id = item.CollectionID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
                     <a href="@Url.Action("Delete","Collection", new { id = item.CollectionID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                
-            </td>
+
+                </td>
             }
         </tr>
     }
@@ -84,7 +86,8 @@
             <th class="hidden-xs right">@Model.Sum(s => s.Amount)</th>
             <th class="hidden-xs right">@Model.Sum(s => s.Discount)</th>
             <th class="right">@Model.Sum(s => s.CollectionAmount)</th>
-            <th></th>
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {<th></th>}
         </tr>
     }
     else

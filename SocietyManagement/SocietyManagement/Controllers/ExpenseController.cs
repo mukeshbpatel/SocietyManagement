@@ -39,7 +39,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Create
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
         public ActionResult Create()
         {
             ViewBag.PaymentModeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PaymentMode"), "KeyID", "KeyValues");
@@ -51,7 +51,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,UDK1,UDK2,UDK3,UDK4,UDK5")] Expense expense)
         {
@@ -68,7 +68,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Edit/5
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
         public ActionResult Edit(Int64? id)
         {
             if (id == null)
@@ -90,7 +90,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
         public ActionResult Edit([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Expense expense)
         {
             Helper.AssignUserInfo(expense, User, false);
@@ -106,7 +106,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Delete/5
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
         public ActionResult Delete(Int64? id)
         {
             if (id == null)
@@ -124,7 +124,7 @@ namespace SocietyManagement.Controllers
         // POST: Expense/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
         public ActionResult DeleteConfirmed(Int64 id)
         {
             Expense expense = db.Expenses.Find(id);

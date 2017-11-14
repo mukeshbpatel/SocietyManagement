@@ -4,13 +4,16 @@
     ViewBag.Title = "Recurring Bill";
 }
 
-<h3><span class="glyphicon glyphicon-retweet"></span> Recurring Bill</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-retweet"></i> @ViewBag.Title</h3>
+    @if (User.IsInRole("SuperUser"))
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
 
-@if (User.IsInRole("SuperUser"))
-{
-    <div class="pull-right">
-        <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
-    </div>
-}
-
-@Html.Partial("_RecurringDue",Model)
+<div class="box-body">
+    @Html.Partial("_RecurringDue", Model)
+</div>

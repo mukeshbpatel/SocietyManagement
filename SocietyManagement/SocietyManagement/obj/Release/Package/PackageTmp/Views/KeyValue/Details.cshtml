@@ -4,10 +4,11 @@
     ViewBag.Title = "Key Value";
 }
 
-<h2>Key Value</h2>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-key"></i> @ViewBag.Title</h3>
+</div>
 
-<div>    
-    <hr />
+<div class="box-body">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.KeyName)
@@ -67,7 +68,6 @@
 
     </dl>
 </div>
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { id = Model.KeyID }) |*@
+<div class="box-footer">
     <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><span class="fa fa-backward"></span> Back</a>
-</p>
+</div>

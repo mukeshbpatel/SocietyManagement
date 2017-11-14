@@ -2,54 +2,56 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
-<h2>@ViewBag.Title</h2>
-<hr />
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
+
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg"><b>Sign in to start your session</b></p>
+        
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
-                @Html.AntiForgeryToken()                
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control"})
-                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                    </div>
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                <div class="form-group has-feedback">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name",@style= "max-width:330px; margin-left:10px; border-radius:0;" })
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+
                 </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>                
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+                <div class="form-group has-feedback">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @style = "max-width:330px; margin-left:10px; border-radius:0;" })
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe) @Html.LabelFor(m => m.RememberMe)
+                            </label>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-primary" />
-                        <a href="@Url.Action("Register", "Account")" class="btn btn-success">Register</a>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </div>
+                    <!-- /.col -->
                 </div>
             }
-</section>
+        <div style="margin-top:10px;">
+            <a href="@Url.Action("ForgotPassword")">Forgot your password?</a><br>
+            <a href="@Url.Action("Register")" class="text-center">Register a new membership</a>
+        </div>
     </div>
-</div>
+    <!-- /.login-box-body -->
+
+
+
+
+
+<section id="loginForm"></section>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
