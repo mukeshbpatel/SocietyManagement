@@ -4,9 +4,9 @@
     ViewBag.Title = "Users";
 }
 
-<h3><span class="glyphicon glyphicon-user"></span> Users</h3>
+
 <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-cubes"></i> @ViewBag.Title</h3>
+    <h3 class="box-title"><i class="fa fa-users"></i> @ViewBag.Title</h3>
     @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
     {
         <div class="pull-right">
@@ -36,7 +36,10 @@
             <th>
                 Role
             </th>
-            <th></th>
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+                <th>Action</th>
+            }
         </tr>
 
         @foreach (var item in Model)
@@ -74,14 +77,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.AspNetRoles.FirstOrDefault().Name)
                 </td>
-
-                <td>
-                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                 {
+                    <td class="list-action">
                         <a href="@Url.Action("Details", new { id = item.Id })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-                        <a href="@Url.Action("Edit", new { id = item.Id })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
-                    }
-                </td>
+                        <a href="@Url.Action("Edit", new { id = item.Id })" title="Edit"><i class="fa fa-edit"></i></a>
+                    </td>
+                }
             </tr>
         }
 

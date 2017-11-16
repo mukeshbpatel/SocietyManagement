@@ -367,11 +367,11 @@ namespace SocietyManagement.Models
 
         private string UpdateBodySubject(string str)
         {
-            str = str.Replace("{{SocietyName}}", SiteSetting.Item("Society.Name"));
-            str = str.Replace("{{SocietyAddress}}", SiteSetting.Item("Society.Address"));
-            str = str.Replace("{{SocietyURL}}", SiteSetting.Item("Society.URL"));
-            str = str.Replace("{{SiteName}}", SiteSetting.Item("Site.Name"));
-            str = str.Replace("{{SiteURL}}", SiteSetting.Item("Site.URL"));
+            str = str.Replace("{{Society.Name}}", SiteSetting.Item("Society.Name"));
+            str = str.Replace("{{Society.Address}}", SiteSetting.Item("Society.Address"));
+            str = str.Replace("{{Society.URL}}", SiteSetting.Item("Society.URL"));
+            str = str.Replace("{{Site.Name}}", SiteSetting.Item("Site.Name"));
+            str = str.Replace("{{Site.URL}}", SiteSetting.Item("Site.URL"));
             return str;
         }
         

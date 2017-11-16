@@ -1,13 +1,13 @@
 ﻿@model SocietyManagement.Models.IndexViewModel
 @{
-    ViewBag.Title = "Setting";
+    ViewBag.Title = "Settings";
 }
-<h3><span class="glyphicon glyphicon-user"></span> @ViewBag.Title.</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-cog"></i> @ViewBag.Title</h3>
+</div>
+<div class="box-body">
+    <p class="text-success">@ViewBag.StatusMessage</p>
 
-<p class="text-success">@ViewBag.StatusMessage</p>
-
-<hr />
-<div>    
     <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
@@ -17,16 +17,17 @@
                 @Html.ActionLink("Change your password", "ChangePassword")
             }
             else
-            {                
-                @Html.ActionLink("Create", "SetPassword")                
+            {
+                @Html.ActionLink("Create", "SetPassword")
             }
             ]
         </dd>
         <dt>Profile:</dt>
-        <dd>            
+        <dd>
             [
-                @Html.ActionLink("Update Profile", "MyProfile")
+            @Html.ActionLink("Update Profile", "MyProfile")
             ]
-        </dd>     
+        </dd>
     </dl>
 </div>
+

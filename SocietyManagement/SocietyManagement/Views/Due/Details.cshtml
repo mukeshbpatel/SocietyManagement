@@ -115,8 +115,8 @@ else
                     <a href="@Url.Action("Details", "Penalty", new { id = item.PenaltyID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
                     @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                     {
-                        <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="@Url.Action("Delete", "Penalty", new { id = item.PenaltyID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><i class="fa fa-edit"></i></a>
+                        <a href="@Url.Action("Delete", "Penalty", new { id = item.PenaltyID })" title="Delete"><i class="fa fa-remove"></i></a>
                     }
                 </td>
             </tr>

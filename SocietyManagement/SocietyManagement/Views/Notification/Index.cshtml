@@ -1,43 +1,54 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Notification>
 
 @{
-    ViewBag.Title = "Notification";
+    ViewBag.Title = "Notifications";
 }
 
-<h3><span class="glyphicon glyphicon-envelope"></span> Notifications</h3>
-
-<table class="table table-sm table-hover table-responsive table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TemplateID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Subject)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-envelope"></i> @ViewBag.Title</h3>
+</div>
+<div class="box-body">
+    <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailTemplate.TemplateType.KeyValues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-            <td>
-                <a href="@Url.Action("Details", new { id = item.NotificationID })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
-                <a href="@Url.Action("Archive", new { id = item.NotificationID })" title="Archive"><span class="glyphicon glyphicon-compressed"></span></a>                
-                <a href="@Url.Action("Delete", new { id = item.NotificationID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>                
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.TemplateID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Subject)
+            </th>
+            <th>Action</th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.EmailTemplate.TemplateType.KeyValues)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = item.NotificationID })" title="Details">
+                    @if(item.IsRead)
+                    {
+                        <span>@item.Subject</span>
+                    }
+                    else
+                    {
+                        <span><b>@item.Subject</b></span>
+                    }
+                    </a>
+                </td>
+                <td class="list-action">
+                    <a href="@Url.Action("Archive", new { id = item.NotificationID })" title="Archive"><span class="fa fa-archive"></span></a>
+                        <a href="@Url.Action("Delete", new { id = item.NotificationID })" title="Delete"><i class="fa fa-remove"></i></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

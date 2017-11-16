@@ -3,62 +3,62 @@
 <div class="row" style="padding:10px 20px 0px 5px">
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-aqua">
-            <a href="@Url.Action("Index", "Due")" class="small-box-header"><i class="fa fa-list-alt hidden-lg hidden-md"></i> Maintance Bills</a>
+        <a href="@Url.Action("Index", "Due")" class="small-box bg-aqua">
+            <div class="small-box-header"><i class="fa fa-list-alt hidden-lg hidden-md"></i> Maintance Bills</div>
             <div class="inner">
-                <h3>1,150</h3>
-                <p>₹ 34,234,23</p>
+                <h3>₹ @ViewBag.BillAmount</h3>
+                <p>@ViewBag.BillCount Bills</p>
             </div>
             <div class="icon">
                 <i class="fa fa-list-alt"></i>
             </div>
-            <a href="@Url.Action("Index", "Due")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-green">
-            <a href="@Url.Action("Index", "Collection")" class="small-box-header"><i class="fa fa-bank hidden-lg hidden-md"></i> Collections</a>
+        <a href="@Url.Action("Index", "Collection")" class="small-box bg-green">
+            <div class="small-box-header"><i class="fa fa-bank hidden-lg hidden-md"></i> Collections</div>
             <div class="inner">
-                <h3>1,353</h3>
-                <p>₹ 1,21,23,123</p>
+                <h3>₹ @ViewBag.PaymentAmount</h3>
+                <p>@ViewBag.PaymentCount Payments</p>
             </div>
             <div class="icon">
                 <i class="fa fa-bank"></i>
             </div>
-            <a href="@Url.Action("Index", "Collection")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-yellow">
-            <a href="@Url.Action("Index", "Expense")" class="small-box-header"><i class="fa fa-pie-chart hidden-lg hidden-md"></i> Income</a>
+        <a href="@Url.Action("Index", "Expense")" class="small-box bg-yellow">
+            <div class="small-box-header"><i class="fa fa-pie-chart hidden-lg hidden-md"></i> Income</div>
             <div class="inner">
-                <h3>32,444</h3>
-                <p>₹ 1,21,23,123</p>
+                <h3>₹ @ViewBag.PaymentAmount</h3>
+                <p>@ViewBag.PaymentCount Transactions</p>
             </div>
             <div class="icon">
                 <i class="fa fa-pie-chart"></i>
             </div>
-            <a href="@Url.Action("Index", "Expense")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-red">
-            <a href="@Url.Action("Index", "Expense")" class="small-box-header"><i class="fa fa-money hidden-lg hidden-md"></i> Expenses</a>
+        <a href="@Url.Action("Index", "Expense")" class="small-box bg-red">
+            <div class="small-box-header"><i class="fa fa-money hidden-lg hidden-md"></i> Expenses</div>
             <div class="inner">
-                <h3>32,444</h3>
-                <p>₹ 1,21,23,123</p>
+                <h3>₹ @ViewBag.ExpenseAmount</h3>
+                <p>@ViewBag.ExpenseCount Vouchers</p>
             </div>
             <div class="icon">
                 <i class="fa fa-money"></i>
             </div>
-            <a href="@Url.Action("Index", "Expense")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
 </div>

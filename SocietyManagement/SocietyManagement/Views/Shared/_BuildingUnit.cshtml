@@ -38,10 +38,10 @@
             @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
             {
                 <td class="list-action">
-                    <a href="@Url.Action("Edit","BuildingUnit", new { id = item.UnitID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="@Url.Action("Edit","BuildingUnit", new { id = item.UnitID })" title="Edit"><i class="fa fa-edit"></i></a>
                     @if (User.IsInRole("SuperUser"))
                     {
-                        <a href="@Url.Action("Delete", "BuildingUnit", new { id = item.UnitID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="@Url.Action("Delete", "BuildingUnit", new { id = item.UnitID })" title="Delete"><i class="fa fa-remove"></i></a>
                     }
                 </td>
             }

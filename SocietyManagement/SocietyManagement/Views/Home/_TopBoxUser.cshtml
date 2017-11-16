@@ -1,65 +1,77 @@
 ﻿
+@if (ViewBag.Units == 0)
+{
+    <div class="box-body">
+        <div class="alert alert-info">
+            <h4><i class="icon fa fa-warning"></i> Alert!</h4>
+            No Building Unit assigned to your user name. Please contact your Admin for details.
+        </div>
+    </div>
+}
+else
+{
 <!-- Small boxes (Stat box) -->
 <div class="row" style="padding:10px 20px 0px 5px">
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-aqua">
-            <a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })" class="small-box-header"><i class="fa fa-list-alt hidden-lg hidden-md"></i> Maintance Bills</a>
+        <a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })" class="small-box bg-aqua">
+            <div class="small-box-header"><i class="fa fa-list-alt hidden-lg hidden-md"></i> Maintance Bills</div>
             <div class="inner">
-                <h3>1,150</h3>
-                <p>₹ 34,234,23</p>
+                <h3>₹ @ViewBag.BillAmount</h3>
+                <p>@ViewBag.BillCount Bills</p>                
             </div>
             <div class="icon">
                 <i class="fa fa-list-alt"></i>
             </div>
-            <a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-green">
-            <a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })" class="small-box-header"><i class="fa fa-bank hidden-lg hidden-md"></i> Payments</a>
+        <a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })" class="small-box bg-green">
+            <div class="small-box-header"><i class="fa fa-bank hidden-lg hidden-md"></i> Payments</div>
             <div class="inner">
-                <h3>1,353</h3>
-                <p>₹ 1,21,23,123</p>
+                <h3>₹ @ViewBag.PaymentAmount</h3>
+                <p>@ViewBag.PaymentCount Payments</p>
             </div>
             <div class="icon">
                 <i class="fa fa-bank"></i>
             </div>
-            <a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-red">
-            <a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })" class="small-box-header"><i class="fa fa-calculator hidden-lg hidden-md"></i> Balance</a>
+        <a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })" class="small-box bg-red">
+            <div class="small-box-header"><i class="fa fa-calculator hidden-lg hidden-md"></i> Balance</div>
             <div class="inner">
-                <h3>32,444</h3>
-                <p>₹ 1,21,23,123</p>
+                <h3>₹ @ViewBag.BalanceAmount</h3>
+                <p>@ViewBag.BalanceDrCr</p>
             </div>
             <div class="icon">
                 <i class="fa fa-calculator"></i>
             </div>
-            <a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <div class="small-box bg-yellow">
-            <a href="@Url.Action("Index", "Notification")" class="small-box-header"><i class="fa fa-envelope-o hidden-lg hidden-md"></i> Notifications</a>
+        <a href="@Url.Action("Index", "Notification")" class="small-box bg-yellow">
+            <div class="small-box-header"><i class="fa fa-envelope-o hidden-lg hidden-md"></i> Notifications</div>
             <div class="inner">
-                <h3>50</h3>
-                <p>New : 10</p>
+                <h3>@ViewBag.Notification</h3>
+                <p>@ViewBag.NewNotification</p>
             </div>
             <div class="icon">
                 <i class="fa fa-envelope-o"></i>
             </div>
-            <a href="@Url.Action("Index", "Notification")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-        </div>
+            <div class="small-box-footer hidden-xs">More info <i class="fa fa-arrow-circle-right"></i></div>
+        </a>
     </div>
     <!-- ./col -->
 </div>
 <!-- /.row -->
+}

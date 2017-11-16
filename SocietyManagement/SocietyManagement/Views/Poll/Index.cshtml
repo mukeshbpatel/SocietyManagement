@@ -56,8 +56,8 @@
             <a href="@Url.Action("Vote", new { id = item.PollID })" title="Vote"><span class="fa fa-hand-o-up"></span></a>            
             @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | User.IsInRole("Manger"))
 {
-            <a href="@Url.Action("Edit", new { id = item.PollID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
-            <a href="@Url.Action("Delete", new { id = item.PollID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+            <a href="@Url.Action("Edit", new { id = item.PollID })" title="Edit"><i class="fa fa-edit"></i></a>
+            <a href="@Url.Action("Delete", new { id = item.PollID })" title="Delete"><i class="fa fa-remove"></i></a>
 }
         </td>
     </tr>

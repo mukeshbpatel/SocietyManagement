@@ -170,7 +170,7 @@
             if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
             {
                 <a class="btn btn-primary" href="@Url.Action("Edit", new { id = Model.CollectionID })" title="Edit"><span class="glyphicon glyphicon-edit"></span> Edit</a>
-                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.CollectionID })" title="Delete"><span class="glyphicon glyphicon-remove"></span> Delete</a>
+                <a class="btn btn-danger" href="@Url.Action("Delete", new { id = Model.CollectionID })" title="Delete"><i class="fa fa-remove"></i> Delete</a>
             }
             <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><i class="fa fa-backward"></i> Back</a>            
         }

@@ -31,8 +31,8 @@
 
         @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
-            <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
-            <a href="@Url.Action("Delete","ComplaintComment", new { id = item.CommentID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+            <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><i class="fa fa-edit"></i></a>
+            <a href="@Url.Action("Delete","ComplaintComment", new { id = item.CommentID })" title="Delete"><i class="fa fa-remove"></i></a>
         }
     </div>
     @Html.Raw("</br><b>Status : " + item.Status.KeyValues + "</b></br>")

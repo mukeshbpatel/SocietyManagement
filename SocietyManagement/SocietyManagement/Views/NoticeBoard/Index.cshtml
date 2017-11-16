@@ -43,8 +43,8 @@
                 @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | User.IsInRole("Manger"))
                 {
                     <td class="list-action">                        
-                        <a href="@Url.Action("Edit", new { id = item.NoticeID })" title="Edit"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="@Url.Action("Delete", new { id = item.NoticeID })" title="Delete"><span class="glyphicon glyphicon-remove"></span></a>
+                        <a href="@Url.Action("Edit", new { id = item.NoticeID })" title="Edit"><i class="fa fa-edit"></i></a>
+                        <a href="@Url.Action("Delete", new { id = item.NoticeID })" title="Delete"><i class="fa fa-remove"></i></a>
                     </td>
                 }
                            </tr>

@@ -1,40 +1,30 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-    <meta charset="utf-8" />
-</head>
-<body>
-    <div style="width:99%; padding:5px 5px 5px 5px; border:1px solid silver; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size:small;">
-        <p align="center">
-            <b><span style="color:rgb(39,78,19);font-size:18px;">{{SocietyName}}</span></b>
-            <br />
-            <span style="color:rgb(11,83,148);">{{SocietyAddress}}</span>
-        </p>
-        <hr id="null">
-
-        <p>Dear <b>{{Name}}</b>,</p>
-        <p>Please find attached {{BillType}} of <b>{{UnitName}}.</b></p>
-        <p style="margin-left: 20px;" dir="ltr">
-            Bill Number : <b>{{BillNumber}}</b>
-            <br />
-            Bill Type : <b>{{BillType}}</b>
-            <br />
-            Bill For : <b>{{BillDetail}}</b>            
-            <br />
-            Bill Date : <b>{{BillDate}}</b>
-            <br />
-            Bill Amount : <b>{{BillAmount}}</b>
-            <br />
-            Due Date : <b>{{DueDate}}</b>
-            <br />            
-        </p>
-        <p>Login to <a href="{{SocietyURL}}">{{SocietyName}}</a> site for detail bill and payment details.</p>
-        <p>Thanks and Regards, <br /><b><i>{{SocietyName}}</i></b></p>
-        <hr id="null">
-        <p align="center">
-            <b>Powerd by <a href="http://www.SocietyInbox.com">Society Inbox</a></b>
-        </p>        
-    </div>
-</body>
-</html>
+﻿<div style="width:99%; padding:5px 5px 5px 5px; border:1px solid silver; font-family:Verdana, Geneva, Tahoma, sans-serif; font-size:small;">
+    <p align="center">
+        <b><span style="color:rgb(39,78,19);font-size:18px;">{{Society.Name}}</span></b>
+        <br />
+        <span style="color:rgb(11,83,148);">{{Society.Address}}</span>
+    </p>
+    <hr>
+    <p>Dear <b>{{Name}}</b>,</p>
+    <p><b>{{BillDetail}}</b> bill of <b>{{UnitName}}</b> is generated and available for view.</p>
+    <p style="margin-left: 20px;" dir="ltr">
+        Bill Number : <b>{{BillNumber}}</b>
+        <br />
+        Bill Type : <b>{{BillType}}</b>
+        <br />
+        Bill For : <b>{{BillDetail}}</b>
+        <br />
+        Bill Date : <b>{{BillDate}}</b>
+        <br />
+        Bill Amount : <b>{{BillAmount}}</b>
+        <br />
+        Due Date : <b>{{DueDate}}</b>
+        <br />
+    </p>
+    <p>Login to <a href="{{Society.URL}}">{{Society.Name}}</a> site for detail bill.</p>
+    <p>Thanks and Regards, <br /><b><i>{{Society.Name}}</i></b></p>
+    <hr id="null">
+    <p align="center">
+        <b>Powerd by <a href="{{Site.URL}}">{{Site.Name}}</a></b>
+    </p>
+</div>
