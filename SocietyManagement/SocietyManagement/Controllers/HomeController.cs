@@ -11,6 +11,7 @@ namespace SocietyManagement.Controllers
     public class HomeController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
+
         public ActionResult Index()
         {
             string UserID = Helper.GetUserID(User);
@@ -29,11 +30,19 @@ namespace SocietyManagement.Controllers
 
                     var Notifications = appUser.Notifications.Where(d => d.IsArchive == false && d.IsDeleted == false && d.IsEmailSend == false).ToList();
 
+                    List<Due> DueList = new List<Due>();
+                    List<Collection> CollectionList = new List<Collection>();
+
                     foreach (var unit in appUser.BuildingUnits.Where(d => d.IsDeleted == false))
                     {
                         var dues = unit.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).ToList();
+
+                        DueList.AddRange(dues);
+
                         var penalties = unit.Penalties.Where(d => d.IsDeleted == false).ToList();
                         var collections = unit.Collections.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).ToList();
+
+                        CollectionList.AddRange(collections);
 
                         BillAmount += dues.Sum(s => s.DueAmount);
                         BillAmount += penalties.Sum(s => s.Amount);
@@ -77,6 +86,9 @@ namespace SocietyManagement.Controllers
                     {
                         ViewBag.NewNotification = "No notification ";
                     }
+
+                    ViewBag.DueList = DueList.OrderByDescending(o=>o.DueDate).Take(5);
+                    ViewBag.CollectionList = CollectionList.OrderByDescending(o => o.CollectionDate).Take(5);
                 }
             }
             else if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
@@ -85,17 +97,21 @@ namespace SocietyManagement.Controllers
                 var penalties = db.Penalties.Where(d => d.IsDeleted == false).ToList();
                 var collections = db.Collections.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).ToList();
                 var expenses = db.Expenses.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).ToList();
-
+                
                 ViewBag.BillAmount = dues.Sum(s=>s.DueAmount) + penalties.Sum(s => s.Amount);
                 ViewBag.BillCount = dues.Count();
                 ViewBag.PaymentAmount = collections.Sum(p=>p.Amount) - collections.Sum(p => p.Discount);
                 ViewBag.PaymentCount = collections.Count();
                 ViewBag.ExpenseAmount = expenses.Sum(p => p.Amount);
                 ViewBag.ExpenseCount = expenses.Count();
+
+                ViewBag.DueList = dues.OrderByDescending(o => o.BillDate).Take(5);
+                ViewBag.CollectionList = collections.OrderByDescending(o => o.CollectionDate).Take(5);
+                ViewBag.expenseList = expenses.OrderByDescending(o => o.ExpenseDate).Take(5);
             }
 
                 return View();
-        }
+        }        
 
         public ActionResult About()
         {

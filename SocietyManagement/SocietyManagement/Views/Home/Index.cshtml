@@ -4,17 +4,43 @@
 
 
 <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-dashboard"></i> @ViewBag.Title</h3>    
+    <h3 class="box-title"><i class="fa fa-dashboard"></i> @ViewBag.Title</h3>
 </div>
 
 <div class="box-body">
     @if (User.IsInRole("User"))
     {
         @Html.Partial("_TopBoxUser")
+
+        <div class="row" style="padding:5px 20px 0px 5px">
+            <div class="col-md-6" style="padding-right:0px;">
+                @Html.Partial("_Bills", (object)ViewBag.DueList)
+            </div>            
+            <div class="col-md-6" style="padding-right:0px;">
+                @Html.Partial("_Payments", (object)ViewBag.CollectionList)
+            </div>
+        </div>
     }
-    else if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperUser"))
+    else if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
     {
         @Html.Partial("_TopBox")
+
+        <div class="row" style="padding:5px 20px 0px 5px">
+            <div class="col-md-6" style="padding-right:0px;">
+                @Html.Partial("_Bills", (object)ViewBag.DueList)
+            </div>
+            <div class="col-md-6" style="padding-right:0px;">
+                @Html.Partial("_Payments", (object)ViewBag.CollectionList)
+            </div>
+        </div>
+        <div class="row" style="padding:5px 20px 0px 5px">
+            <div class="col-md-6" style="padding-right:0px;">
+                @Html.Partial("_Incomes", (object)ViewBag.DueList)
+            </div>
+            <div class="col-md-6" style="padding-right:0px;">
+                @Html.Partial("_Expenses", (object)ViewBag.ExpenseList)
+            </div>
+        </div>
     }
 </div>
 

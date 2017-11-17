@@ -583,6 +583,10 @@
     <Content Include="Views\MyAccount\BalanceSheet.cshtml" />
     <Content Include="Views\MyAccount\MyBill.cshtml" />
     <Content Include="Views\MyAccount\MyPayment.cshtml" />
+    <Content Include="Views\Home\_Bills.cshtml" />
+    <Content Include="Views\Home\_Payments.cshtml" />
+    <Content Include="Views\Home\_Expenses.cshtml" />
+    <Content Include="Views\Home\_Incomes.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
