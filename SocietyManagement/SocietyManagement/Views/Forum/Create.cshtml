@@ -4,49 +4,54 @@
     ViewBag.Title = "Forum";    
 }
 
-<h3><span class="glyphicon glyphicon-bullhorn"></span> Forum</h3>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-bullhorn"></i> @ViewBag.Title</h3>
+</div>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">       
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.ForumTitle, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ForumTitle, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ForumTitle, "", new { @class = "text-danger" })
+    <div class="box-body">
+        <div class="form-horizontal">
+           
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.ForumTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ForumTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ForumTitle, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Details)
-                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Details)
+                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        @Html.HiddenFor(model => model.UDK1)
-        @Html.HiddenFor(model => model.UDK2)
-        @Html.HiddenFor(model => model.UDK3)
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
-                <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
-            </div>
+            @Html.HiddenFor(model => model.UDK1)
+            @Html.HiddenFor(model => model.UDK2)
+            @Html.HiddenFor(model => model.UDK3)
+           
         </div>
     </div>
+        <div class="box-footer">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+                    <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
+                </div>
+            </div>
+        </div>
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
 
-<script>
-    $("textarea").jqte();
-</script>
+        <script>
+            $("textarea").jqte();
+        </script>

@@ -3,40 +3,55 @@
 @{
     ViewBag.Title = "Complaint";
 }
-<br />
 
-<div>
-    <h3><span class="glyphicon glyphicon-hand-up"></span>  @Html.DisplayFor(model => model.Title)</h3>
-    <hr />    
-    @Html.Raw(Model.Details.Replace(Environment.NewLine,"</br>"))
-</div>
-<p>
-    <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><span class="fa fa-backward"></span> Back</a>
-</p>
-<hr />
 
-<div>
-    <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-hand-o-up"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        <a href="@Url.Action("Create", "ComplaintComment", new { id = Model.ComplaintID })"><span class="fa fa-plus-square"></span> Add Comment</a>        
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") || SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+        {
+            <a href="@Url.Action("Edit", new { id = Model.ComplaintID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
+            <a href="@Url.Action("Delete", new { id = Model.ComplaintID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
+        }
+        <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> Back</a>
     </div>
 </div>
-<br />
+
+<div class="box-body">
+    <h4><a href="#">@Html.DisplayFor(model => model.Title)</a></h4>
+    <i class="fa fa-user"></i> @Model.Author.Name &nbsp;
+    <i class="fa fa-calendar"></i> @Model.CreatedDate
+    <hr />
+    @Html.Raw(Model.Details.Replace(Environment.NewLine, "</br>"))
+</div>
+
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-comments"></i> Comments</h3>
+    <div class="pull-right">
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") || User.IsInRole("Manager") || SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+        {
+            <a href="@Url.Action("Create","ComplaintComment", new { id = Model.ComplaintID })" title="Add Comment"><i class="fa fa-plus-square"></i> <span class="hidden-xs">Add Comment</span></a><span> &nbsp; </span>
+        }
+    </div>
+</div>
 
 
-@foreach (var item in Model.ComplaintComments.Where(c => c.IsDeleted == false).OrderBy(o => o.ModifiedDate))
+@foreach (var item in Model.ComplaintComments.Where(c => c.IsDeleted == false).OrderBy(o => o.CreatedDate))
 {
-    <div>
-        <span>@item.Author.Name</span>, <span>@item.CreatedDate</span>
+    <div class="box-body" style="padding:10px 0px 0px 20px; border-bottom:1px solid #f4f4f4">
+        <i class="fa fa-user"></i> @item.Author.Name &nbsp;
+        <i class="fa fa-calendar"></i> @item.CreatedDate
 
         @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
-            <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><i class="fa fa-edit"></i></a>
-            <a href="@Url.Action("Delete","ComplaintComment", new { id = item.CommentID })" title="Delete"><i class="fa fa-remove"></i></a>
+            <div class="pull-right">
+                <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><i class="fa fa-edit"></i></a>
+                <a href="@Url.Action("Delete","ComplaintComment", new { id = item.CommentID })" title="Delete"><i class="fa fa-remove"></i></a>
+            </div>
         }
+
+        @Html.Raw("</br></br><b>Status : " + item.Status.KeyValues + "</b></br></br>")
+        @Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
     </div>
-    @Html.Raw("</br><b>Status : " + item.Status.KeyValues + "</b></br>")
-    @Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
-    <hr />
 }
 

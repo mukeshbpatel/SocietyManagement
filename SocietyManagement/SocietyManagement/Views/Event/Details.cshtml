@@ -1,0 +1,52 @@
+﻿@model SocietyManagement.Models.Event
+
+@{
+    ViewBag.Title = "Event";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-calendar-check-o"></i> @ViewBag.Title</h3>
+    <div class="pull-right">
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | User.IsInRole("Manger"))
+        {
+            <a href="@Url.Action("Edit", new { id = Model.EventID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
+            <a href="@Url.Action("Delete", new { id = Model.EventID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
+        }
+        <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> Back</a>
+    </div>
+</div>
+
+
+<div class="box-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EventDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EventName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EventTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventType.KeyValues)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+    </dl>
+</div>

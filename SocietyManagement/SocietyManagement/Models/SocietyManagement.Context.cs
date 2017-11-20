@@ -59,14 +59,19 @@ namespace SocietyManagement.Models
         public virtual DbSet<SystemSetting> SystemSettings { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
     
-        public virtual ObjectResult<SP_BuildingUnit_BalanceSheet_Result> SP_BuildingUnit_BalanceSheet(Nullable<int> unitID)
+        public virtual ObjectResult<SP_BuildingUnit_BalanceSheet_Result> SP_BuildingUnit_BalanceSheet(Nullable<int> unitID, Nullable<int> yearID)
         {
             var unitIDParameter = unitID.HasValue ?
                 new ObjectParameter("UnitID", unitID) :
                 new ObjectParameter("UnitID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BuildingUnit_BalanceSheet_Result>("SP_BuildingUnit_BalanceSheet", unitIDParameter);
+            var yearIDParameter = yearID.HasValue ?
+                new ObjectParameter("YearID", yearID) :
+                new ObjectParameter("YearID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BuildingUnit_BalanceSheet_Result>("SP_BuildingUnit_BalanceSheet", unitIDParameter, yearIDParameter);
         }
     }
 }

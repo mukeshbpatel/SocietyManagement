@@ -31,6 +31,7 @@ namespace SocietyManagement.Models
             this.Expenses = new HashSet<Expense>();
             this.Expenses1 = new HashSet<Expense>();
             this.EmailTemplates = new HashSet<EmailTemplate>();
+            this.Events = new HashSet<Event>();
         }
     
         public int KeyID { get; set; }
@@ -70,5 +71,7 @@ namespace SocietyManagement.Models
         public virtual ICollection<Expense> Expenses1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmailTemplate> EmailTemplates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Event> Events { get; set; }
     }
 }

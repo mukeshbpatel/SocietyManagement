@@ -3,57 +3,58 @@
 @{
     ViewBag.Title = "Forum";
 }
-<br />
 
-<div>
-    <h3><span class="glyphicon glyphicon-bullhorn"></span>  @Html.DisplayFor(model => model.ForumTitle)</h3>
-    <hr />
-    <a href="#"><span class="glyphicon glyphicon-user"></span>@Model.Author.Name</a> &nbsp;
+
+
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-bullhorn"></i> @ViewBag.Title</h3>
+    <div class="pull-right">
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+            {
+
+            <a href="@Url.Action("Edit", new { id = Model.ForumID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
+                <a href="@Url.Action("Delete", new { id = Model.ForumID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
+
+        }
+        <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> Back</a>
+    </div>
+</div>
+<div class="box-body">    
+    <h4><a href="#">@Model.ForumTitle</a></h4>
+
+    <span class="glyphicon glyphicon-user"></span> @Model.Author.Name &nbsp;
     <span class="glyphicon glyphicon-calendar"></span>@Model.CreatedDate
-    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+    <hr />
+    @Html.Raw(Model.Details)
+</div>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-comments"></i> Comments</h3>
+</div>
+
+    @foreach (var item in Model.ForumComments.Where(c => c.IsDeleted == false).OrderBy(o => o.ModifiedDate))
     {
-        <div class="pull-right">
-            <a href="@Url.Action("Edit", new { id = Model.ForumID })" title="Edit"><i class="fa fa-edit"></i></a><span></span>
-            <a href="@Url.Action("Delete", new { id = Model.ForumID })" title="Delete"><i class="fa fa-remove"></i></a>
+        <div class="box-body" style="padding-left:20px; border-bottom:1px solid #f4f4f4">
+            <a href="#"><span class="glyphicon glyphicon-user"></span> @item.Author.Name</a> &nbsp;
+            <span class="glyphicon glyphicon-calendar"></span>@item.CreatedDate
+            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+            {
+                <div class="pull-right">
+                    <a href="@Url.Action("Edit","ForumComment", new { id = item.CommentID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
+                    <a href="@Url.Action("Delete","ForumComment", new { id = item.CommentID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
+                </div>
+            }
+       <br />
+            @Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
         </div>
     }
-    @Html.Raw(Model.Details)    
-</div>
-<hr />
-<div>
-    <h4><span class="glyphicon glyphicon-comment"></span> Comments</h4>
-    @*<div class="pull-right">
-        <a href="@Url.Action("Create", "ForumComment", new { id = Model.ForumID })"><span class="fa fa-plus-square"></span> Add Comment</a>
-    </div>
-    <br />*@
-</div>
 
-@foreach (var item in Model.ForumComments.Where(c=>c.IsDeleted==false).OrderBy(o=>o.ModifiedDate))
-{
-    <div>
-        <a href="#"><span class="glyphicon glyphicon-user"></span>@item.Author.Name</a> &nbsp;
-        <span class="glyphicon glyphicon-calendar"></span>@item.CreatedDate
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
-        {
-            <div class="pull-right">
-                <a href="@Url.Action("Edit", "ForumComment", new { id = item.CommentID })" title="Edit"><i class="fa fa-edit"></i></a>
-                <a href="@Url.Action("Delete", "ForumComment", new { id = item.CommentID })" title="Delete"><i class="fa fa-remove"></i></a>
-             </div>
-        }
-            </div>
+    @if (Model.ForumComments.Count() == 0)
+    {
+        <div class="box-body">Be first to add comment.</div>
+    }
 
-@Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
-    <hr />
+@{
+    var cmodel = new SocietyManagement.Models.ForumComment();
+    cmodel.ForumID = Model.ForumID;
+    Html.RenderPartial("AddComment", cmodel);
 }
-
-@if (Model.ForumComments.Count() == 0)
-{
-    <div>Be first to add comment.</div>
-}
-
-        @{
-            var cmodel = new SocietyManagement.Models.ForumComment();
-            cmodel.ForumID = Model.ForumID;
-            Html.RenderPartial("AddComment", cmodel);
-        }
-       

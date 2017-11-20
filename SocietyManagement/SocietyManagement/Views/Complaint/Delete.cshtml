@@ -27,46 +27,6 @@
             <dd>
                 @Html.DisplayFor(model => model.Title)
             </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Details)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Details)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.StatusID)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Status.KeyValues)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CreatedDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ModifiedDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ModifiedDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AssignTo.Name)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AssignTo.Name)
-            </dd>
-
             <dt>
                 @Html.DisplayNameFor(model => model.Author.Name)
             </dt>
@@ -82,21 +42,25 @@
             <dd>
                 @Html.DisplayFor(model => model.ComplaintType.KeyValues)
             </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.StatusID)
+            </dt>
+           
+            <dd>
+                @Html.DisplayFor(model => model.Status.KeyValues)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Details)
+            </dt>
+
+            <dd>
+                @Html.Raw(Model.Details.Replace(Environment.NewLine, "</br>"))
+            </dd>
+            
 
         </dl>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <div class="form-actions no-color col-md-offset-1 col-md-11">
-                        <input type="submit" value="Delete" class="btn btn-primary" /> |
-                        <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
-                    </div>
-                </div>
-            </div>
-        }
+       
     </div>
 </div>
 <div class="box-footer">
@@ -106,7 +70,7 @@
         <div class="form-horizontal">
             <div class="form-group">
                 <div class="form-actions no-color col-md-offset-1 col-md-11">
-                    <input type="submit" value="Delete" class="btn btn-primary" />
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</button>
                     <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
                 </div>
             </div>

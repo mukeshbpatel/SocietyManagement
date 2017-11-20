@@ -23,14 +23,25 @@
                     @Html.DisplayFor(model=>model.PollTitle)
                 </div>
             </div>
-
+            <div class="form-group">
+                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.StartDate)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.EndDate)
+                </div>
+            </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Raw(Model.Details)
                 </div>
             </div>
-
+           
             @if (Model.PollType.KeyValues == "Single Selection")
         {
             foreach (var option in Model.PollOptions)
@@ -40,12 +51,12 @@
                 <div class="radio">
                     @if (option.PollVotes.Where(d => d.IsDeleted == false && d.VoteByID == ViewBag.UserID).Count() > 0)
                             {
-                            <label><input type="radio" checked id="chk_@option.PollOptionID" name="chk_@option.PollOptionID"> @option.PollOption1</label>
-                            }
-                            else
-                            {
-                            <label><input type="radio" id="chk_@option.PollOptionID" name="chk_@option.PollOptionID"> @option.PollOption1</label>
-                            }
+                            <input type="radio" checked id="chk_@option.PollOptionID" name="chk"><label>@option.PollOption1</label>
+                    }
+                    else
+                    {
+                            <input type="radio" id="chk_@option.PollOptionID" name="chk"><label>@option.PollOption1</label>
+                    }
                 </div>
             </div>
         </div>
@@ -61,12 +72,12 @@
                     <div class="checkbox checkbox-primary">
                         @if (option.PollVotes.Where(d => d.IsDeleted == false && d.VoteByID == ViewBag.UserID).Count() > 0)
                                 {
-                                <label><input type="checkbox" checked id="chk_@option.PollOptionID" name="chk_@option.PollOptionID"> @option.PollOption1</label>
-                                }
-                                else
-                                {
-                                <label><input type="checkbox" id="chk_@option.PollOptionID" name="chk_@option.PollOptionID"> @option.PollOption1</label>
-                                }
+                                <input type="checkbox" checked id="chk_@option.PollOptionID" name="chk"><label>@option.PollOption1</label>
+                        }
+                        else
+                        {
+                                <input type="checkbox" id="chk_@option.PollOptionID" name="chk"><label>@option.PollOption1</label>
+                        }
                     </div>
                 </div>
             </div>
@@ -93,13 +104,13 @@
 
 
 
-        @if (ViewBag.IsVoted)
+        @if (ViewBag.IsVoted || Model.EndDate < DateTime.Now)
         {
             <script>
                 $(document).ready(function () {
                     $("input:checkbox").prop('disabled', true);
                     $("input:radio").prop('disabled', true);
-                    $("input:submit").prop('disabled', true);
+                    $("button:submit").prop('disabled', true);
                 });
             </script>
         }

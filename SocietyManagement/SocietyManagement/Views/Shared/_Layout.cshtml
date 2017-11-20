@@ -298,7 +298,7 @@
                             <li class="@Html.IsSelected(controllers: "Poll")"><a href="@Url.Action("Index", "Poll")"><i class="fa fa-tasks"></i> Opinion Poll</a></li>
                             <li class="@Html.IsSelected(controllers: "Forum,ForumComment")"><a href="@Url.Action("Index", "Forum")"><i class="fa fa-bullhorn"></i> Forum</a></li>
                             <li class="@Html.IsSelected(controllers: "Complaint,ComplaintComment")"><a href="@Url.Action("Index", "Complaint")"><i class="fa fa-hand-o-up"></i> Complaint</a></li>
-                            <li class="@Html.IsSelected(controllers: "Event")"><a href="@Url.Action("Index", "Event")"><i class="fa fa-calendar-check-o "></i> Events</a></li>
+                            <li class="@Html.IsSelected(controllers: "Event")"><a href="@Url.Action("Index", "Event")"><i class="fa fa-calendar-check-o"></i> Events</a></li>
                         </ul>
                     </li>
                     <li class="treeview @Html.IsSelected(controllers: "Building,BuildingUnit")">
@@ -343,11 +343,11 @@
                             @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                             {
                                 <li class="@Html.IsSelected(controllers: "User")"><a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> Users</a></li>
+                                <li class="@Html.IsSelected(controllers: "EmailTemplate")"><a href="@Url.Action("Index", "EmailTemplate")"><i class="fa fa-envelope"></i> Email Template</a></li>
                             }
                             <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("CalculateBill", "RecurringDue", new { id = 0 })"><i class="fa fa-list-alt"></i> Calculate Bills</a></li>
                             <li class="@Html.IsSelected(controllers: "KeyValue")"><a href="@Url.Action("Index", "KeyValue")"><i class="fa fa-bars"></i> Key Values</a></li>
-                            <li class="@Html.IsSelected(controllers: "SystemSetting")"><a href="@Url.Action("Index", "SystemSetting")"><i class="fa fa-cogs"></i> System Setting</a></li>
-                            <li class="@Html.IsSelected(controllers: "EmailTemplate")"><a href="@Url.Action("Index", "EmailTemplate")"><i class="fa fa-envelope"></i> Email Template</a></li>
+                            <li class="@Html.IsSelected(controllers: "SystemSetting")"><a href="@Url.Action("Index", "SystemSetting")"><i class="fa fa-cogs"></i> System Setting</a></li>                            
                         </ul>
                     </li>
                     }

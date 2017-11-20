@@ -84,6 +84,8 @@
         <EntityTypeShape EntityType="SocietyManagementModel.Notification" Width="1.5" PointX="8.5" PointY="31" />
         <AssociationConnector Association="SocietyManagementModel.FK_Notifications_User" />
         <AssociationConnector Association="SocietyManagementModel.FK_Notifications_EmailTemplate" />
+        <EntityTypeShape EntityType="SocietyManagementModel.Event" Width="1.5" PointX="5.25" PointY="48.875" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Events_Types" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

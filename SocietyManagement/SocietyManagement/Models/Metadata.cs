@@ -19,6 +19,27 @@ namespace SocietyManagement.Models
     //{
     //}
 
+    public partial class EventMetadata
+    {
+        [DataType(DataType.Date)]
+        [Display(Name = "Date")]
+        [Required]
+        public System.DateTime EventDate { get; set; }
+        [Display(Name = "Event Type")]
+        [Required]
+        public int EventTypeID { get; set; }
+        [Required]
+        [Display(Name = "Event")]
+        public string EventName { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Created Date")]
+        public System.DateTime CreatedDate { get; set; }        
+    }
+    [MetadataType(typeof(EventMetadata))]
+    public partial class Event
+    {
+    }
+
     public partial class SP_BuildingUnit_BalanceSheet_ResultMetadata
     {
         public decimal ID { get; set; }

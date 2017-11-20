@@ -277,6 +277,25 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="EventTypeID" Type="int" Nullable="false" />
+          <Property Name="EventName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Details" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="UDK4" Type="nvarchar(max)" />
+          <Property Name="UDK5" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ExpenseMedia">
           <Key>
             <PropertyRef Name="MediaID" />
@@ -942,6 +961,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Events_Types">
+          <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValues">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="EventTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ExpenseMedia_Expenses">
           <End Role="Expenses" Type="Self.Expenses" Multiplicity="1" />
           <End Role="ExpenseMedia" Type="Self.ExpenseMedia" Multiplicity="*" />
@@ -1208,6 +1239,7 @@
         </Association>
         <Function Name="SP_BuildingUnit_BalanceSheet" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UnitID" Type="int" Mode="In" />
+          <Parameter Name="YearID" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="SocietyManagementModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -1225,6 +1257,7 @@
           <EntitySet Name="Complaints" EntityType="Self.Complaints" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dues" EntityType="Self.Dues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ExpenseMedia" EntityType="Self.ExpenseMedia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinancialYear" EntityType="Self.FinancialYear" Schema="dbo" store:Type="Tables" />
@@ -1346,6 +1379,10 @@
           <AssociationSet Name="FK_EmailTemplates_TemplateType" Association="Self.FK_EmailTemplates_TemplateType">
             <End Role="KeyValues" EntitySet="KeyValues" />
             <End Role="EmailTemplates" EntitySet="EmailTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_Types" Association="Self.FK_Events_Types">
+            <End Role="KeyValues" EntitySet="KeyValues" />
+            <End Role="Events" EntitySet="Events" />
           </AssociationSet>
           <AssociationSet Name="FK_ExpenseMedia_Expenses" Association="Self.FK_ExpenseMedia_Expenses">
             <End Role="Expenses" EntitySet="Expenses" />
@@ -1663,7 +1700,13 @@
           </AssociationSet>
           <FunctionImport Name="SP_BuildingUnit_BalanceSheet" ReturnType="Collection(SocietyManagementModel.SP_BuildingUnit_BalanceSheet_Result)">
           <Parameter Name="UnitID" Mode="In" Type="Int32" />
+            <Parameter Name="YearID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Events" EntityType="SocietyManagementModel.Event" />
+          <AssociationSet Name="FK_Events_Types" Association="SocietyManagementModel.FK_Events_Types">
+            <End Role="KeyValue" EntitySet="KeyValues" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1977,6 +2020,7 @@
           <NavigationProperty Name="Expenses" Relationship="SocietyManagementModel.FK_Expenses_PaymentMode" FromRole="KeyValue" ToRole="Expens" />
           <NavigationProperty Name="Expenses1" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="KeyValue" ToRole="Expens" />
           <NavigationProperty Name="EmailTemplates" Relationship="SocietyManagementModel.FK_EmailTemplates_TemplateType" FromRole="KeyValue" ToRole="EmailTemplate" />
+          <NavigationProperty Name="Events" Relationship="SocietyManagementModel.FK_Events_Types" FromRole="KeyValue" ToRole="Event" />
           </EntityType>
         <EntityType Name="NoticeBoard">
           <Key>
@@ -2938,6 +2982,38 @@
           <Property Type="Decimal" Name="Credit" Nullable="false" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="Debit" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EventTypeID" Type="Int32" Nullable="false" />
+          <Property Name="EventName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EventType" Relationship="SocietyManagementModel.FK_Events_Types" FromRole="Event" ToRole="KeyValue" />
+        </EntityType>
+        <Association Name="FK_Events_Types">
+          <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+          <End Type="SocietyManagementModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValue">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="EventTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3605,6 +3681,26 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="SocietyManagementModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventTypeID" ColumnName="EventTypeID" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

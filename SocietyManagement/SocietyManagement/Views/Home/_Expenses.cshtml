@@ -13,11 +13,14 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ExpenseDate)
                     </th>
-                    <th>
+                    <th  class="hidden-xs">
                         @Html.DisplayNameFor(model => model.ExpenseTypeID)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.PaidTo)
+                    </th>
+                    <th class="hidden-xs">
+                        @Html.DisplayNameFor(model => model.PaymentModeID)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Amount)
@@ -30,13 +33,16 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ExpenseDate)
                         </td>
-                        <td>
-                            <a href="@Url.Action("Details", new { id = item.ExpenseID })" title="Details">@item.ExpenseType.KeyValues</a>
+                        <td  class="hidden-xs">
+                            @item.ExpenseType.KeyValues
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.PaidTo)
-                        </td>                        
-                        <td>
+                            <a href="@Url.Action("Details","Expense", new { id = item.ExpenseID })" title="Details">@item.PaidTo</a>
+</td> 
+                        <td class="hidden-xs">
+                            @item.PaymentMode.KeyValues
+                        </td>                       
+                        <td class="right">
                             @Html.DisplayFor(modelItem => item.Amount)
                         </td>
                     </tr>

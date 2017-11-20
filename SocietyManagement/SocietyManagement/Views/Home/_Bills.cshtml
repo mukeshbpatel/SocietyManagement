@@ -10,14 +10,11 @@
         <table class="table table-sm table-hover table-responsive table-condensed">
             <tbody>
                 <tr>
-                    <th>Date</th>
-                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
-                    {
-                        <th>Unit</th>
-                    }
+                    <th>Date</th>                    
+                    <th>Unit</th>                    
                     <th>Details</th>
-                    <th>Amount</th>
-                    <th class="hidden-xs">Due</th>
+                    <th class="hidden-xs">Due Date</th>
+                    <th>Amount</th>                    
                 </tr>
 
                 @foreach (var item in Model)
@@ -26,18 +23,15 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.BillDate)
                         </td>
-                        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
-                        {
-                            <td><a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })">@item.BuildingUnit.UnitName</a></td>
-                        }
+                        <td><a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })">@item.BuildingUnit.UnitName</a></td>                        
                         <td>
                             <a href="@Url.Action("Details","Due", new { id = item.DueID })" title="Details">@item.Details</a>
-                        </td>
-                        <td class="right">
-                            @Html.DisplayFor(modelItem => item.DueAmount)
-                        </td>
+                        </td>                        
                         <td class="hidden-xs">
                             @Html.DisplayFor(modelItem => item.DueDate)
+                        </td>
+                        <td class="right">
+                            @(item.DueAmount + item.Penalties.Where(d=>d.IsDeleted==false).Sum(s=>s.Amount))
                         </td>
                     </tr>
                 }

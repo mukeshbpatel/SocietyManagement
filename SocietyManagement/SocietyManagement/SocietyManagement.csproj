@@ -180,6 +180,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -256,6 +257,9 @@
     </Compile>
     <Compile Include="Models\EmailNotification.cs" />
     <Compile Include="Models\EmailTemplate.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Event.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Expense.cs">
@@ -587,6 +591,11 @@
     <Content Include="Views\Home\_Payments.cshtml" />
     <Content Include="Views\Home\_Expenses.cshtml" />
     <Content Include="Views\Home\_Incomes.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Event\Delete.cshtml" />
+    <Content Include="Views\Event\Details.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />

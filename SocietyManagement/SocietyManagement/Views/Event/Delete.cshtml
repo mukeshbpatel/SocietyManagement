@@ -1,11 +1,11 @@
-﻿@model SocietyManagement.Models.KeyValue
+﻿@model SocietyManagement.Models.Event
 
 @{
-    ViewBag.Title = "Key Value";
+    ViewBag.Title = "Event";
 }
 
 <div class="box-header with-border">
-    <h3 class="box-title"><i class="fa fa-key"></i> @ViewBag.Title</h3>
+    <h3 class="box-title"><i class="fa fa-calendar-check-o"></i> @ViewBag.Title</h3>
 </div>
 
 <div class="box-body">
@@ -14,30 +14,27 @@
 
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.KeyName)
+            @Html.DisplayNameFor(model => model.EventDate)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.KeyName)
+            @Html.DisplayFor(model => model.EventDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.KeyValues)
+            @Html.DisplayNameFor(model => model.EventName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.KeyValues)
+            @Html.DisplayFor(model => model.EventName)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.KeyOrder)
+            @Html.DisplayNameFor(model => model.EventTypeID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.KeyOrder)
+            @Html.DisplayFor(model => model.EventType.KeyValues)
         </dd>
-
-
         <dt>
             @Html.DisplayNameFor(model => model.Details)
         </dt>
@@ -45,7 +42,6 @@
         <dd>
             @Html.DisplayFor(model => model.Details)
         </dd>
-
     </dl>
 
 </div>
@@ -57,10 +53,9 @@
             <div class="form-group">
                 <div class="form-actions no-color col-md-offset-1 col-md-11">
                     <button type="submit" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</button>
-                    <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
+                    <a href="@Url.Action("Index")" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
                 </div>
             </div>
         </div>
     }
 </div>
-
