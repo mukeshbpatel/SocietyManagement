@@ -15,15 +15,15 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group has-feedback">
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name",@style= "max-width:330px; margin-left:10px; border-radius:0;" })
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name"})
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                 
 
                 </div>
                 <div class="form-group has-feedback">
-                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @style = "max-width:330px; margin-left:10px; border-radius:0;" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password"})
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                   
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
@@ -35,7 +35,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Log In</button>
+                        <button type="submit" class="btn btn-primary"><i class="fa fa-sign-in"></i> Sign in</button>
                     </div>
                     <!-- /.col -->
                 </div>

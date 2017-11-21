@@ -215,7 +215,8 @@ namespace SocietyManagement.Controllers
                 } 
                 else
                 {
-                    ModelState.AddModelError("", "User Name or Email address is required to retrive password.");
+                    ModelState.AddModelError("", "Enter User name or Email.");
+                    return View(model);
                 }
 
                 if (user == null)

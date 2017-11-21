@@ -598,8 +598,8 @@
     <Content Include="Views\Event\Index.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
-    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin1.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />
