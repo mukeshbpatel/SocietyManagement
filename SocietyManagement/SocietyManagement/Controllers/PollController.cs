@@ -28,7 +28,7 @@ namespace SocietyManagement.Controllers
             var UserID = Helper.GetUserID(User);
             ViewBag.UserID = UserID;
             if (poll.PollOptions.Count > 0)
-            {                
+            {
                 var options = db.PollVotes.Where(d => d.IsDeleted == false && d.PollOption.PollID == id && d.VoteByID == UserID);
                 if (options.Count() > 0)
                     ViewBag.IsVoted = true;
@@ -39,38 +39,39 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         public ActionResult Vote(int id, FormCollection collection)
         {
+            ViewBag.IsVoted = false;
             Poll poll = db.Polls.Find(id);
             if (poll == null)
             {
                 return HttpNotFound();
             }
-
-            foreach (var option in poll.PollOptions)
+            if (!string.IsNullOrEmpty(collection["Vote"]))
             {
-                if (!string.IsNullOrEmpty(collection["chk_" + option.PollOptionID]))
-                {
-                    string chk = collection["chk_" + option.PollOptionID];
-                    if (chk.ToLower() == "on")
-                    {
+                string[] chk = collection["Vote"].Split(',');
+                foreach (var option in chk)
+                {                    
                         PollVote pollVote = new PollVote();
-                        pollVote.PollOptionID = option.PollOptionID;
+                        pollVote.PollOptionID = int.Parse(option);
                         Helper.AssignUserInfo(pollVote, User);
                         pollVote.VoteByID = pollVote.UserID;
                         pollVote.VoteDate = pollVote.CreatedDate;
                         db.PollVotes.Add(pollVote);
-                        db.SaveChanges();
-                    }
-                    
+                        db.SaveChanges();                 
                 }
             }
-            return RedirectToAction("Details", new { id = poll.PollID });            
+            else
+            {
+                ModelState.AddModelError("", "Please select at least one option.");
+                return View(poll);
+            }
+            return RedirectToAction("Details", new { id = poll.PollID });
         }
 
 
         // GET: Poll
         public ActionResult Index()
         {
-            var polls = db.Polls.Where(p => p.IsDeleted == false).Include(p => p.PollType).OrderByDescending(o=>o.StartDate);
+            var polls = db.Polls.Where(p => p.IsDeleted == false).Include(p => p.PollType).OrderByDescending(o => o.StartDate);
             return View(polls.ToList());
         }
 
@@ -96,7 +97,7 @@ namespace SocietyManagement.Controllers
         // GET: Poll/Create
         [Authorize(Roles = "SuperUser,Admin,Manager")]
         public ActionResult Create()
-        {            
+        {
             ViewBag.PollTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PollType"), "KeyID", "KeyValues");
             return View();
         }
@@ -118,7 +119,7 @@ namespace SocietyManagement.Controllers
 
                 string[] lines = poll.Options.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
                 int i = 1;
-                foreach(var item in lines)
+                foreach (var item in lines)
                 {
                     var pollOption = new PollOption();
                     pollOption.PollID = poll.PollID;
@@ -151,9 +152,9 @@ namespace SocietyManagement.Controllers
             ViewBag.PollTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PollType"), "KeyID", "KeyValues", poll.PollTypeID);
 
             poll.Options = string.Empty;
-            foreach (var pollOption in poll.PollOptions.OrderBy(o=>o.OptionOrder))
+            foreach (var pollOption in poll.PollOptions.OrderBy(o => o.OptionOrder))
             {
-                poll.Options += pollOption.PollOption1 + Environment.NewLine;                
+                poll.Options += pollOption.PollOption1 + Environment.NewLine;
             }
             return View(poll);
         }
@@ -167,7 +168,7 @@ namespace SocietyManagement.Controllers
         [ValidateInput(false)]
         public ActionResult Edit([Bind(Include = "PollID,PollTitle,Details,StartDate,EndDate,PollTypeID,UDK1,UDK2,UDK3,CreatedDate,Options")] Poll poll)
         {
-            Helper.AssignUserInfo(poll, User,true);
+            Helper.AssignUserInfo(poll, User, true);
             if (ModelState.IsValid)
             {
                 db.Entry(poll).State = EntityState.Modified;

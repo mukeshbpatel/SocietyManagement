@@ -8,7 +8,7 @@
 </div>
 
 <div class="box-body">
-    @if (User.IsInRole("User"))
+    @if (User.IsInRole("User") || User.IsInRole("Manager"))
     {
         @Html.Partial("_TopBoxUser")
 

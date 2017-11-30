@@ -108,6 +108,9 @@ namespace SocietyManagement.Controllers
                 ViewBag.DueList = dues.OrderByDescending(o => o.BillDate).Take(5);
                 ViewBag.CollectionList = collections.OrderByDescending(o => o.CollectionDate).Take(5);
                 ViewBag.expenseList = expenses.OrderByDescending(o => o.ExpenseDate).Take(5);
+
+                var data = db.Database.SqlQuery<SP_Graph_DueCollection_Result>("Exec SP_Graph_DueCollection @YearID = " + SiteSetting.FinancialYearID);
+                ViewBag.GraphDueCollection = data;
             }
 
                 return View();

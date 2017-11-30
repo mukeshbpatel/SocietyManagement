@@ -4,6 +4,21 @@
 <div class="box box-primary" style="min-height:240px;">
     <div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-list-alt"></i> Recent Bills</h3>
+        @if (Model.Count() > 0)
+        {
+            if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+                <div class="pull-right">
+                    <a href="@Url.Action("Index","Due")">View More</a>
+                </div>
+            }
+            else if (User.IsInRole("User") || User.IsInRole("Manager"))
+            {
+                <div class="pull-right">
+                    <a href="@Url.Action("MyBill","MyAccount",new { id = 0 })">View More</a>
+                </div>
+            }
+        }
     </div>
     <!-- /.box-header -->
     <div class="box-body no-padding">
@@ -11,7 +26,7 @@
             <tbody>
                 <tr>
                     <th>Date</th>                    
-                    <th>Unit</th>                    
+                    <th class="hidden-xs">Unit</th>                    
                     <th>Details</th>
                     <th class="hidden-xs">Due Date</th>
                     <th>Amount</th>                    
@@ -23,7 +38,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.BillDate)
                         </td>
-                        <td><a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })">@item.BuildingUnit.UnitName</a></td>                        
+                        <td class="hidden-xs"><a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })">@item.BuildingUnit.UnitName</a></td>                        
                         <td>
                             <a href="@Url.Action("Details","Due", new { id = item.DueID })" title="Details">@item.Details</a>
                         </td>                        
@@ -38,9 +53,9 @@
                 @if (Model.Count() == 0)
                 {
                     <tr>
-                        <td colspan="4">No Data available</td>
+                        <td colspan="5">No Data available</td>
                     </tr>
-                }
+                } 
             </tbody>
         </table>
     </div>

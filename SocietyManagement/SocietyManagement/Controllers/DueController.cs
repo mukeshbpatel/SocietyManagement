@@ -27,7 +27,9 @@ namespace SocietyManagement.Controllers
             }
             else
             {
-                var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
+                DateTime dt = new DateTime(DateTime.Today.Year,DateTime.Today.Month,1);                
+                //var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
+                var dues = db.Dues.Where(d => d.IsDeleted == false && d.BillDate == dt.Date && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
                 return View(dues.ToList());
             }
         }

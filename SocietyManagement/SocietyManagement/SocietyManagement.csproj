@@ -329,6 +329,9 @@
     <Compile Include="Models\SP_BuildingUnit_BalanceSheet_Result.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_Graph_DueCollection_Result.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SystemSetting.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>

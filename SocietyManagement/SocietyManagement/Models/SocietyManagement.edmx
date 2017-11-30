@@ -1241,6 +1241,9 @@
           <Parameter Name="UnitID" Type="int" Mode="In" />
           <Parameter Name="YearID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_Graph_DueCollection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="YearID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="SocietyManagementModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -1699,7 +1702,7 @@
             <End Role="Notification" EntitySet="Notifications" />
           </AssociationSet>
           <FunctionImport Name="SP_BuildingUnit_BalanceSheet" ReturnType="Collection(SocietyManagementModel.SP_BuildingUnit_BalanceSheet_Result)">
-          <Parameter Name="UnitID" Mode="In" Type="Int32" />
+            <Parameter Name="UnitID" Mode="In" Type="Int32" />
             <Parameter Name="YearID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Events" EntityType="SocietyManagementModel.Event" />
@@ -1707,6 +1710,9 @@
             <End Role="KeyValue" EntitySet="KeyValues" />
             <End Role="Event" EntitySet="Events" />
           </AssociationSet>
+          <FunctionImport Name="SP_Graph_DueCollection" ReturnType="Collection(SocietyManagementModel.SP_Graph_DueCollection_Result)">
+            <Parameter Name="YearID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -3014,6 +3020,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SP_Graph_DueCollection_Result">
+          <Property Type="Int32" Name="GYear" Nullable="true" />
+          <Property Type="Int32" Name="GMonth" Nullable="true" />
+          <Property Type="Decimal" Name="Dues" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Collections" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3701,6 +3713,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Graph_DueCollection" FunctionName="SocietyManagementModel.Store.SP_Graph_DueCollection">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SocietyManagementModel.SP_Graph_DueCollection_Result">
+                <ScalarProperty Name="GYear" ColumnName="GYear" />
+                <ScalarProperty Name="GMonth" ColumnName="GMonth" />
+                <ScalarProperty Name="Dues" ColumnName="Dues" />
+                <ScalarProperty Name="Collections" ColumnName="Collections" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

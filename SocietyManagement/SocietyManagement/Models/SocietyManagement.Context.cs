@@ -73,5 +73,14 @@ namespace SocietyManagement.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_BuildingUnit_BalanceSheet_Result>("SP_BuildingUnit_BalanceSheet", unitIDParameter, yearIDParameter);
         }
+    
+        public virtual ObjectResult<SP_Graph_DueCollection_Result> SP_Graph_DueCollection(Nullable<int> yearID)
+        {
+            var yearIDParameter = yearID.HasValue ?
+                new ObjectParameter("YearID", yearID) :
+                new ObjectParameter("YearID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Graph_DueCollection_Result>("SP_Graph_DueCollection", yearIDParameter);
+        }
     }
 }

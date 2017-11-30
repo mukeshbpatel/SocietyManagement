@@ -6,7 +6,7 @@
         <a href="@Url.Action("Index", "Due")" class="small-box bg-aqua">
             <div class="small-box-header"><i class="fa fa-list-alt hidden-lg hidden-md"></i> Maintance Bills</div>
             <div class="inner">
-                <h3>₹ @ViewBag.BillAmount</h3>
+                <h4><b>₹ @ViewBag.BillAmount</b></h4>
                 <p>@ViewBag.BillCount Bills</p>
             </div>
             <div class="icon">
@@ -21,7 +21,7 @@
         <a href="@Url.Action("Index", "Collection")" class="small-box bg-green">
             <div class="small-box-header"><i class="fa fa-bank hidden-lg hidden-md"></i> Collections</div>
             <div class="inner">
-                <h3>₹ @ViewBag.PaymentAmount</h3>
+                <h4><b>₹ @ViewBag.PaymentAmount</b></h4>
                 <p>@ViewBag.PaymentCount Payments</p>
             </div>
             <div class="icon">
@@ -36,7 +36,7 @@
         <a href="@Url.Action("Index", "Expense")" class="small-box bg-yellow">
             <div class="small-box-header"><i class="fa fa-pie-chart hidden-lg hidden-md"></i> Income</div>
             <div class="inner">
-                <h3>₹ @ViewBag.PaymentAmount</h3>
+                <h4><b>₹ @ViewBag.PaymentAmount</b></h4>
                 <p>@ViewBag.PaymentCount Transactions</p>
             </div>
             <div class="icon">
@@ -51,7 +51,7 @@
         <a href="@Url.Action("Index", "Expense")" class="small-box bg-red">
             <div class="small-box-header"><i class="fa fa-money hidden-lg hidden-md"></i> Expenses</div>
             <div class="inner">
-                <h3>₹ @ViewBag.ExpenseAmount</h3>
+                <h4><b>₹ @ViewBag.ExpenseAmount</b></h4>
                 <p>@ViewBag.ExpenseCount Vouchers</p>
             </div>
             <div class="icon">

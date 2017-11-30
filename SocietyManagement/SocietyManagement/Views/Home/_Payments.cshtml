@@ -4,6 +4,21 @@
 <div class="box box-success" style="min-height:240px;">
     <div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-bank"></i> Recent Payments</h3>
+        @if (Model.Count() > 0)
+        {
+            if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+                <div class="pull-right">
+                    <a href="@Url.Action("Index","Collection")">View More</a>
+                </div>
+            }
+            else if (User.IsInRole("User") || User.IsInRole("Manager"))
+            {
+                <div class="pull-right">
+                    <a href="@Url.Action("MyPayment","MyAccount",new { id = 0 })">View More</a>
+                </div>
+            }
+        }
     </div>
     <!-- /.box-header -->
     <div class="box-body no-padding">

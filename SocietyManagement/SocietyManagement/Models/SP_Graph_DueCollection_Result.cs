@@ -11,15 +11,11 @@ namespace SocietyManagement.Models
 {
     using System;
     
-    public partial class SP_BuildingUnit_BalanceSheet_Result
+    public partial class SP_Graph_DueCollection_Result
     {
-        public decimal ID { get; set; }
-        public string RecType { get; set; }
-        public System.DateTime BDate { get; set; }
-        public int UnitID { get; set; }
-        public string BType { get; set; }
-        public string Details { get; set; }
-        public decimal Credit { get; set; }
-        public decimal Debit { get; set; }
+        public Nullable<int> GYear { get; set; }
+        public Nullable<int> GMonth { get; set; }
+        public Nullable<decimal> Dues { get; set; }
+        public Nullable<decimal> Collections { get; set; }
     }
 }
