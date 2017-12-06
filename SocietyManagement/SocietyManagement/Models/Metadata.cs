@@ -209,7 +209,9 @@ namespace SocietyManagement.Models
     [MetadataType(typeof(ExpenseMetadata))]
     public partial class Expense
     {
-       
+        [NotMapped]
+        [Display(Name = "Files")]
+        public HttpPostedFileBase[] Files { get; set; }
     }
 
     public partial class CollectionMetadata
@@ -267,6 +269,10 @@ namespace SocietyManagement.Models
                 return this.Amount - this.Discount;
             }
         }
+
+        [NotMapped]
+        [Display(Name = "Files")]
+        public HttpPostedFileBase[] Files { get; set; }
     }
 
     public partial class AspNetUserMetadata

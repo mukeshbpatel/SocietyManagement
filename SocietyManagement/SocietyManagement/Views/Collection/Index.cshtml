@@ -15,6 +15,21 @@
 </div>
 <div class="box-body">
 
+    <ul class="nav nav-pills pull-right">
+        @foreach (var item in (SelectList)ViewBag.Months)
+        {
+            DateTime dt = DateTime.Parse(item.Text);
+            if (item.Selected)
+            {
+                <li class="active"><a href="#">@dt.ToString("MMM-yy")</a></li>
+            }
+            else
+            {
+                <li><a href="@Url.Action("Index", new { CollectionDate = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a></li>
+            }
+        }
+    </ul>
+
     @Html.Partial("_Payment", Model)
 
 </div>

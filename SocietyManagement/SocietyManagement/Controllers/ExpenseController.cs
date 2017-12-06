@@ -17,12 +17,19 @@ namespace SocietyManagement.Controllers
 
         // GET: Expense
         [Authorize(Roles = "SuperUser,Admin,Manager")]
-        public ActionResult Index()
+        public ActionResult Index(string ExpenseDate)
         {
-            var expenses = db.Expenses.Where(d=>d.IsDeleted==false).Include(e => e.PaymentMode).Include(e => e.ExpenseType).OrderBy(o=>o.ExpenseDate);
+            DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            if (!string.IsNullOrEmpty(ExpenseDate))
+            {
+                dt = DateTime.Parse(ExpenseDate);
+            }
+
+            var expenses = db.Expenses.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID && d.ExpenseDate.Month == dt.Date.Month && d.ExpenseDate.Year == dt.Date.Year).Include(e => e.PaymentMode).Include(e => e.ExpenseType).OrderBy(o => o.ExpenseDate);
+            ViewBag.Months = Helper.GetMonths(dt);
             return View(expenses.ToList());
         }
-
+    
         // GET: Expense/Details/5
         public ActionResult Details(Int64? id)
         {

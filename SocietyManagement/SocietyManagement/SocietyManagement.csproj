@@ -329,6 +329,9 @@
     <Compile Include="Models\SP_BuildingUnit_BalanceSheet_Result.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SP_Graph_DueCollection1_Result.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SP_Graph_DueCollection_Result.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
@@ -394,6 +397,9 @@
     <Content Include="images\UserFemale.png" />
     <Content Include="images\UserMale.png" />
     <Content Include="Scripts\adminlte.min.js" />
+    <Content Include="Scripts\HighChart\data.js" />
+    <Content Include="Scripts\HighChart\exporting.js" />
+    <Content Include="Scripts\HighChart\highcharts.js" />
     <Content Include="Template\MaintanceBill.html" />
     <Content Include="Template\PaymentReceipt.html" />
     <Content Include="favicon.ico" />
@@ -599,6 +605,8 @@
     <Content Include="Views\Event\Details.cshtml" />
     <Content Include="Views\Event\Edit.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Home\_GraphBillPayment.cshtml" />
+    <Content Include="Views\Home\_GraphIncomExpense.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

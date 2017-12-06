@@ -19,19 +19,14 @@ namespace SocietyManagement.Controllers
         [Authorize(Roles = "SuperUser,Admin,Manager")]
         public ActionResult Index(string BillDate)
         {
+            DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
             if (!string.IsNullOrEmpty(BillDate))
             {
-                DateTime dt = DateTime.Parse(BillDate);
-                var dues = db.Dues.Where(d => d.IsDeleted == false && d.BillDate == dt.Date && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
-                return View(dues.ToList());
+                dt = DateTime.Parse(BillDate);                
             }
-            else
-            {
-                DateTime dt = new DateTime(DateTime.Today.Year,DateTime.Today.Month,1);                
-                //var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
-                var dues = db.Dues.Where(d => d.IsDeleted == false && d.BillDate == dt.Date && d.YearID == SiteSetting.FinancialYearID).Include(d => d.BuildingUnit).Include(d => d.DueType);
-                return View(dues.ToList());
-            }
+            var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID && d.BillDate.Month == dt.Date.Month && d.BillDate.Year == dt.Date.Year).Include(d => d.BuildingUnit).Include(d => d.DueType);
+            ViewBag.Months = Helper.GetMonths(dt);
+            return View(dues.ToList());
         }
 
         public ActionResult MyBill(int id)

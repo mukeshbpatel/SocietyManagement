@@ -82,5 +82,14 @@ namespace SocietyManagement.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Graph_DueCollection_Result>("SP_Graph_DueCollection", yearIDParameter);
         }
+    
+        public virtual ObjectResult<SP_Graph_DueCollection1_Result> SP_Graph_DueCollection1(Nullable<int> yearID)
+        {
+            var yearIDParameter = yearID.HasValue ?
+                new ObjectParameter("YearID", yearID) :
+                new ObjectParameter("YearID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Graph_DueCollection1_Result>("SP_Graph_DueCollection1", yearIDParameter);
+        }
     }
 }

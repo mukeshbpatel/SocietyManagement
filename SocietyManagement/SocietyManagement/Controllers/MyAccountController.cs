@@ -15,7 +15,7 @@ namespace SocietyManagement.Controllers
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
         
-        public ActionResult MyBill(int id)
+        public ActionResult MyBill(int id=0)
         {
             string UserID = Helper.GetUserID(User);
             var appUser = db.AspNetUsers.Find(UserID);
@@ -50,7 +50,7 @@ namespace SocietyManagement.Controllers
             }
         }
 
-        public ActionResult BalanceSheet(int id)
+        public ActionResult BalanceSheet(int id=0)
         {
             string UserID = Helper.GetUserID(User);
             var appUser = db.AspNetUsers.Find(UserID);

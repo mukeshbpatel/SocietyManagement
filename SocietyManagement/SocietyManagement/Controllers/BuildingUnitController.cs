@@ -43,6 +43,9 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
+
+            var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id + ",@YearID = " + SiteSetting.FinancialYearID);
+            ViewBag.BalanceSheet = data;
             return View(buildingUnit);
         }
 

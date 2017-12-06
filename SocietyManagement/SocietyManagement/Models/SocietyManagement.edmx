@@ -1711,7 +1711,10 @@
             <End Role="Event" EntitySet="Events" />
           </AssociationSet>
           <FunctionImport Name="SP_Graph_DueCollection" ReturnType="Collection(SocietyManagementModel.SP_Graph_DueCollection_Result)">
-            <Parameter Name="YearID" Mode="In" Type="Int32" />
+          <Parameter Name="YearID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Graph_DueCollection1" ReturnType="Collection(SocietyManagementModel.SP_Graph_DueCollection1_Result)">
+          <Parameter Name="YearID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="AspNetRole">
@@ -3026,6 +3029,16 @@
           <Property Type="Decimal" Name="Dues" Nullable="true" Precision="38" Scale="2" />
           <Property Type="Decimal" Name="Collections" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
+        <ComplexType Name="SP_Graph_DueCollection1_Result">
+          <Property Type="Int32" Name="GYear" Nullable="true" />
+          <Property Type="Int32" Name="GMonth" Nullable="true" />
+          <Property Type="Int32" Name="Dues" Nullable="true" />
+          <Property Type="Decimal" Name="DueAmount" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Collections" Nullable="true" />
+          <Property Type="Decimal" Name="CollectionAmount" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="Expenses" Nullable="true" />
+          <Property Type="Decimal" Name="ExpensesAmount" Nullable="true" Precision="38" Scale="2" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3713,13 +3726,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_Graph_DueCollection" FunctionName="SocietyManagementModel.Store.SP_Graph_DueCollection">
+          <FunctionImportMapping FunctionImportName="SP_Graph_DueCollection1" FunctionName="SocietyManagementModel.Store.SP_Graph_DueCollection">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SocietyManagementModel.SP_Graph_DueCollection_Result">
+              <ComplexTypeMapping TypeName="SocietyManagementModel.SP_Graph_DueCollection1_Result">
                 <ScalarProperty Name="GYear" ColumnName="GYear" />
                 <ScalarProperty Name="GMonth" ColumnName="GMonth" />
                 <ScalarProperty Name="Dues" ColumnName="Dues" />
+                <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
                 <ScalarProperty Name="Collections" ColumnName="Collections" />
+                <ScalarProperty Name="CollectionAmount" ColumnName="CollectionAmount" />
+                <ScalarProperty Name="Expenses" ColumnName="Expenses" />
+                <ScalarProperty Name="ExpensesAmount" ColumnName="ExpensesAmount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

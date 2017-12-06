@@ -14,22 +14,7 @@ namespace SocietyManagement.Views
     public class RecurringDueController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
-
-        private SelectList GetMonths(DateTime Current)
-        {
-            FinancialYear fy = db.FinancialYears.Where(f =>f.IsDeleted == false && f.IsActive == true).FirstOrDefault();
-            List<DateTime> dtList = new List<DateTime>();
-            if (fy!=null)
-            {
-                DateTime dt = fy.StartDate;
-                while(dt <= fy.EndDate)
-                {
-                    dtList.Add(dt);
-                    dt = dt.AddMonths(1);
-                }
-            }
-            return new SelectList(dtList, Current);
-        }
+        
 
         [Authorize(Roles = "SuperUser")]
         public ActionResult CalculateBill(int id,string RecurringDate)
@@ -40,7 +25,7 @@ namespace SocietyManagement.Views
             else
                 return RedirectToAction("CalculateBill", new { RecurringDate = dt.ToString("01-MM-yyyy") });
 
-            ViewBag.Months = GetMonths(dt);
+            ViewBag.Months = Helper.GetMonths(dt);
             RecurringBill recurringBill = new RecurringBill();            
             return View(recurringBill.CalculateRecurringBill(User, dt));
         }

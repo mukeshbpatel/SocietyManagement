@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Security.Principal;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Web.Mvc;
 
 namespace SocietyManagement.Models
 {
@@ -28,7 +29,20 @@ namespace SocietyManagement.Models
     }
 
     public static class Helper
-    {        
+    {
+        public static SelectList GetMonths(DateTime Current)
+        {
+            List<DateTime> dtList = new List<DateTime>();
+            DateTime dt = SiteSetting.FinancialYear_StartDate;
+            while (dt <= SiteSetting.FinancialYear_EndDate)
+            {
+                dtList.Add(dt);
+                dt = dt.AddMonths(1);
+            }
+
+            return new SelectList(dtList, Current);
+        }
+
         public static DateTime GetCurrentDate()
         {
             return DateTime.Now;

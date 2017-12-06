@@ -1,0 +1,136 @@
+﻿@model IEnumerable<SocietyManagement.Models.SP_Graph_DueCollection1_Result>
+
+
+
+<div class="nav-tabs-custom border">
+    <ul class="nav nav-tabs pull-right">
+        <li class="active"><a href="#BPBarChart" data-toggle="tab">Bar</a></li>
+        <li><a href="#BPLineChart" data-toggle="tab">Line</a></li>
+        <li class="hidden-xs"><a href="#BPDetails" data-toggle="tab">Detail</a></li>        
+        <li class="pull-left header"><i class="fa fa-bank"></i> Bill/Collection</li>
+    </ul>    
+    <div class="tab-content no-padding">
+        <div class="chart tab-pane active" id="BPBarChart" style="position: relative; height: 300px;"></div>
+        <div class="chart tab-pane" id="BPLineChart" style="position: relative; height: 300px;"></div>
+        <div class="chart tab-pane hidden-xs" id="BPDetails" style="position: relative; min-height: 300px;">
+            <table class="table table-hover table-responsive table-condensed">
+                <tr>
+                    <th>Month</th>
+                    <th class="text-right">Bills</th>
+                    <th class="text-right">Bill Amount</th>
+                    <th class="text-right">Collections</th>
+                    <th class="text-right">Collection Amount</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    @{ 
+                        DateTime dt = new DateTime(item.GYear.Value, item.GMonth.Value, 1);
+                    }
+                    <td>@dt.ToString("MMM-yyyy")</td>
+                    <td class="text-right"><a href="@Url.Action("Index","Due",new { BillDate=dt.ToString("dd-MM-yyyy")})">@item.Dues</a></td>
+                    <td class="text-right"><a href="@Url.Action("Index","Due",new { BillDate=dt.ToString("dd-MM-yyyy")})">@item.DueAmount</a></td>
+                    <td class="text-right"><a href="@Url.Action("Index","Collection",new { CollectionDate=dt.ToString("dd-MM-yyyy")})">@item.Collections</a></td>
+                    <td class="text-right"><a href="@Url.Action("Index","Collection",new { CollectionDate=dt.ToString("dd-MM-yyyy")})">@item.CollectionAmount</a></td>
+                </tr>
+                }
+                <tr>
+                    <th>Total</th>
+                    <th class="text-right">@Model.Sum(s => s.Dues)</th>
+                    <th class="text-right">@Model.Sum(s=>s.DueAmount)</th>
+                    <th class="text-right">@Model.Sum(s => s.Collections)</th>
+                    <th class="text-right">@Model.Sum(s => s.CollectionAmount)</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<table style="display:none; visibility:hidden;" id="datatable">
+    <tr>
+        <th>Month</th>
+        <th>Bill</th>
+        <th>Collection</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            @{
+                string strdt = new DateTime(item.GYear.Value, item.GMonth.Value, 1).ToString("MMM-yyyy");
+            }
+            <td>@strdt</td>
+            <td>@item.DueAmount</td>
+            <td>@item.CollectionAmount</td>
+        </tr>
+    }
+</table>
+
+<script>
+    Highcharts.chart('BPBarChart', {
+        data: {
+            table: 'datatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: null
+            }
+        },
+        credits: {
+            enabled: false
+        },
+
+        colors: ['rgb(124,181,236)', '#00a65a'],
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' + '₹ ' + this.point.y;
+            }
+        }
+    });
+
+    Highcharts.chart('BPLineChart', {
+        data: {
+            table: 'datatable'
+        },        
+        title: {
+            text: null
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: null
+            }
+        },
+        credits: {
+            enabled: false
+        },
+
+        colors: ['rgb(124,181,236)', '#00a65a'],
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' + '₹ ' + this.point.y;
+            }
+        },
+        plotOptions: {
+            area: {
+                pointStart: 0,
+                marker: {
+                    enabled: false,
+                    symbol: 'circle',
+                    radius: 2,
+                    states: {
+                        hover: {
+                            enabled: true
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>

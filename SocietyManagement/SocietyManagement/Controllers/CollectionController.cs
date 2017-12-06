@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SocietyManagement.Models;
+using System.IO;
 
 namespace SocietyManagement.Controllers
 {
@@ -17,9 +18,15 @@ namespace SocietyManagement.Controllers
 
         // GET: Collection
         [Authorize(Roles = "SuperUser,Admin,Manager")]
-        public ActionResult Index()
+        public ActionResult Index(string CollectionDate)
         {
-            var collections = db.Collections.Where(d=>d.IsDeleted==false && d.YearID == SiteSetting.FinancialYearID).Include(c => c.BuildingUnit).Include(c => c.PaymentMode).OrderByDescending(o=>o.CollectionDate);
+            DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            if (!string.IsNullOrEmpty(CollectionDate))
+            {
+                dt = DateTime.Parse(CollectionDate);
+            }
+            var collections = db.Collections.Where(d=>d.IsDeleted==false && d.YearID == SiteSetting.FinancialYearID && d.CollectionDate.Month == dt.Date.Month && d.CollectionDate.Year == dt.Date.Year).Include(c => c.BuildingUnit).Include(c => c.PaymentMode).OrderByDescending(o=>o.CollectionDate);
+            ViewBag.Months = Helper.GetMonths(dt);
             return View(collections.ToList());
         }
 
@@ -102,13 +109,34 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "SuperUser,Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
+        public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
         {
             Helper.AssignUserInfo(collection, User);
             if (ModelState.IsValid)
             {
                 db.Collections.Add(collection);
                 db.SaveChanges();
+
+                foreach (HttpPostedFileBase file in collection.Files)
+                {
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        var media = new CollectionMedia();
+                        media.CollectionID = collection.CollectionID;
+                        media.MediaType = file.ContentType;
+                        media.MediaTitle = Path.GetFileName(file.FileName);
+                        byte[] bytes = null;
+                        using (BinaryReader br = new BinaryReader(file.InputStream))
+                        {
+                            bytes = br.ReadBytes(file.ContentLength);
+                        }
+                        media.MediaData = bytes;
+                        Helper.AssignUserInfo(media, User);
+                        db.CollectionMedias.Add(media);
+                        db.SaveChanges();
+                    }
+                }
 
                 EmailNotification notification = new EmailNotification();
                 notification.SendPaymentNotification(collection);
@@ -146,14 +174,36 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "SuperUser,Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
+        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,YearID,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
         {
             Helper.AssignUserInfo(collection, User, false);
             if (ModelState.IsValid)
             {
                 db.Entry(collection).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                foreach (HttpPostedFileBase file in collection.Files)
+                {
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        var media = new CollectionMedia();
+                        media.CollectionID = collection.CollectionID;
+                        media.MediaType = file.ContentType;
+                        media.MediaTitle = Path.GetFileName(file.FileName);
+                        byte[] bytes = null;
+                        using (BinaryReader br = new BinaryReader(file.InputStream))
+                        {
+                            bytes = br.ReadBytes(file.ContentLength);
+                        }
+                        media.MediaData = bytes;
+                        Helper.AssignUserInfo(media, User);
+                        db.CollectionMedias.Add(media);
+                        db.SaveChanges();
+                    }
+                }
+
+                    return RedirectToAction("Index");
             }
             ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName", collection.UnitID);
             ViewBag.PaymentModeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PaymentMode"), "KeyID", "KeyValues", collection.PaymentModeID);
@@ -186,6 +236,21 @@ namespace SocietyManagement.Controllers
             db.Collections.Remove(collection);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public FileResult DownloadFile(int? id)
+        {
+            if (id != null)
+            {
+                var media = db.CollectionMedias.Find(id);
+                if (media == null)
+                {
+                    return null;
+                }
+                return File(media.MediaData, media.MediaType, media.MediaTitle);
+            }
+            else
+                return null;
         }
 
         protected override void Dispose(bool disposing)

@@ -2501,6 +2501,7 @@ a:focus {
   background: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
+  border:1px solid #f4f4f4;
 }
 .nav-tabs-custom > .nav-tabs {
   margin: 0;
@@ -2574,7 +2575,7 @@ a:focus {
 .nav-tabs-custom > .nav-tabs > li.header {
   line-height: 35px;
   padding: 0 10px;
-  font-size: 20px;
+  font-size: 16px;
   color: #444;
 }
 .nav-tabs-custom > .nav-tabs > li.header > .fa,

@@ -87,30 +87,21 @@ namespace SocietyManagement.Controllers
                         ViewBag.NewNotification = "No notification ";
                     }
 
-                    ViewBag.DueList = DueList.OrderByDescending(o=>o.DueDate).Take(5);
-                    ViewBag.CollectionList = CollectionList.OrderByDescending(o => o.CollectionDate).Take(5);
+                    ViewBag.DueList = DueList.OrderByDescending(o=>o.DueDate).Take(6);
+                    ViewBag.CollectionList = CollectionList.OrderByDescending(o => o.CollectionDate).Take(6);
                 }
             }
             else if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
-            {                                
-                var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).ToList();
-                var penalties = db.Penalties.Where(d => d.IsDeleted == false).ToList();
-                var collections = db.Collections.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).ToList();
-                var expenses = db.Expenses.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID).ToList();
+            {
+                var data = db.Database.SqlQuery<SP_Graph_DueCollection1_Result>("Exec SP_Graph_DueCollection @YearID = " + SiteSetting.FinancialYearID);
+                ViewBag.GraphBillPayment = data;
                 
-                ViewBag.BillAmount = dues.Sum(s=>s.DueAmount) + penalties.Sum(s => s.Amount);
-                ViewBag.BillCount = dues.Count();
-                ViewBag.PaymentAmount = collections.Sum(p=>p.Amount) - collections.Sum(p => p.Discount);
-                ViewBag.PaymentCount = collections.Count();
-                ViewBag.ExpenseAmount = expenses.Sum(p => p.Amount);
-                ViewBag.ExpenseCount = expenses.Count();
-
-                ViewBag.DueList = dues.OrderByDescending(o => o.BillDate).Take(5);
-                ViewBag.CollectionList = collections.OrderByDescending(o => o.CollectionDate).Take(5);
-                ViewBag.expenseList = expenses.OrderByDescending(o => o.ExpenseDate).Take(5);
-
-                var data = db.Database.SqlQuery<SP_Graph_DueCollection_Result>("Exec SP_Graph_DueCollection @YearID = " + SiteSetting.FinancialYearID);
-                ViewBag.GraphDueCollection = data;
+                ViewBag.BillAmount = data.Sum(s=>s.DueAmount);
+                ViewBag.BillCount = data.Sum(s => s.Dues);
+                ViewBag.PaymentAmount = data.Sum(s => s.CollectionAmount);
+                ViewBag.PaymentCount = data.Sum(s => s.Collections);
+                ViewBag.ExpenseAmount = data.Sum(p => p.DueAmount);
+                ViewBag.ExpenseCount = data.Sum(p=>p.Expenses);                
             }
 
                 return View();

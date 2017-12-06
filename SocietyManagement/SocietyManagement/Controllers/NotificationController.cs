@@ -35,10 +35,10 @@ namespace SocietyManagement.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetNotification(string name)
+        public JsonResult GetNotification()
         {
             var userID = Helper.GetUserID(User);
-            var notifications = db.Notifications.Where(d => d.UserID == userID && d.IsDeleted == false && d.IsDeleted == false).Include(n => n.EmailTemplate).OrderByDescending(o => o.CreatedDate);
+            var notifications = db.Notifications.Where(d => d.UserID == userID && d.IsDeleted == false && d.IsRead == false && d.IsArchive == false).Include(n => n.EmailTemplate).OrderByDescending(o => o.CreatedDate);
             return Json(notifications.ToList());
         }
 
