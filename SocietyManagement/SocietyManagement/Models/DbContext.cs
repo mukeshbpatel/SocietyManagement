@@ -172,7 +172,9 @@ namespace SocietyManagement.Models
                 FileType = "File";
             }
             return FileType;
-        } 
+        }
+
+       
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

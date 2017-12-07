@@ -8,8 +8,8 @@
     <h3 class="box-title"><i class="fa fa-cube"></i> @ViewBag.Title</h3>
     <div class="pull-right">
         @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
-        {            
-            <a href="@Url.Action("Edit", new { id = Model.UnitID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>          
+        {
+            <a href="@Url.Action("Edit", new { id = Model.UnitID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
         }
         @if (User.IsInRole("SuperUser"))
         {
@@ -17,7 +17,7 @@
         }
         <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
     </div>
-    </div>
+</div>
 <div class="box-body">
     <dl class="dl-horizontal">
         <dt>
@@ -27,15 +27,28 @@
         <dd>
             @Html.DisplayFor(model => model.UnitName)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.Details)
+            @Html.DisplayNameFor(model => model.Building.BuildingName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Details)
+            <a href="@Url.Action("Details","Building",new {id = Model.BuildingID })">@Model.Building.BuildingName</a>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner.Name)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UnitType.KeyValues)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.OneTimeMaintenance)
         </dt>
@@ -52,28 +65,17 @@
             @Html.DisplayFor(model => model.UnitArea)
         </dd>
 
+
+
+
+
+
         <dt>
-            @Html.DisplayNameFor(model => model.OwnerID)
+            @Html.DisplayNameFor(model => model.Details)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Owner.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Building.BuildingName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Building.BuildingName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UnitTypeID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UnitType.KeyValues)
+            @Html.DisplayFor(model => model.Details)
         </dd>
     </dl>
 
@@ -83,41 +85,48 @@
         <h4><i class="fa fa-files-o"></i> Files</h4>
         <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
             <tr>
+                <th>Title</th>
                 <th>File Name</th>
                 <th>File Type</th>
-                <th class="hidden-xs">Date</th>
-                <th></th>
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                {
+                    <th>Action</th>
+                }
             </tr>
             @foreach (var media in Model.BuildingUnitMedias.Where(d => d.IsDeleted == false))
-        {
-        <tr id="row_@media.MediaID">
-            <td>
-                @Html.DisplayFor(itemModel => media.MediaTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(itemModel => media.MediaType)
-            </td>
-            <td class="hidden-xs">
-                @Html.DisplayFor(itemModel => media.CreatedDate)
-            </td>
-            <td>
-                <a href="@Url.Action("DownloadFile", new { id = media.MediaID })" title="Download"><span class="glyphicon glyphicon-download"></span></a>
-                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            {
+                <tr id="row_@media.MediaID">
+                    <td>
+                        @Html.DisplayFor(itemModel => media.MediaTitle)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("DownloadFile", new { id = media.MediaID })" title="Download">@media.FileName</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(itemModel => media.MediaType)
+                    </td>                    
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
                     {
-                    <a href="@Url.Action("Edit","BuildingUnitMedia", new { id = media.MediaID })" title="Edit"><i class="fa fa-edit"></i></a>
-                    <a href="@Url.Action("Delete","BuildingUnitMedia", new { id = media.MediaID })" title="Delete"><i class="fa fa-remove"></i></a>
+                        <td class="list-action">
+                            <a href="@Url.Action("EditFile", new { id = media.MediaID })" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="@Url.Action("DeleteFile",new { id = media.MediaID })" onclick="return DeleteFile(@media.MediaID,'@media.FileName');" title="Delete"><i class="fa fa-remove"></i></a>
+                            <script>
+                                function DeleteFile(id,fileName)
+                                {
+                                    return window.confirm('Do you want to delete ' + fileName + ' file?');
+                                }
+                            </script>
+                        </td>
                     }
-            </td>
-
-        </tr>
-        }
+                </tr>
+            }
         </table>
     }
 
     @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
-    { 
-    <h4><i class="fa fa-retweet"></i> Recurring Bills</h4>
-    @Html.Partial("_RecurringDue", Model.RecurringDues.Where(d=>d.IsDeleted==false))
+    {
+        <h4><i class="fa fa-retweet"></i> Recurring Bills</h4>
+        @Html.Partial("_RecurringDue", Model.RecurringDues.Where(d => d.IsDeleted == false))
     }
 
     <h4><i class="fa fa-list-alt"></i> Bills</h4>
@@ -130,4 +139,3 @@
     @Html.Partial("_BalanceSheet", (object)ViewBag.BalanceSheet)
 
 </div>
-

@@ -38,7 +38,7 @@
 
 @foreach (var item in Model.ComplaintComments.Where(c => c.IsDeleted == false).OrderBy(o => o.CreatedDate))
 {
-    <div class="box-body" style="padding:10px 0px 0px 20px; border-bottom:1px solid #f4f4f4">
+    <div class="box-body" style="border-bottom:1px solid #f4f4f4">
         <i class="fa fa-user"></i> @item.Author.Name &nbsp;
         <i class="fa fa-calendar"></i> @item.CreatedDate
 
@@ -51,7 +51,14 @@
         }
 
         @Html.Raw("</br></br><b>Status : " + item.Status.KeyValues + "</b></br></br>")
-        @Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>"))
+        @Html.Raw(item.Comment.Replace(Environment.NewLine, "</br>") + "</br></br>")
     </div>
 }
+@if (Model.ComplaintComments.Where(c => c.IsDeleted == false).Count() == 0)
+{
+    <div class="box-body" style="border-bottom:1px solid #f4f4f4">
+        No comments added.
+    </div>
+}
+
 

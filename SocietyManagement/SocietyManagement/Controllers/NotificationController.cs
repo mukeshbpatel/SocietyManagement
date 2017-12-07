@@ -85,7 +85,10 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            return View(notification);
+            Helper.SoftDelete(notification, User);
+            db.Entry(notification).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: Notification/Delete/5

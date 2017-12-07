@@ -81,7 +81,8 @@ namespace SocietyManagement.Controllers
                         var media = new BuildingUnitMedia();
                         media.UnitID = buildingUnit.UnitID;
                         media.MediaType = file.ContentType;
-                        media.MediaTitle = Path.GetFileName(file.FileName);                       
+                        media.FileName = Path.GetFileName(file.FileName);
+                        media.MediaTitle = Path.GetFileNameWithoutExtension(file.FileName);
                         byte[] bytes = null;
                         using (BinaryReader br = new BinaryReader(file.InputStream))
                         {
@@ -113,10 +114,55 @@ namespace SocietyManagement.Controllers
                 {
                     return null;
                 }
-                return File(media.MediaData, media.MediaType, media.MediaTitle);
+                return File(media.MediaData, media.MediaType, media.FileName);
             }
             else
                 return null;
+        }
+
+        // GET: Expense/Edit/5
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult EditFile(Int64? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            BuildingUnitMedia buildingUnitMedia = db.BuildingUnitMedias.Find(id);
+            if (buildingUnitMedia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(buildingUnitMedia);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult EditFile(BuildingUnitMedia buildingUnitMedia)
+        {
+            Helper.AssignUserInfo(buildingUnitMedia, User, false);
+            if (ModelState.IsValid)
+            {
+                var media = db.BuildingUnitMedias.Find(buildingUnitMedia.MediaID);
+                media.MediaTitle = buildingUnitMedia.MediaTitle;
+                media.FileName = buildingUnitMedia.FileName;
+                Helper.AssignUserInfo(media, User, false);
+                db.Entry(media).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = buildingUnitMedia.UnitID });
+            }
+            return View(buildingUnitMedia);
+        }
+
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult DeleteFile(Int64? id)
+        {
+            BuildingUnitMedia buildingUnitMedia = db.BuildingUnitMedias.Find(id);
+            Helper.SoftDelete(buildingUnitMedia, User);
+            db.Entry(buildingUnitMedia).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = buildingUnitMedia.UnitID });
         }
 
         // GET: BuildingUnit/Edit/5
@@ -160,7 +206,8 @@ namespace SocietyManagement.Controllers
                         var media = new BuildingUnitMedia();
                         media.UnitID = buildingUnit.UnitID;
                         media.MediaType = file.ContentType;
-                        media.MediaTitle = Path.GetFileName(file.FileName);
+                        media.FileName = Path.GetFileName(file.FileName);
+                        media.MediaTitle = Path.GetFileNameWithoutExtension(file.FileName);
                         byte[] bytes = null;
                         using (BinaryReader br = new BinaryReader(file.InputStream))
                         {
