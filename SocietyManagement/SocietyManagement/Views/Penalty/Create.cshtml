@@ -4,60 +4,67 @@
     ViewBag.Title = "Penalty";
 }
 
-<h2>Create</h2>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-bank"></i> @ViewBag.Title</h3>
+</div>
 
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
+    <div class="box-body">
+        <div class="form-horizontal">
 
-    <div class="form-horizontal">
-        <hr />
-        @Html.HiddenFor(model=>model.DueID)
-        @Html.HiddenFor(model => model.UnitID)
+            @Html.HiddenFor(model=>model.DueID)
+            @Html.HiddenFor(model => model.UnitID)
 
 
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.PenaltyDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PenaltyDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PenaltyDate, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.PenaltyDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.PenaltyDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PenaltyDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @Html.HiddenFor(model => model.UDK1)
+            @Html.HiddenFor(model => model.UDK2)
+            @Html.HiddenFor(model => model.UDK3)
+            @Html.HiddenFor(model => model.UDK4)
+            @Html.HiddenFor(model => model.UDK5)
+
+            
+        </div>
+        </div>
+
+        <div class="box-footer">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+                    <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
+                </div>
             </div>
         </div>
-        
-        <div class="form-group">
-            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Details, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        @Html.HiddenFor(model => model.UDK1)
-        @Html.HiddenFor(model => model.UDK2)
-        @Html.HiddenFor(model => model.UDK3)
-        @Html.HiddenFor(model => model.UDK4)
-        @Html.HiddenFor(model => model.UDK5)
-    
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
-                <a href="@Url.Action("Details","Due",new {id = Model.DueID })" class="btn btn-success" role="button">Cancel</a>
-            </div>
-        </div>
-    </div>
 }
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

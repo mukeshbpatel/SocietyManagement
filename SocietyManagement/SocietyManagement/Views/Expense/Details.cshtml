@@ -5,6 +5,14 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-money"></i> @ViewBag.Title</h3>
+    <div class="pull-right">
+        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+        {
+            <a href="@Url.Action("Edit", new { id = Model.ExpenseID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
+            <a href="@Url.Action("Delete", new { id = Model.ExpenseID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
+        }
+        <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
+    </div>
 </div>
 
 <div class="box-body">
@@ -66,88 +74,114 @@
 
         @if (Model.PaymentMode.KeyValues == "Bank Transfer" || Model.PaymentMode.KeyValues == "Cheque")
         {
-        <dt>
-            @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+            <dt>
+                @if (Model.PaymentMode.KeyValues == "Bank Transfer")
                 {
-                <span>Bank</span>
+                    <span>Bank</span>
                 }
                 else
                 {
-                @Html.DisplayNameFor(model => model.ChequeBank)
+                    @Html.DisplayNameFor(model => model.ChequeBank)
                 }
-        </dt>
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChequeBank)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ChequeBank)
+            </dd>
 
-        <dt>
-            @if (Model.PaymentMode.KeyValues == "Bank Transfer")
+            <dt>
+                @if (Model.PaymentMode.KeyValues == "Bank Transfer")
                 {
-                <span>Transfer Date</span>
+                    <span>Transfer Date</span>
                 }
                 else
                 {
-                @Html.DisplayNameFor(model => model.ChequeDate)
+                    @Html.DisplayNameFor(model => model.ChequeDate)
                 }
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ChequeDate)
-        </dd>
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ChequeDate)
+            </dd>
         }
         @if (Model.PaymentMode.KeyValues == "Cheque")
         {
-        <dt>
-            @Html.DisplayNameFor(model => model.ChequeNumber)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ChequeNumber)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChequeNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ChequeName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ChequeNumber)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ChequeName)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChequeName)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ChequeName)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ChequeCleared)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ChequeCleared)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChequeCleared)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ChequeCleared)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ChequeEncashmentDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ChequeEncashmentDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ChequeEncashmentDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ChequeEncashmentDate)
+            </dd>
         }
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-
 
     </dl>
+
+    @if (Model.ExpenseMedias.Where(d => d.IsDeleted == false).Count() > 0)
+    {
+        <h4><i class="fa fa-files-o"></i> Files</h4>
+        <table class="table table-sm table-hover table-responsive table-condensed table-bordered">
+            <tr>
+                <th>Title</th>
+                <th>File Name</th>
+                <th>File Type</th>
+                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                {
+                    <th>Action</th>
+                }
+            </tr>
+            @foreach (var media in Model.ExpenseMedias.Where(d => d.IsDeleted == false))
+            {
+                <tr id="row_@media.MediaID">
+                    <td>@Html.DisplayFor(itemModel => media.MediaTitle)</td>
+                    <td>
+                        <a href="@Url.Action("DownloadFile", new { id = media.MediaID })" title="Download">@Html.DisplayFor(itemModel => media.FileName)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(itemModel => media.MediaType)
+                    </td>
+                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                    {
+                        <td class="list-action">
+                            <a href="@Url.Action("EditFile",new { id = media.MediaID })" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="@Url.Action("DeleteFile",new { id = media.MediaID })" onclick="return DeleteFile(@media.MediaID,'@media.FileName');" title="Delete"><i class="fa fa-remove"></i></a>
+                            <script>
+                                function DeleteFile(id,fileName)
+                                {
+                                    return window.confirm('Do you want to delete ' + fileName + ' file?');                                    
+                                }
+                            </script>
+                        </td>
+                    }
+
+                </tr>
+            }
+        </table>
+    }
+
+
 </div>
-<div class="box-footer">
-    <a class="btn btn-success" href="#" onclick="goBack()" title="Go Back"><span class="fa fa-backward"></span> Back</a>
-</div>
+
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SocietyManagement.Models;
+using System.IO;
 
 namespace SocietyManagement.Controllers
 {
@@ -60,13 +61,36 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Manager,SuperUser")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,UDK1,UDK2,UDK3,UDK4,UDK5")] Expense expense)
+        public ActionResult Create([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] Expense expense)
         {
             Helper.AssignUserInfo(expense, User);
             if (ModelState.IsValid)
             {
                 db.Expenses.Add(expense);
                 db.SaveChanges();
+
+                foreach (HttpPostedFileBase file in expense.Files)
+                {
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        var media = new ExpenseMedia();
+                        media.ExpenseID = expense.ExpenseID;
+                        media.MediaType = file.ContentType;
+                        media.FileName = Path.GetFileName(file.FileName);
+                        media.MediaTitle = Path.GetFileNameWithoutExtension(file.FileName);
+                        byte[] bytes = null;
+                        using (BinaryReader br = new BinaryReader(file.InputStream))
+                        {
+                            bytes = br.ReadBytes(file.ContentLength);
+                        }
+                        media.MediaData = bytes;
+                        Helper.AssignUserInfo(media, User);
+                        db.ExpenseMedias.Add(media);
+                        db.SaveChanges();
+                    }
+                }
+
                 return RedirectToAction("Index");
             }
             ViewBag.PaymentModeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PaymentMode"), "KeyID", "KeyValues",expense.PaymentModeID);
@@ -98,13 +122,36 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Manager,SuperUser")]
-        public ActionResult Edit([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,YearID,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Expense expense)
+        public ActionResult Edit([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,YearID,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Expense expense)
         {
             Helper.AssignUserInfo(expense, User, false);
             if (ModelState.IsValid)
             {
                 db.Entry(expense).State = EntityState.Modified;
                 db.SaveChanges();
+
+                foreach (HttpPostedFileBase file in expense.Files)
+                {
+                    //Checking file is available to save.  
+                    if (file != null)
+                    {
+                        var media = new ExpenseMedia();
+                        media.ExpenseID = expense.ExpenseID;
+                        media.MediaType = file.ContentType;
+                        media.FileName = Path.GetFileName(file.FileName);
+                        media.MediaTitle = Path.GetFileNameWithoutExtension(file.FileName);
+                        byte[] bytes = null;
+                        using (BinaryReader br = new BinaryReader(file.InputStream))
+                        {
+                            bytes = br.ReadBytes(file.ContentLength);
+                        }
+                        media.MediaData = bytes;
+                        Helper.AssignUserInfo(media, User);
+                        db.ExpenseMedias.Add(media);
+                        db.SaveChanges();
+                    }
+                }
+
                 return RedirectToAction("Index");
             }
             ViewBag.PaymentModeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PaymentMode"), "KeyID", "KeyValues", expense.PaymentModeID);
@@ -126,7 +173,7 @@ namespace SocietyManagement.Controllers
                 return HttpNotFound();
             }
             return View(expense);
-        }
+        }       
 
         // POST: Expense/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -139,6 +186,66 @@ namespace SocietyManagement.Controllers
             db.Entry(expense).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public FileResult DownloadFile(Int64? id)
+        {
+            if (id != null)
+            {
+                var media = db.ExpenseMedias.Find(id);
+                if (media == null)
+                {
+                    return null;
+                }
+                return File(media.MediaData, media.MediaType, media.MediaTitle);
+            }
+            else
+                return null;
+        }
+
+        // GET: Expense/Edit/5
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult EditFile(Int64? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ExpenseMedia expenseMedia = db.ExpenseMedias.Find(id);
+            if (expenseMedia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(expenseMedia);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult EditFile(ExpenseMedia expenseMedia)
+        {
+            Helper.AssignUserInfo(expenseMedia, User, false);
+            if (ModelState.IsValid)
+            {
+                var media = db.ExpenseMedias.Find(expenseMedia.MediaID);
+                media.MediaTitle = expenseMedia.MediaTitle;
+                media.FileName = expenseMedia.FileName;
+                Helper.AssignUserInfo(media, User, false);
+                db.Entry(media).State = EntityState.Modified;
+                db.SaveChanges();                
+                return RedirectToAction("Details",new {id = expenseMedia.ExpenseID });
+            }       
+            return View(expenseMedia);
+        }
+
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult DeleteFile(Int64? id)
+        {
+            ExpenseMedia expenseMedia = db.ExpenseMedias.Find(id);
+            Helper.SoftDelete(expenseMedia, User);
+            db.Entry(expenseMedia).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = expenseMedia.ExpenseID });
         }
 
         protected override void Dispose(bool disposing)

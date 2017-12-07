@@ -607,6 +607,8 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Home\_GraphBillPayment.cshtml" />
     <Content Include="Views\Home\_GraphIncomExpense.cshtml" />
+    <Content Include="Views\Expense\EditFile.cshtml" />
+    <Content Include="Views\Collection\EditFile.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

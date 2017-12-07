@@ -146,54 +146,54 @@
             @Html.HiddenFor(model => model.UDK5)
 
         </div>
-</div>
-        <div class="box-footer">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
-                    <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
-                </div>
+    </div>
+    <div class="box-footer">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+                <a href="#" onclick="goBack()" title="Go Back" class="btn btn-default"><i class="fa fa-backward"></i> Back</a>
             </div>
         </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<script>
+    $(document).ready(function () {
+        HideShowCheque();
+        $("#PaymentModeID").change(function () {
+            HideShowCheque();
+        });
+    });
+
+    function HideShowCheque() {
+        $(".cheque").hide();
+        $(".ref").hide();
+        $(".cheque_ref").hide();
+        var mode = $("#PaymentModeID option:selected").text();
+        if (mode == "Cheque") {
+            $(".cheque_ref").show();
+            $(".cheque").show();
+            $(".ChequeDate").text("Cheque Date");
+            $(".ChequeBank").text("Cheque Bank");
+        } else if (mode == "Bank Transfer") {
+            $(".cheque_ref").show();
+            $(".ref").show();
+            $(".ChequeDate").text("Transfer Date");
+            $(".ChequeBank").text("Bank");
+        } else if (mode == "UPI Payment") {
+            $(".cheque_ref").show();
+            $(".ref").show();
+            $(".ChequeDate").text("Transfer Date");
+            $(".ChequeBank").text("Mobile/UPI ID");
         }
 
-
-
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-
-
-        <script>
-            $(document).ready(function () {
-                HideShowCheque();
-                $("#PaymentModeID").change(function () {
-                    HideShowCheque();
-                });
-            });
-
-            function HideShowCheque() {
-                $(".cheque").hide();
-                $(".ref").hide();
-                $(".cheque_ref").hide();
-                var mode = $("#PaymentModeID option:selected").text();
-                if (mode == "Cheque") {
-                    $(".cheque_ref").show();
-                    $(".cheque").show();
-                    $(".ChequeDate").text("Cheque Date");
-                    $(".ChequeBank").text("Cheque Bank");
-                } else if (mode == "Bank Transfer") {
-                    $(".cheque_ref").show();
-                    $(".ref").show();
-                    $(".ChequeDate").text("Transfer Date");
-                    $(".ChequeBank").text("Bank");
-                } else if (mode == "UPI Payment") {
-                    $(".cheque_ref").show();
-                    $(".ref").show();
-                    $(".ChequeDate").text("Transfer Date");
-                    $(".ChequeBank").text("Mobile/UPI ID");
-                }
-
-                //alert(mode);
-            }
-        </script>
+        //alert(mode);
+    }
+</script>

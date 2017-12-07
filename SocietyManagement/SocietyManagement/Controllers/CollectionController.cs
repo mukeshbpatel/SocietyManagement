@@ -95,6 +95,8 @@ namespace SocietyManagement.Controllers
                 if (due != null)
                 {
                     collection.Amount = due.DueAmount;
+                    if (due.Penalties.Where(d => d.IsDeleted == false).Count() > 0)
+                        collection.Amount += due.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
                     collection.UnitID = due.UnitID;
                 }
             }
@@ -125,7 +127,8 @@ namespace SocietyManagement.Controllers
                         var media = new CollectionMedia();
                         media.CollectionID = collection.CollectionID;
                         media.MediaType = file.ContentType;
-                        media.MediaTitle = Path.GetFileName(file.FileName);
+                        media.FileName = Path.GetFileName(file.FileName);
+                        media.MediaTitle = Path.GetFileNameWithoutExtension(file.FileName);
                         byte[] bytes = null;
                         using (BinaryReader br = new BinaryReader(file.InputStream))
                         {
@@ -190,7 +193,8 @@ namespace SocietyManagement.Controllers
                         var media = new CollectionMedia();
                         media.CollectionID = collection.CollectionID;
                         media.MediaType = file.ContentType;
-                        media.MediaTitle = Path.GetFileName(file.FileName);
+                        media.FileName = Path.GetFileName(file.FileName);
+                        media.MediaTitle = Path.GetFileNameWithoutExtension(file.FileName);
                         byte[] bytes = null;
                         using (BinaryReader br = new BinaryReader(file.InputStream))
                         {
@@ -247,10 +251,55 @@ namespace SocietyManagement.Controllers
                 {
                     return null;
                 }
-                return File(media.MediaData, media.MediaType, media.MediaTitle);
+                return File(media.MediaData, media.MediaType, media.FileName);
             }
             else
                 return null;
+        }
+
+        // GET: Expense/Edit/5
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult EditFile(Int64? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CollectionMedia collectionMedia = db.CollectionMedias.Find(id);
+            if (collectionMedia == null)
+            {
+                return HttpNotFound();
+            }
+            return View(collectionMedia);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult EditFile(CollectionMedia collectionMedia)
+        {
+            Helper.AssignUserInfo(collectionMedia, User, false);
+            if (ModelState.IsValid)
+            {
+                var media = db.CollectionMedias.Find(collectionMedia.MediaID);
+                media.MediaTitle = collectionMedia.MediaTitle;
+                media.FileName = collectionMedia.FileName;
+                Helper.AssignUserInfo(media, User, false);
+                db.Entry(media).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = collectionMedia.CollectionID });
+            }
+            return View(collectionMedia);
+        }
+
+        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        public ActionResult DeleteFile(Int64? id)
+        {
+            CollectionMedia collectionMedia = db.CollectionMedias.Find(id);
+            Helper.SoftDelete(collectionMedia, User);
+            db.Entry(collectionMedia).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Details", new { id = collectionMedia.CollectionID });
         }
 
         protected override void Dispose(bool disposing)

@@ -44,8 +44,8 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ComplaintID = complaint.ComplaintID;
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName");
+            ViewBag.ComplaintID = complaint.ComplaintID;            
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers, "User", complaint.AuthorID), "Id", "Name");
             ViewBag.StatusID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintStatus"), "KeyID", "KeyValues", complaint.StatusID);
             return View();
         }
@@ -60,23 +60,21 @@ namespace SocietyManagement.Controllers
             Helper.AssignUserInfo(complaintComment, User);
             complaintComment.ComplaintID = id;
             complaintComment.AuthorID = complaintComment.UserID;
+            var complaint = db.Complaints.Find(complaintComment.ComplaintID);
             if (ModelState.IsValid)
             {
                 db.ComplaintComments.Add(complaintComment);
-                db.SaveChanges();
-
-                var complaint = db.Complaints.Find(complaintComment.ComplaintID);
+                db.SaveChanges();                
                 if (complaint != null)
                 {
                     complaint.StatusID = complaintComment.StatusID;
                     db.Entry(complaintComment).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-
                 return RedirectToAction("Details","Complaint",new {id = complaintComment.ComplaintID });
             }
 
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName", complaintComment.AssignToID);
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers, "User", complaint.AuthorID), "Id", "Name", complaintComment.AssignToID);
             ViewBag.StatusID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintStatus"), "KeyID", "KeyValues", complaintComment.StatusID);
             return View(complaintComment);
         }
@@ -93,7 +91,7 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName", complaintComment.AssignToID);
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers, "User", complaintComment.Complaint.AuthorID), "Id", "Name", complaintComment.AssignToID);
             ViewBag.StatusID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintStatus"), "KeyID", "KeyValues", complaintComment.StatusID);
             return View(complaintComment);
         }
@@ -106,12 +104,11 @@ namespace SocietyManagement.Controllers
         public ActionResult Edit([Bind(Include = "CommentID,ComplaintID,AuthorID,AssignToID,Comment,StatusID,CreatedDate")] ComplaintComment complaintComment)
         {
             Helper.AssignUserInfo(complaintComment, User);
+            var complaint = db.Complaints.Find(complaintComment.ComplaintID);
             if (ModelState.IsValid)
             {
                 db.Entry(complaintComment).State = EntityState.Modified;
                 db.SaveChanges();
-
-                var complaint = db.Complaints.Find(complaintComment.ComplaintID);
                 if (complaint != null)
                 {
                     complaint.StatusID = complaintComment.StatusID;
@@ -121,7 +118,7 @@ namespace SocietyManagement.Controllers
 
                 return RedirectToAction("Details", "Complaint", new { id = complaintComment.ComplaintID });
             }
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName", complaintComment.AssignToID);
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers, "User", complaint.AuthorID), "Id", "Name", complaintComment.AssignToID);
             ViewBag.StatusID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintStatus"), "KeyID", "KeyValues", complaintComment.StatusID);
             return View(complaintComment);
         }

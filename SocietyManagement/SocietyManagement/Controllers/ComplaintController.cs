@@ -41,7 +41,7 @@ namespace SocietyManagement.Controllers
         public ActionResult Create()
         {
             ViewBag.ComplaintTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintType"), "KeyID", "KeyValues");
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName");
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers,"User"), "Id", "Name");
             return View();
         }
 
@@ -61,7 +61,7 @@ namespace SocietyManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName", complaint.AssignToID);
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers, "User"), "Id", "Name",complaint.AssignToID);
             ViewBag.ComplaintTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintType"), "KeyID", "KeyValues", complaint.ComplaintTypeID);
             return View(complaint);
         }
@@ -78,7 +78,7 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName", complaint.AssignToID);
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers, "User",complaint.AuthorID), "Id", "Name", complaint.AssignToID);
             ViewBag.ComplaintTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintType"), "KeyID", "KeyValues", complaint.ComplaintTypeID);
             return View(complaint);
         }
@@ -97,7 +97,7 @@ namespace SocietyManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AssignToID = new SelectList(db.AspNetUsers, "Id", "FirstName", complaint.AssignToID);
+            ViewBag.AssignToID = new SelectList(Helper.GetUsers(db.AspNetUsers, "User", complaint.AuthorID), "Id", "Name", complaint.AssignToID);
             ViewBag.ComplaintTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "ComplaintType"), "KeyID", "KeyValues", complaint.ComplaintTypeID);
             return View(complaint);
         }

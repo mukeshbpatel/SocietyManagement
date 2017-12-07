@@ -54,6 +54,14 @@ namespace SocietyManagement.Models
             return FilterUsers;
         }
 
+        public static List<AspNetUser> GetUsers(DbSet<AspNetUser> Users, string RoleName, string UserID= "")
+        {
+            List<AspNetUser> FilterUsers = Users.Where(u => u.AspNetRoles.Any(r => r.Name == "Manager" || r.Name == "Admin")).OrderBy(o => o.FirstName).ToList();
+            if (UserID != "" && FilterUsers.Where(u=>u.Id== UserID).FirstOrDefault() == null)
+                FilterUsers.Add(Users.Find(UserID));
+            return FilterUsers;
+        }
+
         public static AspNetUser CurrentUser()
         {
             AspNetUser aspNetUser;
