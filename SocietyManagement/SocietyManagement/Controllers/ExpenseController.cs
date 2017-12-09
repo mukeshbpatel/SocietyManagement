@@ -248,6 +248,13 @@ namespace SocietyManagement.Controllers
             return RedirectToAction("Details", new { id = expenseMedia.ExpenseID });
         }
 
+        [Authorize]
+        public ActionResult ExpenseReport()
+        {
+            var data = db.Database.SqlQuery<dynamic>("EXEC [dbo].[SP_ExpenseReport] @YearID = " + SiteSetting.FinancialYearID);
+            return View(data);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

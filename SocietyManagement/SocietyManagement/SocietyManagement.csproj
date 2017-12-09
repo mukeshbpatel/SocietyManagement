@@ -182,6 +182,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Helpers\HtmlHelper.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -612,6 +613,7 @@
     <Content Include="Views\Collection\EditFile.cshtml" />
     <Content Include="Views\BuildingUnit\EditFile.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Report\ExpenseReport.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

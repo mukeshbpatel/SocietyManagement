@@ -1,0 +1,209 @@
+﻿@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "Expense Report";
+}
+
+@{
+    System.Data.DataTable dt = (System.Data.DataTable)Model;
+    decimal[] totals = new decimal[dt.Columns.Count - 1];
+}
+
+<script src="~/Scripts/HighChart/highcharts.js"></script>
+<script src="~/Scripts/HighChart/data.js"></script>
+<script src="~/Scripts/HighChart/exporting.js"></script>
+
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-money"></i> @ViewBag.Title</h3>
+</div>
+
+<div class="box-body">
+    <div class="row" style="padding:5px 20px 0px 5px">
+        <div class="col-md-6" style="padding-right:0px;">
+            <div class="chart tab-pane" id="BPBarChart" style="position: relative; min-height: 300px; border:1px solid #f4f4f4;"></div>
+        </div>
+        <div class="col-md-6" style="padding-right:0px;">
+            <div class="chart tab-pane" id="Pichart" style="position: relative; min-height: 300px; border:1px solid #f4f4f4;"></div>
+        </div>
+        <div class="col-md-12 table-responsive" style="padding-right:0px; margin-top:20px;">
+            <table class="table table-sm table-hover table-condensed table-bordered">
+                <tr>
+                    @for (int i = 1; i < dt.Columns.Count; i++)
+            {
+                        <th>@dt.Columns[i].ColumnName</th>
+                    }
+                    <th>Total</th>
+                </tr>
+                @foreach (System.Data.DataRow row in dt.Rows)
+                {
+                    <tr>
+                        <td>@row[1]</td>
+                        @{
+                            Decimal RowTotal = 0;
+                        }
+
+                        @for (int i = 2; i < dt.Columns.Count; i++)
+                {
+                    if (!Convert.IsDBNull(row[i]))
+                    {
+                        RowTotal += (Decimal)@row[i];
+                        totals[i - 2] += (Decimal)@row[i];
+                                <td class="right">@row[i]</td>
+                            }
+                            else
+                            {
+                                <td class="right"></td>
+                            }
+                        }
+                        @{
+                            totals[dt.Columns.Count - 2] += RowTotal;
+                        }
+                        <td class="right">@RowTotal</td>
+                    </tr>
+                            }
+                <tr>
+                    <td>Total</td>
+                    @for (int i = 2; i <= dt.Columns.Count; i++)
+                    {
+                        if (totals[i - 2] > 0)
+                        {
+                            if (i == dt.Columns.Count)
+                            {
+                                <td class="right">@totals[i - 2]</td>
+                            }
+                            else
+                            {
+                                <td class="right"><a href="@Url.Action("Index","Expense",new {ExpenseDate = "01-" + dt.Columns[i].ColumnName })">@totals[i - 2]</a></td>
+                            }
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+</div>
+
+<table style="display:none; visibility:hidden;" id="datatable">
+    <thead>
+        <tr>
+            <th>Month</th>
+            <th>Expense</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 2; i < dt.Columns.Count; i++)
+            {
+            <tr>
+                <td>@dt.Columns[i].ColumnName</td>
+                <td>@totals[i - 2]</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table style="display:none; visibility:hidden;" id="datatable1">
+    <thead>
+        <tr>
+            <th>Expense</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (System.Data.DataRow row in dt.Rows)
+        {
+
+            Decimal RowTotal1 = 0;
+            for (int i = 2; i < dt.Columns.Count; i++)
+            {
+                if (!Convert.IsDBNull(row[i]))
+                {
+                    RowTotal1 += (Decimal)@row[i];
+                }
+            }
+            if (RowTotal1 > 0)
+            {
+                <tr>
+
+                    <td>@row[1]</td>
+                    <td>@RowTotal1</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+    Highcharts.chart('BPBarChart', {
+        data: {
+            table: 'datatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: null
+        },
+        plotOptions: {
+            column: {                
+                showInLegend: false
+            }
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: null
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Month',
+            colorByPoint: true}]
+    });
+
+    Highcharts.chart('Pichart', {
+        data: {
+            table: 'datatable1'
+        },
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: null
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true
+                },
+                showInLegend: false
+            }
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: null
+            }
+        },
+        credits: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: '{point.y} <b>({point.percentage:.1f}%)</b>'
+        }
+    });
+
+</script>

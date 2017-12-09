@@ -201,7 +201,7 @@
                     {
                         <li class="treeview @Html.IsSelected(controllers: "RecurringDue,Due,Collection,Expense")">
                             <a href="#">
-                                <i class="fa fa-bank text-success"></i> <span>Society Account</span>
+                                <i class="fa fa-bank text-green"></i> <span>Society Account</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
@@ -214,6 +214,21 @@
                                 <li class="@Html.IsSelected(controllers: "Due")"><a href="@Url.Action("Index", "Due")"><i class="fa fa-list-alt"></i> Maintanance Bills</a></li>
                                 <li class="@Html.IsSelected(controllers: "Collection")"><a href="@Url.Action("Index", "Collection")"><i class="fa fa-bank"></i> Collections</a></li>
                                 <li class="@Html.IsSelected(controllers: "Expense")"><a href="@Url.Action("Index", "Expense")"><i class="fa fa-money"></i> Expenses</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperUser"))
+                    {
+                        <li class="treeview @Html.IsSelected(controllers: "Report")">
+                            <a href="#">
+                                <i class="fa fa-pie-chart text-primary"></i> <span>Reports</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">                                                                
+                                <li class="@Html.IsSelected(actions: "CollectionReport",controllers: "Report")"><a href="@Url.Action("CollectionReport", "Report")"><i class="fa fa-bank"></i> Collection Report</a></li>
+                                <li class="@Html.IsSelected(actions: "ExpenseReport",controllers: "Report")"><a href="@Url.Action("ExpenseReport", "Report")"><i class="fa fa-money"></i> Expense Report</a></li>
                             </ul>
                         </li>
                     }
