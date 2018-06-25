@@ -25,7 +25,7 @@
     <small><i class="fa fa-calendar"></i> @Html.DisplayFor(model => model.NoticeDate)</small>
     <br /><br />
     <div class="multiline">
-        @Html.Raw(Model.Notice)
+       @Html.Raw(Model.Notice.Replace(Environment.NewLine, "</br>"))
     </div>
 </div>
 
