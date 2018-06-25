@@ -1,0 +1,146 @@
+<?xml version= "1.0"?>
+<grammar mode="voice"
+         root="TOPLEVEL"
+         tag-format="semantics/1.0"
+         version="1.0"
+         xml:lang="en-US"
+         xmlns="http://www.w3.org/2001/06/grammar">
+
+  <rule id="TOPLEVEL">
+    <tag> out = "" </tag>
+    <item repeat="1-">
+	<one-of>
+		<item><ruleref uri="#ALPHA"/><tag> out = out + rules.ALPHA.slot </tag></item>
+		<item><ruleref uri="#NUM"/><tag> out = out + rules.ALPHA.slot </tag></item>
+	</one-of>	
+    </item>
+  </rule>
+
+  <rule id="NUM" scope="public">
+    <item>
+      <one-of>
+        <item>
+          one <tag> out.slot=1 </tag>
+        </item>
+        <item>
+          two <tag> out.slot=2 </tag>
+        </item>
+        <item>
+          three <tag> out.slot=3 </tag>
+        </item>
+        <item>
+          four <tag> out.slot=4 </tag>
+        </item>
+        <item>
+          five <tag> out.slot=5 </tag>
+        </item>
+        <item>
+          six <tag> out.slot=6 </tag>
+        </item>
+        <item>
+          seven <tag> out.slot=7 </tag>
+        </item>
+        <item>
+          eight <tag> out.slot=8 </tag>
+        </item>
+        <item>
+          nine <tag> out.slot=9 </tag>
+        </item>
+        <item>
+          zero <tag> out.slot=0 </tag>
+        </item>
+        <item>
+          zero <tag> out.slot=0 </tag>
+        </item>
+        <item>
+          oh <tag> out.slot=0 </tag>
+        </item>
+	   </one-of>	
+    </item>
+  </rule>
+  
+  <rule id="ALPHA" scope="public">
+    <item>
+      <one-of>        
+        <item>
+          A <tag> out.slot="A"; </tag>
+        </item>
+		<item>
+          B <tag> out.slot="B"; </tag>
+        </item>
+		<item>
+          C <tag> out.slot="C"; </tag>
+        </item>
+		<item>
+          D <tag> out.slot="D"; </tag>
+        </item>
+		<item>
+          E <tag> out.slot="E"; </tag>
+        </item>
+		<item>
+          F <tag> out.slot="F"; </tag>
+        </item>
+		<item>
+          G <tag> out.slot="G"; </tag>
+        </item>
+		<item>
+          H <tag> out.slot="H"; </tag>
+        </item>
+		<item>
+          I <tag> out.slot="I"; </tag>
+        </item>
+		<item>
+          J <tag> out.slot="J"; </tag>
+        </item>
+		<item>
+          K <tag> out.slot="K"; </tag>
+        </item>
+		<item>
+          L <tag> out.slot="L"; </tag>
+        </item>
+		<item>
+          M <tag> out.slot="M"; </tag>
+        </item>
+		<item>
+          N <tag> out.slot="N"; </tag>
+        </item>
+		<item>
+          O <tag> out.slot="O"; </tag>
+        </item>
+		<item>
+          P <tag> out.slot="P"; </tag>
+        </item>
+		<item>
+          Q <tag> out.slot="Q"; </tag>
+        </item>
+		<item>
+          R <tag> out.slot="R"; </tag>
+        </item>
+		<item>
+          S <tag> out.slot="S"; </tag>
+        </item>
+		<item>
+          T <tag> out.slot="T"; </tag>
+        </item>
+		<item>
+          U <tag> out.slot="U"; </tag>
+        </item>
+		<item>
+          V <tag> out.slot="V"; </tag>
+        </item>
+		<item>
+          W <tag> out.slot="W"; </tag>
+        </item>
+		<item>
+          X <tag> out.slot="X"; </tag>
+        </item>
+		<item>
+          Y <tag> out.slot="Y"; </tag>
+        </item>
+		<item>
+          Z <tag> out.slot="Z"; </tag>
+        </item>
+      </one-of>
+    </item>
+  </rule>
+</grammar>
