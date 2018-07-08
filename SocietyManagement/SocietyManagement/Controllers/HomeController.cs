@@ -15,7 +15,7 @@ namespace SocietyManagement.Controllers
         public ActionResult Index()
         {
             string UserID = Helper.GetUserID(User);
-            if (User.IsInRole("User") || User.IsInRole("Manager"))
+            if (Helper.IsInRole("User") || Helper.IsInRole("Manager"))
             {
                 var appUser = db.AspNetUsers.Find(UserID);
                 if (appUser != null)
@@ -91,7 +91,7 @@ namespace SocietyManagement.Controllers
                     ViewBag.CollectionList = CollectionList.OrderByDescending(o => o.CollectionDate).Take(6);
                 }
             }
-            else if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            else if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
             {
                 var data = db.Database.SqlQuery<SP_Graph_DueCollection1_Result>("Exec SP_Graph_DueCollection @YearID = " + SiteSetting.FinancialYearID);
                 ViewBag.GraphBillPayment = data;

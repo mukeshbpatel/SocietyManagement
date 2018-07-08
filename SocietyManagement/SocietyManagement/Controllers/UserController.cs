@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize(Roles ="SuperUser,Admin")]
+    [Authorize(Roles ="Super,Admin")]
     public class UserController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
@@ -21,7 +21,7 @@ namespace SocietyManagement.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View(db.AspNetUsers.Where(u => u.UserName != "SuperUser").Include(b=>b.BuildingUnits).Include(r=>r.AspNetRoles).ToList());
+            return View(db.AspNetUsers.Where(u => u.UserName != "Super").Include(b=>b.BuildingUnits).Include(r=>r.AspNetRoles).ToList());
         }
 
         // GET: User/Details/5
@@ -55,7 +55,7 @@ namespace SocietyManagement.Controllers
         // GET: User/Create
         public ActionResult Create()
         {            
-            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "SuperUser"), "Name", "Name","User");
+            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name","User");
             return View();
         }
 
@@ -81,7 +81,7 @@ namespace SocietyManagement.Controllers
                 }
                 AddErrors(result);
             }
-            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "SuperUser"), "Name", "Name",model.Role);
+            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name",model.Role);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -106,7 +106,7 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "SuperUser"), "Name", "Name", aspNetUser.AspNetRoles.FirstOrDefault().Name);
+            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", aspNetUser.AspNetRoles.FirstOrDefault().Name);
             return View(aspNetUser);
         }
 
@@ -157,7 +157,7 @@ namespace SocietyManagement.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "SuperUser"), "Name", "Name", NetUser.Role);
+            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", NetUser.Role);
             return View(NetUser);
         }
 

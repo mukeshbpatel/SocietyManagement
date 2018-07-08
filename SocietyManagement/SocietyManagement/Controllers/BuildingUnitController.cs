@@ -50,7 +50,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Create
-        [Authorize(Roles ="SuperUser")]
+        [Authorize(Roles ="Super")]
         public ActionResult Create()
         {
             ViewBag.OwnerID = new SelectList(Helper.GetUsers(db.AspNetUsers), "Id", "Name");
@@ -64,8 +64,8 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperUser")]
-        public ActionResult Create([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] BuildingUnit buildingUnit)
+        [Authorize(Roles = "Super")]
+        public ActionResult Create([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5,OwnerName,CoOwnerName,MonthlyMaintenance")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit,User);
             if (ModelState.IsValid)
@@ -121,7 +121,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Edit/5
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult EditFile(Int64? id)
         {
             if (id == null)
@@ -138,7 +138,7 @@ namespace SocietyManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult EditFile(BuildingUnitMedia buildingUnitMedia)
         {
             Helper.AssignUserInfo(buildingUnitMedia, User, false);
@@ -155,7 +155,7 @@ namespace SocietyManagement.Controllers
             return View(buildingUnitMedia);
         }
 
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult DeleteFile(Int64? id)
         {
             BuildingUnitMedia buildingUnitMedia = db.BuildingUnitMedias.Find(id);
@@ -166,7 +166,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Edit/5
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -189,8 +189,8 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperUser,Admin")]
-        public ActionResult Edit([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] BuildingUnit buildingUnit)
+        [Authorize(Roles = "Super,Admin")]
+        public ActionResult Edit([Bind(Include = "UnitID,BuildingID,UnitName,UnitTypeID,Details,OwnerID,OneTimeMaintenance,UnitArea,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate,OwnerName,CoOwnerName,MonthlyMaintenance")] BuildingUnit buildingUnit)
         {
             Helper.AssignUserInfo(buildingUnit, User,false);
             if (ModelState.IsValid)
@@ -230,7 +230,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: BuildingUnit/Delete/5
-        [Authorize(Roles = "SuperUser")]
+        [Authorize(Roles = "Super")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -248,7 +248,7 @@ namespace SocietyManagement.Controllers
         // POST: BuildingUnit/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperUser")]
+        [Authorize(Roles = "Super")]
         public ActionResult DeleteConfirmed(int id)
         {
             BuildingUnit buildingUnit = db.BuildingUnits.Find(id);

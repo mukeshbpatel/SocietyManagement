@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<SocietyManagement.Models.FinancialYear>
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Financial Year";
 }
 
 <h3><span class="glyphicon glyphicon-calendar"></span> Financial Year</h3>
 
-@if (User.IsInRole("SuperUser"))
+@if (Helper.IsInRole("Super"))
 {
     <div class="pull-right">
         <a href="@Url.Action("Create")"><span class="fa fa-plus-square"></span> Add New</a>
@@ -28,7 +29,7 @@
         <th>
             @Html.DisplayNameFor(model => model.IsClosed)
         </th>
-@if (User.IsInRole("SuperUser"))
+@if (Helper.IsInRole("Super"))
 {
         <th>Action</th>
 }
@@ -52,7 +53,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IsClosed)
             </td>
-            @if (User.IsInRole("SuperUser"))
+            @if (Helper.IsInRole("Super"))
             {
                 <td class="center">
                     <a href="@Url.Action("Edit", new { id = item.YearID })" title="Edit"><i class="fa fa-edit"></i></a>

@@ -1,5 +1,5 @@
 ﻿@model SocietyManagement.Models.Due
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Bill";
 }
@@ -7,7 +7,7 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-list-alt"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
         {
             <a href="@Url.Action("Create","Collection", new { id = Model.DueID })" title="Create Payment"><i class="fa fa-bank"></i> <span class="hidden-xs">Payment</span></a><span> &nbsp; </span>
             <a href="@Url.Action("Edit", new { id = Model.DueID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
@@ -75,7 +75,7 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-money"></i> Penalty</h3>
-    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create","Penalty",new {id = Model.DueID })"><i class="fa fa-plus-square"></i> Add New</a>
@@ -95,7 +95,7 @@
             <th>
                 Amount
             </th>
-            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -121,7 +121,7 @@
                     <td class="right">
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
-                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
                     {
                         <td class="list-action">
                             <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><i class="fa fa-edit"></i></a>
@@ -133,7 +133,7 @@
             <tr>
                 <th colspan="2">Total Penalty</th>
                 <th>@Model.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount)</th>
-                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
                 {
                     <th></th>
                 }

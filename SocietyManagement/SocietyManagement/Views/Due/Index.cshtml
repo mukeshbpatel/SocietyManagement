@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Due>
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Bills";
 }
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-list-alt"></i> @ViewBag.Title</h3>
-    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -14,7 +14,37 @@
     }
 </div>
 <div class="box-body">
-    <ul class="nav nav-pills pull-right">
+
+    <div class="dropdown pull-right">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <i class="glyphicon glyphicon-calendar"></i> <span id="lstMonth">Month</span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (var item in (SelectList)ViewBag.Months)
+            {
+                DateTime dt = DateTime.Parse(item.Text);
+                if (item.Selected)
+                {
+                <li>
+                    <a class="dropdown-item select2-dropdown text-bold" href="#" id="lstLink">@dt.ToString("MMM-yy")</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a class="dropdown-item" href="@Url.Action("Index", new { BillDate = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a>
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+
+
+
+
+    @*<ul class="nav nav-pills pull-right">
         @foreach (var item in (SelectList)ViewBag.Months)
         {
             DateTime dt = DateTime.Parse(item.Text);
@@ -27,7 +57,7 @@
                 <li><a href="@Url.Action("Index", new {BillDate = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a></li>
             }
         }
-    </ul>
+    </ul>*@
     @Html.Partial("_Bill", Model)
 
 </div>

@@ -17,7 +17,7 @@ namespace SocietyManagement.Controllers
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
         // GET: Expense
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         public ActionResult Index(string ExpenseDate)
         {
             DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
@@ -47,7 +47,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Create
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult Create()
         {
             ViewBag.PaymentModeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PaymentMode"), "KeyID", "KeyValues");
@@ -59,7 +59,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] Expense expense)
         {
@@ -99,7 +99,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Edit/5
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult Edit(Int64? id)
         {
             if (id == null)
@@ -121,7 +121,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult Edit([Bind(Include = "ExpenseID,ExpenseDate,PaidTo,ExpenseTypeID,Details,Amount,TDS,PaymentModeID,ChequeBank,ChequeName,ChequeDate,ChequeNumber,ChequeCleared,ChequeEncashmentDate,YearID,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Expense expense)
         {
             Helper.AssignUserInfo(expense, User, false);
@@ -160,7 +160,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Delete/5
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult Delete(Int64? id)
         {
             if (id == null)
@@ -178,7 +178,7 @@ namespace SocietyManagement.Controllers
         // POST: Expense/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult DeleteConfirmed(Int64 id)
         {
             Expense expense = db.Expenses.Find(id);
@@ -204,7 +204,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Edit/5
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult EditFile(Int64? id)
         {
             if (id == null)
@@ -221,7 +221,7 @@ namespace SocietyManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult EditFile(ExpenseMedia expenseMedia)
         {
             Helper.AssignUserInfo(expenseMedia, User, false);
@@ -238,7 +238,7 @@ namespace SocietyManagement.Controllers
             return View(expenseMedia);
         }
 
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult DeleteFile(Int64? id)
         {
             ExpenseMedia expenseMedia = db.ExpenseMedias.Find(id);

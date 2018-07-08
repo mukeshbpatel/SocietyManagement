@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Forum>
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Forum";
     
@@ -32,7 +32,7 @@
         </div>
         <div id="collapse_@item.ForumID" class="panel-collapse collapse">
             <div class="panel-body">
-                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
                             {
                                 <div class="pull-right">
                                     <a href="@Url.Action("Edit", new { id = item.ForumID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>

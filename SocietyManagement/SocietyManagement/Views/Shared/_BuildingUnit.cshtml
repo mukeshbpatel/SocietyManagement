@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<SocietyManagement.Models.BuildingUnit>
+@using SocietyManagement.Models;
 
 <table class="table table-sm table-hover table-condensed table-bordered">
     <tr>
@@ -8,14 +9,21 @@
         <th>
             @Html.DisplayNameFor(model => model.UnitName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OwnerName)
+        </th>
         <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.UnitTypeID)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OwnerID)
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.UnitArea)
         </th>
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+        
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
         {
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerID)
+            </th>
             <th>Action</th>
         }
     </tr>
@@ -29,17 +37,23 @@
             <td>
                 <a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })" title="Details">@item.UnitName</a>
             </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OwnerName)
+            </td>
             <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.UnitType.KeyValues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Owner.Name)
-            </td>
-            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+            </td> 
+            <td class="hidden-xs right">
+                @Html.DisplayFor(modelItem => item.UnitArea) Sq.Ft.
+            </td>             
+            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
             {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Owner.UserName)
+                </td>
                 <td class="list-action">
                     <a href="@Url.Action("Edit","BuildingUnit", new { id = item.UnitID })" title="Edit"><i class="fa fa-edit"></i></a>
-                    @if (User.IsInRole("SuperUser"))
+                    @if (Helper.IsInRole("Super"))
                     {
                         <a href="@Url.Action("Delete", "BuildingUnit", new { id = item.UnitID })" title="Delete"><i class="fa fa-remove"></i></a>
                     }

@@ -10,13 +10,13 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Views
 {
-    [Authorize(Roles = "SuperUser,Admin")]
+    [Authorize(Roles = "Super,Admin")]
     public class RecurringDueController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();
         
 
-        [Authorize(Roles = "SuperUser")]
+        [Authorize(Roles = "Super")]
         public ActionResult CalculateBill(int id,string RecurringDate)
         {
             DateTime dt = DateTime.Now;
@@ -30,7 +30,7 @@ namespace SocietyManagement.Views
             return View(recurringBill.CalculateRecurringBill(User, dt));
         }
 
-        [Authorize(Roles = "SuperUser")]
+        [Authorize(Roles = "Super")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CalculateBill(string RecurringDate)

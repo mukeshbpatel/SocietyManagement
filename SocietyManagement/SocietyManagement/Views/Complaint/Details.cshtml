@@ -1,5 +1,5 @@
 ﻿@model SocietyManagement.Models.Complaint
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Complaint";
 }
@@ -8,7 +8,7 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-hand-o-up"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") || SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") || SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
         {
             <a href="@Url.Action("Edit", new { id = Model.ComplaintID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
             <a href="@Url.Action("Delete", new { id = Model.ComplaintID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
@@ -28,7 +28,7 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-comments"></i> Comments</h3>
     <div class="pull-right">
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") || User.IsInRole("Manager") || SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") || Helper.IsInRole("Manager") || SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
         {
             <a href="@Url.Action("Create","ComplaintComment", new { id = Model.ComplaintID })" title="Add Comment"><i class="fa fa-plus-square"></i> <span class="hidden-xs">Add Comment</span></a><span> &nbsp; </span>
         }
@@ -42,7 +42,7 @@
         <i class="fa fa-user"></i> @item.Author.Name &nbsp;
         <i class="fa fa-calendar"></i> @item.CreatedDate
 
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
         {
             <div class="pull-right">
                 <a href="@Url.Action("Edit","ComplaintComment" ,new { id = item.CommentID })" title="Edit"><i class="fa fa-edit"></i></a>

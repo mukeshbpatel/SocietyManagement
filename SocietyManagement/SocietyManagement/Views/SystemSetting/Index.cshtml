@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<SocietyManagement.Models.SystemSetting>
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "System Settings";
 }
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-cog"></i> @ViewBag.Title</h3>
-    @if (User.IsInRole("SuperUser"))
+    @if (Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -26,7 +26,7 @@
                 @Html.DisplayNameFor(model => model.SettingValue)
             </th>
            
-            @if (User.IsInRole("SuperUser"))
+            @if (Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -45,7 +45,7 @@
                     @Html.DisplayFor(modelItem => item.SettingValue)
                 </td>
                
-                @if (User.IsInRole("SuperUser"))
+                @if (Helper.IsInRole("Super"))
                 {
                     <td class="list-action">
                         <a href="@Url.Action("Edit", new { id = item.SettingID })" title="Edit"><i class="fa fa-edit"></i></a>

@@ -46,7 +46,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Penalty/Create
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult Create(Int64 id)
         {
             Due due = db.Dues.Find(id);
@@ -67,7 +67,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles ="SuperUser,Admin")]
+        [Authorize(Roles ="Super,Admin")]
         public ActionResult Create([Bind(Include = "PenaltyID,PenaltyDate,UnitID,DueID,Amount,Details,UDK1,UDK2,UDK3,UDK4,UDK5")] Penalty penalty)
         {
             Helper.AssignUserInfo(penalty, User);
@@ -81,7 +81,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Penalty/Edit/5
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult Edit(Int64? id)
         {
             if (id == null)
@@ -101,7 +101,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult Edit([Bind(Include = "PenaltyID,PenaltyDate,UnitID,DueID,Amount,Details,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Penalty penalty)
         {
             Helper.AssignUserInfo(penalty, User, false);
@@ -115,7 +115,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Penalty/Delete/5
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult Delete(Int64? id)
         {
             if (id == null)
@@ -133,7 +133,7 @@ namespace SocietyManagement.Controllers
         // POST: Penalty/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult DeleteConfirmed(Int64? id)
         {
             Penalty penalty = db.Penalties.Find(id);

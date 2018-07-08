@@ -14,14 +14,14 @@ namespace SocietyManagement
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            if (!roleManager.RoleExists("SuperUser"))
+            if (!roleManager.RoleExists("Super"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "SuperUser";
+                role.Name = "Super";
                 roleManager.Create(role);
 
                 var user = new ApplicationUser();
-                user.UserName = "superuser";
+                user.UserName = "Super";
                 user.FirstName = "Super";
                 user.LastName = "User";
                 user.Email = "mukeshbpatel@gmail.com";
@@ -36,7 +36,7 @@ namespace SocietyManagement
                 //Add default User to Role Admin    
                 if (chkUser.Succeeded)
                 {
-                    var result1 = UserManager.AddToRole(user.Id, "SuperUser");
+                    var result1 = UserManager.AddToRole(user.Id, "Super");
 
                 }
             }

@@ -212,7 +212,7 @@ namespace SocietyManagement.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
-        [Authorize(Roles="SuperUser,Admin")]
+        [Authorize(Roles="Super,Admin")]
         public ActionResult Users()
         {
             SocietyManagementEntities db = new SocietyManagementEntities();

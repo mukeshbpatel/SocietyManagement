@@ -38,7 +38,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Event/Create
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         public ActionResult Create()
         {
             ViewBag.EventTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "EventType"), "KeyID", "KeyValues");
@@ -50,7 +50,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         public ActionResult Create([Bind(Include = "EventID,EventDate,EventTypeID,EventName,Details,UDK1,UDK2,UDK3,UDK4,UDK5")] Event objEvent)
         {
             Helper.AssignUserInfo(objEvent, User);
@@ -66,7 +66,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Event/Edit/5
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -87,7 +87,7 @@ namespace SocietyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         public ActionResult Edit([Bind(Include = "EventID,EventDate,EventTypeID,EventName,Details,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Event objEvent)
         {
             Helper.AssignUserInfo(objEvent, User, false);
@@ -102,7 +102,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Event/Delete/5
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -118,7 +118,7 @@ namespace SocietyManagement.Controllers
         }
 
         // POST: Event/Delete/5
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

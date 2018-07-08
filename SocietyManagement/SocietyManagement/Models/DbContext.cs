@@ -50,7 +50,7 @@ namespace SocietyManagement.Models
 
         public static List<AspNetUser> GetUsers(DbSet<AspNetUser> Users)
         {
-            List<AspNetUser> FilterUsers = Users.Where(u => u.UserName != "SuperUser").OrderBy(o=>o.FirstName).ToList();            
+            List<AspNetUser> FilterUsers = Users.Where(u => u.UserName != "Super").OrderBy(o=>o.FirstName).ToList();            
             return FilterUsers;
         }
 
@@ -60,6 +60,26 @@ namespace SocietyManagement.Models
             if (UserID != "" && FilterUsers.Where(u=>u.Id== UserID).FirstOrDefault() == null)
                 FilterUsers.Add(Users.Find(UserID));
             return FilterUsers;
+        }
+
+        public static Boolean IsInRole(string Role)
+        {
+            if (HttpContext.Current.Session["UserRoles"] != null)
+            {
+                return HttpContext.Current.Session["UserRoles"].ToString().Contains(Role);
+            }
+
+            AspNetUser aspNetUser = CurrentUser();
+            string Roles = string.Empty;
+            foreach (var item in aspNetUser.AspNetRoles)
+            {
+                if (string.IsNullOrEmpty(Roles))
+                    Roles += item.Name;
+                else
+                    Roles += "," + item.Name;
+            }
+            HttpContext.Current.Session["UserRoles"] = Roles;
+            return Roles.Contains(Role);
         }
 
         public static AspNetUser CurrentUser()

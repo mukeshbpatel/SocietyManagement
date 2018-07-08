@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<SocietyManagement.Models.KeyValue>
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Key Value";
 }
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-key"></i> @ViewBag.Title</h3>
-    @if (User.IsInRole("SuperUser"))
+    @if (Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -25,7 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.KeyOrder)
             </th>
-            @if (User.IsInRole("SuperUser"))
+            @if (Helper.IsInRole("Super"))
         {
         <th>Action</th>
         }
@@ -42,7 +42,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.KeyOrder)
         </td>
-        @if (User.IsInRole("SuperUser"))
+        @if (Helper.IsInRole("Super"))
         {
         <td class="list-action">
             <a href="@Url.Action("Edit", new { id = item.KeyID })" title="Edit"><i class="fa fa-edit"></i></a>

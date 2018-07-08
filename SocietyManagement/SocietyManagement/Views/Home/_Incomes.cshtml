@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Due>
-
+@using SocietyManagement.Models;
 
 <div class="box box-warning" style="min-height:240px;">
     <div class="box-header with-border">
@@ -11,7 +11,7 @@
             <tbody>
                 <tr>
                     <th>Date</th>
-                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
                     {
                         <th>Unit</th>
                     }
@@ -26,7 +26,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.BillDate)
                         </td>
-                        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
                         {
                             <td><a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })">@item.BuildingUnit.UnitName</a></td>
                         }

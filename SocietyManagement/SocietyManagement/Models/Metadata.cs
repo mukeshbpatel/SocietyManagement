@@ -312,7 +312,7 @@ namespace SocietyManagement.Models
     {
         [NotMapped]        
         public string Role { get; set; }
-        [Display(Name = "Reset Password")]
+        [Display(Name = "Reset Password (abcd1234)")]
         public bool ResetPassword { get; set; }
         [NotMapped]
         public string Name
@@ -603,21 +603,40 @@ namespace SocietyManagement.Models
         [Required]
         [Display(Name = "Building")]
         public int BuildingID { get; set; }
+
         [Required]
         [Display(Name = "Unit")]
-        [StringLength(1000)]
+        [StringLength(500)]
         public string UnitName { get; set; }
+
         [Required]
         [Display(Name = "Type")]
         public int UnitTypeID { get; set; }
         public string Details { get; set; }
+
         [Required]
         [Display(Name = "Owner")]
+        [StringLength(500)]
+        public string OwnerName { get; set; }
+        
+        [Display(Name = "Co-Owner")]
+        [StringLength(500)]
+        public string CoOwnerName { get; set; }
+
+        [Required]
+        [Display(Name = "User")]
         public string OwnerID { get; set; }
+
         [Required]
         [Display(Name = "Onetime Maintenance")]
         [Range(0,999999)]
         public decimal OneTimeMaintenance { get; set; }
+
+        [Required]
+        [Display(Name = "Monthly Maintenance")]
+        [Range(0, 999999)]
+        public decimal MonthlyMaintenance { get; set; }
+
         [Range(0, 999999)]
         public decimal UnitArea { get; set; }
         [Display(Name = "Created Date")]
@@ -625,8 +644,8 @@ namespace SocietyManagement.Models
 
         [Display(Name = "Modified Date")]
         public System.DateTime ModifiedDate { get; set; }
-
     }
+
     [MetadataType(typeof(BuildingUnitMetadata))]
     public partial class BuildingUnit
     {

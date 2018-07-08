@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<SocietyManagement.Models.EmailTemplate>
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Email Template";
 }
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-envelope"></i> @ViewBag.Title</h3>
-    @if (User.IsInRole("SuperUser"))
+    @if (Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -49,7 +49,7 @@
                 </td>
                 <td>
                     <a href="@Url.Action("Edit", new { id = item.TemplateID })" title="Edit"><i class="fa fa-edit"></i></a>
-                    @if (User.IsInRole("SuperUser"))
+                    @if (Helper.IsInRole("Super"))
                     {
                         <a href="@Url.Action("Delete", new { id = item.TemplateID })" title="Delete"><i class="fa fa-remove"></i></a>
                     }

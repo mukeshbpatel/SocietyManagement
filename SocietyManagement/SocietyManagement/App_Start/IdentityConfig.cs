@@ -59,7 +59,7 @@ namespace SocietyManagement
         //{
         //    var myMessage = new SendGridMessage();
         //    myMessage.AddTo(message.Destination);
-        //    myMessage.From = new EmailAddress("mukeshbpatel@gmail.com", "SuperUser");
+        //    myMessage.From = new EmailAddress("mukeshbpatel@gmail.com", "Super");
         //    myMessage.Subject = message.Subject;
         //    myMessage.PlainTextContent = message.Body;
         //    myMessage.HtmlContent = message.Body;

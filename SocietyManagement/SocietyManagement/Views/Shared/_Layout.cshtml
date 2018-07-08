@@ -197,7 +197,7 @@
                             <li class="@Html.IsSelected(controllers: "BuildingUnit")"><a href="@Url.Action("Index", "BuildingUnit")"><i class="fa fa-cube"></i> Building Units</a></li>
                         </ul>
                     </li>
-                    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperUser"))
+                    @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Manager") || SocietyManagement.Models.Helper.IsInRole("Super"))
                     {
                         <li class="treeview @Html.IsSelected(controllers: "RecurringDue,Due,Collection,Expense")">
                             <a href="#">
@@ -207,7 +207,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                                @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Super"))
                                 {
                                   <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("Index", "RecurringDue")"><i class="fa fa-retweet"></i> Recurring Bill</a></li>
                                 }
@@ -217,7 +217,7 @@
                             </ul>
                         </li>
                     }
-                    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("SuperUser"))
+                    @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Manager") || SocietyManagement.Models.Helper.IsInRole("Super"))
                     {
                         <li class="treeview @Html.IsSelected(controllers: "Report")">
                             <a href="#">
@@ -232,7 +232,7 @@
                             </ul>
                         </li>
                     }
-                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                    @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Super"))
                     {
                         <li class="treeview @Html.IsSelected(controllers: "RecurringDue,KeyValue,SystemSetting,EmailTemplate,User")">
                             <a href="#">
@@ -242,12 +242,12 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                                @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Super"))
                                 {
                                     <li class="@Html.IsSelected(controllers: "User")"><a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> Users</a></li>
                                     <li class="@Html.IsSelected(controllers: "EmailTemplate")"><a href="@Url.Action("Index", "EmailTemplate")"><i class="fa fa-envelope"></i> Email Template</a></li>
                                 }
-                                @if (User.IsInRole("SuperUser"))
+                                @if (SocietyManagement.Models.Helper.IsInRole("Super"))
                                 {
                                     <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("CalculateBill", "RecurringDue", new { id = 0 })"><i class="fa fa-list-alt"></i> Calculate Bills</a></li>
                                     <li class="@Html.IsSelected(controllers: "KeyValue")"><a href="@Url.Action("Index", "KeyValue")"><i class="fa fa-bars"></i> Key Values</a></li>

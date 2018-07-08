@@ -17,7 +17,7 @@ namespace SocietyManagement.Controllers
         private SocietyManagementEntities db = new SocietyManagementEntities();
 
         // GET: Collection
-        [Authorize(Roles = "SuperUser,Admin,Manager")]
+        [Authorize(Roles = "Super,Admin,Manager")]
         public ActionResult Index(string CollectionDate)
         {
             DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
@@ -83,7 +83,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Collection/Create
-        [Authorize(Roles ="SuperUser,Admin")]
+        [Authorize(Roles ="Super,Admin")]
         public ActionResult Create(Int64? id)
         {
             Collection collection = new Collection();
@@ -109,7 +109,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
         {
@@ -154,7 +154,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Collection/Edit/5
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult Edit(Int64? id)
         {
             if (id == null)
@@ -175,7 +175,7 @@ namespace SocietyManagement.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,YearID,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
         {
@@ -215,7 +215,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Collection/Delete/5
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         public ActionResult Delete(Int64? id)
         {
             if (id == null)
@@ -232,7 +232,7 @@ namespace SocietyManagement.Controllers
 
         // POST: Collection/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize(Roles = "SuperUser,Admin")]
+        [Authorize(Roles = "Super,Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Int64? id)
         {
@@ -258,7 +258,7 @@ namespace SocietyManagement.Controllers
         }
 
         // GET: Expense/Edit/5
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult EditFile(Int64? id)
         {
             if (id == null)
@@ -275,7 +275,7 @@ namespace SocietyManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult EditFile(CollectionMedia collectionMedia)
         {
             Helper.AssignUserInfo(collectionMedia, User, false);
@@ -292,7 +292,7 @@ namespace SocietyManagement.Controllers
             return View(collectionMedia);
         }
 
-        [Authorize(Roles = "Admin,Manager,SuperUser")]
+        [Authorize(Roles = "Admin,Manager,Super")]
         public ActionResult DeleteFile(Int64? id)
         {
             CollectionMedia collectionMedia = db.CollectionMedias.Find(id);

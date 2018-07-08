@@ -141,6 +141,9 @@
           <Property Name="CreatedDate" Type="datetime" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="OwnerName" Type="nvarchar" MaxLength="500" />
+          <Property Name="CoOwnerName" Type="nvarchar" MaxLength="500" />
+          <Property Name="MonthlyMaintenance" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
         <EntityType Name="CollectionMedia">
           <Key>
@@ -1852,6 +1855,9 @@
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Penalties" Relationship="SocietyManagementModel.FK_Penalty_BuildingUnits" FromRole="BuildingUnit" ToRole="Penalty" />
           <NavigationProperty Name="BuildingUnitMedias" Relationship="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit" FromRole="BuildingUnit" ToRole="BuildingUnitMedia" />
+          <Property Name="OwnerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CoOwnerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MonthlyMaintenance" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
         </EntityType>
         <EntityType Name="Collection">
           <Key>
@@ -3140,6 +3146,9 @@
           <EntitySetMapping Name="BuildingUnits">
             <EntityTypeMapping TypeName="SocietyManagementModel.BuildingUnit">
               <MappingFragment StoreEntitySet="BuildingUnits">
+                <ScalarProperty Name="MonthlyMaintenance" ColumnName="MonthlyMaintenance" />
+                <ScalarProperty Name="CoOwnerName" ColumnName="CoOwnerName" />
+                <ScalarProperty Name="OwnerName" ColumnName="OwnerName" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />

@@ -1,5 +1,5 @@
 ﻿@model SocietyManagement.Models.Forum
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Forum";
 }
@@ -9,7 +9,7 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-bullhorn"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | SocietyManagement.Models.Helper.GetUserID(User) == Model.AuthorID)
             {
 
             <a href="@Url.Action("Edit", new { id = Model.ForumID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
@@ -36,7 +36,7 @@
         <div class="box-body" style="padding-left:20px; border-bottom:1px solid #f4f4f4">
             <a href="#"><span class="glyphicon glyphicon-user"></span> @item.Author.Name</a> &nbsp;
             <span class="glyphicon glyphicon-calendar"></span>@item.CreatedDate
-            @if (User.IsInRole("Admin") || User.IsInRole("SuperUser") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
+            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | SocietyManagement.Models.Helper.GetUserID(User) == item.AuthorID)
             {
                 <div class="pull-right">
                     <a href="@Url.Action("Edit","ForumComment", new { id = item.CommentID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>

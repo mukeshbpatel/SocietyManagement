@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SocietyManagement.Models.Due>
-
+@using SocietyManagement.Models;
 @{
     Boolean ShowDetails = false;
     Boolean ShowUnit = false;
@@ -12,6 +12,8 @@
     {
         ShowDetails = true;
     }
+    Boolean IsAdmin = Helper.IsInRole("Admin");
+    Boolean IsSuper = Helper.IsInRole("Super");
 
 }
 <table class="table table-sm table-hover table-condensed table-bordered">
@@ -41,7 +43,7 @@
         <th class="hidden-xs">
             @Html.DisplayNameFor(model => model.DueDate)
         </th>
-        @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
+        @if (ShowDetails & (IsAdmin || IsSuper))
         {
             <th>Action</th>
         }
@@ -90,7 +92,7 @@
             <td class="hidden-xs">
                 @Html.DisplayFor(modelItem => item.DueDate)
             </td>
-            @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
+            @if (ShowDetails & (IsAdmin || IsSuper))
                 {
                 <td class="list-action">
                     <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><i class="fa fa-edit"></i></a>
@@ -122,7 +124,7 @@
             }
             <th class="right"><span>@(Model.Sum(s => s.DueAmount) + TotalPenalty)</span></th>
             <th class="hidden-xs"></th>
-            @if (ShowDetails & (User.IsInRole("Admin") || User.IsInRole("SuperUser")))
+            @if (ShowDetails & (IsAdmin || IsSuper))
             {
                 <th></th>
             }

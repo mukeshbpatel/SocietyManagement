@@ -1,5 +1,5 @@
 ﻿@model SocietyManagement.Models.BuildingUnit
-
+@using SocietyManagement.Models;
 @{
     ViewBag.Title = "Building Unit";
 }
@@ -7,11 +7,11 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-cube"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
         {
             <a href="@Url.Action("Edit", new { id = Model.UnitID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
         }
-        @if (User.IsInRole("SuperUser"))
+        @if (Helper.IsInRole("Super"))
         {
             <a href="@Url.Action("Delete", new { id = Model.UnitID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
         }
@@ -88,7 +88,7 @@
                 <th>Title</th>
                 <th>File Name</th>
                 <th>File Type</th>
-                @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
                 {
                     <th>Action</th>
                 }
@@ -105,7 +105,7 @@
                     <td>
                         @Html.DisplayFor(itemModel => media.MediaType)
                     </td>                    
-                    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+                    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
                     {
                         <td class="list-action">
                             <a href="@Url.Action("EditFile", new { id = media.MediaID })" title="Edit"><i class="fa fa-edit"></i></a>
@@ -123,7 +123,7 @@
         </table>
     }
 
-    @if (User.IsInRole("Admin") || User.IsInRole("SuperUser"))
+    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
     {
         <h4><i class="fa fa-retweet"></i> Recurring Bills</h4>
         @Html.Partial("_RecurringDue", Model.RecurringDues.Where(d => d.IsDeleted == false))

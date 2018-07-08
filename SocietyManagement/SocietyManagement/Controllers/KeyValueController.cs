@@ -10,7 +10,7 @@ using SocietyManagement.Models;
 
 namespace SocietyManagement.Controllers
 {
-    [Authorize(Roles = "SuperUser")]
+    [Authorize(Roles = "Super")]
     public class KeyValueController : Controller
     {
         private SocietyManagementEntities db = new SocietyManagementEntities();

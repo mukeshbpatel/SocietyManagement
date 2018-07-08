@@ -42,6 +42,9 @@ namespace SocietyManagement.Models
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string OwnerName { get; set; }
+        public string CoOwnerName { get; set; }
+        public decimal MonthlyMaintenance { get; set; }
     
         public virtual AspNetUser Owner { get; set; }
         public virtual Building Building { get; set; }
