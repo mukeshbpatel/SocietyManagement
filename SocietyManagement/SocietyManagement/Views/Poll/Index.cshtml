@@ -20,12 +20,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.PollTitle)
             </th>
-            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") || Helper.IsInRole("Manager"))
-{
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.PollType.KeyValues)
+          <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.PollTypeID)
         </th>
-}
             <th class="hidden-xs">
                 @Html.DisplayNameFor(model => model.StartDate)
             </th>
@@ -39,13 +36,10 @@
     <tr>
         <td>
             <a href="@Url.Action("Details", new { id = item.PollID })" title="Details">@item.PollTitle</a>
-        </td>
-        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") || Helper.IsInRole("Manager"))
-{
+        </td>       
         <td class="hidden-xs">
             @Html.DisplayFor(modelItem => item.PollType.KeyValues)
         </td>
-}
         <td class="hidden-xs">
             @Html.DisplayFor(modelItem => item.StartDate)
         </td>

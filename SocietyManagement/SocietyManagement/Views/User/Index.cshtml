@@ -22,6 +22,12 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                Role
+            </th>
+            <th>
                 Unit
             </th>
             <th>
@@ -30,12 +36,7 @@
             <th>
                 <span class="glyphicon glyphicon-phone-alt"></span>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                Role
-            </th>
+           
             @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
@@ -47,9 +48,15 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BuildingUnits.FirstOrDefault().UnitName)
+                    @string.Join(", ", item.AspNetRoles.Select(r => r.Name))
+                </td>
+                <td>
+                    @string.Join(", ", item.BuildingUnits.Select(u=>u.UnitName))
                 </td>
                 <td>
                     @if (string.IsNullOrEmpty(item.Email))
@@ -71,12 +78,7 @@
                         <a href="tel:@item.PhoneNumber" title="@item.PhoneNumber"><span class="glyphicon glyphicon-phone-alt"></span></a>
                     }
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AspNetRoles.FirstOrDefault().Name)
-                </td>
+                
                 @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
                 {
                     <td class="list-action">
