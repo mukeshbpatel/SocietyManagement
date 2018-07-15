@@ -7,7 +7,7 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-list-alt"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+        @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
         {
             <a href="@Url.Action("Create","Collection", new { id = Model.DueID })" title="Create Payment"><i class="fa fa-bank"></i> <span class="hidden-xs">Payment</span></a><span> &nbsp; </span>
             <a href="@Url.Action("Edit", new { id = Model.DueID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
@@ -21,21 +21,19 @@
 
     <dl class="dl-horizontal">
         <dt>
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+        </dt>
+
+        <dd>            
+            <a href="@Url.Action("Details","BuildingUnit",new { id = Model.UnitID })">@Model.BuildingUnit.UnitName</a>           
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.BillDate)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.BillDate)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.DueTypeID)
         </dt>
@@ -66,16 +64,13 @@
         <dd>
             @Html.DisplayFor(model => model.DueDate)
         </dd>
-
-
-
     </dl>
 
 </div>
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-money"></i> Penalty</h3>
-    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create","Penalty",new {id = Model.DueID })"><i class="fa fa-plus-square"></i> Add New</a>
@@ -95,7 +90,7 @@
             <th>
                 Amount
             </th>
-            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+            @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -121,7 +116,7 @@
                     <td class="right">
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
-                    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+                    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
                     {
                         <td class="list-action">
                             <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><i class="fa fa-edit"></i></a>
@@ -133,7 +128,7 @@
             <tr>
                 <th colspan="2">Total Penalty</th>
                 <th>@Model.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount)</th>
-                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+                @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
                 {
                     <th></th>
                 }

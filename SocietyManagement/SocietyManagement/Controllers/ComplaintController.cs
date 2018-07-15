@@ -18,8 +18,17 @@ namespace SocietyManagement.Controllers
         // GET: Complaint
         public ActionResult Index()
         {
-            var complaints = db.Complaints.Where(d=>d.IsDeleted==false).Include(c => c.AssignTo).Include(c => c.Author).Include(c => c.ComplaintType).OrderByDescending(o=>o.ModifiedDate);
-            return View(complaints.ToList());
+            if (Helper.IsInRole("User"))
+            {
+                var complaints = db.Complaints.Where(d => d.IsDeleted == false).Include(c => c.AssignTo).Include(c => c.Author).Include(c => c.ComplaintType).OrderByDescending(o => o.ModifiedDate);
+                return View(complaints.ToList());
+            }
+            else
+            {
+                string UserID = Helper.GetUserID(User);
+                var complaints = db.Complaints.Where(d => d.IsDeleted == false && d.AuthorID == UserID).Include(c => c.AssignTo).Include(c => c.Author).Include(c => c.ComplaintType).OrderByDescending(o => o.ModifiedDate);
+                return View(complaints.ToList());
+            }
         }
 
         // GET: Complaint/Details/5

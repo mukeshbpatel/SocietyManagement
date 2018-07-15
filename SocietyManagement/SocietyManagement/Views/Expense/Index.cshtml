@@ -6,7 +6,7 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-money"></i> @ViewBag.Title</h3>
-    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -54,7 +54,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.PaymentModeID)
             </th>
-            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+            @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -85,7 +85,7 @@
                     @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
                 </td>
 
-                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+                @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
                 {
                     <td class="list-action">
                         <a href="@Url.Action("Edit", new { id = item.ExpenseID })" title="Edit"><i class="fa fa-edit"></i></a>

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SocietyManagement.Models;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -29,21 +30,13 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
 
-   
+
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
     </script>
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
-    <style>
-        .search > .dropdown-menu {
-            position: relative;
-            width: 100%;
-            top: 0px !important;
-            /*left: 0px !important;*/
-        }
-    </style>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -64,11 +57,11 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span></a>
+                            <a href="@Url.Action("Index","Home")"><i class="glyphicon glyphicon-home"></i></a>
                         </li>
                         <li>
                             <a href="@Url.Action("Index","Notification")">
-                                <span class="fa fa-bell-o"></span>
+                                <i class="fa fa-bell-o"></i>
                                 <span class="label label-warning" id="cntNotification"></span>
                             </a>
                         </li>
@@ -106,13 +99,13 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="@Url.Action("MyProfile", "Manage")" class="btn btn-default"><span class="fa fa-user"></span> Profile</a>
+                                        <a href="@Url.Action("MyProfile", "Manage")" class="btn btn-default"><i class="fa fa-user"></i> Profile</a>
                                     </div>
                                     <div class="pull-right">
                                         @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
                                         {
                                             @Html.AntiForgeryToken()
-                                            <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default"><span class="glyphicon glyphicon-log-out"></span> Sign out</a>
+                                            <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-default"><i class="glyphicon glyphicon-log-out"></i> Sign out</a>
                                         }
                                     </div>
                                 </li>
@@ -120,7 +113,7 @@
                         </li>
                         <!-- Control Sidebar Toggle Button -->
                         <!--<li>
-                          <a href="#" data-toggle="control-sidebar"><span class="fa fa-gears"></span></a>
+                          <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
                         </li>-->
                     </ul>
                 </div>
@@ -145,144 +138,138 @@
                     </div>
                     <div class="pull-left info">
                         <p>@SocietyManagement.Models.Helper.CurrentUser().Name</p>
-                        <a href="#"><span class="fa fa-circle text-green"></span> Role : @SocietyManagement.Models.Helper.CurrentUser().Role</a>
+                        <a href="#"><i class="fa fa-circle text-green"></i> Role : @SocietyManagement.Models.Helper.CurrentUser().Role</a>
                     </div>
                 </div>
                 <!-- search form -->
-                <form action="/Search/" method="get" class="sidebar-form form-inline">
-                    <div class="input-group search">                       
-                            <input style="width:169px;" name="q" class="form-control typeahead twitter-typeahead" data-provide="typeahead" placeholder="search..." type="text">                       
+                <form action="/Search/" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
                             <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <span class="fa fa-search"></span>
-                            </button>                        
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
                     </div>
                 </form>
-                <script type="text/javascript">
-                    var data = ["A-101", "B-101", "C-101"];// [{ "id": "222", "name": "sneha", "employee_salary": "100000", "employee_age": "23" }, { "id": "223", "name": "arpita", "employee_salary": "40000", "employee_age": "33" }, { "id": "225", "name": "pogi", "employee_salary": "5646545", "employee_age": "546" }, { "id": "229", "name": "eer", "employee_salary": "0", "employee_age": "0" }, { "id": "232", "name": "sdfadf", "employee_salary": "0", "employee_age": "0" }, { "id": "234", "name": "dfgdgd", "employee_salary": "45", "employee_age": "21" }, { "id": "236", "name": "nb", "employee_salary": "0", "employee_age": "0" }, { "id": "237", "name": "BHsdgygbfvr1bn", "employee_salary": "0", "employee_age": "0" }, { "id": "238", "name": "BHsdgygbfvr1bn", "employee_salary": "0", "employee_age": "0" }, { "id": "239", "name": "assa", "employee_salary": "0", "employee_age": "0" }];
-                    var $input = $(".typeahead");
-                    $input.typeahead({
-                        source: data,
-                        autoSelect: true
-                    });
-                </script>
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="@Html.IsSelected(actions: "Index", controllers: "Home")"><a href="@Url.Action("Index", "Home")" class="active"><span class="glyphicon glyphicon-home text-blue"></span> <span>Home</span></a></li>
+                    <li class="@Html.IsSelected(actions: "Index", controllers: "Home")"><a href="@Url.Action("Index", "Home")" class="active"><i class="glyphicon glyphicon-home text-blue"></i> <span>Home</span></a></li>
 
                     <li class="treeview @Html.IsSelected(actions: "MyBill,MyPayment,BalanceSheet", controllers: "MyAccount")">
                         <a href="#">
-                            <span class="glyphicon glyphicon-briefcase text-green"></span> <span>My Account</span>
+                            <i class="glyphicon glyphicon-briefcase text-green"></i> <span>My Account</span>
                             <span class="pull-right-container">
-                                <span class="fa fa-angle-left pull-right"></span>
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="@Html.IsSelected(actions: "MyBill", controllers: "MyAccount")"><a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })"><span class="fa fa-list-alt"></span> Bills</a></li>
-                            <li class="@Html.IsSelected(actions: "MyPayment", controllers: "MyAccount")"><a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })"><span class="fa fa-bank"></span> Payments</a></li>
-                            <li class="@Html.IsSelected(actions: "BalanceSheet", controllers: "MyAccount")"><a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })"><span class="fa fa-calculator"></span> Balance Sheet</a></li>
+                            <li class="@Html.IsSelected(actions: "MyBill", controllers: "MyAccount")"><a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })"><i class="fa fa-list-alt"></i> Bills</a></li>
+                            <li class="@Html.IsSelected(actions: "MyPayment", controllers: "MyAccount")"><a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })"><i class="fa fa-bank"></i> Payments</a></li>
+                            <li class="@Html.IsSelected(actions: "BalanceSheet", controllers: "MyAccount")"><a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })"><i class="fa fa-calculator"></i> Balance Sheet</a></li>
                         </ul>
                     </li>
                     <li class="treeview @Html.IsSelected(controllers: "Notification,NoticeBoard,Poll,Forum,ForumComment,Complaint,ComplaintComment,Event")">
                         <a href="#">
-                            <span class="fa fa-handshake-o text-yellow"></span> <span>Communication</span>
+                            <i class="fa fa-handshake-o text-yellow"></i> <span>Communication</span>
                             <span class="pull-right-container">
-                                <span class="fa fa-angle-left pull-right"></span>
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="@Html.IsSelected(controllers: "Notification")"><a href="@Url.Action("Index", "Notification")"><span class="fa fa-envelope-o"></span> Notification</a></li>
-                            <li class="@Html.IsSelected(controllers: "NoticeBoard")"><a href="@Url.Action("Index", "NoticeBoard")"><span class="glyphicon glyphicon-blackboard"></span> Notice Board</a></li>
-                            <li class="@Html.IsSelected(controllers: "Poll")"><a href="@Url.Action("Index", "Poll")"><span class="fa fa-tasks"></span> Opinion Poll</a></li>
-                            <li class="@Html.IsSelected(controllers: "Forum,ForumComment")"><a href="@Url.Action("Index", "Forum")"><span class="fa fa-bullhorn"></span> Forum</a></li>
-                            <li class="@Html.IsSelected(controllers: "Complaint,ComplaintComment")"><a href="@Url.Action("Index", "Complaint")"><span class="fa fa-hand-o-up"></span> Complaint</a></li>
-                            <li class="@Html.IsSelected(controllers: "Event")"><a href="@Url.Action("Index", "Event")"><span class="fa fa-calendar-check-o"></span> Events</a></li>
+                            <li class="@Html.IsSelected(controllers: "Notification")"><a href="@Url.Action("Index", "Notification")"><i class="fa fa-envelope-o"></i> Notification</a></li>
+                            <li class="@Html.IsSelected(controllers: "NoticeBoard")"><a href="@Url.Action("Index", "NoticeBoard")"><i class="glyphicon glyphicon-blackboard"></i> Notice Board</a></li>
+                            <li class="@Html.IsSelected(controllers: "Poll")"><a href="@Url.Action("Index", "Poll")"><i class="fa fa-tasks"></i> Opinion Poll</a></li>
+                            <li class="@Html.IsSelected(controllers: "Forum,ForumComment")"><a href="@Url.Action("Index", "Forum")"><i class="fa fa-bullhorn"></i> Forum</a></li>
+                            <li class="@Html.IsSelected(controllers: "Complaint,ComplaintComment")"><a href="@Url.Action("Index", "Complaint")"><i class="fa fa-hand-o-up"></i> Complaint</a></li>
+                            <li class="@Html.IsSelected(controllers: "Event")"><a href="@Url.Action("Index", "Event")"><i class="fa fa-calendar-check-o"></i> Events</a></li>
                         </ul>
                     </li>
                     <li class="treeview @Html.IsSelected(controllers: "Building,BuildingUnit")">
                         <a href="#">
-                            <span class="fa fa-building text-aqua"></span> <span>Society</span>
+                            <i class="fa fa-building text-aqua"></i> <span>Society</span>
                             <span class="pull-right-container">
-                                <span class="fa fa-angle-left pull-right"></span>
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="@Html.IsSelected(controllers: "Building")"><a href="@Url.Action("Index", "Building")"><span class="fa fa-cubes"></span> Buildings</a></li>
-                            <li class="@Html.IsSelected(controllers: "BuildingUnit")"><a href="@Url.Action("Index", "BuildingUnit")"><span class="fa fa-cube"></span> Building Units</a></li>
+                            <li class="@Html.IsSelected(controllers: "Building")"><a href="@Url.Action("Index", "Building")"><i class="fa fa-cubes"></i> Buildings</a></li>
+                            <li class="@Html.IsSelected(controllers: "BuildingUnit")"><a href="@Url.Action("Index", "BuildingUnit")"><i class="fa fa-cube"></i> Building Units</a></li>
                         </ul>
                     </li>
-                    @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Manager") || SocietyManagement.Models.Helper.IsInRole("Super"))
+                    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Manager") || Helper.IsInRole("SuperUser"))
                     {
                         <li class="treeview @Html.IsSelected(controllers: "RecurringDue,Due,Collection,Expense")">
                             <a href="#">
-                                <span class="fa fa-bank text-green"></span> <span>Society Account</span>
+                                <i class="fa fa-bank text-green"></i> <span>Society Account</span>
                                 <span class="pull-right-container">
-                                    <span class="fa fa-angle-left pull-right"></span>
+                                    <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Super"))
+                                @if (Helper.IsInRole("Manager") || Helper.IsInRole("SuperUser"))
                                 {
-                                  <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("Index", "RecurringDue")"><span class="fa fa-retweet"></span> Recurring Bill</a></li>
+                                    <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("Index", "RecurringDue")"><i class="fa fa-retweet"></i> Recurring Bill</a></li>
                                 }
-                                <li class="@Html.IsSelected(controllers: "Due")"><a href="@Url.Action("Index", "Due")"><span class="fa fa-list-alt"></span> Maintanance Bills</a></li>
-                                <li class="@Html.IsSelected(controllers: "Collection")"><a href="@Url.Action("Index", "Collection")"><span class="fa fa-bank"></span> Collections</a></li>
-                                <li class="@Html.IsSelected(controllers: "Expense")"><a href="@Url.Action("Index", "Expense")"><span class="fa fa-money"></span> Expenses</a></li>
+                                <li class="@Html.IsSelected(controllers: "Due")"><a href="@Url.Action("Index", "Due")"><i class="fa fa-list-alt"></i> Maintanance Bills</a></li>
+                                <li class="@Html.IsSelected(controllers: "Collection")"><a href="@Url.Action("Index", "Collection")"><i class="fa fa-bank"></i> Collections</a></li>
+                                <li class="@Html.IsSelected(controllers: "Expense")"><a href="@Url.Action("Index", "Expense")"><i class="fa fa-money"></i> Expenses</a></li>
                             </ul>
                         </li>
                     }
-                    @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Manager") || SocietyManagement.Models.Helper.IsInRole("Super"))
+                    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Manager") || Helper.IsInRole("SuperUser"))
                     {
                         <li class="treeview @Html.IsSelected(controllers: "Report")">
                             <a href="#">
-                                <span class="fa fa-pie-chart text-primary"></span> <span>Reports</span>
+                                <i class="fa fa-pie-chart text-primary"></i> <span>Reports</span>
                                 <span class="pull-right-container">
-                                    <span class="fa fa-angle-left pull-right"></span>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">                                                                
-                                <li class="@Html.IsSelected(actions: "CollectionReport",controllers: "Report")"><a href="@Url.Action("CollectionReport", "Report")"><span class="fa fa-bank"></span> Collection Report</a></li>
-                                <li class="@Html.IsSelected(actions: "ExpenseReport",controllers: "Report")"><a href="@Url.Action("ExpenseReport", "Report")"><span class="fa fa-money"></span> Expense Report</a></li>
-                            </ul>
-                        </li>
-                    }
-                    @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Super"))
-                    {
-                        <li class="treeview @Html.IsSelected(controllers: "RecurringDue,KeyValue,SystemSetting,EmailTemplate,User")">
-                            <a href="#">
-                                <span class="fa fa-superpowers text-orange"></span> <span>Admin</span>
-                                <span class="pull-right-container">
-                                    <span class="fa fa-angle-left pull-right"></span>
+                                    <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                @if (SocietyManagement.Models.Helper.IsInRole("Admin") || SocietyManagement.Models.Helper.IsInRole("Super"))
+                                <li class="@Html.IsSelected(actions: "CollectionReport",controllers: "Report")"><a href="@Url.Action("CollectionReport", "Report")"><i class="fa fa-bank"></i> Collection Report</a></li>
+                                <li class="@Html.IsSelected(actions: "ExpenseReport",controllers: "Report")"><a href="@Url.Action("ExpenseReport", "Report")"><i class="fa fa-money"></i> Expense Report</a></li>
+                            </ul>
+                        </li>
+                    }
+                    @if (Helper.IsInRole("Manager") || Helper.IsInRole("SuperUser"))
+                    {
+                        <li class="treeview @Html.IsSelected(controllers: "RecurringDue,KeyValue,SystemSetting,EmailTemplate,User")">
+                            <a href="#">
+                                <i class="fa fa-superpowers text-orange"></i> <span>Admin</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                @if (Helper.IsInRole("Manager") || Helper.IsInRole("SuperUser"))
                                 {
-                                    <li class="@Html.IsSelected(controllers: "User")"><a href="@Url.Action("Index", "User")"><span class="fa fa-users"></span> Users</a></li>
-                                    <li class="@Html.IsSelected(controllers: "EmailTemplate")"><a href="@Url.Action("Index", "EmailTemplate")"><span class="fa fa-envelope"></span> Email Template</a></li>
+                                    <li class="@Html.IsSelected(controllers: "User")"><a href="@Url.Action("Index", "User")"><i class="fa fa-users"></i> Users</a></li>
+                                    <li class="@Html.IsSelected(controllers: "EmailTemplate")"><a href="@Url.Action("Index", "EmailTemplate")"><i class="fa fa-envelope"></i> Email Template</a></li>
                                 }
-                                @if (SocietyManagement.Models.Helper.IsInRole("Super"))
+                                @if (Helper.IsInRole("SuperUser"))
                                 {
-                                    <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("CalculateBill", "RecurringDue", new { id = 0 })"><span class="fa fa-list-alt"></span> Calculate Bills</a></li>
-                                    <li class="@Html.IsSelected(controllers: "KeyValue")"><a href="@Url.Action("Index", "KeyValue")"><span class="fa fa-bars"></span> Key Values</a></li>
-                                    <li class="@Html.IsSelected(controllers: "SystemSetting")"><a href="@Url.Action("Index", "SystemSetting")"><span class="fa fa-cogs"></span> System Setting</a></li>
+                                    <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("CalculateBill", "RecurringDue", new { id = 0 })"><i class="fa fa-list-alt"></i> Calculate Bills</a></li>
+                                    <li class="@Html.IsSelected(controllers: "KeyValue")"><a href="@Url.Action("Index", "KeyValue")"><i class="fa fa-bars"></i> Key Values</a></li>
+                                    <li class="@Html.IsSelected(controllers: "SystemSetting")"><a href="@Url.Action("Index", "SystemSetting")"><i class="fa fa-cogs"></i> System Setting</a></li>
                                 }
                             </ul>
                         </li>
                     }
                     <li class="treeview @Html.IsSelected(controllers: "Manage")">
                         <a href="#">
-                            <span class="fa fa-cog text-purple"></span> <span>Settings</span>
+                            <i class="fa fa-cog text-purple"></i> <span>Settings</span>
                             <span class="pull-right-container">
-                                <span class="fa fa-angle-left pull-right"></span>
+                                <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li class="@Html.IsSelected(controllers: "Manage",actions: "MyProfile")"><a href="@Url.Action("MyProfile", "Manage")"><span class="fa fa-id-card-o"></span> Update Profile</a></li>
-                            <li class="@Html.IsSelected(controllers: "Manage",actions: "ChangePassword")"><a href="@Url.Action("ChangePassword", "Manage")"><span class="fa fa-key"></span> Change Password</a></li>
+                            <li class="@Html.IsSelected(controllers: "Manage",actions: "MyProfile")"><a href="@Url.Action("MyProfile", "Manage")"><i class="fa fa-id-card-o"></i> Update Profile</a></li>
+                            <li class="@Html.IsSelected(controllers: "Manage",actions: "ChangePassword")"><a href="@Url.Action("ChangePassword", "Manage")"><i class="fa fa-key"></i> Change Password</a></li>
                         </ul>
                     </li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="fa fa-sign-out text-red"></span> <span>Sign out</span></a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out text-red"></i> <span>Sign out</span></a></li>
                 </ul>
             </section>
             <!-- /.sidebar -->

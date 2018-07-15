@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.UnitArea)
         </th>
         
-        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+        @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
         {
             <th>
                 @Html.DisplayNameFor(model => model.OwnerID)
@@ -46,7 +46,7 @@
             <td class="hidden-xs right">
                 @Html.DisplayFor(modelItem => item.UnitArea) Sq.Ft.
             </td>             
-            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+            @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
             {
                 <td>
                     @Html.DisplayFor(modelItem => item.Owner.UserName)

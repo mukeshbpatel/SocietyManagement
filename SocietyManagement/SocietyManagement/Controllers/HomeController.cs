@@ -91,7 +91,7 @@ namespace SocietyManagement.Controllers
                     ViewBag.CollectionList = CollectionList.OrderByDescending(o => o.CollectionDate).Take(6);
                 }
             }
-            else if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+            else if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
             {
                 var data = db.Database.SqlQuery<SP_Graph_DueCollection1_Result>("Exec SP_Graph_DueCollection @YearID = " + SiteSetting.FinancialYearID);
                 ViewBag.GraphBillPayment = data;

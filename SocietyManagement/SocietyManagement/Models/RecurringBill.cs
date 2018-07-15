@@ -36,7 +36,6 @@ namespace SocietyManagement.Models
             return bills;
         }
 
-
         public bool EnterRecurringBill(IPrincipal User, DateTime BillDate)
         {
             SocietyManagementEntities db = new SocietyManagementEntities();            

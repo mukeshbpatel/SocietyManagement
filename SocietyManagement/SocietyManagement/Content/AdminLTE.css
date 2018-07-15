@@ -1550,7 +1550,7 @@ a:focus {
   border-radius: 3px;
   background: #ffffff;
   border-top: 3px solid #d2d6de;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   width: 100%;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
@@ -1795,11 +1795,11 @@ a:focus {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 3px; 
   padding-top: 7px;
   padding-left: 7px;
   padding-right: 7px;
-  padding-bottom: 15px;
+  padding-bottom: 7px;
 }
 .no-header .box-body {
   border-top-right-radius: 3px;

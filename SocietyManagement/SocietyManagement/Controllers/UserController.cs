@@ -81,7 +81,14 @@ namespace SocietyManagement.Controllers
                 }
                 AddErrors(result);
             }
-            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name",model.Role);
+            if (Helper.IsInRole("Super"))
+            {
+                ViewBag.Role = new SelectList(db.AspNetRoles, "Name", "Name", model.Role);
+            }
+            else
+            {
+                ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", model.Role);
+            }
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -106,7 +113,14 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", aspNetUser.AspNetRoles.FirstOrDefault().Name);
+            if (Helper.IsInRole("Super"))
+            {
+                ViewBag.Role = new SelectList(db.AspNetRoles, "Name", "Name", aspNetUser.AspNetRoles.FirstOrDefault().Name);
+            }
+            else
+            {
+                ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", aspNetUser.AspNetRoles.FirstOrDefault().Name);
+            }            
             return View(aspNetUser);
         }
 
@@ -156,8 +170,15 @@ namespace SocietyManagement.Controllers
                     }
                 }
                 return RedirectToAction("Index");
+            }            
+            if (Helper.IsInRole("Super"))
+            {
+                ViewBag.Role = new SelectList(db.AspNetRoles, "Name", "Name", NetUser.Role);
             }
-            ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", NetUser.Role);
+            else
+            {
+                ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", NetUser.Role);
+            }
             return View(NetUser);
         }
 

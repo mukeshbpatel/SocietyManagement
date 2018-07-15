@@ -32,17 +32,8 @@
             <div class="form-group">
                 @Html.LabelFor(m => m.Gender, htmlAttributes: new { @class = "col-md-2 control-label" })
                 <div class="col-md-10">
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default" id="Male">
-                            <input type="radio" name="gender" value="Male" /> Male
-                        </label>
-                        <label class="btn btn-default" id="Female">
-                            <input type="radio" name="gender" value="Female" /> Female
-                        </label>
-                        <label class="btn btn-default" id="Other">
-                            <input type="radio" name="gender" value="Other" /> Other
-                        </label>
-                    </div>
+                    @Html.DropDownList("Gender", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -153,8 +144,8 @@
             @Scripts.Render("~/bundles/jqueryval")
         }
 
-        <script>
+        @*<script>
             $(document).ready(function () {
                 $("#@Model.Gender").addClass("active");
             });
-        </script>
+        </script>*@

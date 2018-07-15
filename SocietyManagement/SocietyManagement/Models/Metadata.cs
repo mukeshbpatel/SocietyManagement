@@ -638,6 +638,7 @@ namespace SocietyManagement.Models
         public decimal MonthlyMaintenance { get; set; }
 
         [Range(0, 999999)]
+        [Display(Name = "Area")]
         public decimal UnitArea { get; set; }
         [Display(Name = "Created Date")]
         public System.DateTime CreatedDate { get; set; }

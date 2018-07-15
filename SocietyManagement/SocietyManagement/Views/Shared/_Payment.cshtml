@@ -4,6 +4,7 @@
 @{    
     Boolean IsAdmin = Helper.IsInRole("Admin");
     Boolean IsSuper = Helper.IsInRole("Super");
+    Boolean IsManager = Helper.IsInRole("Manager");
 }
 
 <table class="table table-sm table-hover table-condensed table-bordered">
@@ -34,7 +35,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CollectionAmount)
         </th>
-        @if (IsAdmin || IsSuper)
+        @if (IsManager || IsSuper)
             {
             <th>Action</th>
         }
@@ -68,7 +69,7 @@
             <td align="right">
                 @Html.DisplayFor(modelItem => item.CollectionAmount)
             </td>
-            @if (IsAdmin || IsSuper)
+            @if (IsManager || IsSuper)
             {
                 <td class="list-action">
                     <a href="@Url.Action("Edit","Collection", new { id = item.CollectionID })" title="Edit"><i class="fa fa-edit"></i></a>
@@ -92,7 +93,7 @@
             <th class="hidden-xs right">@Model.Sum(s => s.Amount)</th>
             <th class="hidden-xs right">@Model.Sum(s => s.Discount)</th>
             <th class="right">@Model.Sum(s => s.CollectionAmount)</th>
-            @if (IsAdmin || IsSuper)
+            @if (IsManager || IsSuper)
             {<th></th>}
         </tr>
     }

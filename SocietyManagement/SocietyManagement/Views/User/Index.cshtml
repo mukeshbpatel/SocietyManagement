@@ -7,7 +7,7 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-users"></i> @ViewBag.Title</h3>
-    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -37,7 +37,7 @@
                 <span class="glyphicon glyphicon-phone-alt"></span>
             </th>
            
-            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+            @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -79,7 +79,7 @@
                     }
                 </td>
                 
-                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super"))
+                @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
                 {
                     <td class="list-action">
                         <a href="@Url.Action("Details", new { id = item.Id })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>

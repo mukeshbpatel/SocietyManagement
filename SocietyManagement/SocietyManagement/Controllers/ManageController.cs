@@ -226,12 +226,13 @@ namespace SocietyManagement.Controllers
             SocietyManagementEntities db = new SocietyManagementEntities();
             var UserID = Helper.GetUserID(User);
             var UserInfo = db.AspNetUsers.Find(UserID);
-            db.Dispose();
+            
             if (UserInfo == null)
             {
                 return HttpNotFound();
             }
             UserProfile profile = new UserProfile(UserInfo);
+            ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", UserInfo.Gender);           
             return View(profile);
         }
 
@@ -241,9 +242,9 @@ namespace SocietyManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult MyProfile([Bind(Include = "FirstName,LastName,Gender,DOB,Profession,Occupation,Email,PhoneNumber,BillNotification,PaymentNotification,NoticeBoardNotification,PollNotification,EventNotification,ForumNotification,PaymentReminder")] UserProfile profile)
         {
+            SocietyManagementEntities db = new SocietyManagementEntities();
             if (ModelState.IsValid)
-            {
-                SocietyManagementEntities db = new SocietyManagementEntities();
+            {               
                 var UserID = Helper.GetUserID(User);
                 var aspNetUsers = db.AspNetUsers.Find(UserID);
                 if (aspNetUsers == null)
@@ -273,6 +274,7 @@ namespace SocietyManagement.Controllers
                 HttpContext.Session["UserInfo"] = null;
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
+            ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", profile.Gender);            
             return View(profile);
         }
 
