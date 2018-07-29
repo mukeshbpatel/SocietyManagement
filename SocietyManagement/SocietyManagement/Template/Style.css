@@ -1,0 +1,45 @@
+﻿.title {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:larger;
+    font-weight:bold;
+    width:100%;
+    margin:10px;
+    color:orange;
+    text-align:center;
+}
+
+.BalanceSheet {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size:small;
+    width:100%;
+    border:1px solid silver;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+th{
+    text-align:center;
+    font-weight:bold;
+    padding:6px 4px 6px 4px;
+    border-bottom:1px solid silver;
+}
+
+td{
+    padding:6px 4px 6px 4px;
+}
+
+.right {
+    text-align:right;
+}
+
+.left {
+    text-align:left;
+}
+
+.center {
+    text-align:center;
+}
+
+.bold {
+    font-weight:bold;
+}

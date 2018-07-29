@@ -8,27 +8,31 @@
 
     <div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-calculator"></i> @ViewBag.Title</h3>
+        <div class="pull-right">
+            <a href="@Url.Action("BalanceSheetDownload",new {id=ViewBag.ID,Type="PDF"})" title="PDF Download"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></a><span> &nbsp; </span>
+            <a href="@Url.Action("BalanceSheetDownload",new {id=ViewBag.ID,Type="Excel"})" title="Excel Download"><i class="fa fa-file-excel-o"></i> <span class="hidden-xs">Excel</span></a>
+        </div>
     </div>
-    <div class="box-body">
+        <div class="box-body">
 
-        <ul class="nav nav-pills pull-right">
-            @foreach (var item in (SelectList)ViewBag.UnitID)
-    {
-        if (item.Selected)
-        {
-            <li class="active"><a href="#">@item.Text</a></li>
-        }
-        else
-        {
-            <li><a href="@Url.Action("BalanceSheet", new { id = item.Value })">@item.Text</a></li>
-        }
-    }
-        </ul>
+            <ul class="nav nav-pills pull-right">
+                @foreach (var item in (SelectList)ViewBag.UnitID)
+                {
+                    if (item.Selected)
+                    {
+                        <li class="active"><a href="#">@item.Text</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@Url.Action("BalanceSheet", new { id = item.Value })">@item.Text</a></li>
+                    }
+                }
+            </ul>
 
 
 
-        @Html.Partial("_BalanceSheet", Model)
-    </div>
+            @Html.Partial("_BalanceSheet", Model)
+        </div>
 }
 else
 {

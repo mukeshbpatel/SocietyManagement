@@ -49,6 +49,14 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13\lib\itextsharp.xmlworker.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -297,6 +305,7 @@
     <Compile Include="Models\Notification.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PdfGenrator.cs" />
     <Compile Include="Models\Penalty.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
@@ -416,6 +425,8 @@
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.easy-autocomplete.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Template\Footer.html" />
+    <Content Include="Template\Header.html" />
     <Content Include="Template\MaintanceBill.html" />
     <Content Include="Template\PaymentReceipt.html" />
     <Content Include="favicon.ico" />
@@ -476,6 +487,8 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Template\Signature.html" />
+    <Content Include="Template\Style.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -661,6 +674,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\alt\" />
+    <Folder Include="Template\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

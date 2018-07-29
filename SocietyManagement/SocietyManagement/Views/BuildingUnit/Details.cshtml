@@ -15,63 +15,70 @@
         {
             <a href="@Url.Action("Delete", new { id = Model.UnitID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
         }
-        <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
+        @if (Helper.IsInRole("User"))
+        {
+            <a href="#" onclick="goBack();" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
+        }
+        else
+        {
+            <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
+        }
     </div>
 </div>
 <div class="box-body">
     <style>
         .box-body > row > .col-sm-3 {
-            padding-right:5px;
-            padding-left:5px;
+            padding-right: 5px;
+            padding-left: 5px;
         }
     </style>
     <div class="row">
         <div class="col-sm-3 col-xs-6 right">@Html.DisplayNameFor(model => model.UnitName) : </div>
         <div class="col-sm-3 col-xs-6 left"> <a href="@Url.Action("Details","BuildingUnit",new { id = Model.UnitID })">@Model.UnitName</a> (@Html.DisplayFor(model => model.Building.BuildingName))</div>
         <div class="col-sm-3 col-xs-6 right">@Html.DisplayNameFor(model => model.UnitTypeID)  : </div>
-        <div class="col-sm-3 col-xs-6"> @Html.DisplayFor(model => model.UnitType.KeyValues)</div>    
+        <div class="col-sm-3 col-xs-6"> @Html.DisplayFor(model => model.UnitType.KeyValues)</div>
         <div class="col-sm-3 col-xs-6 right">@Html.DisplayNameFor(model => model.OwnerName) : </div>
         <div class="col-sm-3 col-xs-6">@Html.DisplayFor(model => model.OwnerName)</div>
         <div class="col-sm-3 col-xs-6 right">@Html.DisplayNameFor(model => model.CoOwnerName)  : </div>
         <div class="col-sm-3 col-xs-6">@Html.DisplayFor(model => model.CoOwnerName)</div>
-    </div> 
+    </div>
 
 
     @*<div class="row">
-        <div class="col-md-6">
-             : 
-        </div>        
-        <div class="col-md-6">
-            : 
-        </div>        
-        <div class="col-md-6">
-             : 
-        </div>
-        <div class="col-md-6">
-            @Html.DisplayNameFor(model => model.UnitTypeID) : @Html.DisplayFor(model => model.UnitType.KeyValues)
-        </div>
-        
-        <div class="col-md-3">
-            @Html.DisplayNameFor(model => model.UnitArea)
-        </div>
+            <div class="col-md-6">
+                 :
+            </div>
+            <div class="col-md-6">
+                :
+            </div>
+            <div class="col-md-6">
+                 :
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayNameFor(model => model.UnitTypeID) : @Html.DisplayFor(model => model.UnitType.KeyValues)
+            </div>
 
-        <div class="col-md-3">
-            @Html.DisplayFor(model => model.UnitArea) Sqr.ft.
-        </div>
+            <div class="col-md-3">
+                @Html.DisplayNameFor(model => model.UnitArea)
+            </div>
 
-
+            <div class="col-md-3">
+                @Html.DisplayFor(model => model.UnitArea) Sqr.ft.
+            </div>
 
 
 
 
-        <div class="col-md-3">
-            @Html.DisplayNameFor(model => model.Details)
-        </div>
 
-        <div class="col-md-3">
-            @Html.DisplayFor(model => model.Details)
-        </div>
-    </div>*@
+
+            <div class="col-md-3">
+                @Html.DisplayNameFor(model => model.Details)
+            </div>
+
+            <div class="col-md-3">
+                @Html.DisplayFor(model => model.Details)
+            </div>
+        </div>*@
 
 
     @if (Model.BuildingUnitMedias.Count > 0)
@@ -105,8 +112,7 @@
                             <a href="@Url.Action("EditFile", new { id = media.MediaID })" title="Edit"><i class="fa fa-edit"></i></a>
                             <a href="@Url.Action("DeleteFile",new { id = media.MediaID })" onclick="return DeleteFile(@media.MediaID,'@media.FileName');" title="Delete"><i class="fa fa-remove"></i></a>
                             <script>
-                                function DeleteFile(id,fileName)
-                                {
+                                function DeleteFile(id, fileName) {
                                     return window.confirm('Do you want to delete ' + fileName + ' file?');
                                 }
                             </script>
