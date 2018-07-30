@@ -7,7 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <title>@ViewBag.Title - Society Inbox</title>
-
+    <link href="~/favicon.ico" rel="shortcut icon">
     <link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="~/Content/font-awesome.min.css">
     <link rel="stylesheet" href="~/Content/AdminLTE.css">
@@ -141,18 +141,21 @@
                         <a href="#"><i class="fa fa-circle text-green"></i> Role : @SocietyManagement.Models.Helper.CurrentUser().Role</a>
                     </div>
                 </div>
+                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
+                {
                 <!-- search form -->
-                <form action="/Search/" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
+                    <form action="/Search/" method="get" class="sidebar-form">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
                 <!-- /.search form -->
+                }
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="@Html.IsSelected(actions: "Index", controllers: "Home")"><a href="@Url.Action("Index", "Home")" class="active"><i class="glyphicon glyphicon-home text-blue"></i> <span>Home</span></a></li>
@@ -213,7 +216,7 @@
                             <ul class="treeview-menu">
                                 @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                                 {
-                                <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("Index", "RecurringDue")"><i class="fa fa-retweet"></i> Recurring Bill</a></li>
+                                    <li class="@Html.IsSelected(controllers: "RecurringDue")"><a href="@Url.Action("Index", "RecurringDue")"><i class="fa fa-retweet"></i> Recurring Bill</a></li>
                                 }
                                 <li class="@Html.IsSelected(controllers: "Due")"><a href="@Url.Action("Index", "Due")"><i class="fa fa-list-alt"></i> Maintanance Bills</a></li>
                                 <li class="@Html.IsSelected(controllers: "Collection")"><a href="@Url.Action("Index", "Collection")"><i class="fa fa-bank"></i> Collections</a></li>

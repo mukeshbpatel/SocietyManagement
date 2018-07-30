@@ -1,45 +1,109 @@
-﻿.title {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:larger;
-    font-weight:bold;
-    width:100%;
-    margin:10px;
-    color:orange;
-    text-align:center;
+﻿body {
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+hr {
+    border-bottom: solid 1px silver;
+    color: silver;    
+}
+
+a {
+    text-decoration: none;
+}
+
+.societyname {
+    width: 100%;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    color: orange;
+}
+
+.regdetails {
+    width: 100%;
+    text-align: center;
+    font-size: small;
+    color: #333;
+}
+
+.address {
+    width: 100%;
+    text-align: center;
+    font-size: small;
+    color: #333;
+}
+
+.footer {
+}
+
+.title {
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    width: 100%;
+    margin: 10px;
+    color: orange;
+    text-align: center;
 }
 
 .BalanceSheet {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size:small;
-    width:100%;
-    border:1px solid silver;
-    margin-top:20px;
-    margin-bottom:20px;
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: small;
+    width: 100%;
+    border: 1pt solid silver;
+    margin:10px;
+    border-collapse: collapse;
 }
 
-th{
-    text-align:center;
-    font-weight:bold;
-    padding:6px 4px 6px 4px;
-    border-bottom:1px solid silver;
-}
+    .BalanceSheet > tr > th {
+        font-weight: bold;
+        padding: 6px 4px 6px 4px;
+        border-bottom: 1pt solid silver;
+    }
 
-td{
-    padding:6px 4px 6px 4px;
-}
+    .BalanceSheet > tr > td {
+        padding: 6px 4px 6px 4px;
+    }
 
 .right {
-    text-align:right;
+    text-align: right;
 }
 
 .left {
-    text-align:left;
+    text-align: left;
 }
 
 .center {
-    text-align:center;
+    text-align: center;
 }
 
 .bold {
-    font-weight:bold;
+    font-weight: bold;
 }
+
+
+#container {
+    
+}
+
+#header {
+}
+
+#body {    
+}
+
+#footer {    
+    width: 100%;    
+}
+
+#footer>table{
+    width: 100%;
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: small;
+}
+
+

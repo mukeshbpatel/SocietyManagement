@@ -551,7 +551,7 @@ namespace SocietyManagement.Models
         [Required]
         [Range(-99999999,9999999)]
         public decimal DueAmount { get; set; }
-        [Display(Name = "Perticular")]
+        [Display(Name = "Particular")]
         [Required]
         [StringLength(1000)]
         public string Details { get; set; }

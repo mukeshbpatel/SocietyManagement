@@ -50,7 +50,7 @@
     </tr>
     @{
         decimal TotalPenalty = 0; }
-    @foreach (var item in Model)
+    @foreach (var item in Model.OrderBy(o=>o.BillDate))
     {
         decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
         <tr>

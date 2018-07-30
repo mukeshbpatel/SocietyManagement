@@ -77,28 +77,28 @@ namespace SocietyManagement.Controllers
         public FileResult BalanceSheetDownload(int id = 0, String Type = "PDF")
         {
 
-            if (Type == "PDF")
-            {
-                string html = @"<div class='title'>Balance Sheet</div><table class='BalanceSheet'><tr><th>Date</th><th>Perticular</th><th>Credits</th><th>Debits</th><th>Balance</th><th></th></tr>";
+           
+                string html = @"<div class='title'>Balance Sheet</div><table class='BalanceSheet'><tr><th class='left'>Date</th><th class='left'>Transaction Details</th><th class='right'>Credits</th><th class='right'>Debits</th><th class='right'>Balance</th><th></th></tr>";
                 decimal Balance = 0;
-               
+
                 var Units = db.BuildingUnits.Find(id);
-                if (Units!=null)
+                if (Units != null)
                 {
-                    html = html.Replace("Balance Sheet", "Balance Sheet (" + Units.UnitName +")");
+                    html = html.Replace("Balance Sheet", "Balance Sheet (" + Units.UnitName + ")");
                     var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id + ",@YearID = " + SiteSetting.FinancialYearID);
                     foreach (var item in data)
                     {
                         Balance = Balance + item.Credit - item.Debit;
-                        html += "<tr><td>" + item.BDate.ToShortDateString() + "</td><td>" + item.Details + "</td><td class='right'>" + item.Credit.ToString("0.00") + "</td><td class='right'>" + item.Debit.ToString("0.00") + "</td><td class='right'>" + (Balance >= 0 ? Balance : (Balance * -1)).ToString("0.00") + "</td><td class='left'>" + (Balance == 0 ? string.Empty : (Balance > 0 ? "Cr" : "Dr")) + "</td></tr>";
+                        html += "<tr><td class='left'>" + item.BDate.ToString("dd/MM/yyyy") + "</td><td class='left'>" + item.Details + "</td><td class='right'>" + item.Credit.ToString("0.00") + "</td><td class='right'>" + item.Debit.ToString("0.00") + "</td><td class='right'>" + (Balance >= 0 ? Balance : (Balance * -1)).ToString("0.00") + "</td><td class='left'>" + (Balance == 0 ? string.Empty : (Balance > 0 ? "Cr" : "Dr")) + "</td></tr>";
                     }
                     html += "<tr><td colspan='6'>&nbsp;</td></tr><tr class='bold'><td colspan='2'>Total</td><td class='right'>" + data.Sum(s => s.Credit) + "</td><td class='right'>" + data.Sum(s => s.Debit) + "</td><td class='right'>" + (Balance >= 0 ? Balance : (Balance * -1)).ToString("0.00") + "</td><td class='left'>" + (Balance == 0 ? string.Empty : (Balance > 0 ? "Cr" : "Dr")) + "</td></tr>";
 
                 }
                 html += "</table>";
-                return File(PdfGenrator.HTMLtoPDF(html,false), "application/pdf", "BalanceSheet.pdf");
-            }
-            return File(PdfGenrator.HTMLtoPDF(string.Empty), "application/pdf", "BalanceSheet.csv");
+                if (Type == "Excel")
+                    return File(PdfGenrator.HTMLtoExcel(html, false), "application/vnd.ms-excel", "BalanceSheet.xls");
+                else
+                    return File(PdfGenrator.HTMLtoPDF(html, false), "application/pdf", "BalanceSheet.pdf");            
         }
 
         public ActionResult MyPayment(int id = 0)
