@@ -72,6 +72,7 @@
             @if (IsManager || IsSuper)
             {
                 <td class="list-action">
+                    <a href="@Url.Action("Receipt","FileDownload", new { id = item.CollectionID })" title="PDF"><i class="fa fa-file-pdf-o"></i></a>
                     <a href="@Url.Action("Edit","Collection", new { id = item.CollectionID })" title="Edit"><i class="fa fa-edit"></i></a>
                     <a href="@Url.Action("Delete","Collection", new { id = item.CollectionID })" title="Delete"><i class="fa fa-remove"></i></a>
 

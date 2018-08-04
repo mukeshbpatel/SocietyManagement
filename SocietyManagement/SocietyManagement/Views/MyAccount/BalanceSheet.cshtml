@@ -9,9 +9,8 @@
     <div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-calculator"></i> @ViewBag.Title</h3>
         <div class="pull-right">
-            <a href="@Url.Action("BalanceSheetDownload",new {id=ViewBag.ID,Type="HTML"})" title="Print"><i class="fa fa-print"></i> <span class="hidden-xs">Print</span></a><span> &nbsp; </span>
-            <a href="@Url.Action("BalanceSheetDownload",new {id=ViewBag.ID,Type="PDF"})" title="PDF Download"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></a><span> &nbsp; </span>
-            <a href="@Url.Action("BalanceSheetDownload",new {id=ViewBag.ID,Type="Excel"})" title="Excel Download"><i class="fa fa-file-excel-o"></i> <span class="hidden-xs">Excel</span></a>
+            <a href="@Url.Action("BalanceSheet","FileDownload", new { id = ViewBag.ID })" title="Download PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></a><span> &nbsp; </span>
+            <a href="#" onclick="goBack()" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
         </div>
     </div>
         <div class="box-body">

@@ -95,6 +95,7 @@
             @if (ShowDetails & (IsManager || IsSuper))
                 {
                 <td class="list-action">
+                    <a href="@Url.Action("Bill","FileDownload", new { id = item.DueID })" title="PDF"><i class="fa fa-file-pdf-o"></i></a>
                     <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><i class="fa fa-edit"></i></a>
                     <a href="@Url.Action("Delete","Due", new { id = item.DueID })" title="Delete"><i class="fa fa-remove"></i></a>
                 </td>

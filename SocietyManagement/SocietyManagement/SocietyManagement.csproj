@@ -189,6 +189,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\FileDownloadController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
@@ -425,8 +426,13 @@
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.easy-autocomplete.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
+    <Content Include="Template\Receipt.html" />
+    <Content Include="Template\Bill.html" />
     <Content Include="Template\Footer.html" />
     <Content Include="Template\Header.html" />
+    <Content Include="Template\Images\Chairman.png" />
+    <Content Include="Template\Images\Secretary.png" />
+    <Content Include="Template\Images\Treasurer.png" />
     <Content Include="Template\MaintanceBill.html" />
     <Content Include="Template\PaymentReceipt.html" />
     <Content Include="favicon.ico" />
@@ -674,7 +680,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\alt\" />
-    <Folder Include="Template\Images\" />
+    <Folder Include="Views\FileDownload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

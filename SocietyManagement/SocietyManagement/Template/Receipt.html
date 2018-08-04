@@ -1,0 +1,73 @@
+﻿<div class="maindiv">
+    <div class="title1">RECEIPT</div>
+    <table class="tbl" cellpadding="6" cellspacing="6">
+        <tr>
+            <th colspan="10" style="width:50%;" class="left">Receipt No. : <b>{{ReceiptNumber}}</b></th>            
+            <th colspan="10" style="width:50%;" class="right">Date : <b>{{ReceiptDate}}</b></th>
+        </tr>
+        <tr>
+            <td colspan="20" style="height:25px;"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td colspan="5">Received From : </td>
+            <td colspan="15" class="underline italic"> {{Name}} </td>
+        </tr>
+        <tr>
+            <td colspan="5">Flat/Shop No. : </td>
+            <td colspan="15" class="underline italic"> {{UnitName}} </td>            
+        </tr>
+        <tr>
+            <td colspan="20" style="height:25px;"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td colspan="20">On Account of the Particulars stated Below : </td>
+        </tr>
+        <tr>
+            <td colspan="1" style="width:100px;">A)</td>
+            <td colspan="5">Maintenance from</td>
+            <td colspan="4" class="underline italic center"> {{FromMonth}} </td>
+            <td colspan="1" class="center">to</td>
+            <td colspan="4" class="underline italic center"> {{ToMonth}} </td>
+            <td colspan="1" class="right">Rs</td>
+            <td colspan="4" class="underline italic right"> {{PaymentAmount}} </td>
+        </tr>
+        <tr>
+            <td colspan="1">B)</td>
+            <td colspan="5">Other</td>
+            <td colspan="9" class="underline italic left"> {{Other}} </td>
+            <td colspan="1" class="right">Rs</td>
+            <td colspan="4" class="underline italic right"> {{OtherAmount}} </td>
+        </tr>
+        <tr>
+            <td colspan="1">C)</td>
+            <td colspan="5">Late Fee Fine</td>
+            <td colspan="9" class="underline italic left"> </td>
+            <td colspan="1" class="right">Rs</td>
+            <td colspan="4" class="underline italic right"> {{FineAmount}} </td>
+        </tr>
+        <tr>
+            <td colspan="1"></td>
+            <td colspan="5" class="bold italic">Total</td>
+            <td colspan="9" class="underline italic left"> (A + B + C) </td>
+            <td colspan="1" class="right">Rs</td>
+            <td colspan="4" class="underline italic right bold"> {{TotalAmount}} </td>
+        </tr>
+        <tr>
+            <td colspan="20" style="height:25px;"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td colspan="4">Fee in Words</td>
+            <td colspan="16" class="underline"> {{AmountInWord}} </td>
+        </tr>
+        <tr>
+            <td colspan="4">{{PaymentMode}}</td>
+            <td colspan="16" class="underline"> {{PaymentDetails}} </td>
+        </tr>        
+        <tr>
+            <td colspan="20" style="height:50px;">Receipt is valid subject to Realization of Cheque.<br /></td>
+        </tr>
+        <tr>
+            <td colspan="20" style="height:50px;"> &nbsp; </td>
+        </tr>
+    </table>
+</div>

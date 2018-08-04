@@ -1,0 +1,69 @@
+﻿<div class="maindiv">
+    <div class="title1">MAINTENANCE BILL</div>
+    <table class="tbl" cellpadding="8" cellspacing="8">
+        <tr>
+            <th colspan="5" class="left">&nbsp;</th>
+            <th colspan="5" class="left">&nbsp;</th>
+            <th colspan="10" class="right">Date: <b>{{BillDate}}</b></th>
+        </tr>
+        <tr>
+            <td colspan="20" style="height:25px;"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td colspan="3">Name : </td>
+            <td colspan="17" class="underline italic"> {{Name}} </td>
+        </tr>
+        <tr>
+            <td colspan="3">Flat/Shop No. : </td>
+            <td colspan="17" class="underline italic"> {{UnitName}} </td>
+        </tr>
+        <tr>
+            <td colspan="20" style="height:25px;"> &nbsp; </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:20%">Bill No. : </td>
+            <td colspan="8" style="width:30%" class="underline italic"> {{BillNumber}} </td>            
+            <td colspan="2" style="width:20%" class="right">Bill Date : </td>
+            <td colspan="8" style="width:30%" class="underline italic"> {{BillDate}} </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:20%">Bill Type : </td>
+            <td colspan="8" style="width:30%" class="underline italic"> {{BillType}} </td>
+            <td colspan="2" style="width:20%" class="right">Bill Month : </td>
+            <td colspan="8" style="width:30%" class="underline italic"> {{BillMonth}} </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="width:20%">Bill Amount : </td>
+            <td colspan="8" style="width:30%" class="underline italic"> Rs. {{BillAmount}} </td>
+            <td colspan="2" style="width:20%" class="right">Due Date : </td>
+            <td colspan="8" style="width:30%" class="underline italic"> {{DueDate}} </td>
+        </tr>
+        <tr>
+            <td colspan="20" style="height:50px;"></td>
+        </tr>
+        <tr>
+            <td colspan="20">
+                <table cellpadding="8" cellspacing="8" class="tbl" style="border-collapse:collapse;">
+                    <tr style="color:rgb(128,98,16); font-size:14px;">
+                        <td colspan="4" class="center bold">Account Summary</td>
+                    </tr>
+                    <tr>
+                        <td class="center border">Opening Balance</td>
+                        <td class="center border">{{BillMonth}} Bill</td>
+                        <td class="center border">Total Dues</td>
+                        <td class="center border">Due Date</td>
+                    </tr>
+                    <tr>
+                        <td class="center border">Rs. {{OpeningBalance}}</td>
+                        <td class="center border">Rs. {{BillAmount}} Bill</td>
+                        <td class="center border">Rs. {{TotalAmount}}</td>
+                        <td class="center border">{{DueDate}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="20" style="height:50px;"> &nbsp; </td>
+        </tr>
+    </table>
+</div>
