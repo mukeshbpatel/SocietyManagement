@@ -21,7 +21,7 @@ namespace SocietyManagement.Controllers
         // GET: User
         public ActionResult Index()
         {
-            return View(db.AspNetUsers.Where(u => u.UserName != "Super").Include(b=>b.BuildingUnits).Include(r=>r.AspNetRoles).ToList());
+            return View(db.AspNetUsers.Where(u => u.UserName != "SuperUser").Include(b=>b.BuildingUnits).Include(r=>r.AspNetRoles).OrderBy(o=>o.UserName).ToList());
         }
 
         // GET: User/Details/5
@@ -56,6 +56,7 @@ namespace SocietyManagement.Controllers
         public ActionResult Create()
         {            
             ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name","User");
+            ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues");
             return View();
         }
 
@@ -77,7 +78,7 @@ namespace SocietyManagement.Controllers
                         emailNotification.SendWelcomeEmail(user, model.Password);
                         emailNotification = null;
                     }
-                   return RedirectToAction("Index");
+                    return RedirectToAction("Details", new { id = user.Id });
                 }
                 AddErrors(result);
             }
@@ -90,6 +91,7 @@ namespace SocietyManagement.Controllers
                 ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", model.Role);
             }
             // If we got this far, something failed, redisplay form
+            ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", model.Gender);
             return View(model);
         }
 
@@ -120,7 +122,8 @@ namespace SocietyManagement.Controllers
             else
             {
                 ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", aspNetUser.AspNetRoles.FirstOrDefault().Name);
-            }            
+            }
+            ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", aspNetUser.Gender);
             return View(aspNetUser);
         }
 
@@ -160,16 +163,16 @@ namespace SocietyManagement.Controllers
                 if (NetUser.ResetPassword)
                 {
                     string token = UserManager.GeneratePasswordResetToken(aspNetUser.Id);
-                    var result = UserManager.ResetPassword(aspNetUser.Id,token, "abcd1234");
+                    var result = UserManager.ResetPassword(aspNetUser.Id,token, "abcd@1234");
                     if (result.Succeeded)
                     {
                         var user = UserManager.FindByName(aspNetUser.UserName);
                         EmailNotification emailNotification = new EmailNotification();
-                        emailNotification.SendPasswordChangedEmail(user, "abcd1234");
+                        emailNotification.SendPasswordChangedEmail(user, "abcd@1234");
                         emailNotification = null;
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Details",new {id = aspNetUser.Id });
             }            
             if (Helper.IsInRole("Super"))
             {
@@ -179,6 +182,7 @@ namespace SocietyManagement.Controllers
             {
                 ViewBag.Role = new SelectList(db.AspNetRoles.Where(r => r.Name != "Super"), "Name", "Name", NetUser.Role);
             }
+            ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", NetUser.Gender);
             return View(NetUser);
         }
 

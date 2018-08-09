@@ -55,7 +55,7 @@ namespace SocietyManagement.Models
             string header = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Header.html"));            
             string sign = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Signature.html"));
             string css = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Style.css"));
-            string strHtml =UpdateSettings(header + html + (Signature ? sign : string.Empty));
+            string strHtml =Helper.UpdateSettings(header + html + (Signature ? sign : string.Empty));
 
             MemoryStream ms = new MemoryStream();
             using (Document document = new Document(PageSize.A4, 25, 25, 20, 10))
@@ -65,7 +65,7 @@ namespace SocietyManagement.Models
                 PdfWriter writer = PdfWriter.GetInstance(document,ms);
                 if (Footer)
                 {
-                    string footer = UpdateSettings(System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Footer.html")));
+                    string footer = Helper.UpdateSettings(System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Footer.html")));
                     writer.PageEvent = new ITextEvents(footer);
                 }                    
                 document.Open();
@@ -82,27 +82,10 @@ namespace SocietyManagement.Models
             string footer = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Footer.html"));
             string sign = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Signature.html"));
             string css = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Style.css"));
-            string strHtml = UpdateSettings("<style>" + css + "</style>" + header + html + (Signature ? sign : string.Empty) + footer);            
+            string strHtml = Helper.UpdateSettings("<style>" + css + "</style>" + header + html + (Signature ? sign : string.Empty) + footer);            
             return Encoding.ASCII.GetBytes(strHtml);
         }
 
-        private static string UpdateSettings(string str)
-        {
-            str = str.Replace("{{Society.Name}}", SiteSetting.Item("Society.Name"))
-                .Replace("{{Society.FullName}}", SiteSetting.Item("Society.FullName"))
-                .Replace("{{Society.Address}}", SiteSetting.Item("Society.Address"))
-                .Replace("{{Society.URL}}", SiteSetting.Item("Society.URL"))
-                .Replace("{{Society.Email}}", SiteSetting.Item("Society.Email"))
-                .Replace("{{Society.Phone}}", SiteSetting.Item("Society.Phone"))
-                .Replace("{{Society.OfficePhone}}", SiteSetting.Item("Society.OfficePhone"))
-                .Replace("{{Society.SecurityPhone}}", SiteSetting.Item("Society.SecurityPhone"))
-                .Replace("{{Society.RegNo}}", SiteSetting.Item("Society.RegNo"))
-                 .Replace("{{Society.Chairman}}", SiteSetting.Item("Society.Chairman"))
-                .Replace("{{Society.Secretary}}", SiteSetting.Item("Society.Secretary"))
-                .Replace("{{Society.Treasurer}}", SiteSetting.Item("Society.Treasurer"))
-                .Replace("{{Site.Name}}", SiteSetting.Item("Site.Name"))
-                .Replace("{{Site.URL}}", SiteSetting.Item("Site.URL"));            
-            return str;
-        }
+       
     }
 }

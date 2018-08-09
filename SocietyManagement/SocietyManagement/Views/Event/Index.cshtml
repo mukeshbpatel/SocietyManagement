@@ -25,7 +25,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.EventTypeID)
             </th>
-            @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+            @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -43,7 +43,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EventType.KeyValues)
                 </td>
-                @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+                @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                 {
                     <td class="list-action">
                         <a href="@Url.Action("Edit", new { id = item.EventID })" title="Edit"><i class="fa fa-edit"></i></a>

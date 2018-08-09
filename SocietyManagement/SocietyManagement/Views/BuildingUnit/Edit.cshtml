@@ -157,7 +157,7 @@
                         @Html.DisplayFor(itemModel => media.Details)
                     </td>
                     <td>                        
-                        @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+                        @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                     {
                             <a href="@Url.Action("Edit","BuildingUnitMedia", new { id = media.MediaID })" title="Edit"><i class="fa fa-edit"></i></a>
                             <a href="@Url.Action("Delete","BuildingUnitMedia", new { id = media.MediaID })" title="Delete"><i class="fa fa-remove"></i></a>

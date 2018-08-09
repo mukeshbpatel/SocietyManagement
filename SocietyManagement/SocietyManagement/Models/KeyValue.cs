@@ -19,7 +19,6 @@ namespace SocietyManagement.Models
         {
             this.Buildings = new HashSet<Building>();
             this.BuildingUnits = new HashSet<BuildingUnit>();
-            this.Collections = new HashSet<Collection>();
             this.Complaints = new HashSet<Complaint>();
             this.Dues = new HashSet<Due>();
             this.Polls = new HashSet<Poll>();
@@ -32,6 +31,7 @@ namespace SocietyManagement.Models
             this.Expenses1 = new HashSet<Expense>();
             this.EmailTemplates = new HashSet<EmailTemplate>();
             this.Events = new HashSet<Event>();
+            this.Collections = new HashSet<Collection>();
         }
     
         public int KeyID { get; set; }
@@ -47,8 +47,6 @@ namespace SocietyManagement.Models
         public virtual ICollection<Building> Buildings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuildingUnit> BuildingUnits { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Collection> Collections { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Complaint> Complaints { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -73,5 +71,7 @@ namespace SocietyManagement.Models
         public virtual ICollection<EmailTemplate> EmailTemplates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Event> Events { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Collection> Collections { get; set; }
     }
 }

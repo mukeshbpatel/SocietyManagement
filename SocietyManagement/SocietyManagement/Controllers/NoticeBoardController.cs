@@ -40,7 +40,18 @@ namespace SocietyManagement.Controllers
         // GET: NoticeBoard/Create
         public ActionResult Create()
         {
-            return View();
+            NoticeBoard nb = new NoticeBoard();
+            nb.NoticeDate = DateTime.Today;
+            nb.ExpiryDate = DateTime.Today.AddMonths(1);
+            nb.Notice = "<div style='width:auto; border:1px solid rgb(128,98,16); margin:2px; padding:5px; box-shadow:0 8px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);'>" + Environment.NewLine +
+                        Helper.GetHeader() + Environment.NewLine +
+                        "<div style='width:100%; color:rgb(128,98,16); text-align: center;'><h3><strong><em><span id='htmltitle'>TITLE HERE</span></em></strong></h3></div>" + Environment.NewLine +
+                        "<div style='width:100%; padding:30px; text-align: right;'><strong>Date : " + nb.NoticeDate.ToString("dd-MMM-yyyy")  + "</strong></div>" + Environment.NewLine +
+                        "<div style='width:100%; padding:30px;'><p>Type Notice Here 1<br /></p><p>Type Notice Here 2<br /></p></div>" + Environment.NewLine +
+                        "<br /><br />" + Helper.GetSignature() + "<br /><br />" + Environment.NewLine +
+                        Helper.GetFooter() + "</div>";
+                        
+            return View(nb);
         }
 
         // POST: NoticeBoard/Create

@@ -8,7 +8,7 @@
     <h3 class="box-title"><i class="fa fa-list-alt"></i> @ViewBag.Title</h3>
     <div class="pull-right">
         <a href="@Url.Action("Bill","FileDownload", new { id = Model.DueID })"  title="Download PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></a><span> &nbsp; </span>        
-        @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+        @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
         {
             <a href="@Url.Action("Create","Collection", new { id = Model.DueID })" title="Create Payment"><i class="fa fa-bank"></i> <span class="hidden-xs">Payment</span></a><span> &nbsp; </span>
             <a href="@Url.Action("Edit", new { id = Model.DueID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
@@ -71,7 +71,7 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-money"></i> Penalty</h3>
-    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+    @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create","Penalty",new {id = Model.DueID })"><i class="fa fa-plus-square"></i> Add New</a>
@@ -91,7 +91,7 @@
             <th>
                 Amount
             </th>
-            @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+            @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -117,7 +117,7 @@
                     <td class="right">
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>
-                    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+                    @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                     {
                         <td class="list-action">
                             <a href="@Url.Action("Edit", "Penalty", new { id = item.PenaltyID })" title="Edit"><i class="fa fa-edit"></i></a>
@@ -129,7 +129,7 @@
             <tr>
                 <th colspan="2">Total Penalty</th>
                 <th>@Model.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount)</th>
-                @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+                @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                 {
                     <th></th>
                 }

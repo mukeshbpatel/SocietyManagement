@@ -73,15 +73,27 @@ namespace SocietyManagement.Controllers
                 html = html.Replace("{{UnitName}}", receipt.BuildingUnit.UnitName);
                 html = html.Replace("{{ReceiptNumber}}", receipt.ReceiptNumber.ToString());
                 html = html.Replace("{{ReceiptDate}}", receipt.CollectionDate.ToString("dd-MMM-yyyy"));
-                html = html.Replace("{{FromMonth}}", receipt.CollectionDate.ToString("MMM-yyyy"));
-                html = html.Replace("{{ToMonth}}", receipt.CollectionDate.ToString("MMM-yyyy"));
+                if (receipt.FromDate!= null)
+                    html = html.Replace("{{FromMonth}}", receipt.FromDate.Value.ToString("MMM-yyyy"));
+                else
+                    html = html.Replace("{{FromMonth}}", receipt.CollectionDate.ToString("MMM-yyyy"));
+                if(receipt.ToDate!=null)
+                    html = html.Replace("{{ToMonth}}", receipt.ToDate.Value.ToString("MMM-yyyy"));
+                else
+                    html = html.Replace("{{ToMonth}}", receipt.CollectionDate.ToString("MMM-yyyy"));
                 html = html.Replace("{{PaymentMode}}", receipt.PaymentMode.KeyValues);
                 html = html.Replace("{{PaymentAmount}}", Helper.FormatMoney(receipt.Amount));
-                html = html.Replace("{{Other}}", "");
-                html = html.Replace("{{OtherAmount}}", "0.00");
-                html = html.Replace("{{FineAmount}}", "0.00");
-                html = html.Replace("{{TotalAmount}}", Helper.FormatMoney(receipt.Amount));
-                html = html.Replace("{{AmountInWord}}", Helper.NumbersToWords(receipt.Amount));
+                if (receipt.Discount>0)
+                    html = html.Replace("{{Discount}}", "Advance Payment Discount");
+                else
+                    html = html.Replace("{{Discount}}", "");
+
+                html = html.Replace("{{DiscountAmount}}", Helper.FormatMoney(receipt.Discount));
+                html = html.Replace("{{Other}}", receipt.Other);
+                html = html.Replace("{{OtherAmount}}", Helper.FormatMoney(receipt.OtherAmount));
+                html = html.Replace("{{FineAmount}}", Helper.FormatMoney(receipt.LateFeeFine));
+                html = html.Replace("{{TotalAmount}}", Helper.FormatMoney(receipt.CollectionAmount));
+                html = html.Replace("{{AmountInWord}}", Helper.NumbersToWords(receipt.CollectionAmount));
 
                 string details = string.Empty;
                 if (receipt.PaymentMode.KeyValues == "Cheque Payment")

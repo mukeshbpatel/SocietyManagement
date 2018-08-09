@@ -11,7 +11,7 @@
             <tbody>
                 <tr>
                     <th>Date</th>
-                    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+                    @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                     {
                         <th>Unit</th>
                     }
@@ -26,7 +26,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.BillDate)
                         </td>
-                        @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+                        @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                         {
                             <td><a href="@Url.Action("Details","BuildingUnit", new { id = item.UnitID })">@item.BuildingUnit.UnitName</a></td>
                         }

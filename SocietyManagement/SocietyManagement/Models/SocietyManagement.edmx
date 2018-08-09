@@ -171,8 +171,13 @@
           <Property Name="CollectionID" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CollectionDate" Type="date" Nullable="false" />
           <Property Name="UnitID" Type="int" Nullable="false" />
+          <Property Name="FromDate" Type="date" />
+          <Property Name="ToDate" Type="date" />
           <Property Name="Amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Discount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Other" Type="nvarchar" MaxLength="200" />
+          <Property Name="OtherAmount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LateFeeFine" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="ReceiptNumber" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="PaymentModeID" Type="int" Nullable="false" />
           <Property Name="Reference" Type="nvarchar(max)" />
@@ -1491,7 +1496,6 @@
           <EntitySet Name="Audits" EntityType="SocietyManagementModel.Audit" />
           <EntitySet Name="Buildings" EntityType="SocietyManagementModel.Building" />
           <EntitySet Name="BuildingUnits" EntityType="SocietyManagementModel.BuildingUnit" />
-          <EntitySet Name="Collections" EntityType="SocietyManagementModel.Collection" />
           <EntitySet Name="ComplaintComments" EntityType="SocietyManagementModel.ComplaintComment" />
           <EntitySet Name="Complaints" EntityType="SocietyManagementModel.Complaint" />
           <EntitySet Name="Dues" EntityType="SocietyManagementModel.Due" />
@@ -1552,10 +1556,6 @@
             <End Role="KeyValue" EntitySet="KeyValues" />
             <End Role="BuildingUnit" EntitySet="BuildingUnits" />
           </AssociationSet>
-          <AssociationSet Name="FK_Collections_BuildingUnits" Association="SocietyManagementModel.FK_Collections_BuildingUnits">
-            <End Role="BuildingUnit" EntitySet="BuildingUnits" />
-            <End Role="Collection" EntitySet="Collections" />
-          </AssociationSet>
           <AssociationSet Name="FK_Dues_BuildingUnits" Association="SocietyManagementModel.FK_Dues_BuildingUnits">
             <End Role="BuildingUnit" EntitySet="BuildingUnits" />
             <End Role="Due" EntitySet="Dues" />
@@ -1563,10 +1563,6 @@
           <AssociationSet Name="FK_Tenants_BuildingUnits" Association="SocietyManagementModel.FK_Tenants_BuildingUnits">
             <End Role="BuildingUnit" EntitySet="BuildingUnits" />
             <End Role="Tenant" EntitySet="Tenants" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Collections_KeyValues" Association="SocietyManagementModel.FK_Collections_KeyValues">
-            <End Role="KeyValue" EntitySet="KeyValues" />
-            <End Role="Collection" EntitySet="Collections" />
           </AssociationSet>
           <AssociationSet Name="FK_ComplaintComments_Complaints" Association="SocietyManagementModel.FK_ComplaintComments_Complaints">
             <End Role="Complaint" EntitySet="Complaints" />
@@ -1652,7 +1648,6 @@
             <End Role="Penalty" EntitySet="Penalties" />
           </AssociationSet>
           <EntitySet Name="BuildingUnitMedias" EntityType="SocietyManagementModel.BuildingUnitMedia" />
-          <EntitySet Name="CollectionMedias" EntityType="SocietyManagementModel.CollectionMedia" />
           <EntitySet Name="ExpenseMedias" EntityType="SocietyManagementModel.ExpenseMedia" />
           <EntitySet Name="FinancialYears" EntityType="SocietyManagementModel.FinancialYear" />
           <EntitySet Name="ForumMedias" EntityType="SocietyManagementModel.ForumMedia" />
@@ -1661,14 +1656,6 @@
           <AssociationSet Name="FK_BuildingUnitMedia_BuildingUnit" Association="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit">
             <End Role="BuildingUnit" EntitySet="BuildingUnits" />
             <End Role="BuildingUnitMedia" EntitySet="BuildingUnitMedias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CollectionMedia_Collection" Association="SocietyManagementModel.FK_CollectionMedia_Collection">
-            <End Role="Collection" EntitySet="Collections" />
-            <End Role="CollectionMedia" EntitySet="CollectionMedias" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Collections_FinancialYear" Association="SocietyManagementModel.FK_Collections_FinancialYear">
-            <End Role="FinancialYear" EntitySet="FinancialYears" />
-            <End Role="Collection" EntitySet="Collections" />
           </AssociationSet>
           <AssociationSet Name="FK_Dues_FinancialYear" Association="SocietyManagementModel.FK_Dues_FinancialYear">
             <End Role="FinancialYear" EntitySet="FinancialYears" />
@@ -1719,6 +1706,24 @@
           <FunctionImport Name="SP_Graph_DueCollection1" ReturnType="Collection(SocietyManagementModel.SP_Graph_DueCollection1_Result)">
           <Parameter Name="YearID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="CollectionMedias" EntityType="SocietyManagementModel.CollectionMedia" />
+          <EntitySet Name="Collections" EntityType="SocietyManagementModel.Collection" />
+          <AssociationSet Name="FK_Collections_BuildingUnits" Association="SocietyManagementModel.FK_Collections_BuildingUnits">
+            <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CollectionMedia_Collection" Association="SocietyManagementModel.FK_CollectionMedia_Collection">
+            <End Role="Collection" EntitySet="Collections" />
+            <End Role="CollectionMedia" EntitySet="CollectionMedias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collections_FinancialYear" Association="SocietyManagementModel.FK_Collections_FinancialYear">
+            <End Role="FinancialYear" EntitySet="FinancialYears" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Collections_KeyValues" Association="SocietyManagementModel.FK_Collections_KeyValues">
+            <End Role="KeyValue" EntitySet="KeyValues" />
+            <End Role="Collection" EntitySet="Collections" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1848,7 +1853,6 @@
           <NavigationProperty Name="Owner" Relationship="SocietyManagementModel.FK_BuildingUnits_Owner" FromRole="BuildingUnit" ToRole="AspNetUser" />
           <NavigationProperty Name="Building" Relationship="SocietyManagementModel.FK_BuildingUnits_Buildings" FromRole="BuildingUnit" ToRole="Building" />
           <NavigationProperty Name="UnitType" Relationship="SocietyManagementModel.FK_BuildingUnits_UnitType" FromRole="BuildingUnit" ToRole="KeyValue" />
-          <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_BuildingUnits" FromRole="BuildingUnit" ToRole="Collection" />
           <NavigationProperty Name="Dues" Relationship="SocietyManagementModel.FK_Dues_BuildingUnits" FromRole="BuildingUnit" ToRole="Due" />
           <NavigationProperty Name="Tenants" Relationship="SocietyManagementModel.FK_Tenants_BuildingUnits" FromRole="BuildingUnit" ToRole="Tenant" />
           <NavigationProperty Name="RecurringDues" Relationship="SocietyManagementModel.FK_RecurringDues_BuildingUnits" FromRole="BuildingUnit" ToRole="RecurringDue" />
@@ -1858,40 +1862,7 @@
           <Property Name="OwnerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CoOwnerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MonthlyMaintenance" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="Collection">
-          <Key>
-            <PropertyRef Name="CollectionID" />
-          </Key>
-          <Property Name="CollectionID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="UnitID" Type="Int32" Nullable="false" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ReceiptNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
-          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ChequeBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ChequeDate" Type="DateTime" Precision="0" />
-          <Property Name="ChequeNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ChequeCleared" Type="Boolean" Nullable="false" />
-          <Property Name="ChequeEncashmentDate" Type="DateTime" Precision="0" />
-          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_Collections_BuildingUnits" FromRole="Collection" ToRole="BuildingUnit" />
-          <NavigationProperty Name="PaymentMode" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="Collection" ToRole="KeyValue" />
-          <Property Name="ChequeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="YearID" Type="Int32" />
-          <NavigationProperty Name="CollectionMedias" Relationship="SocietyManagementModel.FK_CollectionMedia_Collection" FromRole="Collection" ToRole="CollectionMedia" />
-          <NavigationProperty Name="FinancialYear" Relationship="SocietyManagementModel.FK_Collections_FinancialYear" FromRole="Collection" ToRole="FinancialYear" />
+          <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_BuildingUnits" FromRole="BuildingUnit" ToRole="Collection" />
         </EntityType>
         <EntityType Name="ComplaintComment">
           <Key>
@@ -2023,7 +1994,6 @@
           <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Buildings" Relationship="SocietyManagementModel.FK_Buildings_BuildingType" FromRole="KeyValue" ToRole="Building" />
           <NavigationProperty Name="BuildingUnits" Relationship="SocietyManagementModel.FK_BuildingUnits_UnitType" FromRole="KeyValue" ToRole="BuildingUnit" />
-          <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="KeyValue" ToRole="Collection" />
           <NavigationProperty Name="Complaints" Relationship="SocietyManagementModel.FK_Complaints_ComplaintType" FromRole="KeyValue" ToRole="Complaint" />
           <NavigationProperty Name="Dues" Relationship="SocietyManagementModel.FK_Dues_KeyValues" FromRole="KeyValue" ToRole="Due" />
           <NavigationProperty Name="Polls" Relationship="SocietyManagementModel.FK_Polls_PollType" FromRole="KeyValue" ToRole="Poll" />
@@ -2036,6 +2006,7 @@
           <NavigationProperty Name="Expenses1" Relationship="SocietyManagementModel.FK_Expenses_Type" FromRole="KeyValue" ToRole="Expens" />
           <NavigationProperty Name="EmailTemplates" Relationship="SocietyManagementModel.FK_EmailTemplates_TemplateType" FromRole="KeyValue" ToRole="EmailTemplate" />
           <NavigationProperty Name="Events" Relationship="SocietyManagementModel.FK_Events_Types" FromRole="KeyValue" ToRole="Event" />
+          <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="KeyValue" ToRole="Collection" />
           </EntityType>
         <EntityType Name="NoticeBoard">
           <Key>
@@ -2305,18 +2276,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Collections_BuildingUnits">
-          <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
-          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BuildingUnit">
-              <PropertyRef Name="UnitID" />
-            </Principal>
-            <Dependent Role="Collection">
-              <PropertyRef Name="UnitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Dues_BuildingUnits">
           <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
           <End Type="SocietyManagementModel.Due" Role="Due" Multiplicity="*" />
@@ -2338,18 +2297,6 @@
             </Principal>
             <Dependent Role="Tenant">
               <PropertyRef Name="UnitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Collections_KeyValues">
-          <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
-          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KeyValue">
-              <PropertyRef Name="KeyID" />
-            </Principal>
-            <Dependent Role="Collection">
-              <PropertyRef Name="PaymentModeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2687,26 +2634,6 @@
           <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit" FromRole="BuildingUnitMedia" ToRole="BuildingUnit" />
           <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="CollectionMedia">
-          <Key>
-            <PropertyRef Name="MediaID" />
-          </Key>
-          <Property Name="MediaID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CollectionID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="MediaType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="MediaTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MediaData" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Collection" Relationship="SocietyManagementModel.FK_CollectionMedia_Collection" FromRole="CollectionMedia" ToRole="Collection" />
-          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="ExpenseMedia">
           <Key>
             <PropertyRef Name="MediaID" />
@@ -2746,9 +2673,9 @@
           <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_FinancialYear" FromRole="FinancialYear" ToRole="Collection" />
           <NavigationProperty Name="Dues" Relationship="SocietyManagementModel.FK_Dues_FinancialYear" FromRole="FinancialYear" ToRole="Due" />
           <NavigationProperty Name="Expenses" Relationship="SocietyManagementModel.FK_Expenses_FinancialYear" FromRole="FinancialYear" ToRole="Expense" />
+          <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_FinancialYear" FromRole="FinancialYear" ToRole="Collection" />
         </EntityType>
         <EntityType Name="ForumMedia">
           <Key>
@@ -2818,30 +2745,6 @@
             </Principal>
             <Dependent Role="BuildingUnitMedia">
               <PropertyRef Name="UnitID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CollectionMedia_Collection">
-          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="1" />
-          <End Type="SocietyManagementModel.CollectionMedia" Role="CollectionMedia" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Collection">
-              <PropertyRef Name="CollectionID" />
-            </Principal>
-            <Dependent Role="CollectionMedia">
-              <PropertyRef Name="CollectionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Collections_FinancialYear">
-          <End Type="SocietyManagementModel.FinancialYear" Role="FinancialYear" Multiplicity="0..1" />
-          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FinancialYear">
-              <PropertyRef Name="YearID" />
-            </Principal>
-            <Dependent Role="Collection">
-              <PropertyRef Name="YearID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3045,6 +2948,113 @@
           <Property Type="Int32" Name="Expenses" Nullable="true" />
           <Property Type="Decimal" Name="ExpensesAmount" Nullable="true" Precision="38" Scale="2" />
         </ComplexType>
+        <EntityType Name="CollectionMedia">
+          <Key>
+            <PropertyRef Name="MediaID" />
+          </Key>
+          <Property Name="MediaID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollectionID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="MediaType" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MediaTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MediaData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Collection" Relationship="SocietyManagementModel.FK_CollectionMedia_Collection" FromRole="CollectionMedia" ToRole="Collection" />
+        </EntityType>
+        <EntityType Name="Collection">
+          <Key>
+            <PropertyRef Name="CollectionID" />
+          </Key>
+          <Property Name="CollectionID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CollectionDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="UnitID" Type="Int32" Nullable="false" />
+          <Property Name="FromDate" Type="DateTime" Precision="0" />
+          <Property Name="ToDate" Type="DateTime" Precision="0" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Discount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Other" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="OtherAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="LateFeeFine" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ReceiptNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentModeID" Type="Int32" Nullable="false" />
+          <Property Name="Reference" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeBank" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeDate" Type="DateTime" Precision="0" />
+          <Property Name="ChequeNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ChequeCleared" Type="Boolean" Nullable="false" />
+          <Property Name="ChequeEncashmentDate" Type="DateTime" Precision="0" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UDK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="YearID" Type="Int32" />
+          <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_Collections_BuildingUnits" FromRole="Collection" ToRole="BuildingUnit" />
+          <NavigationProperty Name="CollectionMedias" Relationship="SocietyManagementModel.FK_CollectionMedia_Collection" FromRole="Collection" ToRole="CollectionMedia" />
+          <NavigationProperty Name="FinancialYear" Relationship="SocietyManagementModel.FK_Collections_FinancialYear" FromRole="Collection" ToRole="FinancialYear" />
+          <NavigationProperty Name="PaymentMode" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="Collection" ToRole="KeyValue" />
+        </EntityType>
+        <Association Name="FK_Collections_BuildingUnits">
+          <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="1" />
+          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingUnit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CollectionMedia_Collection">
+          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="1" />
+          <End Type="SocietyManagementModel.CollectionMedia" Role="CollectionMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Collection">
+              <PropertyRef Name="CollectionID" />
+            </Principal>
+            <Dependent Role="CollectionMedia">
+              <PropertyRef Name="CollectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collections_FinancialYear">
+          <End Type="SocietyManagementModel.FinancialYear" Role="FinancialYear" Multiplicity="0..1" />
+          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FinancialYear">
+              <PropertyRef Name="YearID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="YearID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Collections_KeyValues">
+          <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+          <End Type="SocietyManagementModel.Collection" Role="Collection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValue">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="Collection">
+              <PropertyRef Name="PaymentModeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3166,37 +3176,6 @@
                 <ScalarProperty Name="UnitName" ColumnName="UnitName" />
                 <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
                 <ScalarProperty Name="UnitID" ColumnName="UnitID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Collections">
-            <EntityTypeMapping TypeName="SocietyManagementModel.Collection">
-              <MappingFragment StoreEntitySet="Collections">
-                <ScalarProperty Name="YearID" ColumnName="YearID" />
-                <ScalarProperty Name="Discount" ColumnName="Discount" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ChequeName" ColumnName="ChequeName" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
-                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
-                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
-                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
-                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="ChequeEncashmentDate" ColumnName="ChequeEncashmentDate" />
-                <ScalarProperty Name="ChequeCleared" ColumnName="ChequeCleared" />
-                <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
-                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
-                <ScalarProperty Name="ChequeBank" ColumnName="ChequeBank" />
-                <ScalarProperty Name="Reference" ColumnName="Reference" />
-                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
-                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
-                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
-                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3536,26 +3515,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CollectionMedias">
-            <EntityTypeMapping TypeName="SocietyManagementModel.CollectionMedia">
-              <MappingFragment StoreEntitySet="CollectionMedia">
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
-                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
-                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="Details" ColumnName="Details" />
-                <ScalarProperty Name="MediaData" ColumnName="MediaData" />
-                <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
-                <ScalarProperty Name="MediaType" ColumnName="MediaType" />
-                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
-                <ScalarProperty Name="MediaID" ColumnName="MediaID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ExpenseMedias">
             <EntityTypeMapping TypeName="SocietyManagementModel.ExpenseMedia">
               <MappingFragment StoreEntitySet="ExpenseMedia">
@@ -3749,6 +3708,62 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="CollectionMedias">
+            <EntityTypeMapping TypeName="SocietyManagementModel.CollectionMedia">
+              <MappingFragment StoreEntitySet="CollectionMedia">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="MediaData" ColumnName="MediaData" />
+                <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+                <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+                <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Collections">
+            <EntityTypeMapping TypeName="SocietyManagementModel.Collection">
+              <MappingFragment StoreEntitySet="Collections">
+                <ScalarProperty Name="YearID" ColumnName="YearID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="ChequeEncashmentDate" ColumnName="ChequeEncashmentDate" />
+                <ScalarProperty Name="ChequeCleared" ColumnName="ChequeCleared" />
+                <ScalarProperty Name="ChequeName" ColumnName="ChequeName" />
+                <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+                <ScalarProperty Name="ChequeDate" ColumnName="ChequeDate" />
+                <ScalarProperty Name="ChequeBank" ColumnName="ChequeBank" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+                <ScalarProperty Name="ReceiptNumber" ColumnName="ReceiptNumber" />
+                <ScalarProperty Name="LateFeeFine" ColumnName="LateFeeFine" />
+                <ScalarProperty Name="OtherAmount" ColumnName="OtherAmount" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ToDate" ColumnName="ToDate" />
+                <ScalarProperty Name="FromDate" ColumnName="FromDate" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
+                <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

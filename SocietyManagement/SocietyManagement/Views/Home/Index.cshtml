@@ -9,7 +9,7 @@
 </div>
 
 <div class="box-body">
-    @if (Helper.IsInRole("User") || Helper.IsInRole("Manager"))
+    @if (Helper.IsInRole("User") || Helper.IsInRole("Admin"))
     {
         @Html.Partial("_TopBoxUser")
 
@@ -22,7 +22,7 @@
             </div>
         </div>
     }
-    else if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+    else if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
     {
         @Html.Partial("_TopBox")
 

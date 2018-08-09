@@ -23,13 +23,20 @@ namespace SocietyManagement.Models
         public decimal CollectionID { get; set; }
         public System.DateTime CollectionDate { get; set; }
         public int UnitID { get; set; }
+        public Nullable<System.DateTime> FromDate { get; set; }
+        public Nullable<System.DateTime> ToDate { get; set; }
         public decimal Amount { get; set; }
+        public decimal Discount { get; set; }
+        public string Other { get; set; }
+        public decimal OtherAmount { get; set; }
+        public decimal LateFeeFine { get; set; }
         public string ReceiptNumber { get; set; }
         public int PaymentModeID { get; set; }
         public string Reference { get; set; }
         public string ChequeBank { get; set; }
         public Nullable<System.DateTime> ChequeDate { get; set; }
         public string ChequeNumber { get; set; }
+        public string ChequeName { get; set; }
         public bool ChequeCleared { get; set; }
         public Nullable<System.DateTime> ChequeEncashmentDate { get; set; }
         public string Details { get; set; }
@@ -41,15 +48,13 @@ namespace SocietyManagement.Models
         public string UserID { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public System.DateTime ModifiedDate { get; set; }
-        public string ChequeName { get; set; }
         public bool IsDeleted { get; set; }
-        public decimal Discount { get; set; }
         public Nullable<int> YearID { get; set; }
     
         public virtual BuildingUnit BuildingUnit { get; set; }
-        public virtual KeyValue PaymentMode { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CollectionMedia> CollectionMedias { get; set; }
         public virtual FinancialYear FinancialYear { get; set; }
+        public virtual KeyValue PaymentMode { get; set; }
     }
 }

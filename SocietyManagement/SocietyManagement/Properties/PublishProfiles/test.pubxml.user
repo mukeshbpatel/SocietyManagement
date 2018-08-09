@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App_Data/SQL.txt">
-      <publishTime>11/11/2017 10:45:34</publishTime>
+      <publishTime>08/09/2018 20:18:52</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>08/26/2017 10:41:25</publishTime>
@@ -115,7 +115,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2017 11:04:44</publishTime>
     </File>
     <File Include="bin/SocietyManagement.dll">
-      <publishTime>08/04/2018 16:36:32</publishTime>
+      <publishTime>08/09/2018 20:19:19</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>08/26/2017 10:41:22</publishTime>
@@ -373,10 +373,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2017 19:31:31</publishTime>
     </File>
     <File Include="Models/SocietyManagement.edmx.diagram">
-      <publishTime>12/03/2017 10:35:00</publishTime>
+      <publishTime>08/09/2018 17:50:47</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/28/2018 09:32:28</publishTime>
+      <publishTime>08/09/2018 14:57:48</publishTime>
     </File>
     <File Include="Scripts/adminlte.min.js">
       <publishTime>11/11/2017 15:11:18</publishTime>
@@ -389,6 +389,381 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/bootstrap3-typeahead.min.js">
       <publishTime>07/09/2018 19:06:07</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/froala_editor.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/froala_editor.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/froala_editor.pkgd.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/froala_editor.pkgd.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/froala_style.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/froala_style.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/char_counter.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/char_counter.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/code_view.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/code_view.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/colors.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/colors.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/draggable.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/draggable.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/emoticons.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/emoticons.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/file.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/file.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/fullscreen.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/fullscreen.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/help.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/help.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/image.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/image.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/image_manager.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/image_manager.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/line_breaker.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/line_breaker.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/quick_insert.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/quick_insert.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/special_characters.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/special_characters.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/table.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/table.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/video.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/plugins/video.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/dark.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/dark.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/gray.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/gray.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/red.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/red.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/royal.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/themes/royal.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/third_party/embedly.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/third_party/embedly.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/third_party/spell_checker.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/css/third_party/spell_checker.min.css">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/editor.jpg">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/img/photo1.jpg">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/index.html">
+      <publishTime>08/09/2018 14:57:47</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/froala_editor.min.js">
+      <publishTime>08/09/2018 14:57:46</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/froala_editor.pkgd.min.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/ar.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/bs.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/cs.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/da.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/de.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/el.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/en_ca.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/en_gb.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/es.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/et.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/fa.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/fi.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/fr.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/he.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/hr.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/hu.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/id.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/it.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/ja.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/ko.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/ku.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/me.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/nb.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/nl.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/pl.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/pt_br.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/pt_pt.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/ro.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/ru.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/sk.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/sr.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/sv.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/th.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/tr.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/uk.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/vi.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/zh_cn.js">
+      <publishTime>08/09/2018 14:57:45</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/languages/zh_tw.js">
+      <publishTime>08/09/2018 14:57:44</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/align.min.js">
+      <publishTime>08/09/2018 14:57:44</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/char_counter.min.js">
+      <publishTime>08/09/2018 14:57:44</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/code_beautifier.min.js">
+      <publishTime>08/09/2018 14:57:44</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/code_view.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/colors.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/draggable.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/emoticons.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/entities.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/file.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/font_family.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/font_size.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/forms.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/fullscreen.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/help.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/image.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/image_manager.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/inline_style.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/line_breaker.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/link.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/lists.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/paragraph_format.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/paragraph_style.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/print.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/quick_insert.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/quote.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/save.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/special_characters.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/table.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/url.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/video.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/plugins/word_paste.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/third_party/embedly.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/third_party/image_aviary.min.js">
+      <publishTime>08/09/2018 14:57:43</publishTime>
+    </File>
+    <File Include="Scripts/froala-editor/js/third_party/spell_checker.min.js">
+      <publishTime>08/09/2018 14:57:42</publishTime>
     </File>
     <File Include="Scripts/HighChart/data.js">
       <publishTime>12/06/2017 22:14:50</publishTime>
@@ -451,16 +826,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/09/2018 19:32:19</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>07/09/2018 19:32:19</publishTime>
+      <publishTime>08/09/2018 14:58:39</publishTime>
     </File>
     <File Include="Template/Bill.html">
-      <publishTime>08/04/2018 15:46:46</publishTime>
+      <publishTime>08/09/2018 15:59:33</publishTime>
     </File>
     <File Include="Template/Footer.html">
-      <publishTime>08/03/2018 20:31:29</publishTime>
+      <publishTime>08/09/2018 19:08:37</publishTime>
     </File>
     <File Include="Template/Header.html">
-      <publishTime>08/04/2018 15:38:11</publishTime>
+      <publishTime>08/09/2018 19:08:20</publishTime>
     </File>
     <File Include="Template/Images/Chairman.png">
       <publishTime>08/03/2018 22:07:03</publishTime>
@@ -478,13 +853,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2017 10:51:33</publishTime>
     </File>
     <File Include="Template/Receipt.html">
-      <publishTime>08/04/2018 15:41:00</publishTime>
+      <publishTime>08/09/2018 19:13:08</publishTime>
     </File>
     <File Include="Template/Signature.html">
-      <publishTime>08/04/2018 15:32:48</publishTime>
+      <publishTime>08/09/2018 18:29:35</publishTime>
     </File>
     <File Include="Template/Style.css">
-      <publishTime>08/04/2018 15:55:31</publishTime>
+      <publishTime>08/09/2018 19:12:37</publishTime>
     </File>
     <File Include="Views/Account/ConfirmEmail.cshtml">
       <publishTime>08/26/2017 12:05:25</publishTime>
@@ -547,10 +922,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2018 10:01:49</publishTime>
     </File>
     <File Include="Views/BuildingUnit/Details.cshtml">
-      <publishTime>08/04/2018 16:09:16</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/BuildingUnit/Edit.cshtml">
-      <publishTime>07/28/2018 10:01:49</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/BuildingUnit/EditFile.cshtml">
       <publishTime>07/28/2018 10:01:50</publishTime>
@@ -559,22 +934,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/08/2018 11:23:21</publishTime>
     </File>
     <File Include="Views/Collection/Create.cshtml">
-      <publishTime>07/30/2018 14:28:00</publishTime>
+      <publishTime>08/09/2018 17:56:51</publishTime>
     </File>
     <File Include="Views/Collection/Delete.cshtml">
       <publishTime>07/28/2018 10:01:50</publishTime>
     </File>
     <File Include="Views/Collection/Details.cshtml">
-      <publishTime>08/04/2018 14:55:33</publishTime>
+      <publishTime>08/09/2018 18:05:31</publishTime>
     </File>
     <File Include="Views/Collection/Edit.cshtml">
-      <publishTime>07/30/2018 14:29:24</publishTime>
+      <publishTime>08/09/2018 18:05:58</publishTime>
     </File>
     <File Include="Views/Collection/EditFile.cshtml">
       <publishTime>07/28/2018 10:01:50</publishTime>
     </File>
     <File Include="Views/Collection/Index.cshtml">
-      <publishTime>07/15/2018 18:15:26</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/Collection/MyPayment.cshtml">
       <publishTime>11/16/2017 09:45:46</publishTime>
@@ -619,19 +994,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2018 10:01:51</publishTime>
     </File>
     <File Include="Views/Due/Details.cshtml">
-      <publishTime>08/04/2018 14:47:45</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/Due/Edit.cshtml">
       <publishTime>07/28/2018 10:01:51</publishTime>
     </File>
     <File Include="Views/Due/Index.cshtml">
-      <publishTime>07/15/2018 18:15:26</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/Due/MyBill.cshtml">
       <publishTime>11/16/2017 09:45:46</publishTime>
     </File>
     <File Include="Views/Due/Users.cshtml">
-      <publishTime>07/15/2018 18:15:26</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/EmailTemplate/Create.cshtml">
       <publishTime>07/28/2018 10:01:51</publishTime>
@@ -655,13 +1030,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/07/2017 18:07:31</publishTime>
     </File>
     <File Include="Views/Event/Details.cshtml">
-      <publishTime>07/08/2018 11:23:22</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/Event/Edit.cshtml">
       <publishTime>07/28/2018 10:01:52</publishTime>
     </File>
     <File Include="Views/Event/Index.cshtml">
-      <publishTime>07/15/2018 18:15:26</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/Expense/Create.cshtml">
       <publishTime>07/28/2018 10:01:52</publishTime>
@@ -670,7 +1045,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2018 10:01:52</publishTime>
     </File>
     <File Include="Views/Expense/Details.cshtml">
-      <publishTime>07/15/2018 18:15:26</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/Expense/Edit.cshtml">
       <publishTime>07/28/2018 10:01:53</publishTime>
@@ -679,7 +1054,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2018 10:01:53</publishTime>
     </File>
     <File Include="Views/Expense/Index.cshtml">
-      <publishTime>07/15/2018 18:15:26</publishTime>
+      <publishTime>08/09/2018 20:18:53</publishTime>
     </File>
     <File Include="Views/FinancialYear/Create.cshtml">
       <publishTime>07/28/2018 10:01:53</publishTime>
@@ -736,10 +1111,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2017 10:40:51</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>07/15/2018 18:15:27</publishTime>
+      <publishTime>08/09/2018 20:19:02</publishTime>
     </File>
     <File Include="Views/Home/_Bills.cshtml">
-      <publishTime>07/15/2018 18:15:26</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/Home/_Expenses.cshtml">
       <publishTime>11/20/2017 08:56:30</publishTime>
@@ -751,10 +1126,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/03/2017 11:39:38</publishTime>
     </File>
     <File Include="Views/Home/_Incomes.cshtml">
-      <publishTime>07/15/2018 18:15:27</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/Home/_Payments.cshtml">
-      <publishTime>07/15/2018 18:15:27</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/Home/_TopBox.cshtml">
       <publishTime>11/30/2017 09:25:00</publishTime>
@@ -811,19 +1186,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2017 09:45:48</publishTime>
     </File>
     <File Include="Views/NoticeBoard/Create.cshtml">
-      <publishTime>07/28/2018 10:01:54</publishTime>
+      <publishTime>08/09/2018 16:18:02</publishTime>
     </File>
     <File Include="Views/NoticeBoard/Delete.cshtml">
       <publishTime>07/28/2018 10:01:54</publishTime>
     </File>
     <File Include="Views/NoticeBoard/Details.cshtml">
-      <publishTime>07/28/2018 10:01:54</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/NoticeBoard/Edit.cshtml">
       <publishTime>07/28/2018 10:01:54</publishTime>
     </File>
     <File Include="Views/NoticeBoard/Index.cshtml">
-      <publishTime>07/08/2018 11:23:23</publishTime>
+      <publishTime>08/09/2018 20:19:02</publishTime>
     </File>
     <File Include="Views/Notification/Create.cshtml">
       <publishTime>10/08/2017 18:21:21</publishTime>
@@ -853,7 +1228,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/28/2018 10:01:54</publishTime>
     </File>
     <File Include="Views/Penalty/Index.cshtml">
-      <publishTime>07/15/2018 18:15:27</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/Poll/Create.cshtml">
       <publishTime>11/30/2017 09:19:07</publishTime>
@@ -868,7 +1243,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/30/2017 09:20:31</publishTime>
     </File>
     <File Include="Views/Poll/Index.cshtml">
-      <publishTime>07/14/2018 12:48:59</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/Poll/Vote.cshtml">
       <publishTime>11/30/2017 09:20:50</publishTime>
@@ -931,13 +1306,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/04/2018 16:07:43</publishTime>
     </File>
     <File Include="Views/Shared/_BuildingUnit.cshtml">
-      <publishTime>07/15/2018 18:15:33</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/Shared/_Layout - Copy.cshtml">
       <publishTime>11/11/2017 14:10:49</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>07/30/2018 15:25:39</publishTime>
+      <publishTime>08/09/2018 19:57:22</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutLogin.cshtml">
       <publishTime>11/21/2017 10:04:44</publishTime>
@@ -955,7 +1330,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/11/2017 18:21:20</publishTime>
     </File>
     <File Include="Views/Shared/_RecurringDue.cshtml">
-      <publishTime>07/15/2018 18:15:27</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/SystemSetting/Create.cshtml">
       <publishTime>07/28/2018 10:01:54</publishTime>
@@ -973,19 +1348,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/08/2018 11:23:23</publishTime>
     </File>
     <File Include="Views/User/Create.cshtml">
-      <publishTime>07/28/2018 10:01:55</publishTime>
+      <publishTime>08/09/2018 19:25:26</publishTime>
     </File>
     <File Include="Views/User/Delete.cshtml">
       <publishTime>07/28/2018 10:01:55</publishTime>
     </File>
     <File Include="Views/User/Details.cshtml">
-      <publishTime>11/14/2017 07:43:05</publishTime>
+      <publishTime>08/09/2018 20:18:54</publishTime>
     </File>
     <File Include="Views/User/Edit.cshtml">
-      <publishTime>07/28/2018 10:01:55</publishTime>
+      <publishTime>08/09/2018 19:25:47</publishTime>
     </File>
     <File Include="Views/User/Index.cshtml">
-      <publishTime>07/15/2018 18:15:27</publishTime>
+      <publishTime>08/09/2018 20:18:55</publishTime>
     </File>
     <File Include="Views/UserDefineField/Create.cshtml">
       <publishTime>07/28/2018 10:01:55</publishTime>
@@ -1009,7 +1384,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2017 10:40:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/28/2018 09:59:40</publishTime>
+      <publishTime>08/09/2018 19:56:20</publishTime>
     </File>
   </ItemGroup>
 </Project>

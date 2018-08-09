@@ -34,7 +34,6 @@ namespace SocietyManagement.Models
         public virtual DbSet<Audit> Audits { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<BuildingUnit> BuildingUnits { get; set; }
-        public virtual DbSet<Collection> Collections { get; set; }
         public virtual DbSet<ComplaintComment> ComplaintComments { get; set; }
         public virtual DbSet<Complaint> Complaints { get; set; }
         public virtual DbSet<Due> Dues { get; set; }
@@ -51,7 +50,6 @@ namespace SocietyManagement.Models
         public virtual DbSet<Expense> Expenses { get; set; }
         public virtual DbSet<Penalty> Penalties { get; set; }
         public virtual DbSet<BuildingUnitMedia> BuildingUnitMedias { get; set; }
-        public virtual DbSet<CollectionMedia> CollectionMedias { get; set; }
         public virtual DbSet<ExpenseMedia> ExpenseMedias { get; set; }
         public virtual DbSet<FinancialYear> FinancialYears { get; set; }
         public virtual DbSet<ForumMedia> ForumMedias { get; set; }
@@ -60,6 +58,8 @@ namespace SocietyManagement.Models
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<CollectionMedia> CollectionMedias { get; set; }
+        public virtual DbSet<Collection> Collections { get; set; }
     
         public virtual ObjectResult<SP_BuildingUnit_BalanceSheet_Result> SP_BuildingUnit_BalanceSheet(Nullable<int> unitID, Nullable<int> yearID)
         {

@@ -68,7 +68,7 @@ namespace SocietyManagement.Models
         {
             db = new SocietyManagementEntities();
             EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Payment Receipt").FirstOrDefault();
-            Collection collection = db.Collections.Find(PaymentDetails.CollectionID);            
+            Collection collection = db.Collections.Find(PaymentDetails.CollectionID);
             string Body, Subject;
             if (collection != null && emailTemplate != null)
             {
@@ -77,14 +77,14 @@ namespace SocietyManagement.Models
                 {
                     Body = Body.Replace("{{Name}}", collection.BuildingUnit.Owner.Name);
                 }
-                Body = Body.Replace("{{UnitName}}", collection.BuildingUnit.UnitName);              
+                Body = Body.Replace("{{UnitName}}", collection.BuildingUnit.UnitName);
                 Body = Body.Replace("{{ReceiptNumber}}", collection.ReceiptNumber);
                 Body = Body.Replace("{{PaymentAmount}}", Helper.FormatAmount(collection.CollectionAmount));
                 Body = Body.Replace("{{PaymentDate}}", collection.CollectionDate.ToString("dd-MMM-yyyy"));
                 Body = Body.Replace("{{PaymentMode}}", collection.PaymentMode.KeyValues);
                 Body = Body.Replace("{{PaymentID}}", collection.CollectionID.ToString());
                 Body = UpdateBodySubject(Body);
-                
+
                 Subject = emailTemplate.TemplateSubject;
                 Subject = Subject.Replace("{{ReceiptNumber}}", collection.ReceiptNumber);
                 Subject = Subject.Replace("{{PaymentDate}}", collection.CollectionDate.ToString("dd/MM/yyyy"));
@@ -107,13 +107,13 @@ namespace SocietyManagement.Models
                 }
 
                 MailMessage msg = CreateMessage();
-                if (collection.BuildingUnit.Owner!= null && !String.IsNullOrEmpty(collection.BuildingUnit.Owner.Email))
+                if (collection.BuildingUnit.Owner != null && !String.IsNullOrEmpty(collection.BuildingUnit.Owner.Email))
                 {
                     if (collection.BuildingUnit.Owner.PaymentNotification)
                         msg.To.Add(new MailAddress(collection.BuildingUnit.Owner.Email, collection.BuildingUnit.Owner.Name));
                 }
                 msg.Subject = Subject;
-                msg.Body = Body;                
+                msg.Body = Body;
                 return SendMail(msg);
             }
             return false;
@@ -138,7 +138,7 @@ namespace SocietyManagement.Models
                 }
                 Body = Body.Replace("{{UnitName}}", due.BuildingUnit.UnitName);
                 Body = Body.Replace("{{BillNumber}}", due.DueID.ToString());
-                Body = Body.Replace("{{BillAmount}}", Helper.FormatAmount(due.DueAmount));                
+                Body = Body.Replace("{{BillAmount}}", Helper.FormatAmount(due.DueAmount));
                 Body = Body.Replace("{{BillType}}", due.DueType.KeyValues);
                 Body = Body.Replace("{{BillDetail}}", due.Details);
                 Body = Body.Replace("{{BillDate}}", due.BillDate.ToString("dd-MMM-yyyy"));
@@ -185,10 +185,10 @@ namespace SocietyManagement.Models
             return false;
         }
 
-        public bool SendForgotPasswordEmail(ApplicationUser user,string callbackUrl)
+        public bool SendForgotPasswordEmail(ApplicationUser user, string callbackUrl)
         {
             db = new SocietyManagementEntities();
-            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Forgot Password").FirstOrDefault();            
+            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Forgot Password").FirstOrDefault();
             string Body, Subject;
             if (user != null && emailTemplate != null)
             {
@@ -212,10 +212,10 @@ namespace SocietyManagement.Models
                 notification.TemplateID = emailTemplate.TemplateID;
                 notification.CreatedDate = DateTime.Now;
                 notification.ModifiedDate = notification.CreatedDate;
-                notification.ReferenceTable = "Account";                
+                notification.ReferenceTable = "Account";
                 db.Notifications.Add(notification);
                 db.SaveChanges();
-                
+
                 MailMessage msg = CreateMessage();
                 if (!String.IsNullOrEmpty(user.Email))
                 {
@@ -233,7 +233,7 @@ namespace SocietyManagement.Models
         public bool SendPasswordChangedEmail(ApplicationUser user, string Password)
         {
             db = new SocietyManagementEntities();
-            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Password Changed").FirstOrDefault();            
+            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Password Changed").FirstOrDefault();
             string Body, Subject;
             if (user != null && emailTemplate != null)
             {
@@ -278,7 +278,7 @@ namespace SocietyManagement.Models
         public bool SendWelcomeEmail(ApplicationUser user, string Password)
         {
             db = new SocietyManagementEntities();
-            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Welcome Message").FirstOrDefault();            
+            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Welcome Message").FirstOrDefault();
             string Body, Subject;
             if (user != null && emailTemplate != null)
             {
@@ -320,49 +320,31 @@ namespace SocietyManagement.Models
         {
             db = new SocietyManagementEntities();
             NoticeBoard noticeBoard = db.NoticeBoards.Find(noticeBoardInfo.NoticeID);
-            EmailTemplate emailTemplate = db.EmailTemplates.Where(t => t.TemplateType.KeyName == "EmailTemplateType" && t.TemplateType.KeyValues == "Notice Board").FirstOrDefault();
             string Body, Subject;
-            if (noticeBoard != null && emailTemplate != null)
+            Body = noticeBoardInfo.Notice;
+            Subject = noticeBoard.NoticeHeading;
+            MailMessage msg = CreateMessage();
+            var SiteUsers = db.AspNetUsers.Where(e => e.Email != null && e.Email != string.Empty & e.NoticeBoardNotification == true).ToList();
+            int count = SiteUsers.Count();
+            foreach (var siteuser in SiteUsers)
             {
-                Body = emailTemplate.TemplateBody;
-                Body = Body.Replace("{{NoticeHeading}}", noticeBoard.NoticeHeading);
-                Body = Body.Replace("{{Notice}}", noticeBoard.Notice);
-                Body = Body.Replace("{{NoticeDate}}", noticeBoard.NoticeDate.ToString("dd/MM/yyyy"));
-                Body = UpdateBodySubject(Body); 
-
-                Subject = emailTemplate.TemplateSubject;
-                Subject = Subject.Replace("{{NoticeHeading}}", noticeBoard.NoticeHeading);
-                Subject = UpdateBodySubject(Subject);
-
-                MailMessage msg = CreateMessage();
-                if (WebConfigurationManager.AppSettings["TestMode"] != "true")
-                {
-                    var SiteUsers = db.AspNetUsers.Where(e => e.Email != null && e.Email != string.Empty & e.NoticeBoardNotification == true).ToList();
-                    int count = SiteUsers.Count();
-                    foreach (var siteuser in SiteUsers)
-                    {
-                        msg.Bcc.Add(new MailAddress(siteuser.Email, siteuser.FirstName + " " + siteuser.LastName));
-
-                        Notification notification = new Notification();
-                        notification.Body = Body;
-                        notification.Subject = Subject;
-                        notification.UserID = siteuser.Id;
-                        notification.TemplateID = emailTemplate.TemplateID;
-                        notification.CreatedDate = DateTime.Now;
-                        notification.ModifiedDate = notification.CreatedDate;
-                        notification.ReferenceTable = "NoticeBoard";
-                        notification.ReferenceID = notification.ReferenceID;
-                        db.Notifications.Add(notification);
-                        db.SaveChanges();
-                    }
-                }
-                msg.Subject = Subject;
-                msg.Body = Body;
-                db.Dispose();
-                return SendMail(msg);
+                msg.Bcc.Add(new MailAddress(siteuser.Email, siteuser.FirstName + " " + siteuser.LastName));
+                Notification notification = new Notification();
+                notification.Body = Body;
+                notification.Subject = Subject;
+                notification.UserID = siteuser.Id;
+                notification.TemplateID = 2;
+                notification.CreatedDate = DateTime.Now;
+                notification.ModifiedDate = notification.CreatedDate;
+                notification.ReferenceTable = "NoticeBoard";
+                notification.ReferenceID = notification.ReferenceID;
+                db.Notifications.Add(notification);
+                db.SaveChanges();
             }
+            msg.Subject = Subject;
+            msg.Body = Body;
             db.Dispose();
-            return false;
+            return SendMail(msg);           
         }
 
         private string UpdateBodySubject(string str)
@@ -374,7 +356,7 @@ namespace SocietyManagement.Models
             str = str.Replace("{{Site.URL}}", SiteSetting.Item("Site.URL"));
             return str;
         }
-        
+
         private MailMessage CreateMessage()
         {
             MailMessage msg = new MailMessage();
@@ -401,7 +383,7 @@ namespace SocietyManagement.Models
                 Body = Body.Replace("{{EndDate}}", poll.StartDate.ToString("dd/MM/yyyy"));
                 Body = Body.Replace("{{Options}}", poll.PollOptions.Count().ToString());
                 Body = UpdateBodySubject(Body);
-                
+
                 Subject = emailTemplate.TemplateSubject;
                 Subject = Subject.Replace("{{PollTitle}}", poll.PollTitle);
                 Subject = UpdateBodySubject(Subject);

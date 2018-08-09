@@ -7,7 +7,7 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-users"></i> @ViewBag.Title</h3>
-    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+    @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -19,10 +19,10 @@
     <table class="table table-sm table-hover table-condensed table-bordered">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserName)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 Role
@@ -36,8 +36,8 @@
             <th>
                 <span class="glyphicon glyphicon-phone-alt"></span>
             </th>
-           
-            @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+
+            @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
             {
                 <th>Action</th>
             }
@@ -47,16 +47,16 @@
         {
             <tr>
                 <td>
+                    <a href="@Url.Action("Details", new { id = item.Id })" title="Details">@item.UserName</a>
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>                
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
                 <td>
                     @string.Join(", ", item.AspNetRoles.Select(r => r.Name))
                 </td>
                 <td>
-                    @string.Join(", ", item.BuildingUnits.Select(u=>u.UnitName))
+                    @string.Join(", ", item.BuildingUnits.Select(u => u.UnitName))
                 </td>
                 <td>
                     @if (string.IsNullOrEmpty(item.Email))
@@ -78,11 +78,10 @@
                         <a href="tel:@item.PhoneNumber" title="@item.PhoneNumber"><span class="glyphicon glyphicon-phone-alt"></span></a>
                     }
                 </td>
-                
-                @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+
+                @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                 {
                     <td class="list-action">
-                        <a href="@Url.Action("Details", new { id = item.Id })" title="Details"><span class="glyphicon glyphicon-info-sign"></span></a>
                         <a href="@Url.Action("Edit", new { id = item.Id })" title="Edit"><i class="fa fa-edit"></i></a>
                     </td>
                 }

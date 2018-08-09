@@ -6,7 +6,7 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-bank"></i> @ViewBag.Title</h3>
-    @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+    @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
     {
         <div class="pull-right">            
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>

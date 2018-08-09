@@ -48,6 +48,37 @@ namespace SocietyManagement.Models
             return DateTime.Now;
         }
 
+        public static String GetHeader()
+        {
+           return UpdateSettings(System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Header.html")));
+        }
+        public static String GetFooter()
+        {
+            return UpdateSettings(System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Footer.html")));
+        }
+        public static String GetSignature()
+        {
+            return UpdateSettings(System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Template/Signature.html")));
+        }
+        public static string UpdateSettings(string str)
+        {
+            str = str.Replace("{{Society.Name}}", SiteSetting.Item("Society.Name"))
+                .Replace("{{Society.FullName}}", SiteSetting.Item("Society.FullName"))
+                .Replace("{{Society.Address}}", SiteSetting.Item("Society.Address"))
+                .Replace("{{Society.URL}}", SiteSetting.Item("Society.URL"))
+                .Replace("{{Society.Email}}", SiteSetting.Item("Society.Email"))
+                .Replace("{{Society.Phone}}", SiteSetting.Item("Society.Phone"))
+                .Replace("{{Society.OfficePhone}}", SiteSetting.Item("Society.OfficePhone"))
+                .Replace("{{Society.SecurityPhone}}", SiteSetting.Item("Society.SecurityPhone"))
+                .Replace("{{Society.RegNo}}", SiteSetting.Item("Society.RegNo"))
+                 .Replace("{{Society.Chairman}}", SiteSetting.Item("Society.Chairman"))
+                .Replace("{{Society.Secretary}}", SiteSetting.Item("Society.Secretary"))
+                .Replace("{{Society.Treasurer}}", SiteSetting.Item("Society.Treasurer"))
+                .Replace("{{Site.Name}}", SiteSetting.Item("Site.Name"))
+                .Replace("{{Site.URL}}", SiteSetting.Item("Site.URL"));
+            return str;
+        }
+
         public static List<AspNetUser> GetUsers(DbSet<AspNetUser> Users)
         {
             List<AspNetUser> FilterUsers = Users.Where(u => u.UserName != "Super").OrderBy(o=>o.FirstName).ToList();            
@@ -252,7 +283,7 @@ namespace SocietyManagement.Models
                 }
                 if (i != 0) sb.Append(words3[i - 1]);
             }
-            return sb.ToString().TrimEnd();
+            return sb.ToString().TrimEnd() + " Only";
         }
 
         public static string GetFileType(string MediaType,string MediaTitle)

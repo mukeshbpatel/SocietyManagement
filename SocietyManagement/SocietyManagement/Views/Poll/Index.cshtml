@@ -6,7 +6,7 @@
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-tasks"></i> @ViewBag.Title</h3>
-    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manger"))
+    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manager"))
     {
         <div class="pull-right">
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
@@ -48,7 +48,7 @@
         </td>
         <td class="list-action">
             <a href="@Url.Action("Vote", new { id = item.PollID })" title="Vote"><span class="fa fa-hand-o-up"></span></a>            
-            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manger"))
+            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manager"))
 {
             <a href="@Url.Action("Edit", new { id = item.PollID })" title="Edit"><i class="fa fa-edit"></i></a>
             <a href="@Url.Action("Delete", new { id = item.PollID })" title="Delete"><i class="fa fa-remove"></i></a>

@@ -223,12 +223,31 @@ namespace SocietyManagement.Models
         [Required]
         [Display(Name = "Unit")]
         public int UnitID { get; set; }
+
+        [Display(Name = "FromDate")]
+        [DataType(DataType.Date)]
+        public System.DateTime FromDate { get; set; }
+
+        [Display(Name = "ToDate")]
+        [DataType(DataType.Date)]
+        public System.DateTime ToDate { get; set; }
+
         [Required]
         [Range(0, 9999999, ErrorMessage = "Invalid Amount")]
-        public decimal Amount { get; set; }        
+        public decimal Amount { get; set; } 
+               
         [Range(0, 9999999, ErrorMessage = "Invalid Discount Amount")]
         [Display(Name = "Discount")]
         public decimal Discount { get; set; }
+
+        [Range(0, 9999999, ErrorMessage = "Invalid Other Amount")]
+        [Display(Name = "Other Amount")]
+        public decimal OtherAmount { get; set; }
+
+        [Range(0, 9999999, ErrorMessage = "Invalid Late Fee Fine")]
+        [Display(Name = "Late Fee Fine")]
+        public decimal LateFeeFine { get; set; }
+
         [Required]
         [Display(Name = "Receipt #")]
         public string ReceiptNumber { get; set; }
@@ -266,7 +285,7 @@ namespace SocietyManagement.Models
         {
             get
             {
-                return this.Amount - this.Discount;
+                return this.Amount + this.LateFeeFine + this.OtherAmount - this.Discount;
             }
         }
 
@@ -312,7 +331,7 @@ namespace SocietyManagement.Models
     {
         [NotMapped]        
         public string Role { get; set; }
-        [Display(Name = "Reset Password (abcd1234)")]
+        [Display(Name = "Reset Password (abcd@1234)")]
         public bool ResetPassword { get; set; }
         [NotMapped]
         public string Name

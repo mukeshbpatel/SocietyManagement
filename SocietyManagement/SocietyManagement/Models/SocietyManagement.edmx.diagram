@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="SocietyManagementModel.Audit" Width="1.5" PointX="0.75" PointY="0.5" />
         <EntityTypeShape EntityType="SocietyManagementModel.Building" Width="1.5" PointX="3" PointY="29.625" />
         <EntityTypeShape EntityType="SocietyManagementModel.BuildingUnit" Width="1.5" PointX="5.25" PointY="20.875" />
-        <EntityTypeShape EntityType="SocietyManagementModel.Collection" Width="1.5" PointX="11.875" PointY="30.125" />
         <EntityTypeShape EntityType="SocietyManagementModel.ComplaintComment" Width="1.5" PointX="12.5" PointY="23.375" />
         <EntityTypeShape EntityType="SocietyManagementModel.Complaint" Width="1.5" PointX="10.25" PointY="23" />
         <EntityTypeShape EntityType="SocietyManagementModel.Due" Width="1.5" PointX="10.5" PointY="17.375" />
@@ -37,10 +36,8 @@
         <AssociationConnector Association="SocietyManagementModel.FK_Buildings_BuildingType" />
         <AssociationConnector Association="SocietyManagementModel.FK_BuildingUnits_Buildings" />
         <AssociationConnector Association="SocietyManagementModel.FK_BuildingUnits_UnitType" />
-        <AssociationConnector Association="SocietyManagementModel.FK_Collections_BuildingUnits" />
         <AssociationConnector Association="SocietyManagementModel.FK_Dues_BuildingUnits" />
         <AssociationConnector Association="SocietyManagementModel.FK_Tenants_BuildingUnits" />
-        <AssociationConnector Association="SocietyManagementModel.FK_Collections_KeyValues" />
         <AssociationConnector Association="SocietyManagementModel.FK_ComplaintComments_Complaints" />
         <AssociationConnector Association="SocietyManagementModel.FK_Complaints_ComplaintType" />
         <AssociationConnector Association="SocietyManagementModel.FK_Dues_KeyValues" />
@@ -65,15 +62,12 @@
         <AssociationConnector Association="SocietyManagementModel.FK_Penalty_BuildingUnits" />
         <AssociationConnector Association="SocietyManagementModel.FK_Penalty_Dues" />
         <EntityTypeShape EntityType="SocietyManagementModel.BuildingUnitMedia" Width="1.5" PointX="7.875" PointY="41" />
-        <EntityTypeShape EntityType="SocietyManagementModel.CollectionMedia" Width="1.5" PointX="11.125" PointY="6.625" />
         <EntityTypeShape EntityType="SocietyManagementModel.ExpenseMedia" Width="1.5" PointX="7.875" PointY="36.125" />
         <EntityTypeShape EntityType="SocietyManagementModel.FinancialYear" Width="1.5" PointX="7.75" PointY="3.125" />
         <EntityTypeShape EntityType="SocietyManagementModel.ForumMedia" Width="1.5" PointX="7.875" PointY="46.125" />
         <EntityTypeShape EntityType="SocietyManagementModel.NoticeBoardMedia" Width="1.5" PointX="5.375" PointY="39" />
         <EntityTypeShape EntityType="SocietyManagementModel.SystemSetting" Width="1.5" PointX="0.75" PointY="5.75" />
         <AssociationConnector Association="SocietyManagementModel.FK_BuildingUnitMedia_BuildingUnit" />
-        <AssociationConnector Association="SocietyManagementModel.FK_CollectionMedia_Collection" />
-        <AssociationConnector Association="SocietyManagementModel.FK_Collections_FinancialYear" />
         <AssociationConnector Association="SocietyManagementModel.FK_Dues_FinancialYear" />
         <AssociationConnector Association="SocietyManagementModel.FK_ExpenseMedia_Expenses" />
         <AssociationConnector Association="SocietyManagementModel.FK_Expenses_FinancialYear" />
@@ -86,6 +80,12 @@
         <AssociationConnector Association="SocietyManagementModel.FK_Notifications_EmailTemplate" />
         <EntityTypeShape EntityType="SocietyManagementModel.Event" Width="1.5" PointX="5.25" PointY="48.875" />
         <AssociationConnector Association="SocietyManagementModel.FK_Events_Types" />
+        <EntityTypeShape EntityType="SocietyManagementModel.CollectionMedia" Width="1.5" PointX="13.25" PointY="10.375" />
+        <EntityTypeShape EntityType="SocietyManagementModel.Collection" Width="1.5" PointX="11" PointY="8.5" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Collections_BuildingUnits" />
+        <AssociationConnector Association="SocietyManagementModel.FK_CollectionMedia_Collection" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Collections_FinancialYear" />
+        <AssociationConnector Association="SocietyManagementModel.FK_Collections_KeyValues" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -7,7 +7,7 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-calendar-check-o"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manger"))
+        @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manager"))
         {
             <a href="@Url.Action("Edit", new { id = Model.EventID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
             <a href="@Url.Action("Delete", new { id = Model.EventID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>

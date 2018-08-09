@@ -7,7 +7,7 @@
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-cube"></i> @ViewBag.Title</h3>
     <div class="pull-right">
-        @if (Helper.IsInRole("Manger") || Helper.IsInRole("Super"))
+        @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
         {
             <a href="@Url.Action("Edit", new { id = Model.UnitID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
         }
@@ -15,14 +15,7 @@
         {
             <a href="@Url.Action("Delete", new { id = Model.UnitID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
         }
-        @if (Helper.IsInRole("User"))
-        {
-            <a href="#" onclick="goBack()" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
-        }
-        else
-        {
-            <a href="@Url.Action("Index")" title="Go Back"><i class="fa fa-backward"></i> <span class="hidden-xs">Back</span></a>
-        }
+        <a href="@Url.Action("Index")" title="List"><i class="fa fa-list"></i> <span class="hidden-xs">List</span></a><span> &nbsp; </span>
     </div>
 </div>
 <div class="box-body">

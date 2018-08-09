@@ -1,6 +1,6 @@
 ﻿.maindiv {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #3b3b3b;
+    /*color: #3b3b3b;*/
     font-size:12px;   
 }
 
@@ -33,7 +33,7 @@ a {
 .BalanceSheet {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 11px;
-    color: #3b3b3b;
+    /*color: #3b3b3b;*/
     width: 100%;
     border: 1px solid silver;
     margin: 10px;
@@ -71,7 +71,7 @@ a {
     width:100%;
     font-size:14px;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
-    color: #3b3b3b;
+    /*color: #3b3b3b;*/
 }
 
 .underline {
@@ -80,6 +80,11 @@ a {
 
 .italic {
     font-style:italic;
+    font-size:16px;
+}
+
+.bigSize {
+    font-style:normal;
     font-size:16px;
 }
 

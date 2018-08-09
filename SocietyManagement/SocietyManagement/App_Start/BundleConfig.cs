@@ -26,8 +26,13 @@ namespace SocietyManagement
                       "~/Content/bootstrap.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/AdminLTE.css"));
-            
-            
+
+            bundles.Add(new StyleBundle("~/Content/editor").Include(
+                      "~/Scripts/froala-editor/css/froala_style.min.css",
+                      "~/Scripts/froala-editor/css/froala_editor.pkgd.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/editor").Include(                      
+                      "~/Scripts/froala-editor/js/froala_editor.pkgd.min.js"));
         }
     }
 }

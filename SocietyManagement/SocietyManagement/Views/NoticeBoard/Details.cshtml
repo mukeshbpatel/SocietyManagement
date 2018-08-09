@@ -9,7 +9,7 @@
     
         <div class="pull-right">
             
-@if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manger"))
+@if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manager"))
 {
     <a href="@Url.Action("Edit", new { id = Model.NoticeID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
     <a href="@Url.Action("Delete", new { id = Model.NoticeID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>

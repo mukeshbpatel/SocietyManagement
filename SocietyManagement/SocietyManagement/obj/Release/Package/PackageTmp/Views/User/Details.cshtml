@@ -1,11 +1,18 @@
 ﻿@model SocietyManagement.Models.AspNetUser
-
+@using SocietyManagement.Models;
 @{
-    ViewBag.Title = "Members";
+    ViewBag.Title = "Member";
 }
 
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-user"></i> @ViewBag.Title</h3>
+    <div class="pull-right">
+        @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
+        {
+            <a href="@Url.Action("Edit", new { id = Model.Id })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
+            <a href="@Url.Action("Index")" title="List"><i class="fa fa-list"></i> <span class="hidden-xs">List</span></a><span> &nbsp; </span>
+        }
+    </div>
 </div>
 
 <div class="box-body">
@@ -23,7 +30,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserName)
+            @Html.DisplayFor(model => model.UserName) (@Html.DisplayFor(model => model.AspNetRoles.FirstOrDefault().Name))
         </dd>
 
         <dt>
@@ -57,97 +64,27 @@
         <dd>
             @Html.DisplayFor(model => model.Occupation)
         </dd>
-
-        <dt>
-            Unit
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuildingUnits.FirstOrDefault().UnitName)
-        </dd>
-
+        
         <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Email)
+            <a href="mailto:@Model.Email">@Model.Email</a>            
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
+            <a href="mailto:@Model.PhoneNumber">@Model.PhoneNumber</a>
         </dd>
+       
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Role)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AspNetRoles.FirstOrDefault().Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BillNotification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BillNotification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PaymentNotification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PaymentNotification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NoticeBoardNotification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NoticeBoardNotification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PollNotification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PollNotification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventNotification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventNotification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ForumNotification)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ForumNotification)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PaymentReminder)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PaymentReminder)
-        </dd>
-
+       
     </dl>
+
+    <h4><i class="fa fa-cube"></i> Units</h4>
+    @Html.Partial("_BuildingUnit", Model.BuildingUnits.Where(d => d.IsDeleted == false))
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+

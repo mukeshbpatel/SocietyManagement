@@ -128,7 +128,7 @@ namespace SocietyManagement.Controllers
                 emailNotification.SendBillNotification(due);
                 emailNotification = null;
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BuildingUnit",new {id = due.UnitID });
             }
             ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName", due.UnitID);
             ViewBag.DueTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "DueType"), "KeyID", "KeyValues", due.DueTypeID);
@@ -166,7 +166,7 @@ namespace SocietyManagement.Controllers
             {
                 db.Entry(due).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BuildingUnit", new { id = due.UnitID });
             }
             ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName", due.UnitID);
             ViewBag.DueTypeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "DueType"), "KeyID", "KeyValues", due.DueTypeID);

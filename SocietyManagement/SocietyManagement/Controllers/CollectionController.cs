@@ -95,8 +95,11 @@ namespace SocietyManagement.Controllers
                 if (due != null)
                 {
                     collection.Amount = due.DueAmount;
-                    if (due.Penalties.Where(d => d.IsDeleted == false).Count() > 0)
-                        collection.Amount += due.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
+                    collection.FromDate = due.BillDate;
+                    collection.ToDate = due.BillDate.AddMonths(1).AddDays(-1);
+                    var dues = due.Penalties.Where(d => d.IsDeleted == false);
+                    if (dues.Any())
+                        collection.LateFeeFine = dues.Sum(p => p.Amount);
                     collection.UnitID = due.UnitID;
                 }
             }
@@ -111,7 +114,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "Super,Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
+        public ActionResult Create([Bind(Include = "CollectionID,CollectionDate,UnitID,FromDate,ToDate,Amount,Discount,Other,OtherAmount,LateFeeFine,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,Details,Files,UDK1,UDK2,UDK3,UDK4,UDK5")] Collection collection)
         {
             Helper.AssignUserInfo(collection, User);
             if (ModelState.IsValid)
@@ -145,7 +148,7 @@ namespace SocietyManagement.Controllers
                 notification.SendPaymentNotification(collection);
                 notification = null;
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "BuildingUnit", new { id = collection.UnitID });
             }
 
             ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName",collection.UnitID);
@@ -177,7 +180,7 @@ namespace SocietyManagement.Controllers
         [HttpPost]
         [Authorize(Roles = "Super,Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,Amount,Discount,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,YearID,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
+        public ActionResult Edit([Bind(Include = "CollectionID,CollectionDate,UnitID,FromDate,ToDate,Amount,Discount,Other,OtherAmount,LateFeeFine,ReceiptNumber,PaymentModeID,Reference,ChequeBank,ChequeDate,ChequeNumber,ChequeName,ChequeCleared,ChequeEncashmentDate,Details,YearID,Files,UDK1,UDK2,UDK3,UDK4,UDK5,CreatedDate")] Collection collection)
         {
             Helper.AssignUserInfo(collection, User, false);
             if (ModelState.IsValid)
@@ -207,7 +210,7 @@ namespace SocietyManagement.Controllers
                     }
                 }
 
-                    return RedirectToAction("Index");
+                return RedirectToAction("Details", "BuildingUnit", new { id = collection.UnitID });
             }
             ViewBag.UnitID = new SelectList(db.BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName", collection.UnitID);
             ViewBag.PaymentModeID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "PaymentMode"), "KeyID", "KeyValues", collection.PaymentModeID);

@@ -17,12 +17,12 @@ namespace SocietyManagement.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public BuildingUnit()
         {
-            this.Collections = new HashSet<Collection>();
             this.Dues = new HashSet<Due>();
             this.Tenants = new HashSet<Tenant>();
             this.RecurringDues = new HashSet<RecurringDue>();
             this.Penalties = new HashSet<Penalty>();
             this.BuildingUnitMedias = new HashSet<BuildingUnitMedia>();
+            this.Collections = new HashSet<Collection>();
         }
     
         public int UnitID { get; set; }
@@ -50,8 +50,6 @@ namespace SocietyManagement.Models
         public virtual Building Building { get; set; }
         public virtual KeyValue UnitType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Collection> Collections { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Due> Dues { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tenant> Tenants { get; set; }
@@ -61,5 +59,7 @@ namespace SocietyManagement.Models
         public virtual ICollection<Penalty> Penalties { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BuildingUnitMedia> BuildingUnitMedias { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Collection> Collections { get; set; }
     }
 }

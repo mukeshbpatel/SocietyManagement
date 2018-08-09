@@ -2,12 +2,13 @@
 
 @{
     ViewBag.Title = "Notice";
+    @Styles.Render("~/Content/editor")
 }
 <div class="box-header with-border">
     <h3 class="box-title"><i class="glyphicon glyphicon-blackboard"></i> @ViewBag.Title</h3>
 </div>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="box-body">
@@ -63,10 +64,16 @@
     </div>
 }
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
-        <script>
-            $("#Notice").jqte();
-        </script>
+@Scripts.Render("~/bundles/editor")
+<script>
+    $("#Notice").froalaEditor();
+
+    $("#NoticeHeading").change(function () {
+        var a = $("#NoticeHeading").val();
+        $("#htmltitle").text(a);
+    });
+</script>
