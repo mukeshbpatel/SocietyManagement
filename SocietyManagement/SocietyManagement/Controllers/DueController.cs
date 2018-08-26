@@ -17,12 +17,12 @@ namespace SocietyManagement.Controllers
 
         // GET: Due
         [Authorize(Roles = "Super,Admin,Manager")]
-        public ActionResult Index(string BillDate)
+        public ActionResult Index(string date)
         {
             DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            if (!string.IsNullOrEmpty(BillDate))
+            if (!string.IsNullOrEmpty(date))
             {
-                dt = DateTime.Parse(BillDate);                
+                dt = DateTime.Parse(date);                
             }
             var dues = db.Dues.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID && d.BillDate.Month == dt.Date.Month && d.BillDate.Year == dt.Date.Year).Include(d => d.BuildingUnit).Include(d => d.DueType);
             ViewBag.Months = Helper.GetMonths(dt);

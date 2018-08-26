@@ -16,126 +16,124 @@
     Boolean IsSuper = Helper.IsInRole("Super");
     Boolean IsManager = Helper.IsInRole("Manager");
 }
-<table class="table table-sm table-hover table-condensed table-bordered">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.BillDate)
-        </th>
-        @if (ShowDetails && ShowUnit)
-        {
+<table class="table table-sm table-hover table-condensed table-bordered grid">
+    <thead>
+        <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+                @Html.DisplayNameFor(model => model.BillDate)
             </th>
-        }
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.DueTypeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Details)
-        </th>
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.DueAmount)
-        </th>
-        <th class="hidden-xs">
-            Penalty
-        </th>
-        <th>Amount</th>
-        <th class="hidden-xs">
-            @Html.DisplayNameFor(model => model.DueDate)
-        </th>
-        @if (ShowDetails & (IsManager || IsSuper))
+            @if (ShowDetails && ShowUnit)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
+                </th>
+            }
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.DueTypeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.DueAmount)
+            </th>
+            <th class="hidden-xs">
+                Penalty
+            </th>
+            <th>Amount</th>
+            <th class="hidden-xs">
+                @Html.DisplayNameFor(model => model.DueDate)
+            </th>
+            @if (ShowDetails & (IsManager || IsSuper))
+            {
+                <th>Action</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            decimal TotalPenalty = 0; }
+        @foreach (var item in Model.OrderBy(o => o.BillDate))
         {
-            <th>Action</th>
-        }
-    </tr>
-    @{
-        decimal TotalPenalty = 0; }
-    @foreach (var item in Model.OrderBy(o=>o.BillDate))
-    {
-        decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BillDate)
-            </td>
-            @if (ShowDetails && ShowUnit)
-            {
+            decimal penalty = item.Penalties.Where(d => d.IsDeleted == false).Sum(p => p.Amount);
+            <tr>
                 <td>
-                    <a href="@Url.Action("Details","BuildingUnit",new {id=item.UnitID})">@item.BuildingUnit.UnitName</a>
+                    @Html.DisplayFor(modelItem => item.BillDate)
                 </td>
-            }
-            <td class="hidden-xs">
-                @Html.DisplayFor(modelItem => item.DueType.KeyValues)
-            </td>
-            <td>
-                <a href="@Url.Action("Details","Due", new { id = item.DueID })" title="Details">@item.Details</a>
-            </td>
-            <td class="hidden-xs right">
-                @Html.DisplayFor(modelItem => item.DueAmount)
-            </td>
-            <td class="hidden-xs right">
-                @{
-
-                    if (penalty > 0)
-                    {
-                        TotalPenalty += penalty;
-                        @penalty
-                    }
-                    else
-                    {
-                        <span>0.00</span>
-                    }
-                }
-            </td>
-            <td class="right">
-                <span>@(item.DueAmount + penalty)</span>
-            </td>
-            <td class="hidden-xs">
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            @if (ShowDetails & (IsManager || IsSuper))
+                @if (ShowDetails && ShowUnit)
                 {
-                <td class="list-action">
-                    <a href="@Url.Action("Bill","FileDownload", new { id = item.DueID })" title="PDF"><i class="fa fa-file-pdf-o"></i></a>
-                    <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><i class="fa fa-edit"></i></a>
-                    <a href="@Url.Action("Delete","Due", new { id = item.DueID })" title="Delete"><i class="fa fa-remove"></i></a>
+                    <td>
+                        <a href="@Url.Action("Details","BuildingUnit",new {id=item.UnitID})">@item.BuildingUnit.UnitName</a>
+                    </td>
+                }
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.DueType.KeyValues)
                 </td>
-            }
+                <td>
+                    <a href="@Url.Action("Details","Due", new { id = item.DueID })" title="Details">@item.Details</a>
+                </td>
+                <td class="hidden-xs right">
+                    @Html.DisplayFor(modelItem => item.DueAmount)
+                </td>
+                <td class="hidden-xs right">
+                    @{
 
-        </tr>
+                        if (penalty > 0)
+                        {
+                            TotalPenalty += penalty;
+                            @penalty
+                        }
+                        else
+                        {
+                            <span>0.00</span>
+                        }
                     }
+                </td>
+                <td class="right">
+                    <span>@(item.DueAmount + penalty)</span>
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.DueDate)
+                </td>
+                @if (ShowDetails & (IsManager || IsSuper))
+                {
+                    <td class="list-action">
+                        <a href="@Url.Action("Bill","FileDownload", new { id = item.DueID })" title="PDF"><i class="fa fa-file-pdf-o"></i></a>
+                        <a href="@Url.Action("Edit","Due", new { id = item.DueID })" title="Edit"><i class="fa fa-edit"></i></a>
+                        <a href="@Url.Action("Delete","Due", new { id = item.DueID })" title="Delete"><i class="fa fa-remove"></i></a>
+                    </td>
+                }
 
-    @if (Model.Count() > 0)
-    {
-        <tr>
-            <th>Total</th>
-            @if (ShowDetails && ShowUnit)
-            {
+            </tr>
+                        }
+    </tbody>
+    <tfoot>
+        @if (Model.Count() > 0)
+        {
+            <tr>
+                <th>Total</th>
+                @if (ShowDetails && ShowUnit)
+                {
                 <th></th>
-            }
-            <th class="hidden-xs"></th>
-            <td></td>
-            <th class="hidden-xs right">@Model.Sum(s => s.DueAmount)</th>
-            @if (TotalPenalty > 0)
-            {
+                }
+                <th class="hidden-xs"></th>
+                <td></td>
+                <th class="hidden-xs right">@Model.Sum(s => s.DueAmount)</th>
+                @if (TotalPenalty > 0)
+                {
                 <th class="hidden-xs right">@TotalPenalty</th>
-            }
-            else
-            {
+                }
+                else
+                {
                 <th class="hidden-xs right">0.00</th>
-            }
-            <th class="right"><span>@(Model.Sum(s => s.DueAmount) + TotalPenalty)</span></th>
-            <th class="hidden-xs"></th>
-            @if (ShowDetails & (IsManager || IsSuper))
-            {
+                }
+                <th class="right"><span>@(Model.Sum(s => s.DueAmount) + TotalPenalty)</span></th>
+                <th class="hidden-xs"></th>
+                @if (ShowDetails & (IsManager || IsSuper))
+                {
                 <th></th>
-            }
-        </tr>
-    }
-    else
-    {
-        <tr>
-            <td colspan="8">No Data available</td>
-        </tr>
-    }
-
+                }
+            </tr>
+        }
+    </tfoot>
 </table>

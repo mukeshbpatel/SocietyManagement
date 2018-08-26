@@ -1,0 +1,25 @@
+﻿<div class="dropdown pull-left" id="MonthSelection" style="margin-bottom:5px;">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+        <i class="glyphicon glyphicon-calendar"></i> <span id="lstMonth">Month</span>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        @foreach (var item in (SelectList)ViewBag.Months)
+            {
+                DateTime dt = DateTime.Parse(item.Text);
+                if (item.Selected)
+                {
+                <li>
+                    <a class="dropdown-item select2-dropdown text-bold" href="#" id="lstLink">@dt.ToString("MMM-yy")</a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <a class="dropdown-item" href="@Url.Action("Index", new { date = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a>
+                </li>
+            }
+        }
+    </ul>
+</div>
+

@@ -12,60 +12,20 @@
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
         </div>
     }
+    @Html.Partial("_MonthFilter")
 </div>
 <div class="box-body">
-    <div class="dropdown pull-right">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-            <i class="glyphicon glyphicon-calendar"></i> <span id="lstMonth">Month</span>
-            <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-            @foreach (var item in (SelectList)ViewBag.Months)
-            {
-                DateTime dt = DateTime.Parse(item.Text);
-                if (item.Selected)
-                {
-                    <li>
-                        <a class="dropdown-item select2-dropdown text-bold" href="#" id="lstLink">@dt.ToString("MMM-yy")</a>
-                    </li>
-                }
-                else
-                {
-                    <li>
-                        <a class="dropdown-item" href="@Url.Action("Index", new { CollectionDate = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a>
-                    </li>
-                }
-            }
-        </ul>
-    </div>
+    
 
 
-    <script>
+    @*<script>
         $(function () {
             var mnt = $('#lstLink').text();
             $('#lstMonth').text(mnt);
         });
 
-    </script>
-
-   
-
-
-@*<ul class="nav nav-pills pull-right">
-        @foreach (var item in (SelectList)ViewBag.Months)
-        {
-            DateTime dt = DateTime.Parse(item.Text);
-            if (item.Selected)
-            {
-                <li class="active"><a href="#">@dt.ToString("MMM-yy")</a></li>
-            }
-            else
-            {
-                <li><a href="@Url.Action("Index", new { CollectionDate = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a></li>
-            }
-        }
-    </ul>*@
+    </script>*@
 
 @Html.Partial("_Payment", Model)
-
+    @Html.Partial("_DataTable")
     </div>

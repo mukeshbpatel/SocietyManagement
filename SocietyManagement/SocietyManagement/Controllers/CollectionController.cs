@@ -18,12 +18,12 @@ namespace SocietyManagement.Controllers
 
         // GET: Collection
         [Authorize(Roles = "Super,Admin,Manager")]
-        public ActionResult Index(string CollectionDate)
+        public ActionResult Index(string date)
         {
             DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            if (!string.IsNullOrEmpty(CollectionDate))
+            if (!string.IsNullOrEmpty(date))
             {
-                dt = DateTime.Parse(CollectionDate);
+                dt = DateTime.Parse(date);
             }
             var collections = db.Collections.Where(d=>d.IsDeleted==false && d.YearID == SiteSetting.FinancialYearID && d.CollectionDate.Month == dt.Date.Month && d.CollectionDate.Year == dt.Date.Year).Include(c => c.BuildingUnit).Include(c => c.PaymentMode).OrderByDescending(o=>o.CollectionDate);
             ViewBag.Months = Helper.GetMonths(dt);

@@ -18,12 +18,12 @@ namespace SocietyManagement.Controllers
 
         // GET: Expense
         [Authorize(Roles = "Super,Admin,Manager")]
-        public ActionResult Index(string ExpenseDate)
+        public ActionResult Index(string date)
         {
             DateTime dt = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            if (!string.IsNullOrEmpty(ExpenseDate))
+            if (!string.IsNullOrEmpty(date))
             {
-                dt = DateTime.Parse(ExpenseDate);
+                dt = DateTime.Parse(date);
             }
 
             var expenses = db.Expenses.Where(d => d.IsDeleted == false && d.YearID == SiteSetting.FinancialYearID && d.ExpenseDate.Month == dt.Date.Month && d.ExpenseDate.Year == dt.Date.Year).Include(e => e.PaymentMode).Include(e => e.ExpenseType).OrderBy(o => o.ExpenseDate);

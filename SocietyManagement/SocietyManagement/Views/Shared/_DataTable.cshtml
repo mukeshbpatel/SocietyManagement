@@ -1,0 +1,15 @@
+﻿
+<link href="~/Content/dataTables.css" rel="stylesheet" />
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready( function () {
+    $('.grid').DataTable({
+        "pageLength": 25
+    });
+    
+    $("#MonthSelection").insertBefore('#DataTables_Table_0_length');   
+    $('#DataTables_Table_0_length').hide();
+});
+
+
+</script>

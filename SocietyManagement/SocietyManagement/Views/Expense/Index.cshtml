@@ -4,6 +4,12 @@
     ViewBag.Title = "Expenses";
 }
 
+@{
+    Boolean IsAdmin = Helper.IsInRole("Admin");
+    Boolean IsSuper = Helper.IsInRole("Super");
+    Boolean IsManager = Helper.IsInRole("Manager");
+}
+
 <div class="box-header with-border">
     <h3 class="box-title"><i class="fa fa-money"></i> @ViewBag.Title</h3>
     @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
@@ -12,88 +18,96 @@
             <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
         </div>
     }
+    @Html.Partial("_MonthFilter")
 </div>
 <div class="box-body">
 
-    <ul class="nav nav-pills pull-right">
-        @foreach (var item in (SelectList)ViewBag.Months)
-        {
-            DateTime dt = DateTime.Parse(item.Text);
-            if (item.Selected)
-            {
-                <li class="active"><a href="#">@dt.ToString("MMM-yy")</a></li>
-            }
-            else
-            {
-                <li><a href="@Url.Action("Index", new { ExpenseDate = dt.ToString("dd-MM-yyyy") })">@dt.ToString("MMM-yy")</a></li>
-            }
-        }
-    </ul>
-
-
-    <table class="table table-sm table-hover table-condensed table-bordered">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpenseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ExpenseTypeID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaidTo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Details)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TDS)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentModeID)
-            </th>
-            @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
-            {
-                <th>Action</th>
-            }
-        </tr>
-
-        @foreach (var item in Model)
-        {
+    <table class="table table-sm table-hover table-condensed table-bordered grid">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExpenseDate)
-                </td>
-                <td>
-                    <a href="@Url.Action("Details", new { id = item.ExpenseID })" title="Details">@item.ExpenseType.KeyValues</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PaidTo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Details)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TDS)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
-                </td>
-
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpenseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpenseTypeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaidTo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Details)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TDS)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PaymentModeID)
+                </th>
                 @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
-                {
-                    <td class="list-action">
-                        <a href="@Url.Action("Edit", new { id = item.ExpenseID })" title="Edit"><i class="fa fa-edit"></i></a>
-                        <a href="@Url.Action("Delete", new { id = item.ExpenseID })" title="Delete"><i class="fa fa-remove"></i></a>
-                    </td>        
+            {
+                    <th>Action</th>
                 }
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpenseDate)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = item.ExpenseID })" title="Details">@item.ExpenseType.KeyValues</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaidTo)
+                    </td>
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.Details)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TDS)
+                    </td>
+                    <td class="hidden-xs">
+                        @Html.DisplayFor(modelItem => item.PaymentMode.KeyValues)
+                    </td>
 
+                    @if (IsManager || IsSuper)
+                {
+                        <td class="list-action">
+                            <a href="@Url.Action("Edit", new { id = item.ExpenseID })" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="@Url.Action("Delete", new { id = item.ExpenseID })" title="Delete"><i class="fa fa-remove"></i></a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            @if (Model.Count() > 0)
+            {
+                <tr>
+                    <th>Total</th>
+                    <th></th>
+                    <th></th>
+                    <th class="hidden-xs"></th>                    
+                    <th>@Model.Sum(s => s.Amount)</th>
+                    <th>@Model.Sum(s => s.TDS)</th>
+                    <th class="hidden-xs"></th>
+                    @if (IsManager || IsSuper)
+                    {
+                        <th></th>
+                    }
+                </tr>
+            }
+        </tfoot>
     </table>
+
+    @Html.Partial("_DataTable")
+
 </div>
