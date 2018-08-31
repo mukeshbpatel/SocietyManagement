@@ -128,7 +128,7 @@
     <h4><i class="fa fa-bank"></i> Payments</h4>
     @Html.Partial("_Payment", Model.Collections.Where(d => d.IsDeleted == false))
 
-    <h4><i class="fa fa-calculator"></i> Balance Sheet</h4>
+    <h4><i class="fa fa-calculator"></i> Account Statement</h4>
     @Html.Partial("_BalanceSheet", (object)ViewBag.BalanceSheet)
 
 </div>

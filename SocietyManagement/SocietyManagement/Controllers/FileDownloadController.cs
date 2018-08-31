@@ -37,15 +37,15 @@ namespace SocietyManagement.Controllers
             return File(PdfGenrator.HTMLtoPDF(html, true, true), "application/pdf", due.DueType.KeyValues + ".pdf");
         }
 
-        public FileResult BalanceSheet(int id = 0)
+        public FileResult AccountStatement(int id = 0)
         {
-            string html = @"<div class='maindiv'><div class='title'>BALANCE SHEET</div><table class='BalanceSheet'><tr><th class='left'>Date</th><th class='left'>Transaction Details</th><th class='right'>Credits</th><th class='right'>Debits</th><th class='right'>Balance</th><th></th></tr>";
+            string html = @"<div class='maindiv'><div class='title'>ACCOUNT STATEMENT</div><table class='BalanceSheet'><tr><th class='left'>Date</th><th class='left'>Transaction Details</th><th class='right'>Credits</th><th class='right'>Debits</th><th class='right'>Balance</th><th></th></tr>";
             decimal Balance = 0;
 
             var Units = db.BuildingUnits.Find(id);
             if (Units != null)
             {
-                html = html.Replace("BALANCE SHEET", "BALANCE SHEET (" + Units.UnitName + ")");
+                html = html.Replace("ACCOUNT STATEMENT", "ACCOUNT STATEMENT (" + Units.UnitName + ")");
                 var data = db.Database.SqlQuery<SP_BuildingUnit_BalanceSheet_Result>("Exec SP_BuildingUnit_BalanceSheet @UnitID = " + id + ",@YearID = " + SiteSetting.FinancialYearID);
                 foreach (var item in data)
                 {
@@ -57,10 +57,10 @@ namespace SocietyManagement.Controllers
             }
             else
             {
-                html = "<b>Invalid Balance Sheet</b>";
+                html = "<b>Invalid Account Statement</b>";
             }
             html += "</table></div>";
-            return File(PdfGenrator.HTMLtoPDF(html, false, true), "application/pdf", "BalanceSheet.pdf");
+            return File(PdfGenrator.HTMLtoPDF(html, false, true), "application/pdf", "AccountStatement.pdf");
         }
 
         public FileResult Receipt(int id = 0)

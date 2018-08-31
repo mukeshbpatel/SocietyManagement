@@ -170,7 +170,7 @@
                         <ul class="treeview-menu">
                             <li class="@Html.IsSelected(actions: "MyBill", controllers: "MyAccount")"><a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })"><i class="fa fa-list-alt"></i> Bills</a></li>
                             <li class="@Html.IsSelected(actions: "MyPayment", controllers: "MyAccount")"><a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })"><i class="fa fa-bank"></i> Payments</a></li>
-                            <li class="@Html.IsSelected(actions: "BalanceSheet", controllers: "MyAccount")"><a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })"><i class="fa fa-calculator"></i> Balance Sheet</a></li>
+                            <li class="@Html.IsSelected(actions: "AccountStatement", controllers: "MyAccount")"><a href="@Url.Action("AccountStatement", "MyAccount", new { id = 0 })"><i class="fa fa-calculator"></i> Account Statement</a></li>
                         </ul>
                     </li>
                     <li class="treeview @Html.IsSelected(controllers: "Notification,NoticeBoard,Poll,Forum,ForumComment,Complaint,ComplaintComment,Event")">
@@ -286,7 +286,7 @@
             <!-- Main content -->
 
             <section class="content">
-                <div class="box  box-primary">
+                <div class="box  box-primary shadow">
                     @RenderBody()
                 </div>
             </section>

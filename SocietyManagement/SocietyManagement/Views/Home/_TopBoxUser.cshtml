@@ -14,7 +14,7 @@ else
 <div class="row" style="padding:10px 20px 0px 5px">
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })" class="small-box bg-aqua">
+        <a href="@Url.Action("MyBill", "MyAccount", new { id = 0 })" class="small-box bg-aqua shadow">
             <div class="small-box-header"><i class="fa fa-list-alt hidden-lg hidden-md"></i> Maintance Bills</div>
             <div class="inner">
                 <h3>₹ @ViewBag.BillAmount</h3>
@@ -29,7 +29,7 @@ else
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })" class="small-box bg-green">
+        <a href="@Url.Action("MyPayment", "MyAccount", new { id = 0 })" class="small-box bg-green shadow">
             <div class="small-box-header"><i class="fa fa-bank hidden-lg hidden-md"></i> Payments</div>
             <div class="inner">
                 <h3>₹ @ViewBag.PaymentAmount</h3>
@@ -44,7 +44,7 @@ else
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })" class="small-box bg-red">
+        <a href="@Url.Action("BalanceSheet", "MyAccount", new { id = 0 })" class="small-box bg-red shadow">
             <div class="small-box-header"><i class="fa fa-calculator hidden-lg hidden-md"></i> Balance</div>
             <div class="inner">
                 <h3>₹ @ViewBag.BalanceAmount</h3>
@@ -59,7 +59,7 @@ else
     <!-- ./col -->
     <div class="col-lg-3 col-xs-6" style="padding-right:0px;">
         <!-- small box -->
-        <a href="@Url.Action("Index", "Notification")" class="small-box bg-yellow">
+        <a href="@Url.Action("Index", "Notification")" class="small-box bg-yellow shadow">
             <div class="small-box-header"><i class="fa fa-envelope-o hidden-lg hidden-md"></i> Notifications</div>
             <div class="inner">
                 <h3>@ViewBag.Notification</h3>

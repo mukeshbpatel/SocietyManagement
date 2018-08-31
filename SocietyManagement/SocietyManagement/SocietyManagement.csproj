@@ -417,6 +417,7 @@
     <Content Include="Content\skins\_all-skins.css" />
     <Content Include="Content\skins\_all-skins.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="images\Logo.png" />
     <Content Include="images\UserFemale.png" />
     <Content Include="images\UserMale.png" />
     <Content Include="Scripts\adminlte.min.js" />
@@ -830,7 +831,7 @@
     <Content Include="Views\Home\_TopBox.cshtml" />
     <Content Include="Views\Home\_TopBoxUser.cshtml" />
     <Content Include="Views\Account\View.cshtml" />
-    <Content Include="Views\MyAccount\BalanceSheet.cshtml" />
+    <Content Include="Views\MyAccount\AccountStatement.cshtml" />
     <Content Include="Views\MyAccount\MyBill.cshtml" />
     <Content Include="Views\MyAccount\MyPayment.cshtml" />
     <Content Include="Views\Home\_Bills.cshtml" />
@@ -849,11 +850,13 @@
     <Content Include="Views\BuildingUnit\EditFile.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Report\ExpenseReport.cshtml" />
+    <Content Include="Views\MyAccount\BalanceSheet.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin1.cshtml" />
     <Content Include="Views\Shared\_DataTable.cshtml" />
+    <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
     <Content Include="Views\Manage\UpdateUser.cshtml" />

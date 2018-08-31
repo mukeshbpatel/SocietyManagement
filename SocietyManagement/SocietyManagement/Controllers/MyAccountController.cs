@@ -50,7 +50,7 @@ namespace SocietyManagement.Controllers
             }
         }
 
-        public ActionResult BalanceSheet(int id = 0)
+        public ActionResult AccountStatement(int id = 0)
         {
             ViewBag.ID = id;
             string UserID = Helper.GetUserID(User);
