@@ -188,6 +188,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="Controllers\CommitteeMemberController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\FileDownloadController.cs" />
     <Compile Include="Controllers\MyAccountController.cs" />
@@ -254,6 +255,9 @@
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CollectionMedia.cs">
+      <DependentUpon>SocietyManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommitteeMember.cs">
       <DependentUpon>SocietyManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Complaint.cs">
@@ -850,6 +854,11 @@
     <Content Include="Views\BuildingUnit\EditFile.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Report\ExpenseReport.cshtml" />
+    <Content Include="Views\CommitteeMember\Create.cshtml" />
+    <Content Include="Views\CommitteeMember\Delete.cshtml" />
+    <Content Include="Views\CommitteeMember\Details.cshtml" />
+    <Content Include="Views\CommitteeMember\Edit.cshtml" />
+    <Content Include="Views\CommitteeMember\Index.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

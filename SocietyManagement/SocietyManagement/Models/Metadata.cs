@@ -19,6 +19,63 @@ namespace SocietyManagement.Models
     //{
     //}
 
+    public partial class CommitteeMemberMetadata
+    {
+        [Required]
+        [Display(Name = "Unit")]
+        public Nullable<int> UnitID { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        
+        [StringLength(50)]
+        [Display(Name = "Middle Name")]
+        public string MiddleName { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string EmailID { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string Gender { get; set; }
+
+        [Display(Name = "Mobile")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid mobile number")]
+        public string Mobile { get; set; }
+
+        [Display(Name = "Designation")]
+        [Required]
+        public int DesignationID { get; set; }        
+        [DataType(DataType.Date)]
+        [Display(Name = "Tenure From")]
+        [Required]
+        public System.DateTime TenureFrom { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Tenure To")]
+        [Required]
+        public System.DateTime TenureTo { get; set; }
+    }
+    [MetadataType(typeof(CommitteeMemberMetadata))]
+    public partial class CommitteeMember
+    {
+        [NotMapped]
+        public string Name
+        {
+            get
+            {
+                return this.FirstName + " " + this.LastName;
+            }
+        }
+    }
+
     public partial class EventMetadata
     {
         [DataType(DataType.Date)]
@@ -310,6 +367,10 @@ namespace SocietyManagement.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
         [Required]
         [StringLength(10)]
         public string Gender { get; set; }
@@ -318,9 +379,7 @@ namespace SocietyManagement.Models
         [StringLength(10, MinimumLength = 10, ErrorMessage = "Invalid mobile number")]
         public string PhoneNumber { get; set; }
 
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+       
 
         [DataType(DataType.Date)]
         public DateTime? DOB { get; set; }

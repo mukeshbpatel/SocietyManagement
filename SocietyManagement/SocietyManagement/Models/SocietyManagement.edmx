@@ -199,6 +199,27 @@
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
           <Property Name="YearID" Type="int" />
         </EntityType>
+        <EntityType Name="CommitteeMembers">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UnitID" Type="int" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="DesignationID" Type="int" Nullable="false" />
+          <Property Name="EmailID" Type="varchar" MaxLength="200" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" />
+          <Property Name="Profession" Type="varchar" MaxLength="500" />
+          <Property Name="TenureFrom" Type="date" Nullable="false" />
+          <Property Name="TenureTo" Type="date" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="ComplaintComments">
           <Key>
             <PropertyRef Name="CommentID" />
@@ -757,6 +778,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CommitteeMembers_BuildingUnits">
+          <End Role="BuildingUnits" Type="Self.BuildingUnits" Multiplicity="0..1" />
+          <End Role="CommitteeMembers" Type="Self.CommitteeMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingUnits">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="CommitteeMembers">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommitteeMembers_KeyValues">
+          <End Role="KeyValues" Type="Self.KeyValues" Multiplicity="1" />
+          <End Role="CommitteeMembers" Type="Self.CommitteeMembers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValues">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="CommitteeMembers">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ComplaintComments_AssignTo">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="ComplaintComments" Type="Self.ComplaintComments" Multiplicity="*" />
@@ -1264,6 +1309,7 @@
           <EntitySet Name="BuildingUnits" EntityType="Self.BuildingUnits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CollectionMedia" EntityType="Self.CollectionMedia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Collections" EntityType="Self.Collections" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommitteeMembers" EntityType="Self.CommitteeMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ComplaintComments" EntityType="Self.ComplaintComments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Complaints" EntityType="Self.Complaints" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dues" EntityType="Self.Dues" Schema="dbo" store:Type="Tables" />
@@ -1322,6 +1368,14 @@
           <AssociationSet Name="FK_Collections_KeyValues" Association="Self.FK_Collections_KeyValues">
             <End Role="KeyValues" EntitySet="KeyValues" />
             <End Role="Collections" EntitySet="Collections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommitteeMembers_BuildingUnits" Association="Self.FK_CommitteeMembers_BuildingUnits">
+            <End Role="BuildingUnits" EntitySet="BuildingUnits" />
+            <End Role="CommitteeMembers" EntitySet="CommitteeMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommitteeMembers_KeyValues" Association="Self.FK_CommitteeMembers_KeyValues">
+            <End Role="KeyValues" EntitySet="KeyValues" />
+            <End Role="CommitteeMembers" EntitySet="CommitteeMembers" />
           </AssociationSet>
           <AssociationSet Name="FK_ComplaintComments_AssignTo" Association="Self.FK_ComplaintComments_AssignTo">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -1724,6 +1778,15 @@
             <End Role="KeyValue" EntitySet="KeyValues" />
             <End Role="Collection" EntitySet="Collections" />
           </AssociationSet>
+          <EntitySet Name="CommitteeMembers" EntityType="SocietyManagementModel.CommitteeMember" />
+          <AssociationSet Name="FK_CommitteeMembers_BuildingUnits" Association="SocietyManagementModel.FK_CommitteeMembers_BuildingUnits">
+            <End Role="BuildingUnit" EntitySet="BuildingUnits" />
+            <End Role="CommitteeMember" EntitySet="CommitteeMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommitteeMembers_KeyValues" Association="SocietyManagementModel.FK_CommitteeMembers_KeyValues">
+            <End Role="KeyValue" EntitySet="KeyValues" />
+            <End Role="CommitteeMember" EntitySet="CommitteeMembers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="AspNetRole">
           <Key>
@@ -1863,6 +1926,7 @@
           <Property Name="CoOwnerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="MonthlyMaintenance" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_BuildingUnits" FromRole="BuildingUnit" ToRole="Collection" />
+          <NavigationProperty Name="CommitteeMembers" Relationship="SocietyManagementModel.FK_CommitteeMembers_BuildingUnits" FromRole="BuildingUnit" ToRole="CommitteeMember" />
         </EntityType>
         <EntityType Name="ComplaintComment">
           <Key>
@@ -2007,6 +2071,7 @@
           <NavigationProperty Name="EmailTemplates" Relationship="SocietyManagementModel.FK_EmailTemplates_TemplateType" FromRole="KeyValue" ToRole="EmailTemplate" />
           <NavigationProperty Name="Events" Relationship="SocietyManagementModel.FK_Events_Types" FromRole="KeyValue" ToRole="Event" />
           <NavigationProperty Name="Collections" Relationship="SocietyManagementModel.FK_Collections_KeyValues" FromRole="KeyValue" ToRole="Collection" />
+          <NavigationProperty Name="CommitteeMembers" Relationship="SocietyManagementModel.FK_CommitteeMembers_KeyValues" FromRole="KeyValue" ToRole="CommitteeMember" />
           </EntityType>
         <EntityType Name="NoticeBoard">
           <Key>
@@ -3055,6 +3120,53 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CommitteeMember">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UnitID" Type="Int32" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DesignationID" Type="Int32" Nullable="false" />
+          <Property Name="EmailID" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Profession" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TenureFrom" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TenureTo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BuildingUnit" Relationship="SocietyManagementModel.FK_CommitteeMembers_BuildingUnits" FromRole="CommitteeMember" ToRole="BuildingUnit" />
+          <NavigationProperty Name="Designation" Relationship="SocietyManagementModel.FK_CommitteeMembers_KeyValues" FromRole="CommitteeMember" ToRole="KeyValue" />
+        </EntityType>
+        <Association Name="FK_CommitteeMembers_BuildingUnits">
+          <End Type="SocietyManagementModel.BuildingUnit" Role="BuildingUnit" Multiplicity="0..1" />
+          <End Type="SocietyManagementModel.CommitteeMember" Role="CommitteeMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BuildingUnit">
+              <PropertyRef Name="UnitID" />
+            </Principal>
+            <Dependent Role="CommitteeMember">
+              <PropertyRef Name="UnitID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommitteeMembers_KeyValues">
+          <End Type="SocietyManagementModel.KeyValue" Role="KeyValue" Multiplicity="1" />
+          <End Type="SocietyManagementModel.CommitteeMember" Role="CommitteeMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KeyValue">
+              <PropertyRef Name="KeyID" />
+            </Principal>
+            <Dependent Role="CommitteeMember">
+              <PropertyRef Name="DesignationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3761,6 +3873,28 @@
                 <ScalarProperty Name="UnitID" ColumnName="UnitID" />
                 <ScalarProperty Name="CollectionDate" ColumnName="CollectionDate" />
                 <ScalarProperty Name="CollectionID" ColumnName="CollectionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommitteeMembers">
+            <EntityTypeMapping TypeName="SocietyManagementModel.CommitteeMember">
+              <MappingFragment StoreEntitySet="CommitteeMembers">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="TenureTo" ColumnName="TenureTo" />
+                <ScalarProperty Name="TenureFrom" ColumnName="TenureFrom" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="DesignationID" ColumnName="DesignationID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UnitID" ColumnName="UnitID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

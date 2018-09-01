@@ -189,21 +189,24 @@
                             <li class="@Html.IsSelected(controllers: "Event")"><a href="@Url.Action("Index", "Event")"><i class="fa fa-calendar-check-o"></i> Events</a></li>
                         </ul>
                     </li>
-                    @if (Helper.IsInRole("Admin") || Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
-                    {
-                        <li class="treeview @Html.IsSelected(controllers: "Building,BuildingUnit")">
-                            <a href="#">
-                                <i class="fa fa-building text-aqua"></i> <span>Society</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
+
+                    <li class="treeview @Html.IsSelected(controllers: "Building,BuildingUnit,CommitteeMember")">
+                        <a href="#">
+                            <i class="fa fa-building text-aqua"></i> <span>Society</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            @if (Helper.IsInRole("Admin") || Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
+                            {
                                 <li class="@Html.IsSelected(controllers: "Building")"><a href="@Url.Action("Index", "Building")"><i class="fa fa-cubes"></i> Buildings</a></li>
                                 <li class="@Html.IsSelected(controllers: "BuildingUnit")"><a href="@Url.Action("Index", "BuildingUnit")"><i class="fa fa-cube"></i> Building Units</a></li>
-                            </ul>
-                        </li>
-                    }
+                            }
+                            <li class="@Html.IsSelected(controllers: "CommitteeMember")"><a href="@Url.Action("Index", "CommitteeMember")"><i class="fa fa-users"></i> Management Committee</a></li>
+                        </ul>
+                    </li>
+
                     @if (Helper.IsInRole("Admin") || Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
                     {
                         <li class="treeview @Html.IsSelected(controllers: "RecurringDue,Due,Collection,Expense")">

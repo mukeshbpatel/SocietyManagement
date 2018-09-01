@@ -40,7 +40,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.NoticeDate)
                 </td>
-                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") | Helper.IsInRole("Manager"))
+                @if (Helper.IsInRole("Admin") || Helper.IsInRole("Super") || Helper.IsInRole("Manager"))
                 {
                     <td class="list-action">                        
                         <a href="@Url.Action("Edit", new { id = item.NoticeID })" title="Edit"><i class="fa fa-edit"></i></a>

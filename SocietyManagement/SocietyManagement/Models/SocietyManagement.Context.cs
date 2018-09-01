@@ -60,6 +60,7 @@ namespace SocietyManagement.Models
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<CollectionMedia> CollectionMedias { get; set; }
         public virtual DbSet<Collection> Collections { get; set; }
+        public virtual DbSet<CommitteeMember> CommitteeMembers { get; set; }
     
         public virtual ObjectResult<SP_BuildingUnit_BalanceSheet_Result> SP_BuildingUnit_BalanceSheet(Nullable<int> unitID, Nullable<int> yearID)
         {

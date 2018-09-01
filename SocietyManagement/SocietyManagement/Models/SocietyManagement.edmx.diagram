@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="57963f295608442b9b43758960e55aa5" Name="Diagram1" ZoomLevel="55">
+      <Diagram DiagramId="57963f295608442b9b43758960e55aa5" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetRole" Width="1.5" PointX="0.75" PointY="24.625" />
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetUserClaim" Width="1.5" PointX="4" PointY="35.25" />
         <EntityTypeShape EntityType="SocietyManagementModel.AspNetUserLogin" Width="1.5" PointX="5.5" PointY="32.625" />
@@ -86,6 +86,9 @@
         <AssociationConnector Association="SocietyManagementModel.FK_CollectionMedia_Collection" />
         <AssociationConnector Association="SocietyManagementModel.FK_Collections_FinancialYear" />
         <AssociationConnector Association="SocietyManagementModel.FK_Collections_KeyValues" />
+        <EntityTypeShape EntityType="SocietyManagementModel.CommitteeMember" Width="1.5" PointX="15.5" PointY="23.125" />
+        <AssociationConnector Association="SocietyManagementModel.FK_CommitteeMembers_BuildingUnits" />
+        <AssociationConnector Association="SocietyManagementModel.FK_CommitteeMembers_KeyValues" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

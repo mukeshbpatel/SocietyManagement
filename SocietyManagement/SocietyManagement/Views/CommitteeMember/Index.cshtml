@@ -1,0 +1,115 @@
+﻿@model IEnumerable<SocietyManagement.Models.CommitteeMember>
+@using SocietyManagement.Models;
+@{
+    ViewBag.Title = "Management Committee";
+}
+
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-users"></i> @ViewBag.Title</h3>
+    @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
+    {
+        <div class="pull-right">
+            <a href="@Url.Action("Create")"><i class="fa fa-plus-square"></i> Add New</a>
+        </div>
+    }
+</div>
+<div class="box-body">
+    <table class="table table-sm table-hover table-condensed table-bordered grid">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DesignationID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UnitID)
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.Profession)
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.TenureFrom)
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.TenureTo)
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-envelope"></span>
+                </th>
+                <th>
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                </th>
+
+                @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
+            {
+                    <th>Action</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = item.MemberID })" title="Details">@item.Name</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Designation.KeyValues)
+                    </td>
+                    @if (Helper.IsInRole("Super") || Helper.IsInRole("Manager") || Helper.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a href="@Url.Action("Details","BuildingUnit",new { id = item.UnitID })" title="Details">@item.BuildingUnit.UnitName</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
+                        </td>
+                    }
+                    <td class="hidden-sm">
+                        @Html.DisplayFor(modelItem => item.Profession)
+                    </td>
+                    <td class="hidden-sm">
+                        @Html.DisplayFor(modelItem => item.TenureFrom)
+                    </td>
+                    <td class="hidden-sm">
+                        @Html.DisplayFor(modelItem => item.TenureTo)
+                    </td>
+                    <td>
+                        @if (string.IsNullOrEmpty(item.EmailID))
+                {
+                            <span></span>
+                        }
+                        else
+                        {
+                            <a href="mailto:@item.EmailID" title="@item.EmailID"><span class="glyphicon glyphicon-envelope"></span></a>
+                        }
+                    </td>
+                    <td>
+                        @if (string.IsNullOrEmpty(item.Mobile))
+                {
+                            <span></span>
+                        }
+                        else
+                        {
+                            <a href="tel:@item.Mobile" title="@item.Mobile"><span class="glyphicon glyphicon-phone-alt"></span></a>
+                        }
+                    </td>
+                    @if (Helper.IsInRole("Super") || Helper.IsInRole("Admin"))
+                {
+                        <td class="list-action">
+                            <a href="@Url.Action("Edit", new { id = item.MemberID })" title="Edit"><i class="fa fa-edit"></i></a>
+                            <a href="@Url.Action("Delete", new { id = item.MemberID })" title="Delete"><i class="fa fa-remove"></i></a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@Html.Partial("_DataTable")
