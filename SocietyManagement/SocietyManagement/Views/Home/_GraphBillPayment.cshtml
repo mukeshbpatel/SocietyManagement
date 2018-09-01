@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SocietyManagement.Models.SP_Graph_DueCollection1_Result>
-
+@using SocietyManagement.Models
 
 
 <div class="nav-tabs-custom border shadow">
@@ -17,9 +17,9 @@
                 <tr>
                     <th>Month</th>
                     <th class="text-right">Bills</th>
-                    <th class="text-right">Bill Amount</th>
+                    <th class="text-right">Bill Amt</th>
                     <th class="text-right">Collections</th>
-                    <th class="text-right">Collection Amount</th>
+                    <th class="text-right">Collection Amt</th>
                 </tr>
                 @foreach (var item in Model)
                 {
@@ -29,17 +29,17 @@
                     }
                     <td>@dt.ToString("MMM-yyyy")</td>
                     <td class="text-right"><a href="@Url.Action("Index","Due",new { BillDate=dt.ToString("dd-MM-yyyy")})">@item.Dues</a></td>
-                    <td class="text-right"><a href="@Url.Action("Index","Due",new { BillDate=dt.ToString("dd-MM-yyyy")})">@item.DueAmount</a></td>
+                    <td class="text-right"><a href="@Url.Action("Index","Due",new { BillDate=dt.ToString("dd-MM-yyyy")})">@Helper.FormatMoney(item.DueAmount)</a></td>
                     <td class="text-right"><a href="@Url.Action("Index","Collection",new { CollectionDate=dt.ToString("dd-MM-yyyy")})">@item.Collections</a></td>
-                    <td class="text-right"><a href="@Url.Action("Index","Collection",new { CollectionDate=dt.ToString("dd-MM-yyyy")})">@item.CollectionAmount</a></td>
+                    <td class="text-right"><a href="@Url.Action("Index","Collection",new { CollectionDate=dt.ToString("dd-MM-yyyy")})">@Helper.FormatMoney(@item.CollectionAmount)</a></td>
                 </tr>
                 }
                 <tr>
                     <th>Total</th>
                     <th class="text-right">@Model.Sum(s => s.Dues)</th>
-                    <th class="text-right">@Model.Sum(s=>s.DueAmount)</th>
+                    <th class="text-right">@Helper.FormatMoney(Model.Sum(s=>s.DueAmount))</th>
                     <th class="text-right">@Model.Sum(s => s.Collections)</th>
-                    <th class="text-right">@Model.Sum(s => s.CollectionAmount)</th>
+                    <th class="text-right">@Helper.FormatMoney(Model.Sum(s => s.CollectionAmount))</th>
                 </tr>
             </table>
         </div>

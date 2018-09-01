@@ -214,12 +214,14 @@ namespace SocietyManagement.Models
                 return string.Format(CultureInfo.CreateSpecificCulture("hi-IN"), "{0:#,#}", Amount);
         }
 
-        public static string FormatMoney(object Amount)
+        public static string FormatMoney(object Amount,Boolean Decimal = false)
         {
             if (Amount == null)
                 return string.Empty;
-            else
+            else if(Decimal)
                 return string.Format(CultureInfo.CreateSpecificCulture("hi-IN"), "{0:#,0.00}", Amount);
+            else
+                return string.Format(CultureInfo.CreateSpecificCulture("hi-IN"), "{0:#,0}", Amount);
         }
 
         public static string NumbersToWords(decimal inputNumber)

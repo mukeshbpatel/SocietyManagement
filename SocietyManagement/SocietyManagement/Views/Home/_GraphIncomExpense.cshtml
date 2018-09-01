@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<SocietyManagement.Models.SP_Graph_DueCollection1_Result>
-
+@using SocietyManagement.Models
 <div class="nav-tabs-custom border shadow">
     <ul class="nav nav-tabs pull-right">
         <li class="active"><a href="#IEBarChart" data-toggle="tab">Bar</a></li>
@@ -27,17 +27,17 @@
                     }
                     <td>@dt.ToString("MMM-yyyy")</td>
                     <td class="text-right"><a href="@Url.Action("Index","Income",new { IncomeDate=dt.ToString("dd-MM-yyyy")})">@item.Dues</a></td>
-                    <td class="text-right"><a href="@Url.Action("Index","Income",new { IncomeDate=dt.ToString("dd-MM-yyyy")})">@item.DueAmount</a></td>
+                    <td class="text-right"><a href="@Url.Action("Index","Income",new { IncomeDate=dt.ToString("dd-MM-yyyy")})">@Helper.FormatMoney(item.DueAmount)</a></td>
                     <td class="text-right"><a href="@Url.Action("Index","Expense",new { ExpenseDate=dt.ToString("dd-MM-yyyy")})">@item.Expenses</a></td>
-                    <td class="text-right"><a href="@Url.Action("Index","Expense",new { ExpenseDate=dt.ToString("dd-MM-yyyy")})">@item.ExpensesAmount</a></td>
+                    <td class="text-right"><a href="@Url.Action("Index","Expense",new { ExpenseDate=dt.ToString("dd-MM-yyyy")})">@Helper.FormatMoney(item.ExpensesAmount)</a></td>
                 </tr>
                 }
                 <tr>
                     <th>Total</th>
                     <th class="text-right">@Model.Sum(s => s.Dues)</th>
-                    <th class="text-right">@Model.Sum(s=>s.DueAmount)</th>
+                    <th class="text-right">@Helper.FormatMoney(Model.Sum(s=>s.DueAmount))</th>
                     <th class="text-right">@Model.Sum(s => s.Expenses)</th>
-                    <th class="text-right">@Model.Sum(s => s.ExpensesAmount)</th>
+                    <th class="text-right">@Helper.FormatMoney(Model.Sum(s => s.ExpensesAmount))</th>
                 </tr>
             </table>
         </div>

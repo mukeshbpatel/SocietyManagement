@@ -850,7 +850,6 @@
     <Content Include="Views\BuildingUnit\EditFile.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Report\ExpenseReport.cshtml" />
-    <Content Include="Views\MyAccount\BalanceSheet.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Decimal.cshtml" />
     <Content Include="Views\Shared\_BuildingUnit.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />

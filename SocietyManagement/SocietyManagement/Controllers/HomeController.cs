@@ -54,25 +54,25 @@ namespace SocietyManagement.Controllers
 
                     }
                     ViewBag.Units = appUser.BuildingUnits.Where(d => d.IsDeleted == false).Count();
-                    ViewBag.BillAmount = BillAmount;
+                    ViewBag.BillAmount =Helper.FormatMoney(BillAmount);
                     ViewBag.BillCount = BillCount;
-                    ViewBag.PaymentAmount = PaymentAmount;
+                    ViewBag.PaymentAmount = Helper.FormatMoney(PaymentAmount);
                     ViewBag.PaymentCount = PaymentCount;
 
                     BalanceAmount = BillAmount - PaymentAmount;
                     if (BalanceAmount > 0)
                     {
-                        ViewBag.BalanceAmount = BalanceAmount;
+                        ViewBag.BalanceAmount = Helper.FormatMoney(BalanceAmount);
                         ViewBag.BalanceDrCr = "Credit";
                     }
                     else if (BalanceAmount < 0)
                     {
-                        ViewBag.BalanceAmount = BalanceAmount * -1;
+                        ViewBag.BalanceAmount = Helper.FormatMoney(BalanceAmount * -1);
                         ViewBag.BalanceDrCr = "Debit";
                     }
                     else
                     {
-                        ViewBag.BalanceAmount = 0.00;
+                        ViewBag.BalanceAmount = Helper.FormatMoney(0);
                         ViewBag.BalanceDrCr = "Nil";
                     }
 
@@ -96,11 +96,11 @@ namespace SocietyManagement.Controllers
                 var data = db.Database.SqlQuery<SP_Graph_DueCollection1_Result>("Exec SP_Graph_DueCollection @YearID = " + SiteSetting.FinancialYearID);
                 ViewBag.GraphBillPayment = data;
                 
-                ViewBag.BillAmount = data.Sum(s=>s.DueAmount);
+                ViewBag.BillAmount = Helper.FormatMoney(data.Sum(s=>s.DueAmount));
                 ViewBag.BillCount = data.Sum(s => s.Dues);
-                ViewBag.PaymentAmount = data.Sum(s => s.CollectionAmount);
+                ViewBag.PaymentAmount = Helper.FormatMoney(data.Sum(s => s.CollectionAmount));
                 ViewBag.PaymentCount = data.Sum(s => s.Collections);
-                ViewBag.ExpenseAmount = data.Sum(p => p.DueAmount);
+                ViewBag.ExpenseAmount = Helper.FormatMoney(data.Sum(p => p.ExpensesAmount));
                 ViewBag.ExpenseCount = data.Sum(p=>p.Expenses);                
             }
 
