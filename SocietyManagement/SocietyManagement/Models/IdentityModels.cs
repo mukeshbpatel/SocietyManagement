@@ -34,6 +34,11 @@ namespace SocietyManagement.Models
         [StringLength(50)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
+        
+        [StringLength(50)]
+        [Display(Name = "Middle Name")]
+        public string MiddleName { get; set; }
+
         [Required]
         [StringLength(50)]
         [Display(Name = "Last Name")]
@@ -80,6 +85,7 @@ namespace SocietyManagement.Models
         public UserProfile(AspNetUser UserInfo)
         {
             this.FirstName = UserInfo.FirstName;
+            this.MiddleName = UserInfo.MiddleName;           
             this.LastName = UserInfo.LastName;
             this.Gender = UserInfo.Gender;
             this.DOB = UserInfo.DOB;
@@ -101,6 +107,11 @@ namespace SocietyManagement.Models
         [StringLength(50)]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
+
+        [StringLength(50)]
+        [Display(Name = "Middle Name")]
+        public string MiddleName { get; set; }
+
         [Required]
         [StringLength(50)]
         [Display(Name = "Last Name")]

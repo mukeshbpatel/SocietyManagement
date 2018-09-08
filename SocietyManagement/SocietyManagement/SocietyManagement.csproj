@@ -867,7 +867,6 @@
     <Content Include="Views\Shared\_Layout - Copy.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml.tmp" />
     <Content Include="Views\Manage\MyProfile.cshtml" />
-    <Content Include="Views\Manage\UpdateUser.cshtml" />
     <Content Include="Views\KeyValue\Create.cshtml" />
     <Content Include="Views\KeyValue\Delete.cshtml" />
     <Content Include="Views\KeyValue\Details.cshtml" />

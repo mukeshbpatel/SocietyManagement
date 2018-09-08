@@ -240,7 +240,7 @@ namespace SocietyManagement.Controllers
         // Post: /Manage/MyProfile
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MyProfile([Bind(Include = "FirstName,LastName,Gender,DOB,Profession,Occupation,Email,PhoneNumber,BillNotification,PaymentNotification,NoticeBoardNotification,PollNotification,EventNotification,ForumNotification,PaymentReminder")] UserProfile profile)
+        public ActionResult MyProfile([Bind(Include = "FirstName,MiddleName,LastName,Gender,DOB,Profession,Occupation,Email,PhoneNumber,BillNotification,PaymentNotification,NoticeBoardNotification,PollNotification,EventNotification,ForumNotification,PaymentReminder")] UserProfile profile)
         {
             SocietyManagementEntities db = new SocietyManagementEntities();
             if (ModelState.IsValid)
@@ -253,6 +253,7 @@ namespace SocietyManagement.Controllers
                 }
 
                 aspNetUsers.FirstName = profile.FirstName;
+                aspNetUsers.MiddleName = profile.MiddleName;
                 aspNetUsers.LastName = profile.LastName;
                 aspNetUsers.Gender = profile.Gender;
                 aspNetUsers.DOB = profile.DOB;

@@ -23,7 +23,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.DesignationID)
                 </th>
-                <th>
+                <th class="hidden-xs">
                     @Html.DisplayNameFor(model => model.UnitID)
                 </th>
                 <th class="hidden-xs">
@@ -61,23 +61,23 @@
                     </td>
                     @if (Helper.IsInRole("Super") || Helper.IsInRole("Manager") || Helper.IsInRole("Admin"))
                     {
-                        <td>
+                        <td class="hidden-xs">
                             <a href="@Url.Action("Details","BuildingUnit",new { id = item.UnitID })" title="Details">@item.BuildingUnit.UnitName</a>
                         </td>
                     }
                     else
                     {
-                        <td>
+                        <td class="hidden-xs">
                             @Html.DisplayFor(modelItem => item.BuildingUnit.UnitName)
                         </td>
                     }
-                    <td class="hidden-sm">
+                    <td class="hidden-xs">
                         @Html.DisplayFor(modelItem => item.Profession)
                     </td>
-                    <td class="hidden-sm">
+                    <td class="hidden-xs">
                         @Html.DisplayFor(modelItem => item.TenureFrom)
                     </td>
-                    <td class="hidden-sm">
+                    <td class="hidden-xs">
                         @Html.DisplayFor(modelItem => item.TenureTo)
                     </td>
                     <td>

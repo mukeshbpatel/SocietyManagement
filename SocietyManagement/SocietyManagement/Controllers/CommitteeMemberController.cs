@@ -41,7 +41,8 @@ namespace SocietyManagement.Controllers
         [Authorize(Roles = "Super,Admin")]
         public ActionResult Create()
         {
-            ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName");
+            ViewBag.UnitID = Helper.GetUnits(db.BuildingUnits,null);
+                //new SelectList(db.BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName");
             ViewBag.DesignationID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "CommitteeDesignation"), "KeyID", "KeyValues");
             ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues");
             return View();
@@ -63,7 +64,7 @@ namespace SocietyManagement.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName", committeeMember.UnitID);
+            ViewBag.UnitID = Helper.GetUnits(db.BuildingUnits,  committeeMember.UnitID);
             ViewBag.DesignationID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "CommitteeDesignation"), "KeyID", "KeyValues", committeeMember.DesignationID);
             ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", committeeMember.Gender);
             return View(committeeMember);
@@ -82,7 +83,7 @@ namespace SocietyManagement.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName", committeeMember.UnitID);
+            ViewBag.UnitID = Helper.GetUnits(db.BuildingUnits, committeeMember.UnitID);
             ViewBag.DesignationID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "CommitteeDesignation"), "KeyID", "KeyValues", committeeMember.DesignationID);
             ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", committeeMember.Gender);
             return View(committeeMember);
@@ -103,7 +104,7 @@ namespace SocietyManagement.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UnitID = new SelectList(db.BuildingUnits, "UnitID", "UnitName", committeeMember.UnitID);
+            ViewBag.UnitID = Helper.GetUnits(db.BuildingUnits, committeeMember.UnitID);
             ViewBag.DesignationID = new SelectList(Helper.FilterKeyValues(db.KeyValues, "CommitteeDesignation"), "KeyID", "KeyValues", committeeMember.DesignationID);
             ViewBag.Gender = new SelectList(Helper.FilterKeyValues(db.KeyValues, "Gender"), "KeyValues", "KeyValues", committeeMember.Gender);
             return View(committeeMember);

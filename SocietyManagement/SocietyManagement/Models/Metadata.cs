@@ -71,7 +71,7 @@ namespace SocietyManagement.Models
         {
             get
             {
-                return this.FirstName + " " + this.LastName;
+                return this.FirstName + " " + this.MiddleName + " " + this.LastName;
             }
         }
     }
@@ -397,7 +397,7 @@ namespace SocietyManagement.Models
         {
             get
             {
-                return this.FirstName + " " + this.LastName;
+                return this.FirstName + " " + this.MiddleName + " " + this.LastName;
             }
         }
     }

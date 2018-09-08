@@ -67,7 +67,7 @@ namespace SocietyManagement.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,PhoneNumber = model.Mobile, FirstName = model.FirstName, LastName = model.LastName, Gender = model.Gender };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,PhoneNumber = model.Mobile, FirstName = model.FirstName,MiddleName = model.MiddleName, LastName = model.LastName, Gender = model.Gender };
                 var result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {                    
@@ -142,6 +142,7 @@ namespace SocietyManagement.Controllers
                     return HttpNotFound();
                 }
                 aspNetUser.FirstName = NetUser.FirstName;
+                aspNetUser.MiddleName = NetUser.MiddleName;
                 aspNetUser.LastName = NetUser.LastName;
                 aspNetUser.Gender = NetUser.Gender;
                 aspNetUser.PhoneNumber = NetUser.PhoneNumber;

@@ -152,6 +152,13 @@ namespace SocietyManagement.Models
             return KeyValues.Where(k => k.KeyName == KeyName).OrderBy(o => o.KeyOrder).ToList();
         }
 
+        public static List<SelectListItem> GetUnits(DbSet<BuildingUnit> BuildingUnits, int? UnitID)
+        {
+            List<SelectListItem> items = new SelectList(BuildingUnits.Where(d => d.IsDeleted == false).OrderBy(o => o.UnitName), "UnitID", "UnitName", UnitID).ToList();
+            items.Insert(0, (new SelectListItem { Text = "-- Select One --", Value = "" }));
+            return items;
+        }
+
         private static void AssignValue(object obj,string PropertyName,object value)
         {
             try

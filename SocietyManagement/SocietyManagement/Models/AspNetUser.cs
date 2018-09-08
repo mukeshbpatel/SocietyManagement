@@ -57,6 +57,7 @@ namespace SocietyManagement.Models
         public bool EventNotification { get; set; }
         public bool ForumNotification { get; set; }
         public bool PaymentReminder { get; set; }
+        public string MiddleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }

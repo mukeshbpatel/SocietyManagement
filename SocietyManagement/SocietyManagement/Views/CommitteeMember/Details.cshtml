@@ -1,53 +1,54 @@
 ﻿@model SocietyManagement.Models.CommitteeMember
+@using SocietyManagement.Models
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Committee Member";
 }
 
-<h2>Details</h2>
+<div class="box-header with-border">
+    <h3 class="box-title"><i class="fa fa-users"></i> @ViewBag.Title</h3>
+    <div class="pull-right">
+        @if (Helper.IsInRole("Manager") || Helper.IsInRole("Super"))
+        {
+            <a href="@Url.Action("Edit", new { id = Model.UnitID })" title="Edit"><i class="fa fa-edit"></i> <span class="hidden-xs">Edit</span></a><span> &nbsp; </span>
+        }
+        @if (Helper.IsInRole("Super"))
+        {
+            <a href="@Url.Action("Delete", new { id = Model.UnitID })" title="Delete"><i class="fa fa-remove"></i> <span class="hidden-xs">Delete</span></a><span> &nbsp; </span>
+        }
+        <a href="@Url.Action("Index")" title="List"><i class="fa fa-list"></i> <span class="hidden-xs">List</span></a><span> &nbsp; </span>
+    </div>
+</div>
 
-<div>
-    <h4>CommitteeMember</h4>
-    <hr />
+<div class="box-body">
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.FirstName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.MiddleName)
+            @Html.DisplayNameFor(model => model.DesignationID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MiddleName)
+            @Html.DisplayFor(model => model.Designation.KeyValues)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.EmailID)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EmailID)
+            <a href="mailto:@Model.EmailID">@Model.EmailID</a>
         </dd>
 
         <dt>
@@ -55,7 +56,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Mobile)
+            <a href="mailto:@Model.Mobile">@Model.Mobile</a>
         </dd>
 
         <dt>
@@ -81,58 +82,6 @@
         <dd>
             @Html.DisplayFor(model => model.TenureTo)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserID)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ModifiedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BuildingUnit.UnitName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BuildingUnit.UnitName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Designation.KeyName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Designation.KeyName)
-        </dd>
-
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.MemberID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

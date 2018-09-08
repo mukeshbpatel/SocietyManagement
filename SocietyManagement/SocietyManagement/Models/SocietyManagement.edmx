@@ -69,6 +69,7 @@
           <Property Name="EventNotification" Type="bit" Nullable="false" />
           <Property Name="ForumNotification" Type="bit" Nullable="false" />
           <Property Name="PaymentReminder" Type="bit" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Audits">
           <Key>
@@ -1859,6 +1860,7 @@
           <Property Name="ForumNotification" Type="Boolean" Nullable="false" />
           <Property Name="PaymentReminder" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Notifications" Relationship="SocietyManagementModel.FK_Notifications_User" FromRole="AspNetUser" ToRole="Notification" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Audit">
           <Key>
@@ -3203,6 +3205,7 @@
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="SocietyManagementModel.AspNetUser">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="PaymentReminder" ColumnName="PaymentReminder" />
                 <ScalarProperty Name="ForumNotification" ColumnName="ForumNotification" />
                 <ScalarProperty Name="EventNotification" ColumnName="EventNotification" />
